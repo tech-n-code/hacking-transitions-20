@@ -48,3 +48,4 @@ The app can be started with two steps:
 
 - `docker exec <container_name_or_id> <command>` - Runs command in the context of a container.
 - `docker inspect <container_name_or_id>` - Displays info (including IP address) of a container running in docker.
+
