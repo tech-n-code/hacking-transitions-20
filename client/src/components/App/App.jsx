@@ -5,6 +5,7 @@ import axios from "axios";
 import LeftColumn from "../LeftColumn/LeftColumn.jsx";
 import Footer from "../Footer/Footer.jsx"
 import StudentDetail from '../StudentRender/StudentDetails.jsx'
+import Header from "../Header/Header.jsx";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -24,6 +25,7 @@ const App = () => {
 
   return (
     <main>
+      <Header />
       <h2>Tasks</h2>
       <div className={c.tasks}>
         {tasks.length > 0 ? (
