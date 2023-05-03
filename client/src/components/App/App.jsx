@@ -3,6 +3,7 @@ import Counter from "../Counter/Counter.jsx";
 import c from "./App.module.css";
 import axios from "axios";
 import LeftColumn from "../LeftColumn/LeftColumn.jsx";
+import Header from "../Header/Header.jsx";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -22,6 +23,7 @@ const App = () => {
 
   return (
     <main>
+      <Header />
       <h2>Tasks</h2>
       <div className={c.tasks}>
         {tasks.length > 0 ? (
