@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Counter from "../Counter/Counter.jsx";
 import c from "./App.module.css";
 import axios from "axios";
+import LeftColumn from "../LeftColumn/LeftColumn.jsx";
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -36,6 +37,7 @@ const App = () => {
       </div>
       <h2>Counter</h2>
       <Counter />
+      <LeftColumn />
     </main>
   );
 };
