@@ -4,6 +4,8 @@ const LeftColumnContext = createContext();
 
 export const LeftColumnProvider = ({children}) => {
     const [dropDownClicked, setDropDownClicked] = useState(false);
+    const [cohortClicked, setCohortClicked] = useState(false);
+    
 
     const handleDropClicked = () =>{
         if(dropDownClicked){
@@ -12,10 +14,19 @@ export const LeftColumnProvider = ({children}) => {
             setDropDownClicked(true);
         }
     }
+    const handleCohortClicked = () => {
+        if (cohortClicked) {
+            setCohortClicked(false);
+        } else {
+            setCohortClicked(true);
+        }
+    }
 
     return( <LeftColumnContext.Provider value = {{
         dropDownClicked,
-        handleDropClicked
+        handleDropClicked,
+        cohortClicked, 
+        handleCohortClicked
     }}>
         {children}
     </LeftColumnContext.Provider>
