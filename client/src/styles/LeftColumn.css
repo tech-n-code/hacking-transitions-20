@@ -1,0 +1,45 @@
+.leftColumn{
+    background: #E0EAF8;
+    display: flex;
+    flex-direction: column;
+    background-size: contain;
+    width:fit-content;
+    height: fit-content;
+    color: #FFFFFF;
+    font-size: 25px;
+}
+.leftColumnHeader{
+    font-size: 40px;
+    background: #0D0F4A;
+    text-align: center;
+    border-color: #EF6E47;
+    border-style: solid;
+    margin-bottom: px;
+}
+.leftColumnDrop{
+    display:flex;
+    flex-direction: row;
+    background: #4E70E0;
+    border-color: #EF6E47;
+    border-style: solid;
+}
+.LcCohort{
+    margin-right: 10px;
+    margin-left: 10px;
+
+}
+.leftColumnArrow{
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    margin: 10px;
+}
+.LCAUp{
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+.LCADown{
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+}
