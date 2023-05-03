@@ -1,0 +1,11 @@
+.footermenu {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+  }
+  
+  .menuitems {
+    margin-right: 20px;
+  }
+  
