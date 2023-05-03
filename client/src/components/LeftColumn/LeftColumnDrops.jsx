@@ -1,5 +1,5 @@
 import React, {useContext} from "react";
-import LeftColumnContext from "../context/LeftColumnContext";
+import LeftColumnContext from "../../context/LeftColumnContext";
 
 function LeftColumnDrop(){
     const {handleDropClicked} = useContext(LeftColumnContext);
