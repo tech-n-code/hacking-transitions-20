@@ -48,6 +48,12 @@ const Footer = () => {
                         <a href="https://www.galvanize.com/sitemap/">Sitemap
                         </a>
                     </li>
+                    <li
+                        id="menu-item-8"
+                        className="menuitems"
+                    >
+                    2023 Galvanize, All rights reserved.
+                    </li>
             </div>
     )
 }
