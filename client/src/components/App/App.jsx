@@ -4,6 +4,7 @@ import c from "./App.module.css";
 import axios from "axios";
 import LeftColumn from "../LeftColumn/LeftColumn.jsx";
 import Footer from "../Footer/Footer.jsx"
+import StudentDetail from '../StudentRender/StudentDetails.jsx'
 
 const App = () => {
   const [tasks, setTasks] = useState([]);
@@ -39,6 +40,7 @@ const App = () => {
       <h2>Counter</h2>
       <Counter />
       <LeftColumn />
+      <StudentDetail />
       <Footer />
     </main>
   );
