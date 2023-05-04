@@ -5,8 +5,21 @@ const LeftColumnContext = createContext();
 export const LeftColumnProvider = ({children}) => {
     const [dropDownClicked, setDropDownClicked] = useState(false);
     const [cohortClicked, setCohortClicked] = useState(false);
+    const [addCohortClicked, setAddChohortClicked] = useState(false);
+    const [editCohortClicked, setEditCohortClicked] = useState(false);
     
-
+    const openAddCohort = () => {
+        setAddChohortClicked(true);
+    }
+    const closeAddCohort = () => {
+        setAddChohortClicked(false);
+    }
+    const openEditCohort = () => {
+        setEditCohortClicked(true);
+    }
+    const closeEditCohort = () => {
+        setEditCohortClicked(false);
+    }
     const handleDropClicked = () =>{
         if(dropDownClicked){
             setDropDownClicked(false);
@@ -26,7 +39,13 @@ export const LeftColumnProvider = ({children}) => {
         dropDownClicked,
         handleDropClicked,
         cohortClicked, 
-        handleCohortClicked
+        handleCohortClicked,
+        addCohortClicked,
+        openAddCohort,
+        closeAddCohort,
+        editCohortClicked,
+        openEditCohort,
+        closeEditCohort
     }}>
         {children}
     </LeftColumnContext.Provider>
