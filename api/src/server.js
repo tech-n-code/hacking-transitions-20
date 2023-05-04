@@ -8,14 +8,14 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/api/tasks", async (req, res, next) => {
-  const result = await db.query("SELECT * FROM tasks").catch(next);
+app.get("/api/cohorts", async (req, res, next) => {
+  const result = await db.query("SELECT * FROM cohorts").catch(next);
   res.send(result.rows);
 });
 
-app.get("/api/tasks/:id", async (req, res, next) => {
+app.get("/api/cohorts/:id", async (req, res, next) => {
   const result = await db
-    .query("SELECT * FROM tasks WHERE id = $1", [req.params.id])
+    .query("SELECT * FROM cohorts WHERE id = $1", [req.params.id])
     .catch(next);
 
   if (result.rows.length === 0) {
@@ -25,19 +25,19 @@ app.get("/api/tasks/:id", async (req, res, next) => {
   }
 });
 
-app.post("/api/tasks", async (req, res, next) => {
-  const { description } = req.body;
+app.post("/api/cohorts", async (req, res, next) => {
+  const { courseid } = req.body;
 
   const result = await db
-    .query("INSERT INTO tasks(description) VALUES ($1)", [description])
+    .query("INSERT INTO cohorts(courseid) VALUES ($1)", [courseid])
     .catch(next);
   res.send(result.rows[0]);
 });
 
-app.delete("/api/tasks/:id", async (req, res, next) => {
+app.delete("/api/cohorts/:id", async (req, res, next) => {
   const { id } = req.params;
 
-  await db.query("DELETE FROM tasks WHERE id = $1", [id]).catch(next);
+  await db.query("DELETE FROM cohorts WHERE id = $1", [id]).catch(next);
   res.sendStatus(204);
 });
 
