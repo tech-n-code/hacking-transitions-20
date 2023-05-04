@@ -1,12 +1,11 @@
 import express from "express";
-
 import pg from "pg";
-
+import cors from "cors";
 const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
-
 const app = express();
 
 app.use(express.json());
+app.use(cors());
 
 app.get("/api/cohorts", async (req, res, next) => {
   const result = await db.query("SELECT * FROM cohorts").catch(next);
