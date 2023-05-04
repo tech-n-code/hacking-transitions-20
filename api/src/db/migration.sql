@@ -42,7 +42,9 @@ CREATE TABLE students (
   age INT NOT NULL,
   location TEXT NOT NULL,
   base TEXT,
-  active BOOLEAN NOT NULL
+  active BOOLEAN NOT NULL,
+  phonenumber BIGINT NOT NULL,
+  email TEXT NOT NULL
 );
 
 
