@@ -7,7 +7,7 @@ export const LeftColumnProvider = ({children}) => {
     const [cohortClicked, setCohortClicked] = useState(false);
     const [addCohortClicked, setAddChohortClicked] = useState(false);
     const [editCohortClicked, setEditCohortClicked] = useState(false);
-    
+    const [cohorts, setCohorts] = useState([]);
     const openAddCohort = () => {
         setAddChohortClicked(true);
     }
@@ -34,6 +34,12 @@ export const LeftColumnProvider = ({children}) => {
             setCohortClicked(true);
         }
     }
+    useEffect(() => {
+        fetch('http://localhost:8000/api/cohorts')
+            .then(response => response.json())
+            .then(data => setCohorts(data))
+            .catch(error => console.log(error));
+    }, []);
 
     return( <LeftColumnContext.Provider value = {{
         dropDownClicked,
@@ -45,7 +51,8 @@ export const LeftColumnProvider = ({children}) => {
         closeAddCohort,
         editCohortClicked,
         openEditCohort,
-        closeEditCohort
+        closeEditCohort,
+        cohorts
     }}>
         {children}
     </LeftColumnContext.Provider>
