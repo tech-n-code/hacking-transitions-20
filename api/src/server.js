@@ -20,7 +20,7 @@ app.get("/api/cohorts/:id", async (req, res, next) => {
   if (result.rows.length === 0) {
     res.sendStatus(404);
   } else {
-    res.send(result.rows[0]);
+    res.send(result.rows);
   }
 });
 
@@ -29,11 +29,10 @@ app.get("/api/cohorts/:cohortId/students", async (req, res, next) => {
   const result = await db
     .query(`SELECT students.* FROM students WHERE students.cohort_id = $1`, [cohortId])
     .catch(next);
-    
   if (result.rows.length === 0) {
     res.sendStatus(404);
   } else {
-    res.send(result.rows[0]);
+    res.send(result.rows);
   }
 });
 

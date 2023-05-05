@@ -12,16 +12,16 @@ function LeftColumnDrop() {
         <>
             {cohorts.map((cohort, index) => {
                 const buttonClass = cohortClicked === cohort.courseid ? "LCwasClicked" : "LCnotClicked";
-                const arrowClass = dropDownClicked === cohort.courseid? "LCADown" : "LCAUp";
+                const arrowClass = dropDownClicked === cohort.courseid ? "LCADown" : "LCAUp";
                 return (
                     <div key={index}>
                         <div className={`leftColumnDrop ${buttonClass}`}>
                             <div className="LcCohort" onClick={() => handleCohortClicked(cohort.courseid)}>
                                 {cohort.courseid}
                             </div>
-                                <i className={`leftColumnArrow ${arrowClass}`} onClick={() => {handleDropClicked(cohort.courseid);toggleDropDown(cohort.courseid);}}></i>
+                            <i className={`leftColumnArrow ${arrowClass}`} onClick={() => { handleDropClicked(cohort.courseid, cohort.id); toggleDropDown(cohort.courseid); }}></i>
                         </div>
-                            {openDropDown === cohort.courseid && <LeftColumnNames />}
+                        {openDropDown === cohort.courseid && <LeftColumnNames />}
                     </div>
                 );
             })}
