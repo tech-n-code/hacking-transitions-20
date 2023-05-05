@@ -24,20 +24,17 @@ app.get("/api/cohorts/:id", async (req, res, next) => {
   }
 });
 
-app.post("/api/cohorts", async (req, res, next) => {
-  const { courseid } = req.body;
-
+app.get("/api/cohorts/:cohortId/students", async (req, res, next) => {
+  const cohortId = req.params.cohortId;
   const result = await db
-    .query("INSERT INTO cohorts(courseid) VALUES ($1)", [courseid])
+    .query(`SELECT students.* FROM students WHERE students.cohort_id = $1`, [cohortId])
     .catch(next);
-  res.send(result.rows[0]);
-});
-
-app.delete("/api/cohorts/:id", async (req, res, next) => {
-  const { id } = req.params;
-
-  await db.query("DELETE FROM cohorts WHERE id = $1", [id]).catch(next);
-  res.sendStatus(204);
+    
+  if (result.rows.length === 0) {
+    res.sendStatus(404);
+  } else {
+    res.send(result.rows[0]);
+  }
 });
 
 app.use((err, req, res, next) => {
