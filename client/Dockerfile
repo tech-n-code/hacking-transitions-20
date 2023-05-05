@@ -3,5 +3,6 @@ WORKDIR /code
 COPY package*.json .
 RUN npm ci
 COPY . .
+RUN npm run build
 EXPOSE 3000
-CMD echo "JUST HERE FOR DEVELOPMENT!"
+CMD ["npm", "run", "build"]

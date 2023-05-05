@@ -28,9 +28,9 @@ INSERT INTO students (firstname, middlename, lastname, age, location, base, acti
     ('Tara', NULL, 'Dactyl', 42, 'Hinesville, GA', 'Ft. Stewart', TRUE, 9127671432, 'Triceratops@fakemail.com'),
     ('Iva', 'Anita', 'Takashita', 27, 'Fort Riley, KS', 'Ft. Riley', TRUE, 7858913456, 'GottaGo@fakemail.com');
 
-INSERT INTO cohorts (courseid) VALUES
-    ('MCSP-19'),
-    ('MCSP-01');
+INSERT INTO cohorts (courseid, startdate, enddate, numberofstudents) VALUES
+    ('MCSP-19', '01/17/2023', '05/26/2013', 24),
+    ('MCSP-01', '06/01/1912', '11/18/1912', 15);
 
 INSERT INTO student_tasks (completed) VALUES   
     (TRUE),
@@ -63,8 +63,6 @@ UPDATE students SET cohort_id = 1 WHERE id = 7;
 
 UPDATE cohorts SET instructor_id = 1 WHERE id = 1;
 UPDATE cohorts SET instructor_id = 2 WHERE id = 2;
-UPDATE cohorts SET student_id = 1 WHERE id = 1;
-UPDATE cohorts SET student_id = 2 WHERE id = 2;
 
 UPDATE student_tasks SET student_id = 1 WHERE id = 1;
 UPDATE student_tasks SET student_id = 2 WHERE id = 2;

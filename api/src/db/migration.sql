@@ -50,7 +50,10 @@ CREATE TABLE students (
 
 CREATE TABLE cohorts (
   id SERIAL PRIMARY KEY,
-  courseid VARCHAR (255) NOT NULL
+  courseid VARCHAR (255) NOT NULL,
+  startdate TEXT NOT NULL,
+  enddate TEXT NOT NULL,
+  numberofstudents INT NOT NULL
 );
 
 CREATE TABLE student_tasks (
@@ -73,9 +76,7 @@ ADD CONSTRAINT fk_cohort_id FOREIGN KEY (cohort_id) REFERENCES cohorts(id) ON DE
 
 ALTER TABLE cohorts 
 ADD COLUMN instructor_id INT,
-ADD COLUMN student_id INT,
-ADD CONSTRAINT fk_instructor_id FOREIGN KEY (instructor_id) REFERENCES instructors(id) ON DELETE CASCADE,
-ADD CONSTRAINT fk_student_id FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE;
+ADD CONSTRAINT fk_instructor_id FOREIGN KEY (instructor_id) REFERENCES instructors(id) ON DELETE CASCADE;
 
 ALTER TABLE student_tasks
 ADD COLUMN student_id INT,
