@@ -1,6 +1,6 @@
 import React from 'react';
 import tempData from './StudentDetailsTempData'
-import './StudentDetails.css'
+import '../../styles/StudentDetails.css'
 
 const StudentDetail = () => {
     const studentName = tempData[0]; 
