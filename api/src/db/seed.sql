@@ -63,8 +63,6 @@ UPDATE students SET cohort_id = 1 WHERE id = 7;
 
 UPDATE cohorts SET instructor_id = 1 WHERE id = 1;
 UPDATE cohorts SET instructor_id = 2 WHERE id = 2;
-UPDATE cohorts SET student_id = 1 WHERE id = 1;
-UPDATE cohorts SET student_id = 2 WHERE id = 2;
 
 UPDATE student_tasks SET student_id = 1 WHERE id = 1;
 UPDATE student_tasks SET student_id = 2 WHERE id = 2;
