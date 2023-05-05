@@ -15,7 +15,6 @@ export default function Header(){
             <span id="greeting-container">
                 <h3 id="greeting">Hello, "username" </h3>
             </span>
-
         </span>
     )
 }

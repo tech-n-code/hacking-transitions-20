@@ -6,7 +6,7 @@ export const LoginProvider = ({ children }) => {
     const [showLogin, setShowLogin] = useState(false);
     const [loginPosition, setLoginPosition] = useState({ x: 0, y: 0 });
     const [email, setEmail] = useState("");
-    cosnt [password, setPassword] = useState("");
+    const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
     const [isRegistering, setIsRegistering] = useState(false);
 
