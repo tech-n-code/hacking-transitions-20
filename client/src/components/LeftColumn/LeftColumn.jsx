@@ -1,7 +1,6 @@
-import React, {useContext} from "react";
+import React from "react";
 import LeftColumnDrop from "./LeftColumnDrops";
 import "../../../src/styles/LeftColumn.css"
-import LeftColumnFooter from "./LeftColumnFooter";
 
 function LeftColumn(){
 
@@ -9,7 +8,6 @@ function LeftColumn(){
         <div className="leftColumn">
             <div className="leftColumnHeader">Cohorts</div>
             <LeftColumnDrop />
-            <LeftColumnFooter />
         </div>
     )
 }

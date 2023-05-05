@@ -67,20 +67,3 @@
 .LCName:hover{
     background: #0D0F4A;
 }
-.LCfooterContainer{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;;
-    background:#4E70E0;
-    border:#EF6E47;
-    border-style: solid;
-    font-size: 15px;
-}
-.LCFbtn{
-    flex-grow: 1;
-    text-align: center;
-    cursor: pointer;
-}
-.LCFbtn:hover{
-    background: #0D0F4A;
-}
