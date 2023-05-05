@@ -73,7 +73,6 @@ ADD CONSTRAINT fk_cohort_id FOREIGN KEY (cohort_id) REFERENCES cohorts(id) ON DE
 
 ALTER TABLE cohorts 
 ADD COLUMN instructor_id INT,
-ADD COLUMN student_id INT,
 ADD CONSTRAINT fk_instructor_id FOREIGN KEY (instructor_id) REFERENCES instructors(id) ON DELETE CASCADE,
 ADD CONSTRAINT fk_student_id FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE;
 
