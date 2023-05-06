@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import LeftColumnContext from "../../context/LeftColumnContext";
-// import '../../styles/CohortDetails.css';
-import '../../styles/StudentDetails.css'
+import '../../styles/CohortDetails.css';
+
 
 const CohortDetails = () => {
 
@@ -14,7 +14,7 @@ const CohortDetails = () => {
 
     return (
         <>
-            <h1>{cohortClicked}</h1>
+            <h1 className='cohort-title'>{cohortClicked}</h1>
             <table>
                 <tbody>
                     <tr>
@@ -24,7 +24,7 @@ const CohortDetails = () => {
                         >Course Title</td>
                         <td
                         className='column2'>
-                        BLANK</td>
+                        {cohorts[cohortId].courseid}</td>
                     </tr>
                     <tr>
                         <td
@@ -33,7 +33,7 @@ const CohortDetails = () => {
                         >Start Date</td>
                         <td
                         className='column2'>
-                        BLANK</td>
+                        {cohorts[cohortId].startdate}</td>
                     </tr>
                     <tr>
                         <td
@@ -42,34 +42,25 @@ const CohortDetails = () => {
                         >End Date</td>
                         <td
                             className='column2'>
-                            BLANK</td>
+                            {cohorts[cohortId].enddate}</td>
                     </tr>
                     <tr>
                         <td
                             id='details-3'
                             className='column1'
-                        >Current Taskers</td>
+                        >Instructor</td>
                         <td
                         className='column2'>
-                        BLANK</td>
+                        {cohorts[cohortId].instructor_id}</td>
                     </tr>
                     <tr>
                         <td
                             id='details-4'
                             className='column1'
-                        >Instructor</td>
-                        <td
-                        className='column2'>
-                        BLANKNAME</td>
-                    </tr>
-                    <tr>
-                        <td
-                            id='details-5'
-                            className='column1'
                         >Number of Students</td>
                         <td
                         className='column2'>
-                        BLANK</td>
+                        {cohorts[cohortId].numberofstudents}</td>
                     </tr>
                 </tbody>
             </table>
