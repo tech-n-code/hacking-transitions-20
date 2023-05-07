@@ -74,7 +74,8 @@ export const LeftColumnProvider = ({children}) => {
         toggleDropDown,
         openDropDown,
         students,
-        cohortId
+        cohortId,
+        cohortIdForInfo
     }}>
         {children}
     </LeftColumnContext.Provider>

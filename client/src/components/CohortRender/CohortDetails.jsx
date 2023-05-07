@@ -5,11 +5,11 @@ import '../../styles/CohortDetails.css';
 
 const CohortDetails = () => {
 
-    const { cohortClicked, cohortId, cohorts } = useContext(LeftColumnContext);
+    const { cohortClicked, cohortIdForInfo, cohorts } = useContext(LeftColumnContext);
 
     console.log("cohorts ", cohorts);
     console.log("cohort-clicked", cohortClicked);
-    console.log('cohortID', cohortId);
+    console.log('cohortId', cohortIdForInfo);
 
 
     return (
@@ -24,7 +24,7 @@ const CohortDetails = () => {
                         >Course Title</td>
                         <td
                         className='column2'>
-                        {cohorts[cohortId].courseid}</td>
+                        {cohorts[cohortIdForInfo].courseid}</td>
                     </tr>
                     <tr>
                         <td
@@ -33,7 +33,7 @@ const CohortDetails = () => {
                         >Start Date</td>
                         <td
                         className='column2'>
-                        {cohorts[cohortId].startdate}</td>
+                        {cohorts[cohortIdForInfo].startdate}</td>
                     </tr>
                     <tr>
                         <td
@@ -42,7 +42,7 @@ const CohortDetails = () => {
                         >End Date</td>
                         <td
                             className='column2'>
-                            {cohorts[cohortId].enddate}</td>
+                            {cohorts[cohortIdForInfo].enddate}</td>
                     </tr>
                     <tr>
                         <td
@@ -51,7 +51,7 @@ const CohortDetails = () => {
                         >Instructor</td>
                         <td
                         className='column2'>
-                        {cohorts[cohortId].instructor_id}</td>
+                        {cohorts[cohortIdForInfo].instructor_id}</td>
                     </tr>
                     <tr>
                         <td
@@ -60,7 +60,7 @@ const CohortDetails = () => {
                         >Number of Students</td>
                         <td
                         className='column2'>
-                        {cohorts[cohortId].numberofstudents}</td>
+                        {cohorts[cohortIdForInfo].numberofstudents}</td>
                     </tr>
                 </tbody>
             </table>

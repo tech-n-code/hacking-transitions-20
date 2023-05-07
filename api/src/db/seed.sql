@@ -16,8 +16,8 @@ INSERT INTO branch_tasks (task_id, branch_id) VALUES
     (2, 2);
 
 INSERT INTO instructors (firstname, middlename, lastname, email, location) VALUES
-    ('Jane', 'Dunno', 'Doe', 'JaneDoe@fakemail.com', 'Austin, Texas'),
-    ('Jon', NULL, 'Doe', 'JonDoe@fakeemail.com', 'Cincinnati, OH');
+    ('Jane', 'Dunno', 'Doe1', 'JaneDoe@fakemail.com', 'Austin, Texas'),
+    ('Jon', NULL, 'Doe2', 'JonDoe@fakeemail.com', 'Cincinnati, OH');
 
 INSERT INTO students (firstname, middlename, lastname, age, location, base, active, phonenumber, email) VALUES
     ('Sarah', 'Lynn', 'Marks', 35, 'Clarksville, KY', 'Ft. Campbell', TRUE, 2707981234, 'stoneage@aol.com'),
