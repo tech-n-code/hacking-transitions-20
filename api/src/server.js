@@ -1,7 +1,16 @@
 import express from "express";
 import pg from "pg";
 import cors from "cors";
-const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+import dotenv from "dotenv";
+dotenv.config();
+const db = new pg.Pool({ connectionString: process.env.DATABASE_URL, ssl: {rejectUnauthorized: false} });
+db.connect((error, client, release) => {
+  if (error) {
+    return console.log("There was an error of ", error.stack);
+  };
+  // console.log("Connected to heroku postgres");
+  client.release();
+});
 const app = express();
 
 app.use(express.json());
@@ -40,5 +49,7 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Internal Server Error");
 });
+// Serve the static assets AFTER the routes
+app.use(express.static("../client/src/dist"))
 
 export default app;
