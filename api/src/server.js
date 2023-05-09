@@ -3,14 +3,7 @@ import pg from "pg";
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
-const db = new pg.Pool({ connectionString: process.env.DATABASE_URL, ssl: {rejectUnauthorized: false} });
-db.connect((error, client, release) => {
-  if (error) {
-    return console.log("There was an error of ", error.stack);
-  };
-  // console.log("Connected to heroku postgres");
-  client.release();
-});
+const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 const app = express();
 
 app.use(express.json());
