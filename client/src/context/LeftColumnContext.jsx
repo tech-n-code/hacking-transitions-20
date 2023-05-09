@@ -37,7 +37,21 @@ export const LeftColumnProvider = ({children}) => {
     }, []);
 
     useEffect(() => {
+        fetch('/api/cohorts')
+            .then(response => response.json())
+            .then(data => setCohorts(data))
+            .catch(error => console.log(error));
+    }, []);
+
+    useEffect(() => {
         fetch(`http://localhost:8000/api/cohorts/${cohortId}/students`)
+            .then(response => response.json())
+            .then(data => setStudents(data))
+            .catch(error => console.log(error));
+    }, [cohortId]);
+
+    useEffect(() => {
+        fetch(`/api/cohorts/${cohortId}/students`)
             .then(response => response.json())
             .then(data => setStudents(data))
             .catch(error => console.log(error));
