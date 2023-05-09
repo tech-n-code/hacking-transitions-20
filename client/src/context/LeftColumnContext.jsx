@@ -3,18 +3,6 @@ import React, {createContext, useEffect, useState} from "react";
 const LeftColumnContext = createContext();
 
 export const LeftColumnProvider = ({children}) => {
-<<<<<<< HEAD
-    const [dropDownClicked, setDropDownClicked] = useState("");
-    const [cohortClicked, setCohortClicked] = useState("");
-    const [cohorts, setCohorts] = useState([]);
-    const [openDropDown, setOpenDropdown] = useState(null);
-    const [students, setStudents] = useState([]);
-    const [cohortId, setcohortId] = useState(1);
-
-    const handleDropClicked = (value, id) =>{
-        if(dropDownClicked === value){
-            setDropDownClicked("")    
-=======
     const [dropDownClicked, setDropDownClicked] = useState(false);
     const [cohortClicked, setCohortClicked] = useState(false);
     const [addCohortClicked, setAddChohortClicked] = useState(false);
@@ -35,7 +23,6 @@ export const LeftColumnProvider = ({children}) => {
     const handleDropClicked = () =>{
         if(dropDownClicked){
             setDropDownClicked(false);
->>>>>>> 4a33dc3 (added map for the cohorts, there is a cors issue)
         }else{
             setDropDownClicked(value)
             setcohortId(id)
@@ -71,9 +58,6 @@ export const LeftColumnProvider = ({children}) => {
         } else {
             setOpenDropdown(cohortId);
         }
-<<<<<<< HEAD
-    };
-=======
     }
     useEffect(() => {
         fetch('http://localhost:8000/api/cohorts')
@@ -81,19 +65,12 @@ export const LeftColumnProvider = ({children}) => {
             .then(data => setCohorts(data))
             .catch(error => console.log(error));
     }, []);
->>>>>>> 4a33dc3 (added map for the cohorts, there is a cors issue)
 
     return( <LeftColumnContext.Provider value = {{
         dropDownClicked,
         handleDropClicked,
         cohortClicked, 
         handleCohortClicked,
-<<<<<<< HEAD
-        cohorts,
-        toggleDropDown,
-        openDropDown,
-        students
-=======
         addCohortClicked,
         openAddCohort,
         closeAddCohort,
@@ -101,7 +78,6 @@ export const LeftColumnProvider = ({children}) => {
         openEditCohort,
         closeEditCohort,
         cohorts
->>>>>>> 4a33dc3 (added map for the cohorts, there is a cors issue)
     }}>
         {children}
     </LeftColumnContext.Provider>
