@@ -6,7 +6,7 @@ function LeftColumn(){
 
     return(
         <div className="leftColumn">
-            <div className="leftColumnHeader">Cohorts</div>
+            <div className="leftColumnHeader">Cohorts.</div>
             <LeftColumnDrop />
         </div>
     )
