@@ -3,30 +3,11 @@ import LeftColumnContext from "../../context/LeftColumnContext";
 import "../../../src/styles/LeftColumn.css";
 import LeftColumnNames from "./LeftColumnNames";
 
-<<<<<<< HEAD
-function LeftColumnDrop(){
-    const {handleDropClicked, dropDownClicked, cohortClicked, handleCohortClicked, cohorts} = useContext(LeftColumnContext);
-=======
 function LeftColumnDrop() {
     const { handleDropClicked, dropDownClicked, cohortClicked, handleCohortClicked, cohorts, openDropDown, toggleDropDown} = useContext(LeftColumnContext);
->>>>>>> develop
 
     
 
-<<<<<<< HEAD
-
-
-    return(
-        <>
-            {cohorts.map((cohort, index) => (
-                <div key = {index} className= {`leftColumnDrop ${buttonClass}`}>
-                    <div className="LcCohort" onClick={handleCohortClicked}>{cohort.courseid}</div>
-                    <i className = {`leftColumnArrow ${arrowClass}`} onClick={handleDropClicked}></i>   
-                </div>    
-            ))}
-        </>
-    )
-=======
     return (
         <>
             {cohorts.map((cohort, index) => {
@@ -46,7 +27,6 @@ function LeftColumnDrop() {
             })}
         </>
     );
->>>>>>> develop
 }
 
 export default LeftColumnDrop;
