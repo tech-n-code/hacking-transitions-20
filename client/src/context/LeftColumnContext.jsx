@@ -3,50 +3,41 @@ import React, {createContext, useEffect, useState} from "react";
 const LeftColumnContext = createContext();
 
 export const LeftColumnProvider = ({children}) => {
-    const [dropDownClicked, setDropDownClicked] = useState(false);
-    const [cohortClicked, setCohortClicked] = useState(false);
-    const [addCohortClicked, setAddChohortClicked] = useState(false);
-    const [editCohortClicked, setEditCohortClicked] = useState(false);
+    const [dropDownClicked, setDropDownClicked] = useState("");
+    const [cohortClicked, setCohortClicked] = useState("");
     const [cohorts, setCohorts] = useState([]);
-    const openAddCohort = () => {
-        setAddChohortClicked(true);
-    }
-    const closeAddCohort = () => {
-        setAddChohortClicked(false);
-    }
-    const openEditCohort = () => {
-        setEditCohortClicked(true);
-    }
-    const closeEditCohort = () => {
-        setEditCohortClicked(false);
-    }
-    const handleDropClicked = () =>{
-        if(dropDownClicked){
-            setDropDownClicked(false);
+    const [openDropDown, setOpenDropdown] = useState(null);
+    const [students, setStudents] = useState([]);
+    const [cohortId, setcohortId] = useState(1);
+    const [cohortIdForInfo, setCohortIdForInfo] = useState(1);
+
+    const handleDropClicked = (value, id) =>{
+        if(dropDownClicked === value){
+            setDropDownClicked("")    
         }else{
             setDropDownClicked(value)
             setcohortId(id)
         } 
     }
 
-    const handleCohortClicked = (cohort) => {
+    const handleCohortClicked = (cohort, id) => {
         if(cohortClicked === cohort){
             setCohortClicked("")
         }else{
-            setCohortClicked(cohort)   
+            setCohortClicked(cohort)
+            setCohortIdForInfo(id)   
         } 
     }
     
-
     useEffect(() => {
-        fetch('/api/cohorts')
+        fetch('http://localhost:8000/api/cohorts')
             .then(response => response.json())
             .then(data => setCohorts(data))
             .catch(error => console.log(error));
     }, []);
 
     useEffect(() => {
-        fetch(`/api/cohorts/${cohortId}/students`)
+        fetch(`http://localhost:8000/api/cohorts/${cohortId}/students`)
             .then(response => response.json())
             .then(data => setStudents(data))
             .catch(error => console.log(error));
@@ -58,26 +49,19 @@ export const LeftColumnProvider = ({children}) => {
         } else {
             setOpenDropdown(cohortId);
         }
-    }
-    useEffect(() => {
-        fetch('http://localhost:8000/api/cohorts')
-            .then(response => response.json())
-            .then(data => setCohorts(data))
-            .catch(error => console.log(error));
-    }, []);
+    };
 
     return( <LeftColumnContext.Provider value = {{
         dropDownClicked,
         handleDropClicked,
         cohortClicked, 
         handleCohortClicked,
-        addCohortClicked,
-        openAddCohort,
-        closeAddCohort,
-        editCohortClicked,
-        openEditCohort,
-        closeEditCohort,
-        cohorts
+        cohorts,
+        toggleDropDown,
+        openDropDown,
+        students,
+        cohortId,
+        cohortIdForInfo
     }}>
         {children}
     </LeftColumnContext.Provider>
