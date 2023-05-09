@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "dev": "nodemon src/index.js",
-    "start": "node src/index.js",
+    "start": "node index.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "test": "echo 'add tests'"
   },
   "devDependencies": {
@@ -14,6 +15,7 @@
   },
   "dependencies": {
     "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
     "express": "^4.17.3",
     "full-stack-react": "file:..",
     "pg": "^8.9.0"

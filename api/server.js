@@ -17,7 +17,7 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/api/cohorts", async (req, res, next) => {
-  const result = await db.query("SELECT cohorts.*, instructors.lastname AS instructor_id FROM cohorts INNER JOIN instructors ON cohorts.instructor_id = instructors.id").catch(next);
+  const result = await db.query("SELECT * FROM cohorts").catch(next);
   res.send(result.rows);
 });
 
