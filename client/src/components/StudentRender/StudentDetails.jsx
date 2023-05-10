@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import tempData from './StudentDetailsTempData'
 import '../../styles/StudentDetails.css'
+import LeftColumnContext from "../../context/LeftColumnContext";
 
 const StudentDetail = () => {
-    const studentName = tempData[0]; 
+    const {studentdata} = useContext(LeftColumnContext);
+    
+
+    const studentName = studentdata && studentdata.length > 0 ? studentdata[0].firstname : '';
     const studentBranch = tempData[1];
     const studentStatus = tempData[2];
     const currentTasks = tempData[3];
