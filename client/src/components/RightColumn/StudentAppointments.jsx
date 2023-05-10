@@ -22,8 +22,9 @@ export default function StudentAppointments(){
                     <div key={indexed}>
                         <div>
                             {student.firstname} {student.lastname}
-                            
+                            {console.log(student)}
                         </div>
+                        Reminder: {student.appointments}
                     </div>
                 )
             })}
