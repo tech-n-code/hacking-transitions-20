@@ -103,8 +103,6 @@ app.post("/register", async (req, res) => {
   }
 });
 
-
-
 // Route to handle user login
 app.post("/login", async (req, res) => {
   try {
