@@ -61,6 +61,12 @@ CREATE TABLE student_tasks (
   completed BOOLEAN NOT NULL
 );
 
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  password VARCHAR(100) NOT NULL
+);
+
 
 ALTER TABLE instructors 
 ADD COLUMN cohort_id INT,
@@ -70,6 +76,7 @@ ALTER TABLE students
 ADD COLUMN branch_id INT,
 ADD COLUMN instructor_id INT,
 ADD COLUMN cohort_id INT,
+ADD COLUMN appointments VARCHAR (100),
 ADD CONSTRAINT fk_branch_id FOREIGN KEY (branch_id) REFERENCES branch(id) ON DELETE CASCADE,
 ADD CONSTRAINT fk_instructor_id FOREIGN KEY (instructor_id) REFERENCES instructors(id) ON DELETE CASCADE,
 ADD CONSTRAINT fk_cohort_id FOREIGN KEY (cohort_id) REFERENCES cohorts(id) ON DELETE CASCADE;

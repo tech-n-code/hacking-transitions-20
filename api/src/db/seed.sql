@@ -60,6 +60,14 @@ UPDATE students SET cohort_id = 2 WHERE id = 4;
 UPDATE students SET cohort_id = 1 WHERE id = 5;
 UPDATE students SET cohort_id = 2 WHERE id = 6;
 UPDATE students SET cohort_id = 1 WHERE id = 7;
+UPDATE students SET appointments = 'Medical' WHERE id = 1;
+UPDATE students SET appointments = 'Clothing' WHERE id = 2;
+UPDATE students SET appointments = 'Clearing' WHERE id = 3;
+UPDATE students SET appointments = 'Command survey' WHERE id = 4;
+UPDATE students SET appointments = 'Outprocessing' WHERE id = 5;
+UPDATE students SET appointments = 'Turn-in' WHERE id = 6;
+UPDATE students SET appointments = 'Range Day, bitch, @ me' WHERE id = 7;
+
 
 UPDATE cohorts SET instructor_id = 1 WHERE id = 1;
 UPDATE cohorts SET instructor_id = 2 WHERE id = 2;
