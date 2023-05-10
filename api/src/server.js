@@ -4,11 +4,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
 import bcrypt from "bcrypt";
-<<<<<<< HEAD
 import jwt from "jsonwebtoken";
-=======
-import jwt from "jsonwebtoken"
->>>>>>> 57e8d61 (Added register and login routes, as well as updated tables for users and appointments for students)
 const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 
 const app = express();
