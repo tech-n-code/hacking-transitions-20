@@ -7,13 +7,13 @@ export default function RightColumn(){
    
 
     return(
-        <div className="rightColumn">
+        <span className="rightColumn">
             <div className="RemindersHeader">
                 Appointment reminders
             </div>
             <div className="StudentNames">
                 <StudentAppointments/>
             </div>
-        </div>
+        </span>
     )
 }

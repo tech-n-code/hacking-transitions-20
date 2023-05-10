@@ -22,6 +22,7 @@ export default function StudentAppointments(){
                     <div key={indexed}>
                         <div>
                             {student.firstname} {student.lastname}
+                            
                         </div>
                     </div>
                 )
