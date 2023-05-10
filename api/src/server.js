@@ -3,6 +3,8 @@ import pg from "pg";
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken"
 const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 const app = express();
 
@@ -35,6 +37,47 @@ app.get("/api/cohorts/:cohortId/students", async (req, res, next) => {
     res.sendStatus(404);
   } else {
     res.send(result.rows);
+  }
+});
+
+// Route to handle user registration
+app.post("/register", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const hashedPassword = await bcrypt.hash(password, 10); // hashes the password with bcrypt and add 10 extra bits "salt"
+
+    await pool.query("INSERT INTO users (email, password) VALUES ($1, $2)", [email, hashedPassword]);
+    // JSON Web tokens, yay
+    const token = jwt.sign({ email }, 'your-secret-key', { expiresIn: '2h' });
+    res.status(200).json({ token });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Registration failed" });
+  }
+});
+
+// Route to handle user login
+app.post("/login", async (req, res) => {
+  try {
+    const { email, password } = req.body;
+
+    const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
+    if (!user) {
+    return res.status(400).json({ error: "Invalide email or password" });
+    }
+    // Compare password to the hashed store
+    const validPassword = await bcrypt.compare(password, user.password);
+
+    if (!validPassword) {
+      return res.status(400).json({ error: "Invalide email or password" });
+    }
+    // Create JWT
+    const token = jwt.sign({ email: user.email }, 'your-secret-key', { expiresIn: '2h' });
+
+    res.status(200).json({ token });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ error: "Login failed" });
   }
 });
 
