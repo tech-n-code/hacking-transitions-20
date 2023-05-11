@@ -1,0 +1,12 @@
+.studentNames{
+    border: 3px solid #ef6e47;
+    border-top: 0px;
+    background-color: #4e70e0;
+    color: white;
+}
+
+.appointments{
+    border: 3px solid #ef6e47;
+    border-top: 0px;
+    background-color: #E0EAF8;
+}
