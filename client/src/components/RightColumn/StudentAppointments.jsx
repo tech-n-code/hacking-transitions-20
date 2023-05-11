@@ -15,12 +15,15 @@ export default function StudentAppointments(){
             .then(data => setStudents(data))
             .catch(error => console.log(error));
     }, [cohortIdForInfo]);
+    
     useEffect(() => {
-        fetch(`http://localhost:8000/api/tasks`)
+        fetch(`http://localhost:8000/api/appointments`)
             .then(response => response.json())
             .then(data => setTasks(data))
             .catch(error => console.log(error));
-    }, [cohortIdForInfo]);
+    }, [tasks]);
+
+    
 
     return(
         <div>
@@ -31,16 +34,15 @@ export default function StudentAppointments(){
                             {student.firstname} {student.lastname}
                         </div>
                         <div className="appointments">
-                            Reminder: {tasks.map(( task, i) =>{
+                            Reminder: {tasks.map(( appointments, i) =>{
                                 return(
                                     <div key={ i }>
                                         <div>
-                                            {task.name}
+                                            { appointments.note }
                                         </div>
                                     </div>
                                 )
                             })}
-                        {/* Reminder: {student.appointments} */}
                         </div>
                     </div>
                 )
@@ -48,3 +50,6 @@ export default function StudentAppointments(){
         </div>
     )
 }
+
+//let setAppointments = tasks.find(obj => obj.student[id] === task.id);
+//let setAppointments = tasks.find(obj => obj.student[id] === tasks.student_id);
