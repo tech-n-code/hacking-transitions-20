@@ -3,7 +3,7 @@ import "../../../src/styles/LeftColumn.css"
 import LeftColumnContext from "../../context/LeftColumnContext";
 
 function LeftColumnNames(){
-    const {students, setStudentClicked, setRenderStudent} = useContext(LeftColumnContext);
+    const {students, setStudentClicked, setRenderStudent, setCohortClicked} = useContext(LeftColumnContext);
 
     return (
         <>
@@ -14,6 +14,7 @@ function LeftColumnNames(){
                     className="LCName" onClick={() => {
                     setStudentClicked(student.id);
                     setRenderStudent(true)
+                    setCohortClicked("")
                     }}>
                     {student.firstname} 
                     {student.lastname}
