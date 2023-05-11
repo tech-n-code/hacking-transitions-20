@@ -11,7 +11,7 @@ function Login() {
         e.preventDefault();
 
         try {
-            const res = await axios.post("/login", { email, password });
+            const res = await axios.post("/api/login", { email, password });
             // Insert JWT (res.data.token)
             if(!signIn({token: res.data.token, expiresIn: 7200, remember: true})) {
                 // handle error here, sign in failed

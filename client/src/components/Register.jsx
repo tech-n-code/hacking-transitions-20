@@ -14,12 +14,13 @@ function Register() {
         try {
             const res = await axios.post("/api/register", { email, password });
             // Insert JWT (res.data.token)
-            if(!signIn({token: res.data.token, expiresIn: 7200, remember: true})) {
+            if(!signIn({token: res.data.token, expiresIn: 7200, remember: false})) {
                 setError("Sign-in failed. Please try again.");
             }
+            console.log(res.data);
         } catch (err) {
-            console.error(err.response.data.error);
-            setError(err.response.data.error || "Registration failed");
+            console.log(err);
+            setError("User is already registered, please log in");
         }
     };
 
