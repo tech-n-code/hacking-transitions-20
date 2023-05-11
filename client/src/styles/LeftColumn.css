@@ -7,8 +7,9 @@
     height: fit-content;
     color: #FFFFFF;
     font-size: 25px;
-    margin-top: 10px;
+    margin-top: 0px;
     cursor: default;
+    min-width: 250px;
 }
 .leftColumnHeader{
     font-size: 40px;
@@ -18,8 +19,11 @@
     border-style: solid;
 }
 .leftColumnDrop{
-    display:flex;
+    display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     background: #4E70E0;
     border-color: #EF6E47;
     border-style: solid;

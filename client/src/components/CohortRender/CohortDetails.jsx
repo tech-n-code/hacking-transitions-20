@@ -5,60 +5,30 @@ import '../../styles/CohortDetails.css';
 
 const CohortDetails = () => {
 
-    const { cohortClicked, cohortIdForInfo, cohorts } = useContext(LeftColumnContext);
+    const { cohortClicked, cohortIdForInfo, cohorts, setCohortClicked} = useContext(LeftColumnContext);
 
     return (
         <>
-            <h1 className='cohort-title'>{cohortClicked}</h1>
-            <table>
-                <tbody>
-                    <tr>
-                        <td
-                            id='details-0'
-                            className='column1'
-                        >Course Title</td>
-                        <td
-                        className='column2'>
-                        {cohorts[cohortIdForInfo].courseid}</td>
-                    </tr>
-                    <tr>
-                        <td
-                            id='details-1'
-                            className='column1'
-                        >Start Date</td>
-                        <td
-                        className='column2'>
-                        {cohorts[cohortIdForInfo].startdate}</td>
-                    </tr>
-                    <tr>
-                        <td
-                            id='details-2'
-                            className='column1'
-                        >End Date</td>
-                        <td
-                            className='column2'>
-                            {cohorts[cohortIdForInfo].enddate}</td>
-                    </tr>
-                    <tr>
-                        <td
-                            id='details-3'
-                            className='column1'
-                        >Instructor</td>
-                        <td
-                        className='column2'>
-                        {cohorts[cohortIdForInfo].instructor_id}</td>
-                    </tr>
-                    <tr>
-                        <td
-                            id='details-4'
-                            className='column1'
-                        >Number of Students</td>
-                        <td
-                        className='column2'>
-                        {cohorts[cohortIdForInfo].numberofstudents}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div className='cohortInfoContainer'>
+                <div className="cohortInfoHeader">
+                    <div className="cohortInfoName">
+                        {cohortClicked}
+                        <div className="cohortClose" onClick={() =>{setCohortClicked("")}}>X</div>
+                    </div>
+                    <div ClassName="cohortInfoTypeContainer">
+                        <div className="cohortInfoType">Start Date</div>
+                        <div className="cohortInfoType">End Date</div>
+                        <div className="cohortInfoType">Instructor</div>
+                        <div className="cohortInfoType">Student Count</div>
+                    </div>
+                </div>
+                <div className="cohortInfoBox">
+                    <div className="cohortInfoEntry">{cohorts[cohortIdForInfo].startdate}</div>
+                    <div className="cohortInfoEntry">{cohorts[cohortIdForInfo].enddate}</div>
+                    <div className="cohortInfoEntry">{cohorts[cohortIdForInfo].instructor_id}</div>
+                    <div className="cohortInfoEntry">{cohorts[cohortIdForInfo].numberofstudents}</div>
+                </div>
+            </div>
         </>
     );
 };
