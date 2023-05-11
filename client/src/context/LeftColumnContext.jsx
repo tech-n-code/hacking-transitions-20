@@ -29,7 +29,9 @@ export const LeftColumnProvider = ({children}) => {
             setCohortClicked("")
         }else{
             setCohortClicked(cohort)
-            setCohortIdForInfo(id)   
+            setCohortIdForInfo(id)
+            setRenderStudent(false)
+
         } 
     }
 
@@ -98,6 +100,7 @@ export const LeftColumnProvider = ({children}) => {
     return( <LeftColumnContext.Provider value = {{
         studentID,
         renderStudent,
+        setCohortClicked,
         setRenderStudent,
         studentdata,
         branchdata,
