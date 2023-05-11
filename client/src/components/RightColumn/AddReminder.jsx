@@ -1,18 +1,30 @@
-import React, { useState } from "react";
-import "../../styles/RightColumn.css"
+import React, { useState, useContext } from "react";
+import "../../styles/RightColumn.css";
+import LeftColumnContext from "../../context/LeftColumnContext";
 
 
-export default function AddReminder(){
+
+export default function AddReminder({setShowAddModal}){
+    const { cohortIdForInfo } = useContext(LeftColumnContext);
     const[ note, setNote] = useState("");
     const [ student, setStudent ] = useState("")
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         const test = {note , student}
         console.log(test)
+        fetch(`http://localhost:8000/api/cohorts/${cohortIdForInfo+1}/students`, {
+            method: "POST",
+            headers: { "Content-Type" : "application/json"},
+            body: JSON.stringify(test)
+        }).then(() =>{
+            console.log('Note has been added');
+            setShowAddModal(false)
+        })
+        
     }
     return(
         <span>
-            <button className="addButton">Add</button>
             <form onSubmit={ handleSubmit }>
                 <label >Add note</label>
                 <textarea 
@@ -27,11 +39,14 @@ export default function AddReminder(){
                     required
                 >
                     <option value="" > Please select a student</option>
-                    <option value="student1">student1</option>
-                    <option value="student2">student2</option>
+                    <option value="student 1">student 1</option>
+                    <option value="student 2">student 2</option>
                 </select>
-                <button>Submit</button>
+                <button className="addSubmit">Submit</button>
             </form>
+                <button className="addCancel" onClick={() => setShowAddModal(false)}>
+                    Cancel
+                </button>
         </span>
     )
 }

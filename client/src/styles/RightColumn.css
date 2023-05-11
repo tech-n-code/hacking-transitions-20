@@ -43,3 +43,13 @@ button:hover{
 .addButton{
     border-left: 0;
 }
+
+.addSubmit{
+    border: black solid 1px;
+
+}
+
+.addCancel{
+    border: black solid 1px;
+
+}

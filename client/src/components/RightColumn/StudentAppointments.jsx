@@ -5,6 +5,7 @@ import "../../styles/StudentAppointments.css"
 export default function StudentAppointments(){
     const [students, setStudents] = useState([]);
     const { cohortIdForInfo } = useContext(LeftColumnContext);
+    const [ tasks, setTasks ] = useState([])
 
    
     
@@ -14,7 +15,12 @@ export default function StudentAppointments(){
             .then(data => setStudents(data))
             .catch(error => console.log(error));
     }, [cohortIdForInfo]);
-
+    useEffect(() => {
+        fetch(`http://localhost:8000/api/tasks`)
+            .then(response => response.json())
+            .then(data => setTasks(data))
+            .catch(error => console.log(error));
+    }, [cohortIdForInfo]);
 
     return(
         <div>
@@ -25,7 +31,16 @@ export default function StudentAppointments(){
                             {student.firstname} {student.lastname}
                         </div>
                         <div className="appointments">
-                        Reminder: {student.appointments}
+                            Reminder: {tasks.map(( task, i) =>{
+                                return(
+                                    <div key={ i }>
+                                        <div>
+                                            {task.name}
+                                        </div>
+                                    </div>
+                                )
+                            })}
+                        {/* Reminder: {student.appointments} */}
                         </div>
                     </div>
                 )
