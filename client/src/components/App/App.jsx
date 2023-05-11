@@ -6,6 +6,7 @@ import Header from "../Header/Header.jsx";
 import CohortDetails from "../CohortRender/CohortDetails.jsx";
 import LeftColumnContext from "../../context/LeftColumnContext";
 import RightColumn from "../RightColumn/RightColumn.jsx";
+import "../../styles/App.css"
 
 const App = () => {
 
