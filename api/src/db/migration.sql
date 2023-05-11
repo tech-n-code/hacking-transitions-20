@@ -44,7 +44,8 @@ CREATE TABLE students (
   base TEXT,
   active BOOLEAN NOT NULL,
   phonenumber BIGINT NOT NULL,
-  email TEXT NOT NULL
+  email TEXT NOT NULL,
+  dutystatus TEXT NOT NULL
 );
 
 

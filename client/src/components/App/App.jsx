@@ -9,13 +9,13 @@ import RightColumn from "../RightColumn/RightColumn.jsx";
 
 const App = () => {
 
-  const { cohortClicked } = useContext(LeftColumnContext);
+  const { cohortClicked, renderStudent } = useContext(LeftColumnContext);
 
   return (
     <>
       <Header />
       <LeftColumn />
-      {/* <StudentDetail /> */}
+      {renderStudent ? <StudentDetail />: ''}
       {cohortClicked !== "" ? <CohortDetails />  : <></>}
       {cohortClicked !== "" ? <RightColumn />  : <></>}
       <Footer />
