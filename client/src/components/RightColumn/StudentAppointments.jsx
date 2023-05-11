@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import LeftColumnContext from "../../context/LeftColumnContext";
+import "../../styles/StudentAppointments.css"
 
 export default function StudentAppointments(){
     const [students, setStudents] = useState([]);
@@ -20,11 +21,12 @@ export default function StudentAppointments(){
             {students.map((student, indexed) =>{
                 return(
                     <div key={indexed}>
-                        <div>
+                        <div className="studentNames">
                             {student.firstname} {student.lastname}
-                            {console.log(student)}
                         </div>
+                        <div className="appointments">
                         Reminder: {student.appointments}
+                        </div>
                     </div>
                 )
             })}
