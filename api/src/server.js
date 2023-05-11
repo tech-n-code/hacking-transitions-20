@@ -5,6 +5,8 @@ import dotenv from "dotenv";
 dotenv.config();
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken"
 const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 
 const userPool = new pg.Pool({
@@ -93,7 +95,7 @@ app.post("/register", async (req, res) => {
     const { email, password } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10); // hashes the password with bcrypt and add 10 extra bits "salt"
 
-    await userPool.query("INSERT INTO users (email, password) VALUES ($1, $2)", [email, hashedPassword]);
+    await pool.query("INSERT INTO users (email, password) VALUES ($1, $2)", [email, hashedPassword]);
     // JSON Web tokens, yay
     const token = jwt.sign({ email }, 'your-secret-key', { expiresIn: '2h' });
     res.status(200).json({ token });
@@ -103,14 +105,12 @@ app.post("/register", async (req, res) => {
   }
 });
 
-
-
 // Route to handle user login
 app.post("/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const result = await userPool.query("SELECT * FROM users WHERE email = $1", [email]);
+    const result = await pool.query("SELECT * FROM users WHERE email = $1", [email]);
     if (!user) {
     return res.status(400).json({ error: "Invalide email or password" });
     }
