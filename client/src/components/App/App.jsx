@@ -17,7 +17,7 @@ const App = () => {
       <Header />
       <LeftColumn />
       {renderStudent ? <StudentDetail />: ''}
-      {cohortClicked !== "" ? <CohortDetails />  : <></>}
+      {cohortClicked !== "" && renderStudent !== true ? <CohortDetails />  : <></>}
       {cohortClicked !== "" ? <RightColumn />  : <></>}
       <Footer />
     </>

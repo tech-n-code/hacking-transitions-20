@@ -36,6 +36,18 @@ INSERT INTO student_tasks (completed) VALUES
     (TRUE),
     (FALSE);
 
+INSERT INTO appointments (note, student_id) VALUES  
+    ('Resume needs some work', 1),
+    ('Needs to find 3 companies interested in applying for', 2),
+    ('Finished going over resume', 3),
+    ('Go over practice interview in Pramp', 4),
+    ('Discusee Developer Journal', 5),
+    ('Go over Parin attributes', 6),
+    ('Answer interview questions to one low score specific Parin attribute', 7),
+    ('Fixed resume bullet points to fit STAR method', 1),
+    ('Job scan resume to fit 3 job descriptions', 2),
+    ('Review interview student had with company', 3);
+
 UPDATE instructors SET cohort_id = 1 WHERE id = 1;
 UPDATE instructors SET cohort_id = 2 WHERE id = 2;
 

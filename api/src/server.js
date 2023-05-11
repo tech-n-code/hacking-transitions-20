@@ -74,6 +74,19 @@ app.get("/api/cohorts/:cohortId/students/:studentId", async (req, res, next) => 
   }
 });
 
+// Route to get all tasks
+app.get("/api/tasks", async (req, res, next) =>{
+  // const tasks = req.params.tasks
+  const result = await db
+    .query(`SELECT * FROM tasks`)
+    .catch(next)
+  if(result.rows.length === 0){
+    res.sendStatus(404);
+  } else{
+    res.send(result.rows)
+  }
+})
+
 // Route to handle user registration
 app.post("/register", async (req, res) => {
   try {
@@ -89,6 +102,8 @@ app.post("/register", async (req, res) => {
     res.status(500).json({ error: "Registration failed" });
   }
 });
+
+
 
 // Route to handle user login
 app.post("/login", async (req, res) => {
