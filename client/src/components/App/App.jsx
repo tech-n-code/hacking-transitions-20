@@ -9,6 +9,7 @@ import RightColumn from "../RightColumn/RightColumn.jsx";
 import Register from "../Register.jsx";
 import Login from "../Login.jsx";
 import { AuthProvider } from "react-auth-kit";
+import "../../styles/App.css"
 
 const App = () => {
 
