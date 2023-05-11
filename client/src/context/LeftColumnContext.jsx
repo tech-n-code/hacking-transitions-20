@@ -12,6 +12,8 @@ export const LeftColumnProvider = ({children}) => {
     const [cohortIdForInfo, setCohortIdForInfo] = useState(1);
     const [studentID, setStudentClicked] = useState('');
     const [studentdata, setStudentData] = useState(null);
+    const [branchdata, setBranchData] = useState(null);
+    const [renderStudent, setRenderStudent] = useState(false)
 
     const handleDropClicked = (value, id) =>{
         if(dropDownClicked === value){
@@ -30,6 +32,19 @@ export const LeftColumnProvider = ({children}) => {
             setCohortIdForInfo(id)   
         } 
     }
+
+    useEffect(() => {
+        if(branchdata){
+            console.log(branchdata);
+        }
+    }, [studentdata]);
+
+    useEffect(() => {
+        fetch(`http://localhost:8000/api/branches`)
+            .then(response => response.json())
+            .then(data => setBranchData(data))
+            .catch(error => console.log(error));
+    });
     
     useEffect(() => {
         if(studentdata){
@@ -82,7 +97,10 @@ export const LeftColumnProvider = ({children}) => {
 
     return( <LeftColumnContext.Provider value = {{
         studentID,
+        renderStudent,
+        setRenderStudent,
         studentdata,
+        branchdata,
         setStudentClicked,
         setStudentData,
         dropDownClicked,
