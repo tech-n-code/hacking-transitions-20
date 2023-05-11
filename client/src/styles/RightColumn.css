@@ -1,0 +1,17 @@
+.Appointments{
+    position: relative;
+    left: 79.8%;
+    bottom: 400px;
+    background-color: aqua;
+    text-align: center;
+    width: 20%;
+    border: 3px solid #ef6e47;
+}
+
+.RemindersHeader{
+    border: solid black;
+    font-size: 40px;
+    font-family: Times;
+    background-color: #0d0f4a;
+    color: white;
+}
