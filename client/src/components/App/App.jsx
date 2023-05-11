@@ -18,9 +18,9 @@ const App = () => {
     <>
       <AuthProvider authStorageType="cookie" authStorageName="_auth_t" authTimeStorageName="_auth_time" stateStorageName="_auth_state" cookieDomain={window.location.hostname} cookieSecure={window.location.protocol==="https:"}>
       <Header />
-      <LeftColumn />
       <Register />
       <Login />
+      <LeftColumn />
       {/* <StudentDetail /> */}
       {cohortClicked !== "" ? <CohortDetails />  : <></>}
       {cohortClicked !== "" ? <RightColumn />  : <></>}
