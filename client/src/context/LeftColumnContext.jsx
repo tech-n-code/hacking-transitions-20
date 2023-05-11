@@ -44,7 +44,7 @@ export const LeftColumnProvider = ({children}) => {
             .then(response => response.json())
             .then(data => setBranchData(data))
             .catch(error => console.log(error));
-    });
+    },[]);
     
     useEffect(() => {
         if(studentdata){
