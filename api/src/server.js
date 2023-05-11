@@ -5,8 +5,6 @@ import dotenv from "dotenv";
 dotenv.config();
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken"
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken"
 const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 
 const userPool = new pg.Pool({
@@ -104,6 +102,8 @@ app.post("/register", async (req, res) => {
     res.status(500).json({ error: "Registration failed" });
   }
 });
+
+
 
 // Route to handle user login
 app.post("/login", async (req, res) => {
