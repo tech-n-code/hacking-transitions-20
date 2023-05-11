@@ -15,7 +15,7 @@ const CohortDetails = () => {
                         {cohortClicked}
                         <div className="cohortClose" onClick={() =>{setCohortClicked("")}}>X</div>
                     </div>
-                    <div ClassName="cohortInfoTypeContainer">
+                    <div className="cohortInfoTypeContainer">
                         <div className="cohortInfoType">Start Date</div>
                         <div className="cohortInfoType">End Date</div>
                         <div className="cohortInfoType">Instructor</div>
