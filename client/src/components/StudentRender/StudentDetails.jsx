@@ -4,7 +4,7 @@ import '../../styles/StudentDetails.css'
 import LeftColumnContext from "../../context/LeftColumnContext";
 
 const StudentDetail = () => {
-    const { studentdata, branchdata } = useContext(LeftColumnContext);
+    const { studentdata, branchdata, renderStudent } = useContext(LeftColumnContext);
 
     const studentName = studentdata && studentdata.length > 0 ? studentdata[0].firstname + ' ' + studentdata[0].lastname : '';
     const studentStatus = studentdata && studentdata.length > 0 ? studentdata[0].dutystatus: '';
@@ -14,7 +14,7 @@ const StudentDetail = () => {
     const studentPhone = studentdata && studentdata.length > 0 ? studentdata[0].phonenumber: '';
     const studentEmail = studentdata && studentdata.length > 0 ? studentdata[0].email: '';
     let studentBranch = '';
-    
+
     if (branchdata && branchdata.length > 0) {
       const foundBranch = branchdata.find(branch => branch.id === studentdata[0].branch_id);
       studentBranch = foundBranch ? foundBranch.name : '';
