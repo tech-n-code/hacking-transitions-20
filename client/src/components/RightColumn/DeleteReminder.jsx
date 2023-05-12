@@ -13,12 +13,10 @@ export default function AddReminder({setDeleteNote}){
         e.preventDefault();
         const test = { student}
         console.log(test)
-        fetch(`http://localhost:8000/api/cohorts/${cohortIdForInfo+1}/students`, {
-            method: "PATCH",
-            headers: { "Content-Type" : "application/json"},
-            body: JSON.stringify(test)
+        fetch(`http://localhost:8000/api/appointments`, {
+            method: "DELETE",
         }).then(() =>{
-            console.log('edit has been added');
+            console.log('Note has been added');
             setDeleteNote(false)
         })
         
