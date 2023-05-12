@@ -67,10 +67,10 @@ app.get("/api/cohorts/:cohortId/students/:studentId", async (req, res, next) => 
 });
 
 // Route to get all tasks
-app.get("/api/tasks", async (req, res, next) =>{
+app.get("/api/appointments", async (req, res, next) =>{
   // const tasks = req.params.tasks
   const result = await db
-    .query(`SELECT * FROM tasks`)
+    .query(`SELECT * FROM appointments`)
     .catch(next)
   if(result.rows.length === 0){
     res.sendStatus(404);

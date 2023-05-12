@@ -10,41 +10,46 @@ export default function StudentAppointments(){
    
     
     useEffect(() => {
-        fetch(`http://localhost:8000/api/cohorts/${cohortIdForInfo + 1}/students`)
+        fetch(`/api/cohorts/${cohortIdForInfo + 1}/students`)
             .then(response => response.json())
             .then(data => setStudents(data))
             .catch(error => console.log(error));
     }, [cohortIdForInfo]);
+
     useEffect(() => {
-        fetch(`http://localhost:8000/api/tasks`)
+        fetch('/api/appointments')
             .then(response => response.json())
             .then(data => setTasks(data))
             .catch(error => console.log(error));
-    }, [cohortIdForInfo]);
+    }, []);
 
-    return(
+    console.log("tasks state = ", tasks);
+    console.log("students state = ", students);
+
+    return (
         <div>
-            {students.map((student, indexed) =>{
-                return(
-                    <div key={indexed}>
-                        <div className="studentNames">
-                            {student.firstname} {student.lastname}
-                        </div>
-                        <div className="appointments">
-                            Reminder: {tasks.map(( task, i) =>{
-                                return(
-                                    <div key={ i }>
-                                        <div>
-                                            {task.name}
-                                        </div>
-                                    </div>
-                                )
-                            })}
-                        {/* Reminder: {student.appointments} */}
-                        </div>
-                    </div>
-                )
-            })}
+          {students.map((student, indexed) => {
+            const studentTasks = tasks.filter(task => task.student_id === student.id);
+            console.log("studentTasks Array = ", studentTasks)
+      
+            return (
+              <div key={indexed}>
+                <div className="studentNames">
+                  {student.firstname} {student.lastname}
+                </div>
+                <div className="appointments">
+                  Reminder:
+                  {studentTasks.map((task, i) => {
+                    return (
+                      <div key={i}>
+                        <div>{task.note}</div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            );
+          })}
         </div>
-    )
+      );
 }
