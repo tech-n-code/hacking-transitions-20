@@ -13,7 +13,7 @@ export default function AddReminder({setShowAddModal}){
         e.preventDefault();
         const test = {note , student}
         console.log(test)
-        fetch(`http://localhost:8000/api/cohorts/${cohortIdForInfo+1}/students`, {
+        fetch(`http://localhost:8000/api/cohorts/${cohortIdForInfo + 1}/students`, {
             method: "POST",
             headers: { "Content-Type" : "application/json"},
             body: JSON.stringify(test)
@@ -25,6 +25,7 @@ export default function AddReminder({setShowAddModal}){
     }
     return(
         <span>
+
             <form onSubmit={ handleSubmit }>
                 <label >Add note</label>
                 <textarea 
