@@ -6,8 +6,9 @@
     transform: translate(-50%, -50%);
     font-size: 35px;
     background-color: #E0EAF8;
-    border: 1px solid red;
+    border: 1px solid #EF6E47;
     color:#FFFFFF;
+    
 }
 .cohortInfoHeader{
     text-align: center;
@@ -16,14 +17,13 @@
 .cohortInfoTypeContainer{
     text-align: center;
     display: flex;
-    flex-wrap: wrap;
-    text-align: center;
+
 }
 .cohortInfoType {
     align-items: center;
     border: 1px solid #EF6E47;
     border-top: 0px;
-    width: 24.6786%;
+    width: 300px;
     background-color: #4E70E0;
     color: #000000;
 }
@@ -39,7 +39,7 @@
     vertical-align: middle;
     font-size: 25px;
     color: #000000;
-    width: 24.6786%;
+    width: 300px;
 }
 .cohortInfoName{
     font-size: 50px;
