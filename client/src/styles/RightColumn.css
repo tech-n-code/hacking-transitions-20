@@ -1,0 +1,55 @@
+.Appointments{
+    position: fixed;
+    text-align: center;
+    width: 20%;
+    left: 79.85%;
+    margin-top: -4.6%;
+}
+
+.RemindersHeader{
+    border: 3px solid #ef6e47;
+    font-size: 35px;
+    font-family: Times;
+    background-color: #0d0f4a;
+    color: white;
+}
+
+.StudentNames{
+    font-family: Times;
+    font-size: 20px;
+    letter-spacing: .5px;
+    word-spacing: 1px;
+}
+
+.buttons{
+    border: solid #ef6e47;
+    border-top: 0;
+}
+
+button{
+    display: inline-block;
+    background-color: transparent;
+    width: 33.3%;
+    border: 0;
+    border-left: #ef6e47 solid;
+}
+
+button:hover{
+    background-color: #0d0f4a;
+    color: white;
+    cursor: pointer;
+}
+
+.addButton{
+    border-left: 0;
+}
+
+.addSubmit{
+    border: black solid 1px;
+
+}
+
+.addCancel{
+    border: black solid 1px;
+
+}

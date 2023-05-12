@@ -10,6 +10,10 @@ export const LeftColumnProvider = ({children}) => {
     const [students, setStudents] = useState([]);
     const [cohortId, setcohortId] = useState(1);
     const [cohortIdForInfo, setCohortIdForInfo] = useState(1);
+    const [studentID, setStudentClicked] = useState('');
+    const [studentdata, setStudentData] = useState(null);
+    const [branchdata, setBranchData] = useState(null);
+    const [renderStudent, setRenderStudent] = useState(false)
 
     const handleDropClicked = (value, id) =>{
         if(dropDownClicked === value){
@@ -25,10 +29,38 @@ export const LeftColumnProvider = ({children}) => {
             setCohortClicked("")
         }else{
             setCohortClicked(cohort)
-            setCohortIdForInfo(id)   
+            setCohortIdForInfo(id)
+            setRenderStudent(false)
+
         } 
     }
+
+    useEffect(() => {
+        if(branchdata){
+            console.log(branchdata);
+        }
+    }, [studentdata]);
+
+    useEffect(() => {
+        fetch(`http://localhost:8000/api/branches`)
+            .then(response => response.json())
+            .then(data => setBranchData(data))
+            .catch(error => console.log(error));
+    }, []);
     
+    useEffect(() => {
+        if(studentdata){
+            console.log(studentdata);
+        }
+    }, [studentdata]);
+
+    useEffect(() => {
+        fetch(`http://localhost:8000/api/cohorts/${cohortId}/students/${studentID}`)
+            .then(response => response.json())
+            .then(data => setStudentData(data))
+            .catch(error => console.log(error));
+    }, [cohortId, studentID]);
+
     useEffect(() => {
         fetch('http://localhost:8000/api/cohorts')
             .then(response => response.json())
@@ -66,6 +98,14 @@ export const LeftColumnProvider = ({children}) => {
     };
 
     return( <LeftColumnContext.Provider value = {{
+        studentID,
+        renderStudent,
+        setCohortClicked,
+        setRenderStudent,
+        studentdata,
+        branchdata,
+        setStudentClicked,
+        setStudentData,
         dropDownClicked,
         handleDropClicked,
         cohortClicked, 
@@ -75,7 +115,8 @@ export const LeftColumnProvider = ({children}) => {
         openDropDown,
         students,
         cohortId,
-        cohortIdForInfo
+        cohortIdForInfo,
+        setStudents
     }}>
         {children}
     </LeftColumnContext.Provider>

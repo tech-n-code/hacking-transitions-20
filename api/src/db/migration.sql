@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS student_tasks;
 DROP TABLE IF EXISTS branch_tasks;
 DROP TABLE IF EXISTS tasks;
 DROP TABLE IF EXISTS branch;
+DROP TABLE IF EXISTS appointments;
 
 CREATE TABLE tasks (
   id SERIAL PRIMARY KEY,
@@ -44,7 +45,15 @@ CREATE TABLE students (
   base TEXT,
   active BOOLEAN NOT NULL,
   phonenumber BIGINT NOT NULL,
-  email TEXT NOT NULL
+  email TEXT NOT NULL,
+  dutystatus TEXT NOT NULL
+);
+
+CREATE TABLE appointments (
+  id SERIAL PRIMARY KEY,
+  note TEXT NOT NULL,
+  student_id INT NOT NULL,
+  FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
 );
 
 

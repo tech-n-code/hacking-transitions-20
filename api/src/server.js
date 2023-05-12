@@ -29,6 +29,18 @@ app.get("/api/cohorts/:id", async (req, res, next) => {
   }
 });
 
+app.get("/api/branches", async (req, res, next) => {
+  const result = await db
+    .query("SELECT * FROM branch")
+    .catch(next);
+
+  if (result.rows.length === 0) {
+    res.sendStatus(404);
+  } else {
+    res.send(result.rows);
+  }
+});
+
 app.get("/api/cohorts/:cohortId/students", async (req, res, next) => {
   const cohortId = req.params.cohortId;
   const result = await db
@@ -40,6 +52,32 @@ app.get("/api/cohorts/:cohortId/students", async (req, res, next) => {
     res.send(result.rows);
   }
 });
+
+app.get("/api/cohorts/:cohortId/students/:studentId", async (req, res, next) => {
+  const cohortId = req.params.cohortId;
+  const studentId = req.params.studentId;
+  const result = await db
+    .query(`SELECT students.* FROM students WHERE students.cohort_id = $1 AND students.id = $2`, [cohortId, studentId])
+    .catch(next);
+  if (result.rows.length === 0) {
+    res.sendStatus(404);
+  } else {
+    res.send(result.rows);
+  }
+});
+
+// Route to get all tasks
+app.get("/api/tasks", async (req, res, next) =>{
+  // const tasks = req.params.tasks
+  const result = await db
+    .query(`SELECT * FROM tasks`)
+    .catch(next)
+  if(result.rows.length === 0){
+    res.sendStatus(404);
+  } else{
+    res.send(result.rows)
+  }
+})
 
 // Route to handle user registration
 app.post("/api/register", async (req, res) => {

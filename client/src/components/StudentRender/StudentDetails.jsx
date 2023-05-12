@@ -1,13 +1,24 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import tempData from './StudentDetailsTempData'
 import '../../styles/StudentDetails.css'
+import LeftColumnContext from "../../context/LeftColumnContext";
 
 const StudentDetail = () => {
-    const studentName = tempData[0]; 
-    const studentBranch = tempData[1];
-    const studentStatus = tempData[2];
+    const { studentdata, branchdata, renderStudent } = useContext(LeftColumnContext);
+
+    const studentName = studentdata && studentdata.length > 0 ? studentdata[0].firstname + ' ' + studentdata[0].lastname : '';
+    const studentStatus = studentdata && studentdata.length > 0 ? studentdata[0].dutystatus: '';
     const currentTasks = tempData[3];
-    const toDoTasks = tempData[4];    
+    const studentInstallation = studentdata && studentdata.length > 0 ? studentdata[0].base: '';
+    const studentLocation = studentdata && studentdata.length > 0 ? studentdata[0].location: '';
+    const studentPhone = studentdata && studentdata.length > 0 ? studentdata[0].phonenumber: '';
+    const studentEmail = studentdata && studentdata.length > 0 ? studentdata[0].email: '';
+    let studentBranch = '';
+
+    if (branchdata && branchdata.length > 0) {
+      const foundBranch = branchdata.find(branch => branch.id === studentdata[0].branch_id);
+      studentBranch = foundBranch ? foundBranch.name : '';
+    }
 
     return (
         <div
@@ -36,6 +47,42 @@ const StudentDetail = () => {
                     </tr>
                     <tr>
                         <td
+                            id='details-4'
+                            className='column1'
+                        >Installation:</td>
+                        <td
+                        className='column2'>
+                        {studentInstallation}</td>
+                    </tr>
+                    <tr>
+                        <td
+                            id='details-5'
+                            className='column1'
+                        >Location:</td>
+                        <td
+                        className='column2'>
+                        {studentLocation}</td>
+                    </tr>
+                    <tr>
+                        <td
+                            id='details-6'
+                            className='column1'
+                        >Phone Number:</td>
+                        <td
+                        className='column2'>
+                        {studentPhone}</td>
+                    </tr>
+                    <tr>
+                        <td
+                            id='details-7'
+                            className='column1'
+                        >Email:</td>
+                        <td
+                        className='column2'>
+                        {studentEmail}</td>
+                    </tr>
+                    <tr>
+                        <td
                             id='details-2'
                             className='column1'
                         >Outprocessing Status</td>
@@ -52,15 +99,7 @@ const StudentDetail = () => {
                         className='column2'>
                         {currentTasks}</td>
                     </tr>
-                    <tr>
-                        <td
-                            id='details-4'
-                            className='column1'
-                        >To-do</td>
-                        <td
-                        className='column2'>
-                        {toDoTasks}</td>
-                    </tr>
+
                 </tbody>
             </table>
         </div>
