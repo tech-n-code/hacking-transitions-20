@@ -1,28 +1,40 @@
 import React, { useState, useContext } from "react";
 import "../../styles/RightColumn.css";
 import LeftColumnContext from "../../context/LeftColumnContext";
+import RightColumnContext from "../../context/RightColumnContext";
 
 
 
 export default function AddReminder({setShowAddModal}){
     const { cohortIdForInfo } = useContext(LeftColumnContext);
+    const { students } = useContext(RightColumnContext);
     const[ note, setNote] = useState("");
-    const [ student, setStudent ] = useState("")
+    const [ selectedStudent, setSelectedStudent ] = useState("")
+
+    console.log("note state- ",note);
+    console.log("selectedStudent state - ", selectedStudent)
+    console.log("students state - ", students);
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        const test = {note , student}
-        console.log(test)
-        fetch(`http://localhost:8000/api/cohorts/${cohortIdForInfo + 1}/students`, {
+        const appointmentNote = {
+            note: `${note}`,
+            student_id: `${selectedStudent}`
+        }
+
+        console.log(appointmentNote)
+        
+        fetch(`/api/appointments`, {
             method: "POST",
             headers: { "Content-Type" : "application/json"},
-            body: JSON.stringify(test)
+            body: JSON.stringify(appointmentNote)
         }).then(() =>{
             console.log('Note has been added');
-            setShowAddModal(false)
+            setShowAddModal(false);
         })
         
     }
+    
     return(
         <span>
 
@@ -35,13 +47,22 @@ export default function AddReminder({setShowAddModal}){
                     ></textarea>
                 <label >Select student</label>
                 <select
-                    value={ student }
-                    onChange={(e) => setStudent(e.target.value)}
+                    value={ selectedStudent }
+                    onChange={(e) => setSelectedStudent(e.target.value)}
                     required
                 >
                     <option value="" > Please select a student</option>
-                    <option value="student 1">student 1</option>
-                    <option value="student 2">student 2</option>
+                    {students.map((student, x) => {
+                        return (
+                            <option 
+                                key={x} 
+                                value={student.id}
+                            >
+                                {student.firstname} {student.lastname}
+                            </option>
+                        )
+                    })}
+                    
                 </select>
                 <button className="addSubmit">Submit</button>
             </form>
