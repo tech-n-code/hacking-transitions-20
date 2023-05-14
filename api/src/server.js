@@ -132,6 +132,21 @@ app.get("/api/users", async (req, res, next) => {
   res.send(result.rows);
 })
 
+//Route to POST appointment notes to appointments table:
+app.post('/api/appointments', async (req, res, next) => {
+  const note = req.body.note;
+  const student_id = req.body.student_id;
+
+  const result = await db
+    .query('INSERT INTO appointments (note, student_id) VALUES ($1, $2) RETURNING *;', [note, student_id])
+    .catch(next);
+  if (result.rows.length === 0){
+    res.sendStatus(404);
+  } else {
+    res.send(result.rows)
+  }
+})
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Internal Server Error");
