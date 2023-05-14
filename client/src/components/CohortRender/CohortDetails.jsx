@@ -9,7 +9,7 @@ const CohortDetails = () => {
 
     return (
         <>
-            <div className='cohortInfoContainer'>
+           {/* <div className='cohortInfoContainer'>
                 <div className="cohortInfoHeader">
                     <div className="cohortInfoName">
                         {cohortClicked}
@@ -27,6 +27,20 @@ const CohortDetails = () => {
                     <div className="cohortInfoEntry">{cohorts[cohortIdForInfo].enddate}</div>
                     <div className="cohortInfoEntry">{cohorts[cohortIdForInfo].instructor_id}</div>
                     <div className="cohortInfoEntry">{cohorts[cohortIdForInfo].numberofstudents}</div>
+                </div>
+            </div> */}
+            <div className="cohortInfoContainer">
+                <div className="cohortInfoHeader">
+                    <div className="cohortInfoName">
+                        {cohortClicked}
+                        <div className="cohortClose" onClick={() => { setCohortClicked("") }}>X</div>
+                    </div>
+                </div>
+                <div className="basicCohortInfo">
+                    <div className="CInfo">{`Start Date: ${cohorts[cohortIdForInfo].startdate}`}</div>
+                    <div className="CInfo">{`End Date: ${cohorts[cohortIdForInfo].enddate}`}</div>
+                    <div className="CInfo">{`Instructor: ${cohorts[cohortIdForInfo].instructor_id}`}</div>
+                    <div className="CInfo">{`Number Of Students: ${cohorts[cohortIdForInfo].numberofstudents}`}</div>
                 </div>
             </div>
         </>
