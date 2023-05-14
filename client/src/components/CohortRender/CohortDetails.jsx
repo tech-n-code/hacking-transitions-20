@@ -23,14 +23,25 @@ const CohortDetails = () => {
                     <div className="CInfo">{`Number Of Students: ${cohorts[cohortIdForInfo].numberofstudents}`}</div>
                 </div>
                 {students.map((student, index) => {
+                    let branch;
+                    if (student.branch_id === 1) {
+                        branch = "Air Force";
+                    } else if (student.branch_id === 2) {
+                        branch = "Army";
+                    } else if (student.branch_id === 3) {
+                        branch = "Marines";
+                    } else if (student.branch_id === 4) {
+                        branch = "Navy";
+                    } else {
+                        branch = "Unknown";
+                    }
+                    const etsDate = new Date(student.ets_date).toLocaleDateString('en-US')
+                    const formattedPhoneNumber = student.phonenumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
                     return (
                         <div key={index} className="cohortStudent">
-                            <div>
-                                {student.firstname}
-                                {student.lastname}
-                            </div>
+                            <div>{`${student.firstname} ${student.lastname} ${branch} ${student.dutystatus} ${etsDate} ${formattedPhoneNumber}`}</div>
                         </div>
-                    )
+                    );
                 })}
             </div>
         </>
