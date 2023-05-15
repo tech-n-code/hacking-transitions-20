@@ -3,7 +3,7 @@ import LeftColumnContext from "../../context/LeftColumnContext";
 import "../../styles/StudentAppointments.css"
 
 export default function StudentAppointments(){
-    const [students, setStudents] = useState([]);
+    const [ students, setStudents ] = useState([]);
     const { cohortIdForInfo } = useContext(LeftColumnContext);
     const [ tasks, setTasks ] = useState([])
 
@@ -22,9 +22,6 @@ export default function StudentAppointments(){
             .then(data => setTasks(data))
             .catch(error => console.log(error));
     }, []);
-
-    console.log("tasks state = ", tasks);
-    console.log("students state = ", students);
 
     return (
         <div>
