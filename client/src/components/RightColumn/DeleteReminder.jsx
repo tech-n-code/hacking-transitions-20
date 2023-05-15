@@ -1,41 +1,51 @@
 import React, { useState, useContext} from "react";
 import "../../styles/RightColumn.css"
-import LeftColumnContext from "../../context/LeftColumnContext";
+import RightColumnContext from "../../context/RightColumnContext";
+
 
 
 
 export default function AddReminder({setDeleteNote}){
-    const { cohortIdForInfo } = useContext(LeftColumnContext);
-    // const[ deleted, setDeleted] = useState("");
-    const [ student, setStudent ] = useState("")
+    const [ selectedStudent, setSelectedStudent ] = useState("")
+    const { students, setUpdate, tasks } = useContext(RightColumnContext);
+    // console.log("students", students)
+    // console.log("tasks", tasks)
+  
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        const test = { student}
-        console.log(test)
-        fetch(`http://localhost:8000/api/appointments`, {
+    
+        fetch(`http://localhost:8000/api/appointments/${selectedStudent}`, {
             method: "DELETE",
         }).then(() =>{
-            console.log('Note has been added');
-            setDeleteNote(false)
+            console.log('Note has been deleted');
+            setDeleteNote(false);
+            setUpdate(true);
         })
         
     }
+    // console.log("student selected:", selectedStudent)
     return(
         <span>
-            <form onSubmit={ handleSubmit }>
                 <label >Select student</label>
                 <select
-                    value={ student }
-                    onChange={(e) => setStudent(e.target.value)}
+                    value={ selectedStudent }
+                    onChange={(e) => setSelectedStudent(e.target.value)}
                     required
                 >
                     <option value="" > Please select a student</option>
-                    <option value="student 1">student 1</option>
-                    <option value="student 2">student 2</option>
+                    {students.map((student, x) => {
+                        return (
+                            <option 
+                                key={x} 
+                                value={student.id}
+                            >
+                                {student.firstname} {student.lastname}
+                            </option>
+                        )
+                    })}
                 </select>
-                <button className="addSubmit">Submit</button>
-            </form>
+                <button className="addSubmit" onClick={ handleSubmit }>Delete Notes</button>
                 <button className="addCancel" onClick={() => setDeleteNote(false)}>
                     Cancel
                 </button>

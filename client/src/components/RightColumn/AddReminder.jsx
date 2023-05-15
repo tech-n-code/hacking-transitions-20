@@ -1,28 +1,24 @@
 import React, { useState, useContext } from "react";
 import "../../styles/RightColumn.css";
-import LeftColumnContext from "../../context/LeftColumnContext";
 import RightColumnContext from "../../context/RightColumnContext";
 
 
 
 export default function AddReminder({setShowAddModal}){
-    const { cohortIdForInfo } = useContext(LeftColumnContext);
-    const { students } = useContext(RightColumnContext);
+    const { students, setUpdate } = useContext(RightColumnContext);
     const[ note, setNote] = useState("");
     const [ selectedStudent, setSelectedStudent ] = useState("")
 
     console.log("note state- ",note);
     console.log("selectedStudent state - ", selectedStudent)
     console.log("students state - ", students);
-    
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const appointmentNote = {
             note: `${note}`,
             student_id: `${selectedStudent}`
         }
-
-        console.log(appointmentNote)
         
         fetch(`/api/appointments`, {
             method: "POST",
@@ -31,6 +27,7 @@ export default function AddReminder({setShowAddModal}){
         }).then(() =>{
             console.log('Note has been added');
             setShowAddModal(false);
+            setUpdate(true);
         })
         
     }
