@@ -1,33 +1,17 @@
 import React, { useState, useEffect, useContext } from "react";
 import LeftColumnContext from "../../context/LeftColumnContext";
+import RightColumnContext from "../../context/RightColumnContext";
 import "../../styles/StudentAppointments.css"
 
 export default function StudentAppointments(){
-    const [ students, setStudents ] = useState([]);
-    const { cohortIdForInfo } = useContext(LeftColumnContext);
-    const [ tasks, setTasks ] = useState([])
 
-   
-    
-    useEffect(() => {
-        fetch(`/api/cohorts/${cohortIdForInfo + 1}/students`)
-            .then(response => response.json())
-            .then(data => setStudents(data))
-            .catch(error => console.log(error));
-    }, [cohortIdForInfo]);
-
-    useEffect(() => {
-        fetch('/api/appointments')
-            .then(response => response.json())
-            .then(data => setTasks(data))
-            .catch(error => console.log(error));
-    }, []);
-
+    const { students, tasks } = useContext(RightColumnContext);
+    console.log("tasks state - ", tasks);
+  
     return (
         <div>
           {students.map((student, indexed) => {
             const studentTasks = tasks.filter(task => task.student_id === student.id);
-            console.log("studentTasks Array = ", studentTasks)
       
             return (
               <div key={indexed}>

@@ -132,6 +132,34 @@ app.get("/api/users", async (req, res, next) => {
   res.send(result.rows);
 })
 
+//Route to POST appointment notes to appointments table:
+app.post('/api/appointments', async (req, res, next) => {
+  const note = req.body.note;
+  const student_id = req.body.student_id;
+
+  const result = await db
+    .query('INSERT INTO appointments (note, student_id) VALUES ($1, $2) RETURNING *;', [note, student_id])
+    .catch(next);
+  if (result.rows.length === 0){
+    res.sendStatus(404);
+  } else {
+    res.send(result.rows)
+  }
+})
+
+//Route to DELETE appointment notes from appointment table:
+app.delete('/api/appointments/:student_id', async (req, res, next)=>{
+  const student_id = req.params.student_id
+  const result = await db
+    .query('DELETE FROM appointments WHERE student_id = $1 RETURNING *', [ student_id ])
+    .catch(next);
+  if(result.rows){
+    res.sendStatus(200);
+  } else {
+    res.status(404).send("No Data To Delete")
+  }
+})
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Internal Server Error");

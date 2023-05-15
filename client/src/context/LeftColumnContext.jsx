@@ -37,7 +37,6 @@ export const LeftColumnProvider = ({children}) => {
 
     useEffect(() => {
         if(branchdata){
-            console.log(branchdata);
         }
     }, [studentdata]);
 
@@ -50,7 +49,6 @@ export const LeftColumnProvider = ({children}) => {
     
     useEffect(() => {
         if(studentdata){
-            console.log(studentdata);
         }
     }, [studentdata]);
 

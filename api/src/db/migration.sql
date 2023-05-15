@@ -46,7 +46,8 @@ CREATE TABLE students (
   active BOOLEAN NOT NULL,
   phonenumber BIGINT NOT NULL,
   email TEXT NOT NULL,
-  dutystatus TEXT NOT NULL
+  dutystatus TEXT NOT NULL,
+  ets_date DATE NOT NULL
 );
 
 CREATE TABLE appointments (
