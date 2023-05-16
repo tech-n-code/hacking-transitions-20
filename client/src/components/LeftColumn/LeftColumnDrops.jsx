@@ -16,7 +16,7 @@ function LeftColumnDrop() {
                 return (
                     <div key={index}>
                         <div className={`leftColumnDrop ${buttonClass}`}>
-                            <div className="LcCohort" onClick={() => handleCohortClicked(cohort.courseid, cohort.id - 1)}>
+                            <div className="LcCohort" onClick={() => handleCohortClicked(cohort.courseid, cohort.id - 1, cohort.id)}>
                                 {cohort.courseid}
                             </div>
                             <i className={`leftColumnArrow ${arrowClass}`} onClick={() => { handleDropClicked(cohort.courseid, cohort.id); toggleDropDown(cohort.courseid); }}></i>
