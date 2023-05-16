@@ -8,6 +8,7 @@ export const RightColumnProvider = ({children}) => {
     const { cohortIdForInfo } = useContext(LeftColumnContext);
     const [ tasks, setTasks ] = useState([]);
     const [ update, setUpdate ] = useState(false)
+    
     useEffect(() => {
         fetch(`/api/cohorts/${cohortIdForInfo + 1}/students`)
             .then(response => response.json())
