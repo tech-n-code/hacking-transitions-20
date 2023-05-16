@@ -22,7 +22,7 @@ const App = () => {
       <Register />
       <Login />
       <LeftColumn />
-      {/* <StudentDetail /> */}
+      {renderStudent ? <StudentDetail />: ''}
       {cohortClicked !== "" ? <CohortDetails />  : <></>}
       {cohortClicked !== "" ? <RightColumn />  : <></>}
       <Footer />

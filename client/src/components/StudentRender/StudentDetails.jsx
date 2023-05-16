@@ -20,6 +20,8 @@ const StudentDetail = () => {
       studentBranch = foundBranch ? foundBranch.name : '';
     }
 
+    const formattedPhoneNumber = studentdata[0].phonenumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
+
     return (
         <div
             id='detailsmain'
@@ -70,7 +72,7 @@ const StudentDetail = () => {
                         >Phone Number:</td>
                         <td
                         className='column2'>
-                        {studentPhone}</td>
+                        {formattedPhoneNumber}</td>
                     </tr>
                     <tr>
                         <td
