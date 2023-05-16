@@ -27,7 +27,7 @@ const StudentDetail = () => {
             id='detailsmain'
             className='studentDetails'
         > 
-            <table>
+            <table className="student-table">
                 <tbody>
                     <tr>
                         <td

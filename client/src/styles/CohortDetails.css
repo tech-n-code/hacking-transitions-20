@@ -7,7 +7,7 @@
     font-size: 1vw;
     /* Adjust font size based on screen width */
     background-color: #4E70E0;
-    border: 3px solid #EF6E47;
+    border: 1px solid #EF6E47;
     color: #FFFFFF;
     width: 50%;
     height: 50%;
@@ -38,7 +38,7 @@
     padding-left: 13%;
     padding-right: 13%;
     background-color: #0D0F4A;
-    border: 3px solid #EF6E47;
+    border: 1px solid #EF6E47;
     border-left: 0;
     border-right: 0;
     font-size: 1vw;
@@ -50,7 +50,7 @@
 }
 
 .cohortStudentTable {
-    border: 3px solid #EF6E47;
+    border: 1px solid #EF6E47;
     width: 100%;
     height: auto;
     max-height: calc(100% - 70px);
@@ -60,16 +60,16 @@
 }
 
 .cohortStudentTableHeader {
-    border: 3px solid #EF6E47;
+    border: 1px solid #EF6E47;
     background-color:#0D0F4A;
 }
 
 .cohortStudent {
-    border: 3px solid #EF6E47;
+    border: 1px solid #EF6E47;
 }
 
 .cohortStudentEntry {
-    border: 3px solid #EF6E47;
+    border: 1px solid #EF6E47;
 }
 #green{
     background-color: green;

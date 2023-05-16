@@ -3,71 +3,89 @@
     display: flex;
     flex-direction: column;
     background-size: contain;
-    width:fit-content;
+    width: fit-content;
     height: fit-content;
     color: #FFFFFF;
-    font-size: 25px;
-    margin-top: 0px;
+    font-size: 22px;
+    margin-top: 2%;
     cursor: default;
-    min-width: 250px;
+    width: 18vw;
 }
+
 .leftColumnHeader{
     font-size: 40px;
     background: #0D0F4A;
     text-align: center;
-    border-color: #EF6E47;
-    border-style: solid;
+    border: #EF6E47 solid;
+    border-top: 0px;
+    border-left: 0px;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
 }
+
 .leftColumnDrop{
     display: flex;
     flex-direction: row;
+    padding: 5px;
     justify-content: center;
     align-items: center;
     text-align: center;
     background: #4E70E0;
-    border-color: #EF6E47;
-    border-style: solid;
+    border: solid #EF6E47;
     border-top: 0px;
+    border-left: 0px;
 }
-.LcCohort{
-    margin-right: 10px;
-    margin-left: 10px;
-    cursor: pointer;
 
+.LcCohort{
+    cursor: pointer;
 }
+
 .leftColumnArrow{
     border: solid #FFFFFF;
     border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;
-    margin: 10px;
+    margin-left: 30px;
     cursor: pointer;
-    
 }
+
 .LCAUp{
     transform: rotate(-135deg);
     -webkit-transform: rotate(-135deg);
 }
+
 .LCADown{
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
 }
+
 .LCwasClicked{
     background: #0D0F4A;
 }
+
 .LCnotClicked{
     background: #4E70E0;
 }
+
 .leftColumnNames{
-    border-color: #EF6E47;
-    border-style: solid;
+    display: flex;
+    flex-wrap: wrap;
+    border: solid #EF6E47;
     border-top: 0px;
+    border-left: 0px;
+    width: fit-content;
+    align-self: center;
 }
+
 .LCName{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 5px;
     background: #4E70E0;
     cursor: pointer;
-    text-align: center; 
+    width: 100%;
 }
+
 .LCName:hover{
     background: #0D0F4A;
 }
