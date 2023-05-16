@@ -1,40 +1,89 @@
-.cohortInfoContainer{
+.cohortInfoContainer {
     cursor: default;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    font-size: 35px;
-    background-color:#4E70E0;
+    font-size: 1vw;
+    /* Adjust font size based on screen width */
+    background-color: #4E70E0;
     border: 3px solid #EF6E47;
-    color:#FFFFFF;
+    color: #FFFFFF;
     width: 50%;
     height: 50%;
+    max-height: 90vh;
+    /* Limit height to 90% of the viewport height */
     height: fit-content;
-    
 }
-.cohortInfoHeader{
+
+.cohortInfoHeader {
     text-align: center;
     background-color: #0D0F4A;
+    
 }
-.cohortClose{
-    float:right;
-    padding-right: 10px;
-    font-size: 30px;
+
+.cohortClose {
+    float: right;
+    padding-right: 1.5vw;
+    /* Adjust padding based on screen width */
+    font-size: 1vw;
+    /* Adjust font size based on screen width */
     z-index: 50;
     cursor: pointer;
 }
-.basicCohortInfo{
+
+.basicCohortInfo {
     display: flex;
+    justify-content: space-between;
     padding-left: 13%;
     padding-right: 13%;
     background-color: #0D0F4A;
     border: 3px solid #EF6E47;
-    border-left: 0px;
-    border-right: 0px;
-    font-size: 25px;
+    border-left: 0;
+    border-right: 0;
+    font-size: 1vw;
 }
-.CInfo{
-    margin: 1%;
+
+.CInfo {
+    margin: .5%;
     width: fit-content;
+}
+
+.cohortStudentTable {
+    border: 3px solid #EF6E47;
+    width: 100%;
+    height: auto;
+    max-height: calc(100% - 70px);
+    /* Adjust the value (70px) based on the other elements' heights */
+    overflow: hidden;
+    text-align: center;
+}
+
+.cohortStudentTableHeader {
+    border: 3px solid #EF6E47;
+    background-color:#0D0F4A;
+}
+
+.cohortStudent {
+    border: 3px solid #EF6E47;
+}
+
+.cohortStudentEntry {
+    border: 3px solid #EF6E47;
+}
+#green{
+    background-color: green;
+}
+#yellow{
+    background-color: yellow;
+}
+#red{
+    background-color: red;
+}
+.circle{
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    float: right;
+    border: 3px solid#0D0F4A;
 }

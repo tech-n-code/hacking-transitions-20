@@ -1,12 +1,25 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import LeftColumnContext from "../../context/LeftColumnContext";
 import '../../styles/CohortDetails.css';
 
-
 const CohortDetails = () => {
+    const { cohortClicked, cohortIdForInfo, cohorts, setCohortClicked, students, assignColor } = useContext(LeftColumnContext);
 
-    const { cohortClicked, cohortIdForInfo, cohorts, setCohortClicked, students} = useContext(LeftColumnContext);
-    /* branc_id, dutystatus, phonenumber, ets_date */
+    const getBranchName = (branchId) => {
+        switch (branchId) {
+            case 1:
+                return "Air Force";
+            case 2:
+                return "Army";
+            case 3:
+                return "Marines";
+            case 4:
+                return "Navy";
+            default:
+                return "Unknown";
+        }
+    };
+
     return (
         <>
             <div className="cohortInfoContainer">
@@ -22,27 +35,37 @@ const CohortDetails = () => {
                     <div className="CInfo">{`Instructor: ${cohorts[cohortIdForInfo].instructor_id}`}</div>
                     <div className="CInfo">{`Number Of Students: ${cohorts[cohortIdForInfo].numberofstudents}`}</div>
                 </div>
-                {students.map((student, index) => {
-                    let branch;
-                    if (student.branch_id === 1) {
-                        branch = "Air Force";
-                    } else if (student.branch_id === 2) {
-                        branch = "Army";
-                    } else if (student.branch_id === 3) {
-                        branch = "Marines";
-                    } else if (student.branch_id === 4) {
-                        branch = "Navy";
-                    } else {
-                        branch = "Unknown";
-                    }
-                    const etsDate = new Date(student.ets_date).toLocaleDateString('en-US')
-                    const formattedPhoneNumber = student.phonenumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
-                    return (
-                        <div key={index} className="cohortStudent">
-                            <div>{`${student.firstname} ${student.lastname} ${branch} ${student.dutystatus} ${etsDate} ${formattedPhoneNumber}`}</div>
-                        </div>
-                    );
-                })}
+                <table className="cohortStudentTable">
+                    <thead>
+                        <tr>
+                            <th className="cohortStudentTableHeader">First Name</th>
+                            <th className="cohortStudentTableHeader">Last Name</th>
+                            <th className="cohortStudentTableHeader">Branch</th>
+                            <th className="cohortStudentTableHeader">Duty Status</th>
+                            <th className="cohortStudentTableHeader">ETS Date</th>
+                            <th className="cohortStudentTableHeader">Phone Number</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {students.map((student, index) => {
+                            const branch = getBranchName(student.branch_id);
+                            const etsDate = new Date(student.ets_date).toLocaleDateString('en-US');
+                            const formattedPhoneNumber = student.phonenumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
+                            const setColor = assignColor(student.ets_date)
+                            console.log(setColor)
+                            return (
+                                <tr key={index} className="cohortStudent">
+                                    <td className="cohortStudentEntry">{student.firstname}</td>
+                                    <td className="cohortStudentEntry">{student.lastname}</td>
+                                    <td className="cohortStudentEntry">{branch}</td>
+                                    <td className="cohortStudentEntry">{student.dutystatus}</td>
+                                    <td className="cohortStudentEntry">{etsDate}<div className='circle' id={setColor}></div></td>
+                                    <td className="cohortStudentEntry">{formattedPhoneNumber}</td>
+                                </tr>
+                            );
+                        })}
+                    </tbody>
+                </table>
             </div>
         </>
     );
