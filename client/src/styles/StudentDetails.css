@@ -1,7 +1,15 @@
 table {
-    border-collapse: collapse;
-    border: 2px solid black;
-    margin: 0 auto;
+    cursor: default;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 35px;
+    border: 3px solid #EF6E47;
+    color: #FFFFFF;
+    width: 50%;
+    height: 50%;
+    height: fit-content;
 }
 
 td {
@@ -10,8 +18,10 @@ td {
 }
 .column1 {
     font-weight: bold;
+    background-color: #0D0F4A;
 }
 .column2 {
     padding-left: 30px;
     padding-right: 30px;
+    background-color: #4E70E0;
 }
