@@ -10,7 +10,7 @@ export const LeftColumnProvider = ({children}) => {
     const [students, setStudents] = useState([]);
     const [cohortId, setcohortId] = useState(1);
     const [cohortIdForInfo, setCohortIdForInfo] = useState(1);
-    const [studentID, setStudentClicked] = useState('');
+    const [studentID, setStudentClicked] = useState(1);
     const [studentdata, setStudentData] = useState(null);
     const [branchdata, setBranchData] = useState(null);
     const [renderStudent, setRenderStudent] = useState(false)
@@ -53,11 +53,11 @@ export const LeftColumnProvider = ({children}) => {
     }, [studentdata]);
 
     useEffect(() => {
-        fetch(`http://localhost:8000/api/cohorts/${cohortId}/students/${studentID}`)
+        fetch(`http://localhost:8000/api/students/${studentID}`)
             .then(response => response.json())
             .then(data => setStudentData(data))
             .catch(error => console.log(error));
-    }, [cohortId, studentID]);
+    }, [studentID]);
 
     useEffect(() => {
         fetch('http://localhost:8000/api/cohorts')

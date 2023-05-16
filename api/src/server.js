@@ -53,11 +53,10 @@ app.get("/api/cohorts/:cohortId/students", async (req, res, next) => {
   }
 });
 
-app.get("/api/cohorts/:cohortId/students/:studentId", async (req, res, next) => {
-  const cohortId = req.params.cohortId;
+app.get("/api/students/:studentId", async (req, res, next) => {
   const studentId = req.params.studentId;
   const result = await db
-    .query(`SELECT students.* FROM students WHERE students.cohort_id = $1 AND students.id = $2`, [cohortId, studentId])
+    .query(`SELECT students.* FROM students WHERE students.id = $1`, [studentId])
     .catch(next);
   if (result.rows.length === 0) {
     res.sendStatus(404);
@@ -106,7 +105,7 @@ app.post("/api/login", async (req, res) => {
     const result = await db.query("SELECT * FROM users WHERE email = $1", [email]);
     const user = result.rows[0];
     if (!user) {
-    return res.status(400).json({ error: "Invalide email or password" });
+    return res.status(400).json({ error: "Invalid email or password" });
     }
     console.log(user);
     // Compare password to the hashed store
