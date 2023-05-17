@@ -52,7 +52,7 @@ const CohortDetails = () => {
                             const etsDate = new Date(student.ets_date).toLocaleDateString('en-US');
                             const formattedPhoneNumber = student.phonenumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
                             const setColor = assignColor(student.ets_date)
-                            console.log(setColor)
+                            // console.log(setColor)
                             return (
                                 <tr key={index} className="cohortStudent">
                                     <td className="cohortStudentEntry">{student.firstname}</td>

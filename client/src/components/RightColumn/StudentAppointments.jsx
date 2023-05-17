@@ -5,8 +5,8 @@ import "../../styles/StudentAppointments.css"
 
 export default function StudentAppointments(){
 
-    const { students, tasks, handleTaskNote } = useContext(RightColumnContext);
-    console.log("tasks - ", tasks);
+    const { students, tasks, taskId, noteSelected, setNoteSelected, setTaskId} = useContext(RightColumnContext);
+    // console.log("tasks - ", tasks);
   
     return (
         <div>
@@ -24,7 +24,10 @@ export default function StudentAppointments(){
                   {studentTasks.map((task, i) => {
                     return (
                       <div key={i}>
-                        <div onClick={()=>handleTaskNote(task.id, task.note)}>{task.note}</div>
+                        {/* {console.log("List of tasks: ",task)} */}
+                        <div onClick={()=> {setTaskId(task.id), setNoteSelected(task.note)}}>{task.note}</div>
+                        {/* handleTaskNote(task.id, task.note) */}
+                        {/* console.log(task.id, task.note) */}
                       </div>
                     );
                   })}
