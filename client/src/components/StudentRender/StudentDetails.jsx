@@ -4,7 +4,7 @@ import '../../styles/StudentDetails.css'
 import LeftColumnContext from "../../context/LeftColumnContext";
 
 const StudentDetail = () => {
-    const { studentdata, branchdata, renderStudent } = useContext(LeftColumnContext);
+    const { studentdata, branchdata, renderStudent, assignColor } = useContext(LeftColumnContext);
 
     const studentName = studentdata && studentdata.length > 0 ? studentdata[0].firstname + ' ' + studentdata[0].lastname : '';
     const studentStatus = studentdata && studentdata.length > 0 ? studentdata[0].dutystatus: '';
@@ -21,6 +21,9 @@ const StudentDetail = () => {
     }
 
     const formattedPhoneNumber = studentdata[0].phonenumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
+    const etsDate = new Date(studentdata[0].ets_date).toLocaleDateString('en-us');
+    const setColor = assignColor(studentdata[0].ets_date)
+    console.log("setColor", setColor);
 
     return (
         <div
@@ -85,7 +88,16 @@ const StudentDetail = () => {
                     </tr>
                     <tr>
                         <td
-                            id='details-2'
+                            id='details-8'
+                            className='column1'
+                        >ETS Date:</td>
+                        <td
+                        className='column2'>
+                        {etsDate}<div className='circle-student' id={setColor}></div></td>
+                    </tr>
+                    <tr>
+                        <td
+                            id='details-9'
                             className='column1'
                         >Outprocessing Status</td>
                         <td
@@ -94,7 +106,7 @@ const StudentDetail = () => {
                     </tr>
                     <tr>
                         <td
-                            id='details-3'
+                            id='details-10'
                             className='column1'
                         >Current Taskers</td>
                         <td
