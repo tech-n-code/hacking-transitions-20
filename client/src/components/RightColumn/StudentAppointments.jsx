@@ -5,13 +5,14 @@ import "../../styles/StudentAppointments.css"
 
 export default function StudentAppointments(){
 
-    const { students, tasks } = useContext(RightColumnContext);
-    console.log("tasks state - ", tasks);
+    const { students, tasks, handleTaskNote } = useContext(RightColumnContext);
+    console.log("tasks - ", tasks);
   
     return (
         <div>
           {students.map((student, indexed) => {
             const studentTasks = tasks.filter(task => task.student_id === student.id);
+            
       
             return (
               <div key={indexed}>
@@ -23,7 +24,7 @@ export default function StudentAppointments(){
                   {studentTasks.map((task, i) => {
                     return (
                       <div key={i}>
-                        <div>{task.note}</div>
+                        <div onClick={()=>handleTaskNote(task.id, task.note)}>{task.note}</div>
                       </div>
                     );
                   })}
