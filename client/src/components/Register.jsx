@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useSignIn } from "react-auth-kit";
+import { useUser } from "./UserProvider";
 
 function Register() {
-    const signIn = useSignIn();
+    const { setUser } = useUser();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState(null);
@@ -14,13 +14,16 @@ function Register() {
         try {
             const res = await axios.post("/api/register", { email, password });
             // Insert JWT (res.data.token)
-            if(!signIn({token: res.data.token, expiresIn: 7200, remember: false})) {
-                setError("Sign-in failed. Please try again.");
-            }
-            console.log(res.data);
+            localStorage.setItem('token', res.data.token);
+            setUser(res.data.user);
+            console.log(res.data.token);
         } catch (err) {
             console.log(err);
-            setError("User is already registered, please log in");
+            if(err.response && err.response.status === 409) {
+                setError("User is already registered, please log in");
+            } else {
+                setError("Registration failed. Please try again.");
+            }
         }
     };
 

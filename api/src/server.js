@@ -93,7 +93,11 @@ app.post("/api/register", async (req, res) => {
     res.status(200).json({ token });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "Registration failed" });
+    if (err.code === '23505') {
+    res.status(409).json({ error: "Email is already registeredd" });
+    } else {
+      res.status(500).json({ error: "Registration failed"});
+    }
   }
 });
 
@@ -107,18 +111,21 @@ app.post("/api/login", async (req, res) => {
     if (!user) {
     return res.status(400).json({ error: "Invalid email or password" });
     }
-    console.log(user);
+    // console.log(user);
     // Compare password to the hashed store
     const validPassword = await bcrypt.compare(password, user.password);
-    console.log(password, user.password)
+    // console.log(password, user.password)
 
     if (!validPassword) {
-      return res.status(400).json({ error: "Invalide email or password" });
+      return res.status(400).json({ error: "Invalid email or password" });
     }
     // Create JWT
-    const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '2h' });
+    const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '30s' });
 
-    res.status(200).json({ token });
+    // Exclude the password and other sensitive info
+    const { password: _, ...safeUserData } = user;
+    
+    res.status(200).json({ token, user: safeUserData });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Login failed" });
