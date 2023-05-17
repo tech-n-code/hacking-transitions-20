@@ -7,7 +7,19 @@ export const RightColumnProvider = ({children}) => {
     const [students, setStudents] = useState([]);
     const { cohortIdForInfo } = useContext(LeftColumnContext);
     const [ tasks, setTasks ] = useState([]);
-    const [ update, setUpdate ] = useState(false)
+    const [ update, setUpdate ] = useState(false);
+    const [ noteSelected, setNoteSelected ] = useState('');
+    const[ edit, setEdit] = useState("");
+    const [ student, setStudent ] = useState("");
+    const [ taskId, setTaskId ] = useState(null);
+
+    const handleTaskNote = (id, note) =>{
+        setTaskId(id);
+        setNoteSelected(note);
+        console.log("taskId", taskId);
+        console.log("noteSelected", noteSelected);
+    }
+
     
     useEffect(() => {
         fetch(`/api/cohorts/${cohortIdForInfo + 1}/students`)
@@ -30,7 +42,12 @@ export const RightColumnProvider = ({children}) => {
         students,
         tasks,
         update,
-        setUpdate
+        setUpdate,
+        edit,
+        setEdit,
+        student,
+        setStudent,
+        handleTaskNote
     }}>
         {children}
     </RightColumnContext.Provider>
