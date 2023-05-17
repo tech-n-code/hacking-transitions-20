@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useSignIn } from "react-auth-kit";
+import { useUser } from "./UserProvider";
+// import jwtDecode from "jwt-decode";
 
 function Login() {
-    const signIn = useSignIn();
+    const { setUser } = useUser();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -13,9 +14,9 @@ function Login() {
         try {
             const res = await axios.post("/api/login", { email, password });
             // Insert JWT (res.data.token)
-            if(!signIn({token: res.data.token, expiresIn: 7200, remember: true})) {
-                // handle error here, sign in failed
-              }
+            localStorage.setItem('token', res.data.token);
+            // const decodedToken = jwtDecode(res.data.token);
+            setUser(res.data.user);
         } catch (err) {
             console.error(err);
         }

@@ -9,6 +9,7 @@ import RightColumn from "../RightColumn/RightColumn.jsx";
 import Register from "../Register.jsx";
 import Login from "../Login.jsx";
 import { AuthProvider } from "react-auth-kit";
+import { UserProvider } from "../UserProvider.jsx"
 import "../../styles/App.css"
 
 const App = () => {
@@ -18,6 +19,7 @@ const App = () => {
   return (
     <>
       <AuthProvider authStorageType="cookie" authStorageName="_auth_t" authTimeStorageName="_auth_time" stateStorageName="_auth_state" cookieDomain={window.location.hostname} cookieSecure={window.location.protocol==="https:"}>
+      <UserProvider>
       <Header />
       <Register />
       <Login />
@@ -26,6 +28,7 @@ const App = () => {
       {cohortClicked !== "" ? <CohortDetails />  : <></>}
       {cohortClicked !== "" ? <RightColumn />  : <></>}
       <Footer />
+      </UserProvider>
       </AuthProvider>
     </>
   );
