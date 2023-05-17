@@ -167,7 +167,7 @@ app.delete('/api/appointments/:student_id', async (req, res, next)=>{
 })
 
 //PATCH/EDIT route for appointment notes in appointments table:
-app.patch('api/appointments/:id', async (req, res, next) => {
+app.patch('/api/appointments/:id', async (req, res, next) => {
   const id = Number.parseInt(req.params.id);
   const { note } = req.body
   const result = await db

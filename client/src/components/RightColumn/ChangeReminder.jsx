@@ -11,20 +11,27 @@ export default function ChangeReminder({setEditNote}){
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        // const test = {edit , student}
-        // console.log(test)
+
         fetch(`/api/appointments/${taskId}`, {
             method: "PATCH",
-            headers: { "Content-Type" : "application/json"},
-            body: JSON.stringify(noteSelected)
-        }).then(() =>{
-            console.log(JSON.stringify(noteSelected))
-            console.log('Note has been updated');
-            setEditNote(false);
-            setUpdate(true);
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ note: noteSelected }) // Wrap noteSelected in an object with the key "note"
         })
-        
-    }
+            .then(response => {
+                if (response.ok) {
+                    console.log(JSON.stringify(noteSelected));
+                    console.log('Note has been updated');
+                    setEditNote(false);
+                    setUpdate(true);
+                } else {
+                    throw new Error('Failed to update note');
+                }
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    };
+
     return(
         <span>
             <form onSubmit={ handleSubmit }>
