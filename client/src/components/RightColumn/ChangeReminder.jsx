@@ -5,35 +5,37 @@ import RightColumnContext from "../../context/RightColumnContext";
 
 
 
-export default function AddReminder({setEditNote}){
+export default function ChangeReminder({setEditNote}){
     const { cohortIdForInfo } = useContext(LeftColumnContext);
-    const { edit, setEdit, student, setStudent, noteSelected} = useContext(RightColumnContext);
+    const { edit, setEdit, student, setStudent, noteSelected, taskId , setUpdate, setNoteSelected } = useContext(RightColumnContext);
     
     const handleSubmit = (e) => {
         e.preventDefault();
-        const test = {edit , student}
-        console.log(test)
-        fetch(`http://localhost:8000/api/cohorts/${cohortIdForInfo+1}/students`, {
+        // const test = {edit , student}
+        // console.log(test)
+        fetch(`/api/appointments/${taskId}`, {
             method: "PATCH",
             headers: { "Content-Type" : "application/json"},
-            body: JSON.stringify(test)
+            body: JSON.stringify(noteSelected)
         }).then(() =>{
-            console.log('edit has been added');
-            setShowAddModal(false)
+            console.log(JSON.stringify(noteSelected))
+            console.log('Note has been updated');
+            setEditNote(false);
+            setUpdate(true);
         })
         
     }
     return(
         <span>
             <form onSubmit={ handleSubmit }>
-                <label >Add edit</label>
+                {/* <label >Add edit</label> */}
                 <textarea 
                     required
-                    value={ edit }
-                    onChange={(e) => setEdit(e.target.value)}
-                    ></textarea>
-                <label >Select student</label>
-                <select
+                    value={ noteSelected }
+                    onChange={(e) => setNoteSelected(e.target.value)}
+                    >{noteSelected}</textarea>
+                {/* <label >Select student</label> */}
+                {/* <select
                     value={ student }
                     onChange={(e) => setStudent(e.target.value)}
                     required
@@ -41,8 +43,8 @@ export default function AddReminder({setEditNote}){
                     <option value="" > Please select a student</option>
                     <option value="student 1">student 1</option>
                     <option value="student 2">student 2</option>
-                </select>
-                <button className="addSubmit">Submit</button>
+                </select> */}
+                <button className="addSubmit" >Submit</button>
             </form>
                 <button className="addCancel" onClick={() => setEditNote(false)}>
                     Cancel

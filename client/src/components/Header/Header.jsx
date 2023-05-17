@@ -3,12 +3,12 @@ import '../../styles/Header.css'
 
 export default function Header(){
     const [ email, setEmail ] = useState("")
-    useEffect(() => {
-        fetch(`http://localhost:3000/api/users`)
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.log(error));
-    }, []);
+    // useEffect(() => {
+    //     fetch(`http://localhost:3000/api/users`)
+    //         .then(response => response.json())
+    //         .then(data => console.log(data))
+    //         .catch(error => console.log(error));
+    // }, []);
 
     return(
         <span id="header">
