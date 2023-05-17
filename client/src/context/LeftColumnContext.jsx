@@ -24,11 +24,12 @@ export const LeftColumnProvider = ({children}) => {
         } 
     }
 
-    const handleCohortClicked = (cohort, id) => {
+    const handleCohortClicked = (cohort, id, id2) => {
         if(cohortClicked === cohort){
             setCohortClicked("")
         }else{
             setCohortClicked(cohort)
+            setcohortId(id2)
             setCohortIdForInfo(id)
             setRenderStudent(false)
 
@@ -95,6 +96,27 @@ export const LeftColumnProvider = ({children}) => {
         }
     };
 
+    function assignColor(dateInput) {
+        let today = new Date();
+        today.setHours(0, 0, 0, 0); // Set the time to midnight
+
+        let inputDate = new Date(dateInput);
+        inputDate.setHours(0, 0, 0, 0); // Set the time to midnight
+
+        let timeDifference = inputDate.getTime() - today.getTime();
+        var daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24)); // Convert milliseconds to days
+
+        let color;
+        if (daysDifference < 0) {
+            color = "green"; // Date has passed
+        } else if (daysDifference <= 30) {
+            color = "red"; // Less than a month away
+        } else {
+            color = "yellow"; // More than a month away
+        }
+        return color;
+    }
+
     return( <LeftColumnContext.Provider value = {{
         studentID,
         renderStudent,
@@ -114,7 +136,9 @@ export const LeftColumnProvider = ({children}) => {
         students,
         cohortId,
         cohortIdForInfo,
-        setStudents
+        setStudents,
+        assignColor
+        
     }}>
         {children}
     </LeftColumnContext.Provider>
