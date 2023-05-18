@@ -3,7 +3,7 @@ import '../../styles/StudentDetails.css'
 import LeftColumnContext from "../../context/LeftColumnContext";
 
 const StudentDetail = () => {
-    const { studentdata, branchdata, renderStudent, assignColor } = useContext(LeftColumnContext);
+    const { studentdata, branchdata, assignColor } = useContext(LeftColumnContext);
 
     const studentName = studentdata && studentdata.length > 0 ? studentdata[0].firstname + ' ' + studentdata[0].lastname : '';
     const studentStatus = studentdata && studentdata.length > 0 ? studentdata[0].dutystatus: '';

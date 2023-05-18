@@ -26,7 +26,14 @@ INSERT INTO students (firstname, middlename, lastname, age, location, base, acti
     ('Jed', 'I', 'Knight', 38, 'Elkhart, IN', 'Grisson Air Reserve Base', TRUE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Pending', '14-Jul-2023'),
     ('Deja', NULL, 'Viau', 22, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Pending', '23-May-2023'),
     ('Tara', NULL, 'Dactyl', 42, 'Hinesville, GA', 'Ft. Stewart', TRUE, 9127671432, 'Triceratops@fakemail.com', 'Pending', '02-Jun-2023'),
-    ('Iva', 'Anita', 'Takashita', 27, 'Fort Riley, KS', 'Ft. Riley', TRUE, 7858913456, 'GottaGo@fakemail.com', 'Outprocessed', '03-May-2023');
+    ('Iva', 'Anita', 'Takashita', 27, 'Fort Riley, KS', 'Ft. Riley', TRUE, 7858913456, 'GottaGo@fakemail.com', 'Outprocessed', '03-May-2023'),
+    ('Steve', NULL, 'Sharts', 23, 'Clarksville, KY', 'Ft. Campbell', TRUE, 2708476524, 'fakeemail@fakeemail.com', 'Pending', '11-Oct-2023'),
+    ('Sam', NULL, 'Sung', 24, 'Villages, FL', NULL, FALSE, 7276437382, 'Bacon&Eggs@fakemail.com', 'Outprocessed', '25-Apr-2023'),
+    ('Saad', NULL, 'Man', 25, 'San Francisco, CA', 'Travis Air Force Base', TRUE, 4158299673, 'OverCompensate@fakemail.com', 'Pending', '20-Jun-2023'),
+    ('Batman', 'Bin', 'Suparman', 26, 'Elkhart, IN', 'Grisson Air Reserve Base', TRUE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Pending', '14-Jul-2023'),
+    ('Kash', NULL, 'Register', 27, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Pending', '23-May-2023'),
+    ('Jack', NULL, 'Daniels', 28,'Hinesville, GA', 'Ft. Stewart', TRUE, 9127671432, 'Triceratops@fakemail.com', 'Pending', '02-Jun-2023'),
+    ('Krystal', NULL, 'Ball', 29,'Fort Riley, KS', 'Ft. Riley', TRUE, 7858913456, 'GottaGo@fakemail.com', 'Outprocessed', '03-May-2023');
 
 INSERT INTO cohorts (courseid, startdate, enddate, numberofstudents) VALUES
     ('MCSP-19', '01/17/2023', '05/26/2013', 24),
@@ -58,6 +65,14 @@ UPDATE students SET branch_id = 3 WHERE id = 4;
 UPDATE students SET branch_id = 4 WHERE id = 5;
 UPDATE students SET branch_id = 1 WHERE id = 6;
 UPDATE students SET branch_id = 2 WHERE id = 7;
+UPDATE students SET branch_id = 4 WHERE id = 8;
+UPDATE students SET branch_id = 3 WHERE id = 9;
+UPDATE students SET branch_id = 1 WHERE id = 10;
+UPDATE students SET branch_id = 1 WHERE id = 11;
+UPDATE students SET branch_id = 3 WHERE id = 12;
+UPDATE students SET branch_id = 4 WHERE id = 13;
+UPDATE students SET branch_id = 4 WHERE id = 14;
+
 UPDATE students SET instructor_id = 1 WHERE id = 1;
 UPDATE students SET instructor_id = 2 WHERE id = 2;
 UPDATE students SET instructor_id = 1 WHERE id = 3;
@@ -65,6 +80,14 @@ UPDATE students SET instructor_id = 2 WHERE id = 4;
 UPDATE students SET instructor_id = 1 WHERE id = 5;
 UPDATE students SET instructor_id = 2 WHERE id = 6;
 UPDATE students SET instructor_id = 1 WHERE id = 7;
+UPDATE students SET instructor_id = 2 WHERE id = 8;
+UPDATE students SET instructor_id = 1 WHERE id = 9;
+UPDATE students SET instructor_id = 2 WHERE id = 10;
+UPDATE students SET instructor_id = 1 WHERE id = 11;
+UPDATE students SET instructor_id = 2 WHERE id = 12;
+UPDATE students SET instructor_id = 1 WHERE id = 13;
+UPDATE students SET instructor_id = 2 WHERE id = 14;
+
 UPDATE students SET cohort_id = 1 WHERE id = 1;
 UPDATE students SET cohort_id = 2 WHERE id = 2;
 UPDATE students SET cohort_id = 1 WHERE id = 3;
@@ -72,6 +95,14 @@ UPDATE students SET cohort_id = 2 WHERE id = 4;
 UPDATE students SET cohort_id = 1 WHERE id = 5;
 UPDATE students SET cohort_id = 2 WHERE id = 6;
 UPDATE students SET cohort_id = 1 WHERE id = 7;
+UPDATE students SET cohort_id = 2 WHERE id = 8;
+UPDATE students SET cohort_id = 1 WHERE id = 9;
+UPDATE students SET cohort_id = 2 WHERE id = 10;
+UPDATE students SET cohort_id = 1 WHERE id = 11;
+UPDATE students SET cohort_id = 2 WHERE id = 12;
+UPDATE students SET cohort_id = 1 WHERE id = 13;
+UPDATE students SET cohort_id = 2 WHERE id = 14;
+
 UPDATE students SET appointments = 'Medical' WHERE id = 1;
 UPDATE students SET appointments = 'Clothing' WHERE id = 2;
 UPDATE students SET appointments = 'Clearing' WHERE id = 3;
@@ -79,7 +110,13 @@ UPDATE students SET appointments = 'Command survey' WHERE id = 4;
 UPDATE students SET appointments = 'Outprocessing' WHERE id = 5;
 UPDATE students SET appointments = 'Turn-in' WHERE id = 6;
 UPDATE students SET appointments = 'Range Day, bitch, @ me' WHERE id = 7;
-
+UPDATE students SET appointments = 'Medical' WHERE id = 8;
+UPDATE students SET appointments = 'Clothing' WHERE id = 9;
+UPDATE students SET appointments = 'Clearing' WHERE id = 10;
+UPDATE students SET appointments = 'Command survey' WHERE id = 11;
+UPDATE students SET appointments = 'Outprocessing' WHERE id = 12;
+UPDATE students SET appointments = 'Turn-in' WHERE id = 13;
+UPDATE students SET appointments = 'Range Day, bitch, @ me' WHERE id = 14;
 
 UPDATE cohorts SET instructor_id = 1 WHERE id = 1;
 UPDATE cohorts SET instructor_id = 2 WHERE id = 2;
