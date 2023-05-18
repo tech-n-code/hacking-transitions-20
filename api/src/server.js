@@ -166,6 +166,20 @@ app.delete('/api/appointments/:student_id', async (req, res, next)=>{
   }
 })
 
+//PATCH/EDIT route for appointment notes in appointments table:
+app.patch('/api/appointments/:id', async (req, res, next) => {
+  const id = Number.parseInt(req.params.id);
+  const { note } = req.body
+  const result = await db
+    .query('UPDATE appointments SET note=$1 WHERE id=$2 RETURNING *', [note, id])
+    .catch(next);
+  if(result.rows){
+    res.sendStatus(200);
+  } else {
+    res.status(404).send("No Data to update")
+  }
+})
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Internal Server Error");

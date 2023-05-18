@@ -22,8 +22,11 @@ function LeftColumnDrop() {
 				const arrowClass =
 					dropDownClicked === cohort.courseid ? "LCADown" : "LCAUp";
 				return (
-					<div key={index}>
-						<div className={`leftColumnDrop ${buttonClass}`}>
+					<>
+						<div
+							key={index}
+							className={`leftColumnDrop ${buttonClass}`}
+						>
 							<div
 								className='LcCohort'
 								onClick={() =>
@@ -41,7 +44,7 @@ function LeftColumnDrop() {
 							></i>
 						</div>
 						{openDropDown === cohort.courseid && <LeftColumnNames />}
-					</div>
+					</>
 				);
 			})}
 		</>

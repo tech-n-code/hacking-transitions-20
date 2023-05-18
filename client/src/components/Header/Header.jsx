@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import '../../styles/Header.css'
 
 export default function Header(){
+    const [ email, setEmail ] = useState("")
+    // useEffect(() => {
+    //     fetch(`http://localhost:3000/api/users`)
+    //         .then(response => response.json())
+    //         .then(data => console.log(data))
+    //         .catch(error => console.log(error));
+    // }, []);
+
     return(
         <span id="header">
             <span id="home-container">
@@ -13,7 +21,7 @@ export default function Header(){
                 <h1 id="title">Hacking Transitions</h1>
             </span>
             <span id="greeting-container">
-                <h3 id="greeting">Hello, "username" </h3>
+                <h3 id="greeting">Hello, Galvanize Staff Member </h3>
             </span>
         </span>
     )
