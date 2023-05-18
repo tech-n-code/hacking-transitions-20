@@ -2,16 +2,10 @@ import React, { useState, useContext } from "react";
 import "../../styles/RightColumn.css";
 import RightColumnContext from "../../context/RightColumnContext";
 
-
-
-export default function AddReminder({setShowAddModal}){
+export default function AddReminder({ setShowAddModal }){
     const { students, setUpdate } = useContext(RightColumnContext);
-    const[ note, setNote] = useState("");
+    const[ note, setNote ] = useState("");
     const [ selectedStudent, setSelectedStudent ] = useState("")
-
-    console.log("note state- ",note);
-    console.log("selectedStudent state - ", selectedStudent)
-    console.log("students state - ", students);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -19,7 +13,6 @@ export default function AddReminder({setShowAddModal}){
             note: `${note}`,
             student_id: `${selectedStudent}`
         }
-        
         fetch(`/api/appointments`, {
             method: "POST",
             headers: { "Content-Type" : "application/json"},
@@ -34,7 +27,6 @@ export default function AddReminder({setShowAddModal}){
     
     return(
         <span>
-
             <form onSubmit={ handleSubmit }>
                 <label >Add note</label>
                 <textarea 
@@ -59,7 +51,6 @@ export default function AddReminder({setShowAddModal}){
                             </option>
                         )
                     })}
-                    
                 </select>
                 <button className="addSubmit">Submit</button>
             </form>
