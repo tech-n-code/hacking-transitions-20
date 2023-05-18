@@ -1,10 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
+import Draggable from 'react-draggable';
 import LeftColumnContext from "../../context/LeftColumnContext";
 import '../../styles/CohortDetails.css';
+import { Resizable } from 'react-resizable';
+import { useState } from 'react';
 
 const CohortDetails = () => {
     const { cohortClicked, cohortIdForInfo, cohorts, setCohortClicked, students, assignColor } = useContext(LeftColumnContext);
+    const [size, setSize] = useState({ width: 500, height: 300 });
 
+    const workAreaBounds = {
+        left: -170, // Define the left boundary of the work area
+        top: -455, // Define the top boundary of the work area
+        right: 520, // Define the right boundary of the work area
+        bottom: 370, // Define the bottom boundary of the work area
+    };
+    const handleResize = (e, { size }) => {
+        setSize(size);
+    };
     const getBranchName = (branchId) => {
         switch (branchId) {
             case 1:
@@ -21,7 +34,16 @@ const CohortDetails = () => {
     };
 
     return (
-        <>
+        
+        <Draggable handle=".cohortInfoHeader" bounds={workAreaBounds}>
+            <Resizable
+                className="cohortInfoContainer"
+                width={size.width}
+                height={size.height}
+                onResize={handleResize}
+                minConstraints={[200, 200]}
+                maxConstraints={[800, 600]}
+            >
             <div className="cohortInfoContainer">
                 <div className="cohortInfoHeader">
                     <div className="cohortInfoName">
@@ -67,7 +89,8 @@ const CohortDetails = () => {
                     </tbody>
                 </table>
             </div>
-        </>
+            </Resizable>
+        </Draggable >
     );
 };
 

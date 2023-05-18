@@ -2,18 +2,16 @@
     cursor: default;
     position: absolute;
     top: 50%;
-    left: 50%;
+    left: 25%;
     transform: translate(-50%, -50%);
     font-size: 1vw;
-    /* Adjust font size based on screen width */
     background-color: #4E70E0;
     border: 1px solid #EF6E47;
     color: #FFFFFF;
-    width: 50%;
-    height: 50%;
     max-height: 90vh;
-    /* Limit height to 90% of the viewport height */
     height: fit-content;
+    resize: both;
+    overflow: auto;
 }
 
 .cohortInfoHeader {
