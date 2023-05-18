@@ -26,7 +26,7 @@ export default function AddReminder({ setShowAddModal }){
     }
     
     return(
-        <span className="addForm">
+        <span className="Form">
             <form onSubmit={ handleSubmit }>
                 <div>
                 <label >Add note</label>
@@ -38,8 +38,6 @@ export default function AddReminder({ setShowAddModal }){
                     rows="5" cols="40"
                     ></textarea>
                 <div>
-                    <label >Select student</label>
-                </div>
                 <select
                     value={ selectedStudent }
                     onChange={(e) => setSelectedStudent(e.target.value)}
@@ -57,11 +55,18 @@ export default function AddReminder({ setShowAddModal }){
                         )
                     })}
                 </select>
+                </div>
+                <div>
+                    <span>
                 <button className="addSubmit">Submit</button>
-            </form>
+                    </span>
+                    <span>
                 <button className="addCancel" onClick={() => setShowAddModal(false)}>
                     Cancel
                 </button>
+                    </span>
+                </div>
+            </form>
         </span>
     )
 }

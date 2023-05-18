@@ -26,18 +26,28 @@ export default function ChangeReminder({ setEditNote }){
     };
 
     return(
-        <span>
+        <span className="Form">
             <form onSubmit={ handleSubmit }>
+                <div>
+                <label> Click note you would like to edit </label>
+                </div>
                 <textarea 
                     required
                     value={ noteSelected }
                     onChange={(e) => setNoteSelected(e.target.value)}
-                    >{noteSelected}</textarea>             
+                    rows="5" cols="40"
+                    >{noteSelected}</textarea>      
+                    <div>
+                    <span>
                 <button className="addSubmit" >Submit</button>
-            </form>
-                <button className="addCancel" onClick={() => setEditNote(false)}>
+                    </span>
+                    <span>
+                <button className="addCancel" onClick={() => {setEditNote(false), setNoteSelected("")}}>
                     Cancel
                 </button>
+                    </span>
+                    </div>       
+            </form>
         </span>
     )
 }

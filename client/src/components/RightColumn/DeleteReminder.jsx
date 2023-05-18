@@ -19,27 +19,35 @@ export default function AddReminder({ setDeleteNote }){
     }
     return(
         <span>
-                <label >Select student</label>
-                <select
-                    value={ selectedStudent }
-                    onChange={(e) => setSelectedStudent(e.target.value)}
-                    required
-                >
-                    <option value="" > Please select a student</option>
-                    {students.map((student, x) => {
-                        return (
-                            <option 
-                                key={x} 
-                                value={student.id}>
-                                    {student.firstname} {student.lastname}
-                            </option>
-                        )
-                    })}
-                </select>
-                <button className="addSubmit" onClick={ handleSubmit }>Delete Notes</button>
-                <button className="addCancel" onClick={() => setDeleteNote(false)}>
-                    Cancel
-                </button>
+            <div>
+                <label >Select student's notes to Delete <br /> <p> *CAUTION: this will delete all notes for selected student</p></label>
+            </div>
+            <select
+                value={ selectedStudent }
+                onChange={(e) => setSelectedStudent(e.target.value)}
+                required
+            >
+            <option value="" > Please select a student</option>
+                {students.map((student, x) => {
+                    return (
+                        <option 
+                            key={x} 
+                            value={student.id}>
+                                {student.firstname} {student.lastname}
+                        </option>
+                    )
+                })}
+            </select>
+            <div>
+                <span>
+                    <button className="addSubmit" onClick={ handleSubmit }>Delete Notes</button>
+                </span>
+                <span>
+                    <button className="addCancel" onClick={() => setDeleteNote(false)}>
+                        Cancel
+                    </button>
+                </span>
+            </div>
         </span>
     )
 }

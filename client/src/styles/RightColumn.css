@@ -52,12 +52,15 @@ button:hover{
     color: white;
     cursor: pointer;
 }
+p{
+    color: red
+}
 
-.addForm{
+.Form{
     width: 100%;
-    position: absolute;
+    position: relative;
     left: 0px;
-    border: solid black;
+    /* border: solid black; */
 }
 
 .addButton{
@@ -74,6 +77,10 @@ button:hover{
 
 }
 
+label {
+    font-weight: bolder;
+    text-decoration: underline;
+}
 
 @keyframes fadeIn {
 	from {
