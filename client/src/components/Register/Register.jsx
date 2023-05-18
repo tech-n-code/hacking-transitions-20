@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useUser } from "./UserProvider";
+import { useUser } from "../UserProvider";
+import "./Register.css"
 
 function Register() {
     const { setUser } = useUser();
@@ -21,6 +22,7 @@ function Register() {
             console.log(err);
             if(err.response && err.response.status === 409) {
                 setError("User is already registered, please log in");
+            
             } else {
                 setError("Registration failed. Please try again.");
             }
@@ -29,7 +31,8 @@ function Register() {
 
     return (
         <div>
-        <form onSubmit={register}>
+            <h2>Register here:</h2>
+        <form className="register-form" onSubmit={register}>
             <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
             <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
             <button type="submit">Register</button>

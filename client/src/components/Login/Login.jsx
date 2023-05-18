@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useUser } from "./UserProvider";
-// import jwtDecode from "jwt-decode";
+import { useUser } from "../UserProvider";
+import "./Login.css"
 
 function Login() {
     const { setUser } = useUser();
@@ -23,11 +23,14 @@ function Login() {
     };
 
     return (
-        <form onSubmit={login}>
+        <div>
+            <h2>Login here:</h2>
+        <form className="login-form" onSubmit={login}>
             <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
             <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
             <button type="submit">Login</button>
         </form>
+        </div>
     );
 }
 
