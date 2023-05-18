@@ -1,5 +1,4 @@
 import React, {useContext} from 'react';
-import tempData from './StudentDetailsTempData'
 import '../../styles/StudentDetails.css'
 import LeftColumnContext from "../../context/LeftColumnContext";
 
@@ -8,10 +7,8 @@ const StudentDetail = () => {
 
     const studentName = studentdata && studentdata.length > 0 ? studentdata[0].firstname + ' ' + studentdata[0].lastname : '';
     const studentStatus = studentdata && studentdata.length > 0 ? studentdata[0].dutystatus: '';
-    const currentTasks = tempData[3];
     const studentInstallation = studentdata && studentdata.length > 0 ? studentdata[0].base: '';
     const studentLocation = studentdata && studentdata.length > 0 ? studentdata[0].location: '';
-    const studentPhone = studentdata && studentdata.length > 0 ? studentdata[0].phonenumber: '';
     const studentEmail = studentdata && studentdata.length > 0 ? studentdata[0].email: '';
     let studentBranch = '';
 
@@ -104,16 +101,6 @@ const StudentDetail = () => {
                             className='column2'>
                             {studentStatus}</td>
                     </tr>
-                    <tr>
-                        <td
-                            id='details-10'
-                            className='column1'
-                        >Current Taskers</td>
-                        <td
-                        className='column2'>
-                        {currentTasks}</td>
-                    </tr>
-
                 </tbody>
             </table>
         </div>
