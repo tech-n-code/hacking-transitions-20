@@ -2,16 +2,10 @@ import React, { useState, useContext} from "react";
 import "../../styles/RightColumn.css"
 import RightColumnContext from "../../context/RightColumnContext";
 
-
-
-
-export default function AddReminder({setDeleteNote}){
+export default function AddReminder({ setDeleteNote }){
     const [ selectedStudent, setSelectedStudent ] = useState("")
-    const { students, setUpdate, tasks } = useContext(RightColumnContext);
-    // console.log("students", students)
-    // console.log("tasks", tasks)
-  
-    
+    const { students, setUpdate } = useContext(RightColumnContext);
+
     const handleSubmit = (e) => {
         e.preventDefault();
     
@@ -22,9 +16,7 @@ export default function AddReminder({setDeleteNote}){
             setDeleteNote(false);
             setUpdate(true);
         })
-        
     }
-    // console.log("student selected:", selectedStudent)
     return(
         <span>
                 <label >Select student</label>
@@ -38,9 +30,8 @@ export default function AddReminder({setDeleteNote}){
                         return (
                             <option 
                                 key={x} 
-                                value={student.id}
-                            >
-                                {student.firstname} {student.lastname}
+                                value={student.id}>
+                                    {student.firstname} {student.lastname}
                             </option>
                         )
                     })}

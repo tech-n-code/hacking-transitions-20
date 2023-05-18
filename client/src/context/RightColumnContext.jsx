@@ -3,19 +3,16 @@ import LeftColumnContext from "./LeftColumnContext.jsx";
 
 const RightColumnContext = createContext();
 
-export const RightColumnProvider = ({children}) => {
-    const [students, setStudents] = useState([]);
+export const RightColumnProvider = ({ children }) => {
+    const [ students, setStudents ] = useState([]);
     const { cohortIdForInfo } = useContext(LeftColumnContext);
     const [ tasks, setTasks ] = useState([]);
     const [ update, setUpdate ] = useState(false);
-    const [ edit, setEdit] = useState("");
+    const [ edit, setEdit ] = useState("");
     const [ student, setStudent ] = useState("");
     const [ taskId, setTaskId ] = useState(null);
     const [ noteSelected, setNoteSelected ] = useState("");
 
-    // console.log("task selected should be this: ", noteSelected)
-    // console.log("task id that was selected should be this: ", taskId)
-    
     useEffect(() => {
         fetch(`/api/cohorts/${cohortIdForInfo + 1}/students`)
             .then(response => response.json())
@@ -32,7 +29,6 @@ export const RightColumnProvider = ({children}) => {
             .catch(error => console.log(error));
     }, [update===true]);
     
-
     return( <RightColumnContext.Provider value = {{
         students,
         tasks,
