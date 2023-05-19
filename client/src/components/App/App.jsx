@@ -28,7 +28,6 @@ const App = () => {
 const AuthContent = () => {
   const { isAuthenticated } = useUser(); // Get the new isAuthenticated variable from the context
   const { cohortClicked, renderStudent } = useContext(LeftColumnContext);
-  console.log(isAuthenticated);
   return (
     <>
       <Header />

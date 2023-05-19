@@ -20,7 +20,6 @@ const StudentDetail = () => {
     const formattedPhoneNumber = studentdata[0].phonenumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
     const etsDate = new Date(studentdata[0].ets_date).toLocaleDateString('en-us');
     const setColor = assignColor(studentdata[0].ets_date)
-    console.log("setColor", setColor);
 
     return (
         <div
