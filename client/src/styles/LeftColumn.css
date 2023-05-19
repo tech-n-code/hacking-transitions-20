@@ -1,4 +1,4 @@
-.leftColumn{
+.leftColumn {
     background: #E0EAF8;
     display: flex;
     flex-direction: column;
@@ -12,18 +12,15 @@
     width: 18vw;
 }
 
-.leftColumnHeader{
+.leftColumnHeader {
     font-size: 40px;
     background: #0D0F4A;
     text-align: center;
-    border: #EF6E47 solid;
-    border-top: 0px;
-    border-left: 0px;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+    border-color: #EF6E47;
+    border-style: solid;
 }
 
-.leftColumnDrop{
+.leftColumnDrop {
     display: flex;
     flex-direction: row;
     padding: 5px;
@@ -36,56 +33,53 @@
     border-left: 0px;
 }
 
-.LcCohort{
+.LcCohort {
+    margin-right: 10px;
+    margin-left: 10px;
     cursor: pointer;
+
 }
 
-.leftColumnArrow{
+.leftColumnArrow {
     border: solid #FFFFFF;
     border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;
-    margin-left: 30px;
+    margin: 10px;
     cursor: pointer;
+    z-index: 2;
 }
 
-.LCAUp{
+.LCAUp {
     transform: rotate(-135deg);
     -webkit-transform: rotate(-135deg);
 }
 
-.LCADown{
+.LCADown {
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
 }
 
-.LCwasClicked{
+.LCwasClicked {
     background: #0D0F4A;
 }
 
-.LCnotClicked{
+.LCnotClicked {
     background: #4E70E0;
 }
 
-.leftColumnNames{
-    display: flex;
-    flex-wrap: wrap;
-    border: solid #EF6E47;
+.leftColumnNames {
+    border-color: #EF6E47;
+    border-style: solid;
     border-top: 0px;
-    border-left: 0px;
-    width: fit-content;
-    align-self: center;
 }
 
-.LCName{
-    display: flex;
-    flex-wrap: wrap;
-    padding: 5px;
+.LCName {
     background: #4E70E0;
     cursor: pointer;
-    width: 100%;
+    text-align: center;
 }
 
-.LCName:hover{
+.LCName:hover {
     background: #0D0F4A;
 }

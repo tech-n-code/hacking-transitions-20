@@ -6,7 +6,7 @@ import { Resizable } from 'react-resizable';
 import { useState } from 'react';
 
 const CohortDetails = () => {
-    const { cohortClicked, cohortIdForInfo, cohorts, setCohortClicked, students, assignColor } = useContext(LeftColumnContext);
+    const { cohortClicked, cohortIdForInfo, cohorts, setCohortClicked, students, assignColor, setStudentClicked, setRenderStudent } = useContext(LeftColumnContext);
     const [size, setSize] = useState({ width: 500, height: 300 });
 
     const workAreaBounds = {
@@ -76,8 +76,12 @@ const CohortDetails = () => {
                             const setColor = assignColor(student.ets_date)
                             // console.log(setColor)
                             return (
-                                <tr key={index} className="cohortStudent">
-                                    <td className="cohortStudentEntry">{student.firstname}</td>
+                                <tr key={index} className="cohortStudent" 
+                                    onClick={() => {
+                                        setStudentClicked(student.id);
+                                        setRenderStudent(true);
+                                    }}>
+                                    <td className="cohortStudentEntry" >{student.firstname}</td>
                                     <td className="cohortStudentEntry">{student.lastname}</td>
                                     <td className="cohortStudentEntry">{branch}</td>
                                     <td className="cohortStudentEntry">{student.dutystatus}</td>
