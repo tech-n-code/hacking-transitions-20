@@ -8,7 +8,9 @@ export const LeftColumnProvider = ({children}) => {
     const [cohorts, setCohorts] = useState([]);
     const [openDropDown, setOpenDropdown] = useState(null);
     const [students, setStudents] = useState([]);
+    const [studentss, setStudentss] = useState([]);
     const [cohortId, setcohortId] = useState(1);
+    const [cohortIds, setcohortIds] = useState(1);
     const [cohortIdForInfo, setCohortIdForInfo] = useState(1);
     const [studentID, setStudentClicked] = useState(1);
     const [studentdata, setStudentData] = useState(null);
@@ -20,7 +22,7 @@ export const LeftColumnProvider = ({children}) => {
             setDropDownClicked("")    
         }else{
             setDropDownClicked(value)
-            setcohortId(id)
+            setcohortIds(id)
         } 
     }
 
@@ -82,6 +84,13 @@ export const LeftColumnProvider = ({children}) => {
     }, [cohortId]);
 
     useEffect(() => {
+        fetch(`http://localhost:8000/api/cohorts/${cohortIds}/students`)
+            .then(response => response.json())
+            .then(data => setStudentss(data))
+            .catch(error => console.log(error));
+    }, [cohortIds]);
+
+    useEffect(() => {
         fetch(`/api/cohorts/${cohortId}/students`)
             .then(response => response.json())
             .then(data => setStudents(data))
@@ -134,6 +143,7 @@ export const LeftColumnProvider = ({children}) => {
         toggleDropDown,
         openDropDown,
         students,
+        studentss,
         cohortId,
         cohortIdForInfo,
         setStudents,

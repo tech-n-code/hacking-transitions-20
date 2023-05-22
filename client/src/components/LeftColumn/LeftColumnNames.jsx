@@ -3,12 +3,12 @@ import "../../../src/styles/LeftColumn.css";
 import LeftColumnContext from "../../context/LeftColumnContext";
 
 function LeftColumnNames() {
-	const { students, setStudentClicked, setRenderStudent, setCohortClicked } =
+	const { studentss, setStudentClicked, setRenderStudent, setCohortClicked } =
 		useContext(LeftColumnContext);
 
 	return (
 		<>
-			{students
+			{studentss
 				.sort((a, b) => a.firstname.localeCompare(b.firstname))
 				.map((student, index) => {
 					return (
