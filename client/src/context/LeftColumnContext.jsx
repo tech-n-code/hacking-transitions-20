@@ -49,6 +49,13 @@ export const LeftColumnProvider = ({children}) => {
             .then(data => setBranchData(data))
             .catch(error => console.log(error));
     }, []);
+
+    useEffect(() => {
+        fetch(`/api/branches`)
+            .then(response => response.json())
+            .then(data => setBranchData(data))
+            .catch(error => console.log(error));
+    }, []);
     
     useEffect(() => {
         if(studentdata){
@@ -57,6 +64,13 @@ export const LeftColumnProvider = ({children}) => {
 
     useEffect(() => {
         fetch(`http://localhost:8000/api/students/${studentID}`)
+            .then(response => response.json())
+            .then(data => setStudentData(data))
+            .catch(error => console.log(error));
+    }, [studentID]);
+
+    useEffect(() => {
+        fetch(`/api/students/${studentID}`)
             .then(response => response.json())
             .then(data => setStudentData(data))
             .catch(error => console.log(error));
