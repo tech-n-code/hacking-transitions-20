@@ -1,6 +1,7 @@
-import React, {useContext} from 'react';
+import React, {useContext, useState} from 'react';
 import '../../styles/StudentDetails.css'
 import LeftColumnContext from "../../context/LeftColumnContext";
+import Draggable from 'react-draggable';
 
 const StudentDetail = () => {
     const { studentdata, branchdata, assignColor, setRenderStudent } = useContext(LeftColumnContext);
@@ -21,7 +22,15 @@ const StudentDetail = () => {
     const etsDate = new Date(studentdata[0].ets_date).toLocaleDateString('en-us');
     const setColor = assignColor(studentdata[0].ets_date)
 
+    const workAreaBounds = {
+        left: -125,
+        top: -185,
+        right: 120,
+        bottom: 625,
+    };
+
     return (
+        <Draggable handle=".studentDetails" bounds={workAreaBounds}>
         <div
             id='detailsmain'
             className='studentDetails'
@@ -37,7 +46,8 @@ const StudentDetail = () => {
                         <td
                         className='column2'>
                         {studentName}
-                            <td className='exit' onClick={() => { setRenderStudent(false) }}>X</td></td>
+                            <div className='exit' onClick={() => { setRenderStudent(false) }}>X</div>
+                        </td>
                     </tr>
                     <tr>
                         <td
@@ -105,6 +115,7 @@ const StudentDetail = () => {
                 </tbody>
             </table>
         </div>
+        </Draggable >
     )
 }
 

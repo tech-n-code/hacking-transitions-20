@@ -1,9 +1,9 @@
 .student-table {
     cursor: default;
     position: absolute;
-    top: 50%;
+
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -0%);
     font-size: 35px;
     border: 1px solid #EF6E47;
     color: #FFFFFF;
@@ -41,7 +41,7 @@
 }
 .exit{
     float: right;
-    font-weight: bold;
+    color:#FFFFFF;
 }
 .exit:hover{
     color:#0D0F4A;

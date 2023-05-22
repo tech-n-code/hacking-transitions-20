@@ -10,10 +10,10 @@ const CohortDetails = () => {
     const [size, setSize] = useState({ width: 500, height: 300 });
 
     const workAreaBounds = {
-        left: -170, // Define the left boundary of the work area
-        top: -455, // Define the top boundary of the work area
-        right: 520, // Define the right boundary of the work area
-        bottom: 370, // Define the bottom boundary of the work area
+        left: -170, 
+        top: -455, 
+        right: 520, 
+        bottom: 370, 
     };
     const handleResize = (e, { size }) => {
         setSize(size);
