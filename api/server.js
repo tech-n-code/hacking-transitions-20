@@ -53,11 +53,10 @@ app.get("/api/cohorts/:cohortId/students", async (req, res, next) => {
   }
 });
 
-app.get("/api/cohorts/:cohortId/students/:studentId", async (req, res, next) => {
-  const cohortId = req.params.cohortId;
+app.get("/api/students/:studentId", async (req, res, next) => {
   const studentId = req.params.studentId;
   const result = await db
-    .query(`SELECT students.* FROM students WHERE students.cohort_id = $1 AND students.id = $2`, [cohortId, studentId])
+    .query(`SELECT students.* FROM students WHERE students.id = $1`, [studentId])
     .catch(next);
   if (result.rows.length === 0) {
     res.sendStatus(404);
@@ -94,7 +93,11 @@ app.post("/api/register", async (req, res) => {
     res.status(200).json({ token });
   } catch (err) {
     console.log(err);
-    res.status(500).json({ error: "Registration failed" });
+    if (err.code === '23505') {
+    res.status(409).json({ error: "Email is already registeredd" });
+    } else {
+      res.status(500).json({ error: "Registration failed"});
+    }
   }
 });
 
@@ -108,10 +111,10 @@ app.post("/api/login", async (req, res) => {
     if (!user) {
     return res.status(400).json({ error: "Invalid email or password" });
     }
-    console.log(user);
+    // console.log(user);
     // Compare password to the hashed store
     const validPassword = await bcrypt.compare(password, user.password);
-    console.log(password, user.password)
+    // console.log(password, user.password)
 
     if (!validPassword) {
       return res.status(400).json({ error: "Invalid email or password" });
@@ -119,7 +122,10 @@ app.post("/api/login", async (req, res) => {
     // Create JWT
     const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '2h' });
 
-    res.status(200).json({ token, user: { email: user.email } });
+    // Exclude the password and other sensitive info
+    const { password: _, ...safeUserData } = user;
+    
+    res.status(200).json({ token, user: safeUserData });
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Login failed" });
@@ -130,6 +136,48 @@ app.post("/api/login", async (req, res) => {
 app.get("/api/users", async (req, res, next) => {
   const result = await db.query("SELECT * FROM users").catch(next);
   res.send(result.rows);
+})
+
+//Route to POST appointment notes to appointments table:
+app.post('/api/appointments', async (req, res, next) => {
+  const note = req.body.note;
+  const student_id = req.body.student_id;
+
+  const result = await db
+    .query('INSERT INTO appointments (note, student_id) VALUES ($1, $2) RETURNING *;', [note, student_id])
+    .catch(next);
+  if (result.rows.length === 0){
+    res.sendStatus(404);
+  } else {
+    res.send(result.rows)
+  }
+})
+
+//Route to DELETE appointment notes from appointment table:
+app.delete('/api/appointments/:student_id', async (req, res, next)=>{
+  const student_id = req.params.student_id
+  const result = await db
+    .query('DELETE FROM appointments WHERE student_id = $1 RETURNING *', [ student_id ])
+    .catch(next);
+  if(result.rows){
+    res.sendStatus(200);
+  } else {
+    res.status(404).send("No Data To Delete")
+  }
+})
+
+//PATCH/EDIT route for appointment notes in appointments table:
+app.patch('/api/appointments/:id', async (req, res, next) => {
+  const id = Number.parseInt(req.params.id);
+  const { note } = req.body
+  const result = await db
+    .query('UPDATE appointments SET note=$1 WHERE id=$2 RETURNING *', [note, id])
+    .catch(next);
+  if(result.rows){
+    res.sendStatus(200);
+  } else {
+    res.status(404).send("No Data to update")
+  }
 })
 
 app.use((err, req, res, next) => {

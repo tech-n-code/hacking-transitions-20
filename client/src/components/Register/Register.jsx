@@ -12,6 +12,11 @@ function Register() {
     const register = async (e) => {
         e.preventDefault();
 
+        if (!email.endsWith("@galvanize.com")) {
+            alert("You can only register with an approved email");
+            return;
+        }
+
         try {
             const res = await axios.post("/api/register", { email, password });
             // Insert JWT (res.data.token)
@@ -31,10 +36,10 @@ function Register() {
 
     return (
         <div>
-            <h2>Register here:</h2>
+            <h2 className="form-title">First time users register here:</h2>
         <form className="register-form" onSubmit={register}>
-            <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
+            <input type="email" value={email} onChange={e => setEmail(e.target.value)} required placeholder="Email" />
+            <input type="password" value={password} onChange={e => setPassword(e.target.value)} required placeholder="Password" />
             <button type="submit">Register</button>
         </form>
         {error && <p>{error}</p>}

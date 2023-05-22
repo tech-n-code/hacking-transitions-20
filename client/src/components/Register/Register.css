@@ -7,11 +7,13 @@
     margin: 20px auto;
     display: flex;
     flex-direction: column;
+    border: solid 1px;
   }
 
-  h2 {
+  .form-title {
+    text-align: center;
     color: #EF6E47;
-    margin-left: 400px;
+    padding-bottom: 5px;
   }
   
   .register-form input {
@@ -24,12 +26,13 @@
   
   .register-form button {
     background-color: #4E70E0;
-    color: #FFFFFF;
-    border: none;
+    color: #121010;
+    border: 2px solid;
+    font-weight: bold;
     border-radius: 5px;
     padding: 10px 15px;
     cursor: pointer;
-    margin: 10px 0;
+    margin: 0 auto;
   }
   
   .register-form button:hover {

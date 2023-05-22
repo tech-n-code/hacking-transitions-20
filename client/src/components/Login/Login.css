@@ -7,6 +7,7 @@
     margin: 20px auto;
     display: flex;
     flex-direction: column;
+    border: solid 1px;
   }
   
   .login-form input {
@@ -19,12 +20,13 @@
   
   .login-form button {
     background-color: #4E70E0;
-    color: #FFFFFF;
-    border: none;
+    color: #121010;
+    border: 2px solid;
+    font-weight: bold;
     border-radius: 5px;
     padding: 10px 15px;
     cursor: pointer;
-    margin: 10px 0;
+    margin: 0 auto;
   }
   
   .login-form button:hover {

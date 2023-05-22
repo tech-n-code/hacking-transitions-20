@@ -24,10 +24,10 @@ function Login() {
 
     return (
         <div>
-            <h2>Login here:</h2>
+            <h2 className="form-title">Returning staff login here:</h2>
         <form className="login-form" onSubmit={login}>
-            <input type="email" value={email} onChange={e => setEmail(e.target.value)} required />
-            <input type="password" value={password} onChange={e => setPassword(e.target.value)} required />
+            <input type="email" value={email} onChange={e => setEmail(e.target.value)} required placeholder="Email"/>
+            <input type="password" value={password} onChange={e => setPassword(e.target.value)} required placeholder="Password" />
             <button type="submit">Login</button>
         </form>
         </div>
