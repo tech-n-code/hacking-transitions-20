@@ -10,6 +10,7 @@
     animation: fadeIn .5s ease-in both;
     z-index: 0;
     border: transparent;
+    bottom: 75px;
 }
 
 .appointments{

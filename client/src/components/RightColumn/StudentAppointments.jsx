@@ -1,12 +1,16 @@
 import React, { useContext } from "react";
 import RightColumnContext from "../../context/RightColumnContext";
 import "../../styles/StudentAppointments.css"
+import Scroll from "./Scroll";
 
 export default function StudentAppointments(){
     const { students, tasks, setNoteSelected, setTaskId } = useContext(RightColumnContext);
   
     return (
         <div>
+          <Scroll>
+
+          
           {students.map((student, indexed) => {
             const studentTasks = tasks.filter(task => task.student_id === student.id);
             return (
@@ -27,6 +31,7 @@ export default function StudentAppointments(){
               </div>
             );
           })}
+          </Scroll>
         </div>
       );
 }
