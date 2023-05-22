@@ -3,7 +3,7 @@ import '../../styles/StudentDetails.css'
 import LeftColumnContext from "../../context/LeftColumnContext";
 
 const StudentDetail = () => {
-    const { studentdata, branchdata, assignColor } = useContext(LeftColumnContext);
+    const { studentdata, branchdata, assignColor, setRenderStudent } = useContext(LeftColumnContext);
 
     const studentName = studentdata && studentdata.length > 0 ? studentdata[0].firstname + ' ' + studentdata[0].lastname : '';
     const studentStatus = studentdata && studentdata.length > 0 ? studentdata[0].dutystatus: '';
@@ -26,7 +26,8 @@ const StudentDetail = () => {
             id='detailsmain'
             className='studentDetails'
         > 
-            <table className="student-table">
+            <table className="student-table">                    
+  
                 <tbody>
                     <tr>
                         <td
@@ -35,7 +36,8 @@ const StudentDetail = () => {
                         >Name</td>
                         <td
                         className='column2'>
-                        {studentName}</td>
+                        {studentName}
+                            <td className='exit' onClick={() => { setRenderStudent(false) }}>X</td></td>
                     </tr>
                     <tr>
                         <td
