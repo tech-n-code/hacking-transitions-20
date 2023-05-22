@@ -16,6 +16,14 @@ export default function AddReminder({ setDeleteNote }){
             setDeleteNote(false);
             setUpdate(true);
         })
+
+        fetch(`/api/appointments/${selectedStudent}`, {
+            method: "DELETE",
+        }).then(() => {
+            console.log('Note has been deleted');
+            setDeleteNote(false);
+            setUpdate(true);
+        })
     }
     return(
         <span>
