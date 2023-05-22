@@ -22,7 +22,7 @@ function LeftColumnDrop() {
 				const arrowClass =
 					dropDownClicked === cohort.courseid ? "LCADown" : "LCAUp";
 				return (
-					<>
+					<React.Fragment key={cohort.courseid}>
 						<div
 							key={index}
 							className={`leftColumnDrop ${buttonClass}`}
@@ -44,7 +44,7 @@ function LeftColumnDrop() {
 							></i>
 						</div>
 						{openDropDown === cohort.courseid && <LeftColumnNames />}
-					</>
+					</React.Fragment>
 				);
 			})}
 		</>

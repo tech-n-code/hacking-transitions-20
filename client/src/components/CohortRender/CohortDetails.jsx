@@ -48,7 +48,7 @@ const CohortDetails = () => {
                 <div className="cohortInfoHeader">
                     <div className="cohortInfoName">
                         {cohortClicked}
-                        <div className="cohortClose" onClick={() => { setCohortClicked("") }}>X</div>
+                            <div className="cohortClose" onClick={() => { setCohortClicked(""); setRenderStudent(false) }}>X</div>
                     </div>
                 </div>
                 <div className="basicCohortInfo">
