@@ -89,7 +89,12 @@ export const LeftColumnProvider = ({children}) => {
             .then(data => setStudentss(data))
             .catch(error => console.log(error));
     }, [cohortIds]);
-
+    useEffect(() => {
+        fetch(`/api/cohorts/${cohortIds}/students`)
+            .then(response => response.json())
+            .then(data => setStudentss(data))
+            .catch(error => console.log(error));
+    }, [cohortIds]);
     useEffect(() => {
         fetch(`/api/cohorts/${cohortId}/students`)
             .then(response => response.json())
