@@ -23,7 +23,7 @@ export default function StudentAppointments(){
                   {studentTasks.map((task, i) => {
                     return (
                       <div key={i}>
-                        <div onClick={()=> {setTaskId(task.id), setNoteSelected(task.note)}}>{task.note}</div>
+                        <div className="reminder" onClick={()=> {setTaskId(task.id), setNoteSelected(task.note)}}>{task.note}</div>
                       </div>
                     );
                   })}
