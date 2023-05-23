@@ -12,7 +12,7 @@ function Login() {
         e.preventDefault();
 
         try {
-            const res = await axios.post("https://hacking-transitions.herokuapp.com/api/login", { email, password });
+            const res = await axios.post("/api/login", { email, password });
             // Insert JWT (res.data.token)
             localStorage.setItem('token', res.data.token);
             // const decodedToken = jwtDecode(res.data.token);
