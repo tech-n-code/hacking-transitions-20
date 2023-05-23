@@ -5,7 +5,7 @@ import dotenv from "dotenv";
 dotenv.config();
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
-const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
+const db = new pg.Pool({ connectionString: process.env.DATABASE_URL, ssl: {rejectUnauthorized: false} });
 
 const app = express();
 
