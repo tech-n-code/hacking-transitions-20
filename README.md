@@ -37,7 +37,7 @@ A Full-Stack React application for transition managers to keep track of students
 3. In your terminal run `npm install; npm install --prefix=api; npm install --prefix=client` - Install all dependencies.
 4. In your terminal run `docker compose up --build` - From the root directory (Note* the --build command ensures dependencies are installed alongside the Docker container build).
 5. Visit deployed application @ https://hacking-transitions.herokuapp.com.
-*Note: Since the database for the deployed application is hosted on Heroku, any changes to the data, or structure of the ERD must be pushed to heroku manually by using Heroku's CLI and adding/removing/altering the data from there. Updating the included migration and seed files will not affect the deployed version.
+6. *Note: Since the database for the deployed application is hosted on Heroku, any changes to the data, or structure of the ERD must be pushed to heroku manually by using Heroku's CLI and adding/removing/altering the data from there. Updating the included migration and seed files will not affect the deployed version.
 
 ## Usage
 For Staff Members charged with assisting students as they transition from military service.
