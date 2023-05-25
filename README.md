@@ -52,7 +52,7 @@ Burman Bedford (Software Engineer) || Steve Dean (User Interface Owner) || Kevin
 Full E2E test suite with Cypress, Multiple unit tests written for various components throughout the entire application with Vitest & react-test-library, and development testing with Postman during API development to test routes.
 
 ## Questions
-Contact information (GitHub usernames) of the developers
+Contact information (GitHub usernames) of the developers:
 Burman - burman92 || Steve - EZSteezy || Kevin - kevin-foreman || Brennan - Alphie1028 || Josh - Velkore || Todd - todd-j-topicz 
 
 ## License
