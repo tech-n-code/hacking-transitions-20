@@ -56,5 +56,5 @@ Contact information (GitHub usernames) of the developers:
 Burman - burman92 || Steve - EZSteezy || Kevin - kevin-foreman || Brennan - Alphie1028 || Josh - Velkore || Todd - todd-j-topicz 
 
 ## License
-The license used for this project is MIT
+The license used for this project is MIT.
 For more information visit: https://opensource.org/license/mit/
