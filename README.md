@@ -33,7 +33,7 @@ A Full-Stack React application for transition managers to keep track of students
 
 ## Installation
 1. This application biulds the development environment inside Docker, so after forking/cloning, make sure you have Docker desktop running.
-2. In your terminal run `cp .env.example .env; cp .env.example .env --prefix=api; cp .env.example .env --prefix=client` - Copy required environment variables.
+2. In your terminal run `cp .env.example .env; cp api/.env.example api/.env` - Copy required environment variables.
 3. In your terminal run `npm install; npm install --prefix=api; npm install --prefix=client` - Install all dependencies.
 4. In your terminal run `docker compose up --build` - From the root directory (Note* the --build command ensures dependencies are installed alongside the Docker container build).
 5. Visit deployed application @ https://hacking-transitions.herokuapp.com.
