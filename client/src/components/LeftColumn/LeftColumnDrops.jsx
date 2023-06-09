@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import LeftColumnContext from "../../context/LeftColumnContext";
-import "../../../src/styles/LeftColumn.css";
+import "./LeftColumn.css";
 import LeftColumnNames from "./LeftColumnNames";
 
 function LeftColumnDrop() {
