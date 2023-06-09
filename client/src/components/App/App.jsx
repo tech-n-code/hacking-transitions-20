@@ -11,6 +11,7 @@ import Login from "../Login/Login.jsx";
 import { AuthProvider } from "react-auth-kit";
 import { UserProvider, useUser } from "../UserProvider.jsx";
 import "../../styles/App.css";
+import Calendar from "../Calendar/Calendar.jsx";
 
 const App = () => {
 
@@ -40,6 +41,7 @@ const AuthContent = () => {
       {isAuthenticated && (
         <>
           <LeftColumn />
+          <Calendar />
           {renderStudent ? <StudentDetail />: ''}
           {cohortClicked !== "" ? <CohortDetails />  : <></>}
           {cohortClicked !== "" ? <RightColumn />  : <></>}
