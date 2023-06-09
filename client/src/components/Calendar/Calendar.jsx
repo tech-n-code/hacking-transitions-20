@@ -1,14 +1,30 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import '../../styles/Calendar.css'
 
 
 const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  const [events] = useState([
-    { date: new Date(2023, 5, 10), title: "Meeting" },
-    { date: new Date(2023, 5, 15), title: "Birthday Party" },
-    { date: new Date(2023, 5, 22), title: "Conference" },
-  ]);
+  // const [events] = useState([
+  //   { date: new Date(2023, 5, 10), title: "Meeting" },
+  //   { date: new Date(2023, 5, 15), title: "Birthday Party" },
+  //   { date: new Date(2023, 5, 22), title: "Conference" },
+  // ]);
+  const [events, setEvents] = useState([]);
+
+  useEffect(() => {
+    fetch("/api/calendar")
+    .then((res) => res.json())
+    .then((data) => { 
+      const formattedEvents = data.map((event) => ({
+        date: new Date(event.date),
+        title: `${event.title}`
+      }));
+      setEvents(formattedEvents);
+    })
+    .catch((err) => {
+      console.error("Error fetching Calendar events: ", err)
+    });
+  }, []);
 
   const goToPrevMonth = () => {
     setCurrentDate(
