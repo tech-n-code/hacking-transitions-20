@@ -1,11 +1,11 @@
 import React, {useContext}  from "react";
-import LeftColumn from "../LeftColumn/LeftColumn.jsx";
+import CohortNav from "../CohortNav/CohortNav.jsx";
 import Footer from "../Footer/Footer.jsx";
-import StudentDetail from '../StudentRender/StudentDetails.jsx';
+import StudentDetail from '../StudentDetails/StudentDetails.jsx';
 import Header from "../Header/Header.jsx";
-import CohortDetails from "../CohortRender/CohortDetails.jsx";
+import CohortDetails from "../CohortDetails/CohortDetails.jsx";
 import CohortContext from "../../context/CohortContext";
-import RightColumn from "../RightColumn/RightColumn.jsx";
+import Appointments from "../Appointments/Appointments.jsx";
 import Register from "../Register/Register.jsx";
 import Login from "../Login/Login.jsx";
 import { AuthProvider } from "react-auth-kit";
@@ -40,11 +40,11 @@ const AuthContent = () => {
       )}
       {isAuthenticated && (
         <>
-          <LeftColumn />
+          <CohortNav />
           <Calendar />
           {renderStudent ? <StudentDetail />: ''}
           {cohortClicked !== "" ? <CohortDetails />  : <></>}
-          {cohortClicked !== "" ? <RightColumn />  : <></>}
+          {cohortClicked !== "" ? <Appointments />  : <></>}
           <Footer />
         </>
       )}

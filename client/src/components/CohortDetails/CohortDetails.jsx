@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import Draggable from 'react-draggable';
 import CohortContext from "../../context/CohortContext";
-import '../../styles/CohortDetails.css';
+import './CohortDetails.css';
 import { Resizable } from 'react-resizable';
 import { useState } from 'react';
 

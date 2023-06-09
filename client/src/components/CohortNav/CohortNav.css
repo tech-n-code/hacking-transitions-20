@@ -1,4 +1,4 @@
-.leftColumn {
+.cohortNav {
     background: #E0EAF8;
     display: flex;
     flex-direction: column;
@@ -19,7 +19,7 @@
     animation: fadeIn .5s ease-in both;
 }
 
-.leftColumnHeader {
+.cohortNavHeader {
     font-size: 40px;
     background: #0d0f4af4;
     text-align: center;
@@ -30,7 +30,7 @@
     border-top-left-radius: 10px;
 }
 
-.leftColumnDrop {
+.cohortNavDrop {
     display: flex;
     flex-direction: row;
     padding: 5px;
@@ -50,7 +50,7 @@
     
 }
 
-.leftColumnArrow {
+.cohortNavArrow {
     border: solid #FFFFFF;
     border-width: 0 3px 3px 0;
     display: inline-block;
@@ -78,7 +78,7 @@
     background: #4E70E0;
 }
 
-.leftColumnNames {
+.cohortNavNames {
     border-color: #EF6E47;
     border-style: solid;
     border-top: 0px;

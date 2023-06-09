@@ -1,5 +1,5 @@
 import React, { useState, useContext} from "react";
-import "../../styles/RightColumn.css"
+import "./Appointments.css"
 import AppointmentContext from "../../context/AppointmentContext";
 
 export default function AddReminder({ setDeleteNote }){
