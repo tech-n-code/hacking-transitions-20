@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import StudentAppointments from "./StudentAppointments";
-import "../../styles/RightColumn.css"
+import "./RightColumn.css"
 import AddReminder from "./AddReminder";
 import DeleteReminder from "./DeleteReminder";
 import ChangeReminder from "./ChangeReminder";

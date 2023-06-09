@@ -1,5 +1,5 @@
 import React, {useContext, useState} from 'react';
-import '../../styles/StudentDetails.css'
+import './StudentDetails.css'
 import LeftColumnContext from "../../context/LeftColumnContext";
 import Draggable from 'react-draggable';
 

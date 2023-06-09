@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "../../../src/styles/LeftColumn.css";
+import "./LeftColumn.css";
 import LeftColumnContext from "../../context/LeftColumnContext";
 
 function LeftColumnNames() {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import '../../styles/Header.css'
+import './Header.css'
 
 export default function Header(){
     const [ email, setEmail ] = useState("")

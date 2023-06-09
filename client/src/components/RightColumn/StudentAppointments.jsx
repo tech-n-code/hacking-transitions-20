@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import RightColumnContext from "../../context/RightColumnContext";
-import "../../styles/StudentAppointments.css"
+import "./StudentAppointments.css"
 import Scroll from "./Scroll";
 
 export default function StudentAppointments(){

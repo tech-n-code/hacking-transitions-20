@@ -1,6 +1,6 @@
 import React from "react";
 import LeftColumnDrop from "./LeftColumnDrops";
-import "../../../src/styles/LeftColumn.css"
+import "./LeftColumn.css"
 
 function LeftColumn(){
 

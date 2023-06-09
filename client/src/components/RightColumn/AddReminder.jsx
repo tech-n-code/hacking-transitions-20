@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import "../../styles/RightColumn.css";
+import "./RightColumn.css";
 import RightColumnContext from "../../context/RightColumnContext";
 
 export default function AddReminder({ setShowAddModal }){
