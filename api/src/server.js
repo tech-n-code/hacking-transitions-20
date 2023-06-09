@@ -138,6 +138,19 @@ app.get("/api/users", async (req, res, next) => {
   res.send(result.rows);
 })
 
+//Route to get calendar events
+app.get("/api/calendar", async (req, res) => {
+  db.query(
+    "select ets_date as date, firstname || ' ' || lastname || ' ETS' as title from students",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result.rows);
+    }
+  );
+});
+
 //Route to POST appointment notes to appointments table:
 app.post('/api/appointments', async (req, res, next) => {
   const note = req.body.note;
