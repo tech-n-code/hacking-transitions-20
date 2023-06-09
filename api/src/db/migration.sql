@@ -1,11 +1,12 @@
-DROP TABLE IF EXISTS instructors;
-DROP TABLE IF EXISTS students;
-DROP TABLE IF EXISTS cohorts;
-DROP TABLE IF EXISTS student_tasks;
-DROP TABLE IF EXISTS branch_tasks;
-DROP TABLE IF EXISTS tasks;
-DROP TABLE IF EXISTS branch;
-DROP TABLE IF EXISTS appointments;
+DROP TABLE IF EXISTS instructors CASCADE;
+DROP TABLE IF EXISTS students CASCADE;
+DROP TABLE IF EXISTS cohorts CASCADE;
+DROP TABLE IF EXISTS student_tasks CASCADE;
+DROP TABLE IF EXISTS branch_tasks CASCADE;
+DROP TABLE IF EXISTS tasks CASCADE;
+DROP TABLE IF EXISTS branch CASCADE;
+DROP TABLE IF EXISTS appointments CASCADE;
+drop table if exists users;
 
 CREATE TABLE tasks (
   id SERIAL PRIMARY KEY,
@@ -100,3 +101,10 @@ ADD COLUMN student_id INT,
 ADD COLUMN branch_tasks_id INT,
 ADD CONSTRAINT fk_student_id FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
 ADD CONSTRAINT fk_branch_tasks_id FOREIGN KEY (branch_tasks_id) REFERENCES branch_tasks(id) ON DELETE CASCADE;
+
+ALTER TABLE users
+ADD COLUMN firstname VARCHAR(100) ,
+ADD COLUMN lastname VARCHAR(100) ;
+
+ALTER TABLE appointments
+ADD COLUMN appointment_date DATE;
