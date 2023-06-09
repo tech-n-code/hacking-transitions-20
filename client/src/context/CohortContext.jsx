@@ -1,8 +1,8 @@
 import React, {createContext, useEffect, useState} from "react";
 
-const LeftColumnContext = createContext();
+const CohortContext = createContext();
 
-export const LeftColumnProvider = ({children}) => {
+export const CohortProvider = ({children}) => {
     const [dropDownClicked, setDropDownClicked] = useState("");
     const [cohortClicked, setCohortClicked] = useState("");
     const [cohorts, setCohorts] = useState([]);
@@ -145,7 +145,7 @@ export const LeftColumnProvider = ({children}) => {
         return color;
     }
 
-    return( <LeftColumnContext.Provider value = {{
+    return( <CohortContext.Provider value = {{
         studentID,
         renderStudent,
         setCohortClicked,
@@ -170,8 +170,8 @@ export const LeftColumnProvider = ({children}) => {
         
     }}>
         {children}
-    </LeftColumnContext.Provider>
+    </CohortContext.Provider>
     )
 }
 
-export default LeftColumnContext;
+export default CohortContext;

@@ -1,15 +1,15 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import App from "./components/App/App";
-import { LeftColumnProvider } from "./context/LeftColumnContext";
-import { RightColumnProvider } from "./context/RightColumnContext";
+import { CohortProvider } from "./context/CohortContext";
+import { AppointmentProvider } from "./context/AppointmentContext";
 
 createRoot(document.getElementById("root")).render(
 
-    <LeftColumnProvider>
-        <RightColumnProvider>
+    <CohortProvider>
+        <AppointmentProvider>
             <App /> 
-        </RightColumnProvider>   
-    </LeftColumnProvider>
+        </AppointmentProvider>   
+    </CohortProvider>
     
 );

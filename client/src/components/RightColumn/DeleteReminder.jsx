@@ -1,10 +1,10 @@
 import React, { useState, useContext} from "react";
-import "./RightColumn.css"
-import RightColumnContext from "../../context/RightColumnContext";
+import "../../styles/RightColumn.css"
+import AppointmentContext from "../../context/AppointmentContext";
 
 export default function AddReminder({ setDeleteNote }){
     const [ selectedStudent, setSelectedStudent ] = useState("")
-    const { students, setUpdate } = useContext(RightColumnContext);
+    const { students, setUpdate } = useContext(AppointmentContext);
 
     const handleSubmit = (e) => {
         e.preventDefault();

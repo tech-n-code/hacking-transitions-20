@@ -31,9 +31,9 @@ describe('StudentDetail component', () => {
 
     // Mount the component with the mock data
     mount(
-      <LeftColumnContext.Provider value={{ studentdata, branchdata }}>
+      <CohortContext.Provider value={{ studentdata, branchdata }}>
         <StudentDetail />
-      </LeftColumnContext.Provider>
+      </CohortContext.Provider>
     );
 
     // Assertions

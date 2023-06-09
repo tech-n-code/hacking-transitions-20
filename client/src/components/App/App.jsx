@@ -4,7 +4,7 @@ import Footer from "../Footer/Footer.jsx";
 import StudentDetail from '../StudentRender/StudentDetails.jsx';
 import Header from "../Header/Header.jsx";
 import CohortDetails from "../CohortRender/CohortDetails.jsx";
-import LeftColumnContext from "../../context/LeftColumnContext";
+import CohortContext from "../../context/CohortContext";
 import RightColumn from "../RightColumn/RightColumn.jsx";
 import Register from "../Register/Register.jsx";
 import Login from "../Login/Login.jsx";
@@ -15,7 +15,7 @@ import Calendar from "../Calendar/Calendar.jsx";
 
 const App = () => {
 
-  const { cohortClicked, renderStudent } = useContext(LeftColumnContext);
+  const { cohortClicked, renderStudent } = useContext(CohortContext);
 
   return (
     <UserProvider>
@@ -28,7 +28,7 @@ const App = () => {
 
 const AuthContent = () => {
   const { isAuthenticated } = useUser(); // Get the new isAuthenticated variable from the context
-  const { cohortClicked, renderStudent } = useContext(LeftColumnContext);
+  const { cohortClicked, renderStudent } = useContext(CohortContext);
   return (
     <>
       <Header />

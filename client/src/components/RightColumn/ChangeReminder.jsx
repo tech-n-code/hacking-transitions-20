@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import "./RightColumn.css"
-import RightColumnContext from "../../context/RightColumnContext";
+import "../../styles/RightColumn.css"
+import AppointmentContext from "../../context/AppointmentContext";
 
 export default function ChangeReminder({ setEditNote }){
-    const { noteSelected, taskId , setUpdate, setNoteSelected } = useContext(RightColumnContext);
+    const { noteSelected, taskId , setUpdate, setNoteSelected } = useContext(AppointmentContext);
     
     const handleSubmit = (e) => {
         e.preventDefault();
