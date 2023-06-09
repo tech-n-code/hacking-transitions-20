@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import "../../../src/styles/LeftColumn.css";
-import LeftColumnContext from "../../context/LeftColumnContext";
+import CohortContext from "../../context/CohortContext";
 
 function LeftColumnNames() {
 	const { studentss, setStudentClicked, setRenderStudent, setCohortClicked } =
-		useContext(LeftColumnContext);
+		useContext(CohortContext);
 
 	return (
 		<>

@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import RightColumnContext from "../../context/RightColumnContext";
+import AppointmentContext from "../../context/AppointmentContext";
 import "../../styles/StudentAppointments.css"
 import Scroll from "./Scroll";
 
 export default function StudentAppointments(){
-    const { students, tasks, setNoteSelected, setTaskId } = useContext(RightColumnContext);
+    const { students, tasks, setNoteSelected, setTaskId } = useContext(AppointmentContext);
   
     return (
         <div>

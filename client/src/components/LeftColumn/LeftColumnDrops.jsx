@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import LeftColumnContext from "../../context/LeftColumnContext";
+import CohortContext from "../../context/CohortContext";
 import "../../../src/styles/LeftColumn.css";
 import LeftColumnNames from "./LeftColumnNames";
 
@@ -12,7 +12,7 @@ function LeftColumnDrop() {
 		cohorts,
 		openDropDown,
 		toggleDropDown,
-	} = useContext(LeftColumnContext);
+	} = useContext(CohortContext);
 
 	return (
 		<>

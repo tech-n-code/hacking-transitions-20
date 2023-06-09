@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import "../../styles/RightColumn.css";
-import RightColumnContext from "../../context/RightColumnContext";
+import AppointmentContext from "../../context/AppointmentContext";
 
 export default function AddReminder({ setShowAddModal }){
-    const { students, setUpdate } = useContext(RightColumnContext);
+    const { students, setUpdate } = useContext(AppointmentContext);
     const[ note, setNote ] = useState("");
     const [ selectedStudent, setSelectedStudent ] = useState("")
 

@@ -1,12 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import Draggable from 'react-draggable';
-import LeftColumnContext from "../../context/LeftColumnContext";
+import CohortContext from "../../context/CohortContext";
 import '../../styles/CohortDetails.css';
 import { Resizable } from 'react-resizable';
 import { useState } from 'react';
 
 const CohortDetails = () => {
-    const { cohortClicked, cohortIdForInfo, cohorts, setCohortClicked, students, assignColor, setStudentClicked, setRenderStudent } = useContext(LeftColumnContext);
+    const { cohortClicked, cohortIdForInfo, cohorts, setCohortClicked, students, assignColor, setStudentClicked, setRenderStudent } = useContext(CohortContext);
     const [size, setSize] = useState({ width: 500, height: 300 });
 
     const workAreaBounds = {
