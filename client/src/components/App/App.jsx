@@ -7,7 +7,6 @@ import CohortDetails from "../CohortRender/CohortDetails.jsx";
 import LeftColumnContext from "../../context/LeftColumnContext";
 import RightColumn from "../RightColumn/RightColumn.jsx";
 import Register from "../Register/Register.jsx";
-
 import Login from "../Login/Login.jsx";
 import { AuthProvider } from "react-auth-kit";
 import { UserProvider, useUser } from "../UserProvider.jsx";

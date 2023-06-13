@@ -7,6 +7,8 @@ function Register({ handleModeChange }) {
   const { setUser } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState(""); // Add a new state variable called "firstName"
+  const [lastName, setLastName] = useState(""); // Add a new state variable called "lastName"
   const [error, setError] = useState(null);
 
   const register = async (e) => {
@@ -18,7 +20,7 @@ function Register({ handleModeChange }) {
     }
 
     try {
-      const res = await axios.post("/api/register", { email, password });
+      const res = await axios.post("/api/register", { email, password, firstName, lastName });
       // Insert JWT (res.data.token)
       localStorage.setItem("token", res.data.token);
       setUser(res.data.user);
@@ -37,6 +39,8 @@ function Register({ handleModeChange }) {
     <div>
       <h2 className="form-title">First time users register here:</h2>
       <form className="register-form" onSubmit={register}>
+      <input type="text" placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} required/>
+        <input type="text" placeholder="Last Name" onChange={(e) => setLastName(e.target.value)} required/>
         <input
           type="email"
           value={email}
@@ -51,6 +55,7 @@ function Register({ handleModeChange }) {
           required
           placeholder="Password"
         />
+        
         <button type="submit">Register</button>
         <button type="button" onClick={() => handleModeChange("login")}>
           Existing User
