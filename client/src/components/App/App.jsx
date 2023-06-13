@@ -1,5 +1,10 @@
-import React, { useContext } from "react";
+
+import React, {useContext, useState}  from "react";
+import LeftColumn from "../LeftColumn/LeftColumn.jsx";
+
+
 import CohortNav from "../CohortNav/CohortNav.jsx";
+
 import Footer from "../Footer/Footer.jsx";
 import StudentDetail from "../StudentDetails/StudentDetails.jsx";
 import Header from "../Header/Header.jsx";
@@ -12,6 +17,7 @@ import { AuthProvider } from "react-auth-kit";
 import { UserProvider, useUser } from "../UserProvider.jsx";
 import "./App.css";
 import Calendar from "../Calendar/Calendar.jsx";
+import Logout from "../Logout/Logout.jsx";
 
 const App = () => {
   const { cohortClicked, renderStudent } = useContext(CohortContext);
@@ -33,33 +39,38 @@ const App = () => {
 };
 
 const AuthContent = () => {
+  const [mode, setMode] = useState("login"); // Add a new state variable called "mode" and initialize it to "login"
   const { isAuthenticated } = useUser(); // Get the new isAuthenticated variable from the context
-  const { cohortClicked, renderStudent } = useContext(CohortContext);
+
+  const { cohortClicked, renderStudent } = useContext(LeftColumnContext);
+
+  const handleModeChange = (newMode) => {
+    setMode(newMode);
+  };
+
   return (
     <>
-      <div className="page-container">
-        <Header />
-        {!isAuthenticated && (
-          <div className="auth-container">
-            <Register />
-            <Login />
-          </div>
-        )}
-        {isAuthenticated && (
-          <>
-            <CohortNav />
-            <div className="body-container">
-              {cohortClicked !== "" ? <Appointments /> : <></>}
-              <div className="content-container">
-                <Calendar />
-                {cohortClicked !== "" ? <CohortDetails /> : <></>}
-                {renderStudent ? <StudentDetail /> : ""}
-              </div>
-            </div>
-            <Footer />
-          </>
-        )}
-      </div>
+      <Header />
+      {!isAuthenticated && (
+        <div className="auth-container">
+          {mode === 'login' ? <Login handleModeChange={handleModeChange}/> : <Register handleModeChange={handleModeChange} />}
+          {/* <button onClick={() => handleModeChange(mode === 'login' ? 'register' : 'login')}>
+            {mode === 'login' ? 'New User' : 'Existing User'}
+          </button> */}
+        </div>
+      )}
+      {isAuthenticated && (
+        <>
+        <Logout />
+          <LeftColumn />
+          <Calendar />
+          {renderStudent ? <StudentDetail />: ''}
+          {cohortClicked !== "" ? <CohortDetails />  : <></>}
+          {cohortClicked !== "" ? <RightColumn />  : <></>}
+          <Footer />
+        </>
+      )}
+
     </>
   );
 };

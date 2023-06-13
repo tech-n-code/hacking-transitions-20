@@ -46,7 +46,7 @@ For Staff Members charged with assisting students as they transition from milita
 ![alt text](assets/images/hacking-transitions-1.png)
 
 ## Contributors
-Burman Bedford (Software Engineer) || Steve Dean (User Interface Owner) || Kevin Foreman (Architectural Owner) || Brennan Mulligan (Project Manager) || Josh Smith (Software Engineer) || Todd Topicz (Software Engineer)
+Matthew Drevon (Software Engineer) || Josh Benton (User Interface Owner) || Will Franceschini(Architectural Owner) || Blake Barkman (Project Manager) || Dennis Kennedy (Software Engineer) || Kimberly Jenkins (Software Engineer)
 
 ## Tests
 Full E2E test suite with Cypress, Multiple unit tests written for various components throughout the entire application with Vitest & react-test-library, and development testing with Postman during API development to test routes.
