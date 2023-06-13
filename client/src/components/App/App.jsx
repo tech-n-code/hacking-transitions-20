@@ -12,6 +12,7 @@ import { AuthProvider } from "react-auth-kit";
 import { UserProvider, useUser } from "../UserProvider.jsx";
 import "./App.css";
 import Calendar from "../Calendar/Calendar.jsx";
+import Logout from "../Logout/Logout.jsx";
 
 const App = () => {
 
@@ -40,6 +41,7 @@ const AuthContent = () => {
       )}
       {isAuthenticated && (
         <>
+        <Logout />
           <LeftColumn />
           <Calendar />
           {renderStudent ? <StudentDetail />: ''}

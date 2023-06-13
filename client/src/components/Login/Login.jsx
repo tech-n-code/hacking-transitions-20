@@ -22,6 +22,11 @@ function Login() {
         }
     };
 
+    const handleNewUser = (event) => {
+        event.preventDefault();
+        navigate("/NewUser");
+      };
+
     return (
         <div>
             <h2 className="form-title">Returning staff login here:</h2>
@@ -29,6 +34,9 @@ function Login() {
             <input type="email" value={email} onChange={e => setEmail(e.target.value)} required placeholder="Email"/>
             <input type="password" value={password} onChange={e => setPassword(e.target.value)} required placeholder="Password" />
             <button type="submit">Login</button>
+            <button type="button" name="newUser" onClick={handleNewUser}>
+            New User
+          </button>
         </form>
         </div>
     );
