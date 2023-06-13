@@ -1,7 +1,7 @@
-import React, {useContext}  from "react";
+import React, { useContext } from "react";
 import CohortNav from "../CohortNav/CohortNav.jsx";
 import Footer from "../Footer/Footer.jsx";
-import StudentDetail from '../StudentDetails/StudentDetails.jsx';
+import StudentDetail from "../StudentDetails/StudentDetails.jsx";
 import Header from "../Header/Header.jsx";
 import CohortDetails from "../CohortDetails/CohortDetails.jsx";
 import CohortContext from "../../context/CohortContext";
@@ -14,12 +14,18 @@ import "./App.css";
 import Calendar from "../Calendar/Calendar.jsx";
 
 const App = () => {
-
   const { cohortClicked, renderStudent } = useContext(CohortContext);
 
   return (
     <UserProvider>
-      <AuthProvider authStorageType="cookie" authStorageName="_auth_t" authTimeStorageName="_auth_time" stateStorageName="_auth_state" cookieDomain={window.location.hostname} cookieSecure={window.location.protocol==="https:"}>
+      <AuthProvider
+        authStorageType="cookie"
+        authStorageName="_auth_t"
+        authTimeStorageName="_auth_time"
+        stateStorageName="_auth_state"
+        cookieDomain={window.location.hostname}
+        cookieSecure={window.location.protocol === "https:"}
+      >
         <AuthContent />
       </AuthProvider>
     </UserProvider>
@@ -31,23 +37,29 @@ const AuthContent = () => {
   const { cohortClicked, renderStudent } = useContext(CohortContext);
   return (
     <>
-      <Header />
-      {!isAuthenticated && (
-        <div className="auth-container">
+      <div className="page-container">
+        <Header />
+        {!isAuthenticated && (
+          <div className="auth-container">
             <Register />
             <Login />
-        </div>
-      )}
-      {isAuthenticated && (
-        <>
-          <CohortNav />
-          <Calendar />
-          {renderStudent ? <StudentDetail />: ''}
-          {cohortClicked !== "" ? <CohortDetails />  : <></>}
-          {cohortClicked !== "" ? <Appointments />  : <></>}
-          <Footer />
-        </>
-      )}
+          </div>
+        )}
+        {isAuthenticated && (
+          <>
+            <CohortNav />
+            <div className="body-container">
+              {cohortClicked !== "" ? <Appointments /> : <></>}
+              <div className="content-container">
+                <Calendar />
+                {cohortClicked !== "" ? <CohortDetails /> : <></>}
+                {renderStudent ? <StudentDetail /> : ""}
+              </div>
+            </div>
+            <Footer />
+          </>
+        )}
+      </div>
     </>
   );
 };

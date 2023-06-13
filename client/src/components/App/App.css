@@ -1,3 +1,19 @@
-body{
+/* body{
     background: #E0EAF8;
+} */
+.page-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.body-container {
+    display: flex;
+    flex-direction: row;
+}
+
+.content-container {
+    display: flex;
+    flex-direction: column;
 }
