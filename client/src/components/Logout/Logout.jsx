@@ -1,5 +1,6 @@
 import React from 'react';
 import { useUser } from "../UserProvider";
+import "./Logout.css";
 
 const Logout = () => {
     const { setUser } = useUser();
@@ -14,7 +15,7 @@ const Logout = () => {
   };
 
   return (
-    <button onClick={handleLogout}>Logout</button>
+    <button className="logout-button" onClick={handleLogout}>Logout</button>
   );
 };
 

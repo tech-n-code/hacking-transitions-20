@@ -1,4 +1,4 @@
-import React, {useContext}  from "react";
+import React, {useContext, useState}  from "react";
 import LeftColumn from "../LeftColumn/LeftColumn.jsx";
 import Footer from "../Footer/Footer.jsx";
 import StudentDetail from '../StudentRender/StudentDetails.jsx';
@@ -7,6 +7,7 @@ import CohortDetails from "../CohortRender/CohortDetails.jsx";
 import LeftColumnContext from "../../context/LeftColumnContext";
 import RightColumn from "../RightColumn/RightColumn.jsx";
 import Register from "../Register/Register.jsx";
+
 import Login from "../Login/Login.jsx";
 import { AuthProvider } from "react-auth-kit";
 import { UserProvider, useUser } from "../UserProvider.jsx";
@@ -28,15 +29,23 @@ const App = () => {
 };
 
 const AuthContent = () => {
+  const [mode, setMode] = useState("login"); // Add a new state variable called "mode" and initialize it to "login"
   const { isAuthenticated } = useUser(); // Get the new isAuthenticated variable from the context
   const { cohortClicked, renderStudent } = useContext(LeftColumnContext);
+
+  const handleModeChange = (newMode) => {
+    setMode(newMode);
+  };
+
   return (
     <>
       <Header />
       {!isAuthenticated && (
         <div className="auth-container">
-            <Register />
-            <Login />
+          {mode === 'login' ? <Login handleModeChange={handleModeChange}/> : <Register handleModeChange={handleModeChange} />}
+          {/* <button onClick={() => handleModeChange(mode === 'login' ? 'register' : 'login')}>
+            {mode === 'login' ? 'New User' : 'Existing User'}
+          </button> */}
         </div>
       )}
       {isAuthenticated && (
