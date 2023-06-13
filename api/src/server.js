@@ -81,12 +81,12 @@ app.get("/api/appointments", async (req, res, next) =>{
 // Route to handle user registration
 app.post("/api/register", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, firstName, lastName } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10); // hashes the password with bcrypt and add 10 extra bits "salt"
     console.log(req.body);
 
     console.log("Attempting to insert:", email, hashedPassword);
-    const result = await db.query("INSERT INTO users (email, password) VALUES ($1, $2)", [email, hashedPassword]);
+    const result = await db.query("INSERT INTO users (email, password, firstname, lastname) VALUES ($1, $2, $3, $4)", [email, hashedPassword, firstName, lastName]);
     console.log('Query result:', result);
     // JSON Web tokens, yay
     const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '2h' });

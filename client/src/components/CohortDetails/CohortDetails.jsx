@@ -35,15 +35,6 @@ const CohortDetails = () => {
 
     return (
         
-        <Draggable handle=".cohortInfoHeader" bounds={workAreaBounds}>
-            <Resizable
-                className="cohortInfoContainer"
-                width={size.width}
-                height={size.height}
-                onResize={handleResize}
-                minConstraints={[200, 200]}
-                maxConstraints={[800, 600]}
-            >
             <div className="cohortInfoContainer">
                 <div className="cohortInfoHeader">
                     <div className="cohortInfoName">
@@ -65,6 +56,7 @@ const CohortDetails = () => {
                             <th className="cohortStudentTableHeader">Branch</th>
                             <th className="cohortStudentTableHeader">Duty Status</th>
                             <th className="cohortStudentTableHeader">ETS Date</th>
+                            <th className="cohortStudentTableHeader">Status</th>
                             <th className="cohortStudentTableHeader">Phone Number</th>
                         </tr>
                     </thead>
@@ -85,7 +77,8 @@ const CohortDetails = () => {
                                     <td className="cohortStudentEntry">{student.lastname}</td>
                                     <td className="cohortStudentEntry">{branch}</td>
                                     <td className="cohortStudentEntry">{student.dutystatus}</td>
-                                    <td className="cohortStudentEntry">{etsDate}<div className='circle' id={setColor}></div></td>
+                                    <td className="cohortStudentEntry">{etsDate}</td>
+                                    <td className="cohortStudentEntry"><div className='circle' id={setColor}></div></td>
                                     <td className="cohortStudentEntry">{formattedPhoneNumber}</td>
                                 </tr>
                             );
@@ -93,8 +86,6 @@ const CohortDetails = () => {
                     </tbody>
                 </table>
             </div>
-            </Resizable>
-        </Draggable >
     );
 };
 
