@@ -1,4 +1,4 @@
-.cohortNav {
+/* .cohortNav {
     background: #E0EAF8;
     display: flex;
     flex-direction: column;
@@ -39,8 +39,6 @@
     text-align: center;
     background: #e6e7ea;
     border: 1px solid #EF6E47;
-    /* border-top: 0px;
-    border-left: 0px; */
 }
 
 .LcCohort {
@@ -92,4 +90,43 @@
 
 .LCName:hover {
     background: #0D0F4A;
+} */
+
+.cohortNav {
+    animation: fadeIn .5s ease-in both;
+    display: inline-flex;
+    flex-direction: row;
+    font-size: 22px;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.cohortNavHeader {
+    background-color: darkblue;
+    border: orange solid;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    color: white;
+    font-size: 30px;
+    padding: 10px;
+}
+
+.cohortNavDrop-container {
+    background-color: lightblue;
+    border: orange solid;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.cohortNavDrop {
+    background-color: lightblue;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 50px;
+    padding: 5px;
+    cursor: pointer;
 }
