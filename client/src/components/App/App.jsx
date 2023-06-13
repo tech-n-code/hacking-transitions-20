@@ -1,10 +1,5 @@
-
 import React, {useContext, useState}  from "react";
-import LeftColumn from "../LeftColumn/LeftColumn.jsx";
-
-
 import CohortNav from "../CohortNav/CohortNav.jsx";
-
 import Footer from "../Footer/Footer.jsx";
 import StudentDetail from "../StudentDetails/StudentDetails.jsx";
 import Header from "../Header/Header.jsx";
@@ -38,11 +33,12 @@ const App = () => {
   );
 };
 
+
 const AuthContent = () => {
   const [mode, setMode] = useState("login"); // Add a new state variable called "mode" and initialize it to "login"
   const { isAuthenticated } = useUser(); // Get the new isAuthenticated variable from the context
 
-  const { cohortClicked, renderStudent } = useContext(LeftColumnContext);
+  const { cohortClicked, renderStudent } = useContext(CohortContext);
 
   const handleModeChange = (newMode) => {
     setMode(newMode);
@@ -59,20 +55,28 @@ const AuthContent = () => {
           </button> */}
         </div>
       )}
-      {isAuthenticated && (
-        <>
-        <Logout />
-          <LeftColumn />
-          <Calendar />
-          {renderStudent ? <StudentDetail />: ''}
-          {cohortClicked !== "" ? <CohortDetails />  : <></>}
-          {cohortClicked !== "" ? <RightColumn />  : <></>}
-          <Footer />
-        </>
-      )}
-
+        {isAuthenticated && (
+          <>
+          <Logout />
+            <CohortNav />
+            <div className="body-container">
+              {cohortClicked !== "" ? <Appointments /> : <></>}
+              <div className="content-container">
+                <Calendar />
+                {cohortClicked !== "" ? <CohortDetails /> : <></>}
+                {renderStudent ? <StudentDetail /> : ""}
+              </div>
+            </div>
+            <Footer />
+          </>
+        )}
+      
     </>
   );
 };
 
 export default App;
+
+
+
+
