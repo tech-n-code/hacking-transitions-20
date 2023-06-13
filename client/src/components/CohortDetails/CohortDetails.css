@@ -1,45 +1,36 @@
 .cohortInfoContainer {
-    cursor: default;
-    position: absolute;
-    top: 50%;
-    left: 25%;
-    transform: translate(-50%, -50%);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius: 10px;
     font-size: 1vw;
-    background-color: #4E70E0;
-    border: 1px solid #4758ef;
-    color: #FFFFFF;
-    max-height: 90vh;
+    background-color: #E0EAF8;
+    border: 1px solid;
     height: fit-content;
-    resize: both;
-    overflow: auto;
+    width: calc(60vw);
+    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
 }
 
 .cohortInfoHeader {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
     text-align: center;
+    color:#E0EAF8;
     background-color: #0D0F4A;
+    padding: 10px 0 10px 0;
     
 }
 
 .cohortClose {
     float: right;
     padding-right: 1.5vw;
-    /* Adjust padding based on screen width */
-    font-size: 1vw;
-    /* Adjust font size based on screen width */
-    z-index: 50;
     cursor: pointer;
 }
 
 .basicCohortInfo {
     display: flex;
     justify-content: space-between;
-    padding-left: 13%;
-    padding-right: 13%;
-    background-color: #0D0F4A;
-    border: 1px solid #EF6E47;
-    border-left: 0;
-    border-right: 0;
-    font-size: 1vw;
+    padding: 5px 13% 5px 13%;
+    color: #E0EAF8;
+    background-color: #4E70E0;
 }
 
 .CInfo {
@@ -48,40 +39,53 @@
 }
 
 .cohortStudentTable {
-    border: 1px solid #EF6E47;
     width: 100%;
     height: auto;
     max-height: calc(100% - 70px);
     /* Adjust the value (70px) based on the other elements' heights */
     overflow: hidden;
     text-align: center;
+    margin: 0 0 15px 0;
+    border-collapse: collapse;
 }
 
 .cohortStudentTableHeader {
-    border: 1px solid #EF6E47;
-    background-color:#0D0F4A;
+    background-color:#EF6E47;
+    cursor: default;
 }
 
 .cohortStudent {
-    border: 1px solid #EF6E47;
+
 }
 
 .cohortStudentEntry {
-    border: 1px solid #EF6E47;
+    padding: 5px 0 5px 0;
+    border-bottom: 1px solid #4E70E0;
+    align-items: center;
 }
-#green{
-    background-color: green;
+
+tr:hover {
+    background-color: #b9caff;
+    cursor: pointer;
 }
-#yellow{
-    background-color: yellow;
-}
-#red{
-    background-color: red;
-}
+
 .circle{
     height: 15px;
     width: 15px;
     border-radius: 50%;
-    float: right;
-    border: 3px solid#0D0F4A;
+    border: 2px solid lightgray;
+    position: relative;
+    left: 40%;
+}
+
+#green{
+    background-color: green;
+}
+
+#yellow{
+    background-color: yellow;
+}
+
+#red{
+    background-color: red;
 }
