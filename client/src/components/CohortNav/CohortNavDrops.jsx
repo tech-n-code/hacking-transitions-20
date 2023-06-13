@@ -1,9 +1,9 @@
 import React, { useContext } from "react";
-import LeftColumnContext from "../../context/LeftColumnContext";
-import "./LeftColumn.css";
-import LeftColumnNames from "./LeftColumnNames";
+import CohortContext from "../../context/CohortContext";
+import "./CohortNav.css";
+import CohortNavNames from "./CohortNavNames";
 
-function LeftColumnDrop() {
+function CohortNavDrops() {
 	const {
 		handleDropClicked,
 		dropDownClicked,
@@ -12,7 +12,7 @@ function LeftColumnDrop() {
 		cohorts,
 		openDropDown,
 		toggleDropDown,
-	} = useContext(LeftColumnContext);
+	} = useContext(CohortContext);
 
 	return (
 		<>
@@ -25,7 +25,7 @@ function LeftColumnDrop() {
 					<React.Fragment key={cohort.courseid}>
 						<div
 							key={index}
-							className={`leftColumnDrop ${buttonClass}`}
+							className={`cohortNavDrop ${buttonClass}`}
 						>
 							<div
 								className='LcCohort'
@@ -36,14 +36,14 @@ function LeftColumnDrop() {
 								{cohort.courseid}
 							</div>
 							<i
-								className={`leftColumnArrow ${arrowClass}`}
+								className={`cohortNavArrow ${arrowClass}`}
 								onClick={() => {
 									handleDropClicked(cohort.courseid, cohort.id);
 									toggleDropDown(cohort.courseid);
 								}}
 							></i>
 						</div>
-						{openDropDown === cohort.courseid && <LeftColumnNames />}
+						{openDropDown === cohort.courseid && <CohortNavNames />}
 					</React.Fragment>
 				);
 			})}
@@ -51,4 +51,4 @@ function LeftColumnDrop() {
 	);
 }
 
-export default LeftColumnDrop;
+export default CohortNavDrops;

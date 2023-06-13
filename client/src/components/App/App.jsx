@@ -1,11 +1,16 @@
+
 import React, {useContext, useState}  from "react";
 import LeftColumn from "../LeftColumn/LeftColumn.jsx";
+
+
+import CohortNav from "../CohortNav/CohortNav.jsx";
+
 import Footer from "../Footer/Footer.jsx";
-import StudentDetail from '../StudentRender/StudentDetails.jsx';
+import StudentDetail from "../StudentDetails/StudentDetails.jsx";
 import Header from "../Header/Header.jsx";
-import CohortDetails from "../CohortRender/CohortDetails.jsx";
-import LeftColumnContext from "../../context/LeftColumnContext";
-import RightColumn from "../RightColumn/RightColumn.jsx";
+import CohortDetails from "../CohortDetails/CohortDetails.jsx";
+import CohortContext from "../../context/CohortContext";
+import Appointments from "../Appointments/Appointments.jsx";
 import Register from "../Register/Register.jsx";
 import Login from "../Login/Login.jsx";
 import { AuthProvider } from "react-auth-kit";
@@ -15,12 +20,18 @@ import Calendar from "../Calendar/Calendar.jsx";
 import Logout from "../Logout/Logout.jsx";
 
 const App = () => {
-
-  const { cohortClicked, renderStudent } = useContext(LeftColumnContext);
+  const { cohortClicked, renderStudent } = useContext(CohortContext);
 
   return (
     <UserProvider>
-      <AuthProvider authStorageType="cookie" authStorageName="_auth_t" authTimeStorageName="_auth_time" stateStorageName="_auth_state" cookieDomain={window.location.hostname} cookieSecure={window.location.protocol==="https:"}>
+      <AuthProvider
+        authStorageType="cookie"
+        authStorageName="_auth_t"
+        authTimeStorageName="_auth_time"
+        stateStorageName="_auth_state"
+        cookieDomain={window.location.hostname}
+        cookieSecure={window.location.protocol === "https:"}
+      >
         <AuthContent />
       </AuthProvider>
     </UserProvider>
@@ -30,6 +41,7 @@ const App = () => {
 const AuthContent = () => {
   const [mode, setMode] = useState("login"); // Add a new state variable called "mode" and initialize it to "login"
   const { isAuthenticated } = useUser(); // Get the new isAuthenticated variable from the context
+
   const { cohortClicked, renderStudent } = useContext(LeftColumnContext);
 
   const handleModeChange = (newMode) => {
@@ -58,6 +70,7 @@ const AuthContent = () => {
           <Footer />
         </>
       )}
+
     </>
   );
 };

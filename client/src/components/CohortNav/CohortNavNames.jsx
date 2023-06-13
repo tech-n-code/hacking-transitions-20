@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import "./LeftColumn.css";
-import LeftColumnContext from "../../context/LeftColumnContext";
+import "./CohortNav.css";
+import CohortContext from "../../context/CohortContext";
 
-function LeftColumnNames() {
+function CohortNavNames() {
 	const { studentss, setStudentClicked, setRenderStudent, setCohortClicked } =
-		useContext(LeftColumnContext);
+		useContext(CohortContext);
 
 	return (
 		<>
@@ -14,7 +14,7 @@ function LeftColumnNames() {
 					return (
 						<div
 							key={index}
-							className='leftColumnNames'
+							className='cohortNavNames'
 						>
 							<div
 								className='LCName'
@@ -32,4 +32,4 @@ function LeftColumnNames() {
 		</>
 	);
 }
-export default LeftColumnNames;
+export default CohortNavNames;

@@ -1,4 +1,4 @@
-.leftColumn {
+/* .cohortNav {
     background: #E0EAF8;
     display: flex;
     flex-direction: column;
@@ -19,7 +19,7 @@
     animation: fadeIn .5s ease-in both;
 }
 
-.leftColumnHeader {
+.cohortNavHeader {
     font-size: 40px;
     background: #0d0f4af4;
     text-align: center;
@@ -30,7 +30,7 @@
     border-top-left-radius: 10px;
 }
 
-.leftColumnDrop {
+.cohortNavDrop {
     display: flex;
     flex-direction: row;
     padding: 5px;
@@ -39,8 +39,6 @@
     text-align: center;
     background: #e6e7ea;
     border: 1px solid #EF6E47;
-    /* border-top: 0px;
-    border-left: 0px; */
 }
 
 .LcCohort {
@@ -50,7 +48,7 @@
     
 }
 
-.leftColumnArrow {
+.cohortNavArrow {
     border: solid #FFFFFF;
     border-width: 0 3px 3px 0;
     display: inline-block;
@@ -78,7 +76,7 @@
     background: #4E70E0;
 }
 
-.leftColumnNames {
+.cohortNavNames {
     border-color: #EF6E47;
     border-style: solid;
     border-top: 0px;
@@ -92,4 +90,43 @@
 
 .LCName:hover {
     background: #0D0F4A;
+} */
+
+.cohortNav {
+    animation: fadeIn .5s ease-in both;
+    display: inline-flex;
+    flex-direction: row;
+    font-size: 22px;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.cohortNavHeader {
+    background-color: darkblue;
+    border: orange solid;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+    color: white;
+    font-size: 30px;
+    padding: 10px;
+}
+
+.cohortNavDrop-container {
+    background-color: lightblue;
+    border: orange solid;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    padding: 5px;
+}
+
+.cohortNavDrop {
+    background-color: lightblue;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 50px;
+    padding: 5px;
+    cursor: pointer;
 }

@@ -1,0 +1,91 @@
+.cohortInfoContainer {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border-radius: 10px;
+    font-size: 1vw;
+    background-color: #E0EAF8;
+    border: 1px solid;
+    height: fit-content;
+    width: calc(60vw);
+    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+}
+
+.cohortInfoHeader {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    text-align: center;
+    color:#E0EAF8;
+    background-color: #0D0F4A;
+    padding: 10px 0 10px 0;
+    
+}
+
+.cohortClose {
+    float: right;
+    padding-right: 1.5vw;
+    cursor: pointer;
+}
+
+.basicCohortInfo {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 13% 5px 13%;
+    color: #E0EAF8;
+    background-color: #4E70E0;
+}
+
+.CInfo {
+    margin: .5%;
+    width: fit-content;
+}
+
+.cohortStudentTable {
+    width: 100%;
+    height: auto;
+    max-height: calc(100% - 70px);
+    /* Adjust the value (70px) based on the other elements' heights */
+    overflow: hidden;
+    text-align: center;
+    margin: 0 0 15px 0;
+    border-collapse: collapse;
+}
+
+.cohortStudentTableHeader {
+    background-color:#EF6E47;
+    cursor: default;
+}
+
+.cohortStudent {
+
+}
+
+.cohortStudentEntry {
+    padding: 5px 0 5px 0;
+    border-bottom: 1px solid #4E70E0;
+    align-items: center;
+}
+
+tr:hover {
+    background-color: #b9caff;
+    cursor: pointer;
+}
+
+.circle{
+    height: 15px;
+    width: 15px;
+    border-radius: 50%;
+    border: 2px solid lightgray;
+    position: relative;
+    left: 40%;
+}
+
+#green{
+    background-color: green;
+}
+
+#yellow{
+    background-color: yellow;
+}
+
+#red{
+    background-color: red;
+}

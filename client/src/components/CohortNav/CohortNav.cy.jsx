@@ -1,9 +1,9 @@
 import React from 'react'
-import RightColumn from './RightColumn'
+import CohortNav from './CohortNav'
 
-describe('<RightColumn />', () => {
+describe('<CohortNav />', () => {
   it('renders', () => {
     // see: https://on.cypress.io/mounting-react
-    cy.mount(<RightColumn />)
+    cy.mount(<CohortNav />)
   })
 })

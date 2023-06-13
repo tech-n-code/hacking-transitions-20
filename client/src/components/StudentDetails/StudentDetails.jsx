@@ -1,10 +1,10 @@
 import React, {useContext, useState} from 'react';
 import './StudentDetails.css'
-import LeftColumnContext from "../../context/LeftColumnContext";
+import CohortContext from "../../context/CohortContext";
 import Draggable from 'react-draggable';
 
 const StudentDetail = () => {
-    const { studentdata, branchdata, assignColor, setRenderStudent } = useContext(LeftColumnContext);
+    const { studentdata, branchdata, assignColor, setRenderStudent } = useContext(CohortContext);
 
     const studentName = studentdata && studentdata.length > 0 ? studentdata[0].firstname + ' ' + studentdata[0].lastname : '';
     const studentStatus = studentdata && studentdata.length > 0 ? studentdata[0].dutystatus: '';

@@ -1,11 +1,11 @@
 import React, {createContext, useEffect, useState, useContext} from "react";
-import LeftColumnContext from "./LeftColumnContext.jsx";
+import CohortContext from "./CohortContext.jsx";
 
-const RightColumnContext = createContext();
+const AppointmentContext = createContext();
 
-export const RightColumnProvider = ({ children }) => {
+export const AppointmentProvider = ({ children }) => {
     const [ students, setStudents ] = useState([]);
-    const { cohortIdForInfo } = useContext(LeftColumnContext);
+    const { cohortIdForInfo } = useContext(CohortContext);
     const [ tasks, setTasks ] = useState([]);
     const [ update, setUpdate ] = useState(false);
     const [ edit, setEdit ] = useState("");
@@ -29,7 +29,7 @@ export const RightColumnProvider = ({ children }) => {
             .catch(error => console.log(error));
     }, [update===true]);
     
-    return( <RightColumnContext.Provider value = {{
+    return( <AppointmentContext.Provider value = {{
         students,
         tasks,
         update,
@@ -44,8 +44,8 @@ export const RightColumnProvider = ({ children }) => {
         setTaskId
     }}>
         {children}
-    </RightColumnContext.Provider>
+    </AppointmentContext.Provider>
     )
 }
 
-export default RightColumnContext;
+export default AppointmentContext;
