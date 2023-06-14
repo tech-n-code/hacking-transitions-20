@@ -1,23 +1,20 @@
-import React, { useContext, useEffect } from 'react';
-import Draggable from 'react-draggable';
+import React, { useContext, useEffect } from "react";
 import CohortContext from "../../context/CohortContext";
-import './CohortDetails.css';
-import { Resizable } from 'react-resizable';
-import { useState } from 'react';
+import "./CohortDetails.css";
+import { useState } from "react";
 
 const CohortDetails = () => {
-    const { cohortClicked, cohortIdForInfo, cohorts, setCohortClicked, students, assignColor, setStudentClicked, setRenderStudent } = useContext(CohortContext);
-    const [size, setSize] = useState({ width: 500, height: 300 });
+    const {
+        cohortClicked,
+        cohortIdForInfo,
+        cohorts,
+        setCohortClicked,
+        students,
+        assignColor,
+        setStudentClicked,
+        setIsStudentModalOpen,
+    } = useContext(CohortContext);
 
-    const workAreaBounds = {
-        left: -170, 
-        top: -455, 
-        right: 520, 
-        bottom: 370, 
-    };
-    const handleResize = (e, { size }) => {
-        setSize(size);
-    };
     const getBranchName = (branchId) => {
         switch (branchId) {
             case 1:
@@ -34,58 +31,99 @@ const CohortDetails = () => {
     };
 
     return (
-        
-            <div className="cohortInfoContainer">
-                <div className="cohortInfoHeader">
-                    <div className="cohortInfoName">
-                        {cohortClicked}
-                            <div className="cohortClose" onClick={() => { setCohortClicked(""); setRenderStudent(false) }}>X</div>
+        <div className="cohort-details-container">
+            <div className="cohort-details-header">
+                <div>
+                    {cohortClicked}
+                    <div
+                        className="cohort-close"
+                        onClick={() => {
+                            setCohortClicked("");
+                            setIsStudentModalOpen(false);
+                        }}
+                    >
+                        X
                     </div>
                 </div>
-                <div className="basicCohortInfo">
-                    <div className="CInfo">{`Start Date: ${cohorts[cohortIdForInfo].startdate}`}</div>
-                    <div className="CInfo">{`End Date: ${cohorts[cohortIdForInfo].enddate}`}</div>
-                    <div className="CInfo">{`Instructor: ${cohorts[cohortIdForInfo].instructor_id}`}</div>
-                    <div className="CInfo">{`Number Of Students: ${cohorts[cohortIdForInfo].numberofstudents}`}</div>
-                </div>
-                <table className="cohortStudentTable">
-                    <thead>
-                        <tr>
-                            <th className="cohortStudentTableHeader">First Name</th>
-                            <th className="cohortStudentTableHeader">Last Name</th>
-                            <th className="cohortStudentTableHeader">Branch</th>
-                            <th className="cohortStudentTableHeader">Duty Status</th>
-                            <th className="cohortStudentTableHeader">ETS Date</th>
-                            <th className="cohortStudentTableHeader">Status</th>
-                            <th className="cohortStudentTableHeader">Phone Number</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {students.map((student, index) => {
-                            const branch = getBranchName(student.branch_id);
-                            const etsDate = new Date(student.ets_date).toLocaleDateString('en-US');
-                            const formattedPhoneNumber = student.phonenumber.replace(/(\d{3})(\d{3})(\d{4})/, '($1)-$2-$3');
-                            const setColor = assignColor(student.ets_date)
-                            // console.log(setColor)
-                            return (
-                                <tr key={index} className="cohortStudent" 
-                                    onClick={() => {
-                                        setStudentClicked(student.id);
-                                        setRenderStudent(true);
-                                    }}>
-                                    <td className="cohortStudentEntry" >{student.firstname}</td>
-                                    <td className="cohortStudentEntry">{student.lastname}</td>
-                                    <td className="cohortStudentEntry">{branch}</td>
-                                    <td className="cohortStudentEntry">{student.dutystatus}</td>
-                                    <td className="cohortStudentEntry">{etsDate}</td>
-                                    <td className="cohortStudentEntry"><div className='circle' id={setColor}></div></td>
-                                    <td className="cohortStudentEntry">{formattedPhoneNumber}</td>
-                                </tr>
-                            );
-                        })}
-                    </tbody>
-                </table>
             </div>
+            <div className="cohort-basic-info">
+                <div>{`Start Date: ${cohorts[cohortIdForInfo].startdate}`}</div>
+                <div>{`End Date: ${cohorts[cohortIdForInfo].enddate}`}</div>
+                <div>{`Instructor: ${cohorts[cohortIdForInfo].instructor_id}`}</div>
+                <div>{`Number Of Students: ${cohorts[cohortIdForInfo].numberofstudents}`}</div>
+            </div>
+            <table className="cohort-details-table">
+                <thead>
+                    <tr>
+                        <th className="cohort-details-table-header">
+                            First Name
+                        </th>
+                        <th className="cohort-details-table-header">
+                            Last Name
+                        </th>
+                        <th className="cohort-details-table-header">Branch</th>
+                        <th className="cohort-details-table-header">
+                            Duty Status
+                        </th>
+                        <th className="cohort-details-table-header">
+                            ETS Date
+                        </th>
+                        <th className="cohort-details-table-header">Status</th>
+                        <th className="cohort-details-table-header">
+                            Phone Number
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {students.map((student, index) => {
+                        const branch = getBranchName(student.branch_id);
+                        const etsDate = new Date(
+                            student.ets_date
+                        ).toLocaleDateString("en-US");
+                        const formattedPhoneNumber =
+                            student.phonenumber.replace(
+                                /(\d{3})(\d{3})(\d{4})/,
+                                "($1)-$2-$3"
+                            );
+                        const setColor = assignColor(student.ets_date);
+                        return (
+                            <tr
+                                key={index}
+                                onClick={() => {
+                                    setStudentClicked(student.id);
+                                    setIsStudentModalOpen(true);
+                                }}
+                            >
+                                <td className="cohort-student-entry">
+                                    {student.firstname}
+                                </td>
+                                <td className="cohort-student-entry">
+                                    {student.lastname}
+                                </td>
+                                <td className="cohort-student-entry">
+                                    {branch}
+                                </td>
+                                <td className="cohort-student-entry">
+                                    {student.dutystatus}
+                                </td>
+                                <td className="cohort-student-entry">
+                                    {etsDate}
+                                </td>
+                                <td className="cohort-student-entry">
+                                    <div
+                                        className="cohort-details-circle"
+                                        id={setColor}
+                                    ></div>
+                                </td>
+                                <td className="cohort-student-entry">
+                                    {formattedPhoneNumber}
+                                </td>
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+        </div>
     );
 };
 
