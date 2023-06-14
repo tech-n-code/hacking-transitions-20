@@ -34,12 +34,13 @@
 
 .student-exit{
     float: right;
+    padding-right: .5vw;
+    cursor: pointer;
     color:black;
 }
 
 .student-exit:hover{
-    cursor: pointer;
-    color:#0D0F4A;
+    color:white;
 }
 
 .lowerRight-cell {
