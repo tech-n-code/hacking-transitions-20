@@ -97,6 +97,8 @@
     border-radius: 10px;
     display: inline-flex;
     flex-direction: row;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
     font-size: 22px;
     justify-content: center;
     margin-top: 15px;
