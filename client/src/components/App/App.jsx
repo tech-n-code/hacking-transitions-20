@@ -62,7 +62,8 @@ const AuthContent = () => {
             <div className="body-container">
               {cohortClicked !== "" ? <Appointments /> : <></>}
               <div className="content-container">
-                <Calendar />
+                {/* <Calendar /> */}
+                {cohortClicked !== "" ? <Calendar /> : <></>}
                 {cohortClicked !== "" ? <CohortDetails /> : <></>}
                 {isStudentModalOpen ? <StudentDetail /> : ""}
               </div>
