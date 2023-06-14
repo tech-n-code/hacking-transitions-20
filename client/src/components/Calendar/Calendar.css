@@ -26,12 +26,6 @@
     padding: 5px;
     }
     
-    .days {
-    display: grid;
-    grid-template-columns: repeat(7, 1fr);
-    gap: 5px;
-    }
-    
     .day {
     display: flex;
     justify-content: center;
@@ -39,6 +33,17 @@
     height: 80px;
     width: 96%;
     border: 1px solid #ccc;
+    }
+    
+    .day {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 95%;
+    width: 95%;
+    border: 1px solid #ccc;
+    /* padding-bottom: calc((100% - 40px) / 7); */
+    flex-basis: calc((100% - 40px) / 7);
     }
     
     .day.inactive {
