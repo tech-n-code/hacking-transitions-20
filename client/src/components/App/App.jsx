@@ -15,7 +15,7 @@ import Calendar from "../Calendar/Calendar.jsx";
 import Logout from "../Logout/Logout.jsx";
 
 const App = () => {
-  const { cohortClicked, renderStudent } = useContext(CohortContext);
+  const { cohortClicked, isStudentModalOpen } = useContext(CohortContext);
 
   return (
     <UserProvider>
@@ -38,7 +38,7 @@ const AuthContent = () => {
   const [mode, setMode] = useState("login"); // Add a new state variable called "mode" and initialize it to "login"
   const { isAuthenticated } = useUser(); // Get the new isAuthenticated variable from the context
 
-  const { cohortClicked, renderStudent } = useContext(CohortContext);
+  const { cohortClicked, isStudentModalOpen } = useContext(CohortContext);
 
   const handleModeChange = (newMode) => {
     setMode(newMode);
@@ -64,7 +64,7 @@ const AuthContent = () => {
               <div className="content-container">
                 <Calendar />
                 {cohortClicked !== "" ? <CohortDetails /> : <></>}
-                {renderStudent ? <StudentDetail /> : ""}
+                {isStudentModalOpen ? <StudentDetail /> : ""}
               </div>
             </div>
             <Footer />
