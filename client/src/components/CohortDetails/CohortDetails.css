@@ -1,4 +1,5 @@
 .cohort-details-container {
+    animation: fadeIn .5s ease-in forwards;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     border-radius: 10px;
     font-size: 1vw;
@@ -92,4 +93,13 @@
 
 #red {
     background-color: red;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
