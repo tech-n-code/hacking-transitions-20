@@ -1,6 +1,7 @@
-/* body{
-    background: #E0EAF8;
-} */
+body{
+    /* background: #E0EAF8; */
+    padding-bottom: 50px;
+}
 .page-container {
     display: flex;
     flex-direction: column;
