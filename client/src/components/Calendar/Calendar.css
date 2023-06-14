@@ -15,8 +15,9 @@
     justify-content: space-between;
     background-color: #0d0f4a;
     color: white;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    max-height: 48px;
 }
 
 .weekdays {
