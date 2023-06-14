@@ -5,8 +5,7 @@ import Modal from "react-modal";
 Modal.setAppElement("#root");
 
 export default function AddReminder(){
-    const { students, setUpdate } = useContext(AppointmentContext);
-    const[ showAddModal, setShowAddModal ] = useState(false)
+    const { students, setUpdate, showAddModal, setShowAddModal } = useContext(AppointmentContext);
     // const {} = useContext(Appointments);
     const[ note, setNote ] = useState("");
     const [ selectedStudent, setSelectedStudent ] = useState("")
@@ -33,14 +32,30 @@ export default function AddReminder(){
     setIsStudentModalOpen(false)
     }
     
-
+    const modalStyle = {
+        content:{
+            position: 'absolute',
+            top: '50%',
+            bottom: '50%',
+            left: '50%',
+            right: '50%',
+            transform: "translate(-50%, -50%)",
+            height: "fit-content",
+            width: "fit-content",
+            border: '1px solid #ccc',
+            background: '#fff',
+            overflow: 'auto',
+            borderRadius: '10px',
+            outline: 'none',
+            padding: '30px'
+          }}
     
     return(
         <Modal 
         isOpen={setShowAddModal}
         onRequestClose={closeModal}
         style={modalStyle}
->
+        >
             <span className="Form">
                 <form onSubmit={ handleSubmit }>
                     <div>
