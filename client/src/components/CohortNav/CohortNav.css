@@ -94,17 +94,21 @@
 
 .cohortNav {
     animation: fadeIn .5s ease-in both;
+    border-radius: 10px;
     display: inline-flex;
     flex-direction: row;
     font-size: 22px;
     justify-content: center;
     margin-top: 15px;
     margin-bottom: 15px;
+    width: auto;
+    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+
 }
 
 .cohortNavHeader {
-    background-color: darkblue;
-    border: orange solid;
+    background-color: #0D0F4A;
+    border: 1px solid black;
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     color: white;
@@ -113,20 +117,21 @@
 }
 
 .cohortNavDrop-container {
-    background-color: lightblue;
-    border: orange solid;
-    border-top-right-radius: 15px;
-    border-bottom-right-radius: 15px;
+    background-color: #EF6E47;
+    border: 1px solid black;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    color: white;
     display: flex;
     flex-direction: row;
     padding: 5px;
 }
 
 .cohortNavDrop {
-    background-color: lightblue;
     margin-top: auto;
     margin-bottom: auto;
-    margin-left: 50px;
+    margin-left: 15px;
+    margin-right: 15px;
     padding: 5px;
     cursor: pointer;
 }
