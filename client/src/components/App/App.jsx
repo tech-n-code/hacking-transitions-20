@@ -1,4 +1,4 @@
-import React, {useContext, useState}  from "react";
+import React, { useContext, useState } from "react";
 import CohortNav from "../CohortNav/CohortNav.jsx";
 import Footer from "../Footer/Footer.jsx";
 import StudentDetail from "../StudentDetails/StudentDetails.jsx";
@@ -33,7 +33,6 @@ const App = () => {
   );
 };
 
-
 const AuthContent = () => {
   const [mode, setMode] = useState("login"); // Add a new state variable called "mode" and initialize it to "login"
   const { isAuthenticated } = useUser(); // Get the new isAuthenticated variable from the context
@@ -49,34 +48,41 @@ const AuthContent = () => {
       <Header />
       {!isAuthenticated && (
         <div className="auth-container">
-          {mode === 'login' ? <Login handleModeChange={handleModeChange}/> : <Register handleModeChange={handleModeChange} />}
+          {mode === "login" ? (
+            <Login handleModeChange={handleModeChange} />
+          ) : (
+            <Register handleModeChange={handleModeChange} />
+          )}
           {/* <button onClick={() => handleModeChange(mode === 'login' ? 'register' : 'login')}>
             {mode === 'login' ? 'New User' : 'Existing User'}
           </button> */}
         </div>
       )}
-        {isAuthenticated && (
-          <>
-          <Logout />
-            <CohortNav />
-            <div className="body-container">
-              {cohortClicked !== "" ? <Appointments /> : <></>}
-              <div className="content-container">
-                <Calendar />
-                {cohortClicked !== "" ? <CohortDetails /> : <></>}
-                {isStudentModalOpen ? <StudentDetail /> : ""}
-              </div>
+      {isAuthenticated && (
+        <>
+          <div className="app-banner">
+            <div className="spare-container"></div>
+            <div className="nav-container">
+              <CohortNav />
             </div>
-            <Footer />
-          </>
-        )}
-      
+            <div className="logout-container">
+              <Logout />
+            </div>
+          </div>
+          <div className="body-container">
+            {cohortClicked !== "" ? <Appointments /> : <></>}
+            <div className="content-container">
+              {/* <Calendar /> */}
+              {cohortClicked !== "" ? <Calendar /> : <></>}
+              {cohortClicked !== "" ? <CohortDetails /> : <></>}
+              {isStudentModalOpen ? <StudentDetail /> : ""}
+            </div>
+          </div>
+          <Footer />
+        </>
+      )}
     </>
   );
 };
 
 export default App;
-
-
-
-
