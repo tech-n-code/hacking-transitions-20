@@ -95,32 +95,34 @@ label {
 } */
 
 .Appointments {
-    background-color: lightblue;
-    border: orange solid;
+    background-color: #E0EAF8;
+    border: 1px solid black;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     justify-content: flex-start;
     margin-right: 8px;
     max-height: 350px;
     max-width: 275px;
     padding-bottom: 5px;
+    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
 }
 
 .RemindersHeader {
     align-items: center;
-    background-color: darkblue;
+    background-color: #0D0F4A;
     border-top-left-radius: 9px;
     border-top-right-radius: 9px;
     color: white;
     display: flex;
-    font-size: 30px;
+    font-size: 25px;
     justify-content: center;
     padding-bottom: 2px;
 }
 
 .buttons {
-    border: orange solid;
+    background-color: #4E70E0;
     display: flex;
     justify-content: space-between;
     padding-bottom: 8px;
@@ -130,7 +132,7 @@ label {
 }
 
 .studentNames {
-    background-color: orange;
+    background-color: #EF6E47;
     display: flex;
     font-weight: bold;
     justify-content: center;
