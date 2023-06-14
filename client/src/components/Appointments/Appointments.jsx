@@ -9,6 +9,9 @@ export default function RightColumn(){
     const[ showAddModal, setShowAddModal ] = useState(false)
     const[ editNote, setEditNote ] = useState(false)
     const[ deleteNote, setDeleteNote ] = useState(false)
+    
+//a: use a div with a class of modal and a class of modal-content
+
 
     const handleAddClick = () =>{
         setShowAddModal(true)

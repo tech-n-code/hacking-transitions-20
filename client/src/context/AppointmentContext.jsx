@@ -12,6 +12,7 @@ export const AppointmentProvider = ({ children }) => {
     const [ student, setStudent ] = useState("");
     const [ taskId, setTaskId ] = useState(null);
     const [ noteSelected, setNoteSelected ] = useState("");
+    const[ showAddModal, setShowAddModal ] = useState(false)
 
     useEffect(() => {
         fetch(`/api/cohorts/${cohortIdForInfo + 1}/students`)
@@ -41,7 +42,9 @@ export const AppointmentProvider = ({ children }) => {
         noteSelected,
         setNoteSelected,
         taskId,
-        setTaskId
+        setTaskId,
+        showAddModal,
+        setShowAddModal
     }}>
         {children}
     </AppointmentContext.Provider>

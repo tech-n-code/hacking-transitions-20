@@ -1,9 +1,12 @@
 import React, { useState, useContext } from "react";
 import "./Appointments.css";
 import AppointmentContext from "../../context/AppointmentContext";
+import Modal from "react-modal";
+Modal.setAppElement("#root");
 
-export default function AddReminder({ setShowAddModal }){
-    const { students, setUpdate } = useContext(AppointmentContext);
+export default function AddReminder(){
+    const { students, setUpdate, showAddModal, setShowAddModal } = useContext(AppointmentContext);
+    // const {} = useContext(Appointments);
     const[ note, setNote ] = useState("");
     const [ selectedStudent, setSelectedStudent ] = useState("")
 
@@ -24,49 +27,77 @@ export default function AddReminder({ setShowAddModal }){
         })
         
     }
+
+    function closeModal(){
+    setIsStudentModalOpen(false)
+    }
+    
+    const modalStyle = {
+        content:{
+            position: 'absolute',
+            top: '50%',
+            bottom: '50%',
+            left: '50%',
+            right: '50%',
+            transform: "translate(-50%, -50%)",
+            height: "fit-content",
+            width: "fit-content",
+            border: '1px solid #ccc',
+            background: '#fff',
+            overflow: 'auto',
+            borderRadius: '10px',
+            outline: 'none',
+            padding: '30px'
+          }}
     
     return(
-        <span className="Form">
-            <form onSubmit={ handleSubmit }>
-                <div>
-                <label >Add note</label>
-                </div>
-                <textarea 
-                    required
-                    value={ note }
-                    onChange={(e) => setNote(e.target.value)}
-                    rows="5" cols="40"
-                    ></textarea>
-                <div>
-                <select
-                    value={ selectedStudent }
-                    onChange={(e) => setSelectedStudent(e.target.value)}
-                    required
-                >
-                    <option value="" > Please select a student</option>
-                    {students.map((student, x) => {
-                        return (
-                            <option 
-                                key={x} 
-                                value={student.id}
-                            >
-                                {student.firstname} {student.lastname}
-                            </option>
-                        )
-                    })}
-                </select>
-                </div>
-                <div>
-                    <span>
-                <button className="addSubmit">Submit</button>
-                    </span>
-                    <span>
-                <button className="addCancel" onClick={() => setShowAddModal(false)}>
-                    Cancel
-                </button>
-                    </span>
-                </div>
-            </form>
-        </span>
+        <Modal 
+        isOpen={setShowAddModal}
+        onRequestClose={closeModal}
+        style={modalStyle}
+        >
+            <span className="Form">
+                <form onSubmit={ handleSubmit }>
+                    <div>
+                    <label >Add note</label>
+                    </div>
+                    <textarea 
+                        required
+                        value={ note }
+                        onChange={(e) => setNote(e.target.value)}
+                        rows="5" cols="40"
+                        ></textarea>
+                    <div>
+                    <select
+                        value={ selectedStudent }
+                        onChange={(e) => setSelectedStudent(e.target.value)}
+                        required
+                    >
+                        <option value="" > Please select a student</option>
+                        {students.map((student, x) => {
+                            return (
+                                <option 
+                                    key={x} 
+                                    value={student.id}
+                                >
+                                    {student.firstname} {student.lastname}
+                                </option>
+                            )
+                        })}
+                    </select>
+                    </div>
+                    <div>
+                        <span>
+                    <button className="addSubmit">Submit</button>
+                        </span>
+                        <span>
+                    <button className="addCancel" onClick={() => setShowAddModal(false)}>
+                        Cancel
+                    </button>
+                        </span>
+                    </div>
+                </form>
+            </span>
+            </Modal>
     )
 }
