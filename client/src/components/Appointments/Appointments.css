@@ -1,4 +1,4 @@
-.Appointments{
+/* .Appointments{
     position: relative;
     text-align: center;
     width: 20%;
@@ -61,7 +61,6 @@ p{
     width: 100%;
     position: relative;
     left: 0px;
-    /* border: solid black; */
 }
 
 .addButton{
@@ -92,4 +91,42 @@ label {
 		opacity: 1;
 		transform: translate3d(0, 0, 0);
 	}
+} */
+
+.Appointments {
+    border: orange solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-height: 350px;
+    max-width: 275px;
+}
+
+.RemindersHeader {
+    align-items: center;
+    background-color: darkblue;
+    color: white;
+    display: flex;
+    font-size: 30px;
+    justify-content: center;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-left: 25px;
+    margin-right: 25px;
+    margin-top: 10px;
+}
+
+.studentNames {
+    background-color: orange;
+    display: flex;
+    justify-content: center;
+}
+
+.reminder {
+    font-style: italic;
+    height: 50px;
 }
