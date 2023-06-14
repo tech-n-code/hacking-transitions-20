@@ -120,7 +120,7 @@ app.post("/api/login", async (req, res) => {
       return res.status(400).json({ error: "Invalid email or password" });
     }
     // Create JWT
-    const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '2h' });
+    const token = jwt.sign({ email: user.email, firstname: user.firstname, lastname: user.lastname }, process.env.JWT_SECRET, { expiresIn: '2h' });
 
     // Exclude the password and other sensitive info
     const { password: _, ...safeUserData } = user;

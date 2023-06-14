@@ -1,8 +1,21 @@
 import React, { useState, useEffect } from "react";
 import './Header.css'
+import { useUser } from "../UserProvider.jsx";
 
 export default function Header(){
-    const [ email, setEmail ] = useState("")
+    const [ email, setEmail ] = useState("");
+    const user = useUser(); 
+    const userLoggedIn = user && user.user ? `${user.user.firstname} ${user.user.lastname}` : null;
+
+    useEffect(() => {
+        // console.log(userLoggedIn);
+      }, [user]);
+    
+     
+
+
+
+    
     // useEffect(() => {
     //     fetch(`http://localhost:3000/api/users`)
     //         .then(response => response.json())
@@ -21,7 +34,7 @@ export default function Header(){
                 <h1 id="title">Hacking Transitions</h1>
             </span>
             <span id="greeting-container">
-                <h3 id="greeting">Hello, Galvanize Staff Member </h3>
+            {userLoggedIn && <h3 id="greeting">Hello, {userLoggedIn}</h3>}               
             </span>
         </span>
     )
