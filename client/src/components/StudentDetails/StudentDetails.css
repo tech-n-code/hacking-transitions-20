@@ -1,48 +1,64 @@
-.student-table {
-    cursor: default;
-    position: absolute;
-
-    left: 50%;
-    transform: translate(-50%, -0%);
-    font-size: 35px;
-    border: 1px solid #EF6E47;
+.student-details-table {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 1vw;
     color: #FFFFFF;
-    width: 50%;
-    height: 50%;
     height: fit-content;
 }
 
+.student-details-header {
+    color: black;
+    font-weight: bold;
+    background-color:#EF6E47;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 10px;
+}
+
 .column1 {
-    border: 1px solid black;
     padding: 10px;
     font-weight: bold;
     background-color: #0D0F4A;
 }
 .column2 {
-    padding-left: 30px;
-    padding-right: 30px;
+    padding: 10px;
     background-color: #4E70E0;
 }
-#green{
-    background-color: green;
-}
-#yellow{
-    background-color: yellow;
-}
-#red{
-    background-color: red;
-}
-.circle-student{
-    height: 30px;
-    width: 30px;
+
+.student-details-circle{
+    height: 15px;
+    width: 15px;
     border-radius: 50%;
     float: right;
-    border: 3px solid#0D0F4A;
+    border: 2px solid lightgray;
 }
-.exit{
+
+.student-exit{
     float: right;
-    color:#FFFFFF;
+    padding-right: .5vw;
+    cursor: pointer;
+    color:black;
 }
-.exit:hover{
-    color:#0D0F4A;
+
+.student-exit:hover{
+    color:white;
+}
+
+.lowerRight-cell {
+    border-bottom-right-radius: 10px;
+}
+
+.lowerLeft-cell {
+    border-bottom-left-radius: 10px;
+}
+
+#green {
+    background-color: green;
+}
+
+#yellow {
+    background-color: yellow;
+}
+
+#red {
+    background-color: red;
 }

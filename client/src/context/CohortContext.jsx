@@ -15,7 +15,7 @@ export const CohortProvider = ({children}) => {
     const [studentID, setStudentClicked] = useState(1);
     const [studentdata, setStudentData] = useState(null);
     const [branchdata, setBranchData] = useState(null);
-    const [renderStudent, setRenderStudent] = useState(false)
+    const [isStudentModalOpen, setIsStudentModalOpen] = useState(false)
 
     const handleDropClicked = (value, id) =>{
         if(dropDownClicked === value){
@@ -33,7 +33,7 @@ export const CohortProvider = ({children}) => {
             setCohortClicked(cohort)
             setcohortId(id2)
             setCohortIdForInfo(id)
-            setRenderStudent(false)
+            setIsStudentModalOpen(false)
 
         } 
     }
@@ -147,9 +147,9 @@ export const CohortProvider = ({children}) => {
 
     return( <CohortContext.Provider value = {{
         studentID,
-        renderStudent,
+        isStudentModalOpen,
         setCohortClicked,
-        setRenderStudent,
+        setIsStudentModalOpen,
         studentdata,
         branchdata,
         setStudentClicked,
