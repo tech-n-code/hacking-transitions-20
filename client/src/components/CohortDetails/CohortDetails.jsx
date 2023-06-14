@@ -47,10 +47,38 @@ const CohortDetails = () => {
                 </div>
             </div>
             <div className="cohort-basic-info">
-                <div>{`Start Date: ${cohorts[cohortIdForInfo].startdate}`}</div>
-                <div>{`End Date: ${cohorts[cohortIdForInfo].enddate}`}</div>
-                <div>{`Instructor: ${cohorts[cohortIdForInfo].instructor_id}`}</div>
-                <div>{`Number Of Students: ${cohorts[cohortIdForInfo].numberofstudents}`}</div>
+                <div className="cohort-bacic-info-column">
+                    <span>
+                        Start Date:
+                    </span>
+                    <span>
+                        {cohorts[cohortIdForInfo].startdate}
+                    </span>
+                </div>
+                <div className="cohort-bacic-info-column">
+                    <span>
+                        End Date:
+                    </span>
+                    <span>
+                        {cohorts[cohortIdForInfo].enddate}
+                    </span>
+                </div>
+                <div className="cohort-bacic-info-column">
+                    <span>
+                        Instructor:
+                    </span>
+                    <span>
+                        {cohorts[cohortIdForInfo].instructor_id}
+                    </span>
+                </div>
+                <div className="cohort-bacic-info-column">
+                    <span>
+                        Number Of Students:
+                    </span>
+                    <span>
+                        {cohorts[cohortIdForInfo].numberofstudents}
+                    </span>
+                </div>
             </div>
             <table className="cohort-details-table">
                 <thead>
