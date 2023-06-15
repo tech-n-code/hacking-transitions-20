@@ -1,6 +1,6 @@
 .student-details-table {
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    font-size: 1vw;
+    font-size: 18px;
     color: #FFFFFF;
     height: fit-content;
 }
@@ -20,16 +20,20 @@
     background-color: #0D0F4A;
 }
 .column2 {
+    display: flex;
+    flex-direction: row;
+    min-height: 21px;
     padding: 10px;
-    background-color: #4E70E0;
+    background-color: #4E70E0;align-items: center;
 }
 
-.student-details-circle{
-    height: 15px;
-    width: 15px;
-    border-radius: 50%;
-    float: right;
+.student-details-badge {
+    border-radius: 50px;
     border: 2px solid lightgray;
+    padding: 0 10px 0 10px;
+    margin-left: 10px;
+    font-size: 14px;
+    justify-content: center;
 }
 
 .student-exit{
@@ -51,14 +55,16 @@
     border-bottom-left-radius: 10px;
 }
 
-#green {
-    background-color: green;
+#student-badge-green {
+    background-color: lightgreen;
+    color: black;
 }
 
-#yellow {
+#student-badge-yellow {
     background-color: yellow;
+    color:black;
 }
 
-#red {
+#student-badge-red {
     background-color: red;
 }
