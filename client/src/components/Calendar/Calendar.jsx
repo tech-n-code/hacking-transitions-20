@@ -62,12 +62,12 @@ const Calendar = () => {
   return (
     <div className="calendar">
       <div className="header">
-        <button onClick={goToPrevMonth}>&lt;</button>
+        <span className="prev-button" onClick={goToPrevMonth}>&lt;</span>
         <h2>
           {currentDate.toLocaleString("default", { month: "long" })}{" "}
           {currentYear}
         </h2>
-        <button onClick={goToNextMonth}>&gt;</button>
+        <span className="next-button" onClick={goToNextMonth}>&gt;</span>
       </div>
       <div className="weekdays">
         {weekDays.map((day, index) => (

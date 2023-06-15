@@ -125,11 +125,60 @@ label {
 .buttons {
     background-color: #4E70E0;
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     padding-bottom: 8px;
-    padding-left: 30px;
-    padding-right: 30px;
     padding-top: 8px;
+}
+
+.addButton {
+    background-color: rgb(33, 119, 22);
+    border: 1px solid black;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    width: 50px;
+    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+}
+
+.addButton:hover {
+    background-color: rgb(25, 187, 60);
+}
+
+.editButton {
+    background-color: rgb(159, 157, 21);
+    border: 1px solid black;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    width: 50px;
+    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+}
+
+.editButton:hover {
+    background-color: rgb(196, 201, 73);
+}
+
+.deleteButton {
+    background-color: rgb(217, 25, 25);
+    border: 1px solid black;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    width: 50px;
+    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+}
+
+.deleteButton:hover {
+    background-color: rgb(244, 155, 155);
 }
 
 .studentNames {

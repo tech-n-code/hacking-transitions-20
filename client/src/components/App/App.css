@@ -13,12 +13,7 @@ body{
     align-items: center;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-}
-
-.logout-container {
-    display: flex;
-    justify-content: flex-end;
+    justify-content: space-evenly;
 }
 
 .body-container {
