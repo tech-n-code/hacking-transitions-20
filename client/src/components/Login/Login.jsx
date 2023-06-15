@@ -24,7 +24,7 @@ function Login({ handleModeChange }) {
 
   return (
     <div>
-      <h2 className="form-title">Returning staff login here:</h2>
+      <h2 className="form-title">Welcome Staff!</h2>
       <form className="login-form" onSubmit={login}>
         <input
           type="email"
