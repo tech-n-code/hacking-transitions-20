@@ -31,15 +31,15 @@ export default function RightColumn(){
                 Appointment Notes
             </div>
             <div className="buttons">
-                <button className="addButton" onClick={handleAddClick}>
+                <span className="addButton" onClick={handleAddClick}>
                     Add
-                </button>
-                <button className="editButton" onClick={handleEditClick}>
+                </span>
+                <span className="editButton" onClick={handleEditClick}>
                     Edit
-                </button>
-                <button className="deleteButton" onClick={handleDeleteClick}>
+                </span>
+                <span className="deleteButton" onClick={handleDeleteClick}>
                     Delete
-                </button>
+                </span>
             </div>
             <div className="StudentNames">
                 <StudentAppointments/>
