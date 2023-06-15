@@ -21,6 +21,16 @@
     max-height: 48px;
 }
 
+.prev-button {
+    padding-left: 25px;
+    cursor: pointer;
+}
+
+.next-button {
+    padding-right: 25px;
+    cursor: pointer;
+}
+
 .weekdays {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
