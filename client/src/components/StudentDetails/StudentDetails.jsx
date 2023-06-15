@@ -41,7 +41,7 @@ const StudentDetail = () => {
     const etsDate = new Date(studentdata[0].ets_date).toLocaleDateString(
         "en-us"
     );
-    const setColor = assignColor(studentdata[0].ets_date);
+    const badgeColor = assignColor(studentdata[0].ets_date);
 
     const modalStyle = {
         content: {
@@ -60,6 +60,20 @@ const StudentDetail = () => {
             boxShadow: "0px 10px 20px -10px rgba(0, 0, 0, 0.75)",
         },
     };
+
+    const getbadgeMsg = (givenDate) => {
+        const today = new Date();
+        const futureDate = new Date(givenDate);
+        if (today >= futureDate) {
+            return "Done";
+        } else {
+            const timeLeft = futureDate.getTime() - today.getTime();
+            const daysLeft = Math.ceil(timeLeft / (1000 * 60 * 60 * 24));
+            return `${daysLeft} days`;
+        }
+    }
+
+    const badgeMsg = getbadgeMsg(studentdata[0].ets_date);
 
     function closeModal() {
         setIsStudentModalOpen(false);
@@ -115,11 +129,11 @@ const StudentDetail = () => {
                     <tr>
                         <td className="column1">ETS Date:</td>
                         <td className="column2">
-                            {etsDate}
-                            <div
-                                className="student-details-circle"
-                                id={setColor}
-                            ></div>
+                            <span>{etsDate}</span>
+                            <span
+                                className="student-details-badge"
+                                id={`student-badge-${badgeColor}`}
+                            >{badgeMsg}</span>
                         </td>
                     </tr>
                     <tr>
