@@ -65,9 +65,7 @@ const AuthContent = () => {
             <div className="nav-container">
               <CohortNav />
             </div>
-            <div className="logout-container">
-              <Logout />
-            </div>
+            
           </div>
           <div className="body-container">
             {cohortClicked !== "" ? <Appointments /> : <></>}
