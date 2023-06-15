@@ -1,9 +1,10 @@
 import React, { useContext } from "react";
 import "./Appointments.css"
 import AppointmentContext from "../../context/AppointmentContext";
+import Modal from "react-modal";
 
 export default function ChangeReminder({ setEditNote }){
-    const { noteSelected, taskId , setUpdate, setNoteSelected } = useContext(AppointmentContext);
+    const { noteSelected, taskId , setUpdate, setNoteSelected, showAddModal, setShowAddModal } = useContext(AppointmentContext);
     
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -25,7 +26,34 @@ export default function ChangeReminder({ setEditNote }){
             });
     };
 
+    const modalStyle = {
+        content:{
+            position: 'absolute',
+            top: '50%',
+            bottom: '50%',
+            left: '50%',
+            right: '50%',
+            transform: "translate(-50%, -50%)",
+            height: "fit-content",
+            width: "fit-content",
+            border: '1px solid #ccc',
+            background: '#fff',
+            overflow: 'auto',
+            borderRadius: '10px',
+            outline: 'none',
+            padding: '30px'
+          }}
+
+          function closeModal(){
+            setIsStudentModalOpen(false)
+            } 
+
     return(
+        <Modal 
+        isOpen={setShowAddModal}
+        onRequestClose={closeModal}
+        style={modalStyle}
+        >
         <span className="Form">
             <form onSubmit={ handleSubmit }>
                 <div>
@@ -49,5 +77,6 @@ export default function ChangeReminder({ setEditNote }){
                     </div>       
             </form>
         </span>
+            </Modal>
     )
 }

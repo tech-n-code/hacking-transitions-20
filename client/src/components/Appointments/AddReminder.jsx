@@ -28,9 +28,12 @@ export default function AddReminder(){
         
     }
 
-    function closeModal(){
-    setIsStudentModalOpen(false)
-    }
+function closeModal() {
+    e.preventDefault();
+    setShowAddModal(false);
+    console.log(showAddModal)
+}
+
     
     const modalStyle = {
         content:{
@@ -57,12 +60,12 @@ export default function AddReminder(){
         style={modalStyle}
         >
             <span className="Form">
-                <form onSubmit={ handleSubmit }>
+                <form >
                     <div>
                     <label >Add note</label>
                     </div>
                     <textarea 
-                        required
+                        // required
                         value={ note }
                         onChange={(e) => setNote(e.target.value)}
                         rows="5" cols="40"
@@ -71,7 +74,7 @@ export default function AddReminder(){
                     <select
                         value={ selectedStudent }
                         onChange={(e) => setSelectedStudent(e.target.value)}
-                        required
+                        // required
                     >
                         <option value="" > Please select a student</option>
                         {students.map((student, x) => {
@@ -88,10 +91,10 @@ export default function AddReminder(){
                     </div>
                     <div>
                         <span>
-                    <button className="addSubmit">Submit</button>
+                    <button className="addSubmit" onClick={ handleSubmit }>Submit</button>
                         </span>
                         <span>
-                    <button className="addCancel" onClick={() => setShowAddModal(false)}>
+                    <button className="addCancel" onClick={() => closeModal()}>
                         Cancel
                     </button>
                         </span>
