@@ -60,20 +60,19 @@ const AuthContent = () => {
       )}
       {isAuthenticated && (
         <>
-          <div className="app-banner">
-            <div className="spare-container"></div>
+          <div className="body-container">
             <div className="nav-container">
               <CohortNav />
             </div>
-            
-          </div>
-          <div className="body-container">
-            {cohortClicked !== "" ? <Appointments /> : <></>}
-            <div className="content-container">
-              {/* <Calendar /> */}
-              {cohortClicked !== "" ? <Calendar /> : <></>}
-              {cohortClicked !== "" ? <CohortDetails /> : <></>}
-              {isStudentModalOpen ? <StudentDetail /> : ""}
+
+            <div className="content-display">
+              {cohortClicked !== "" ? <Appointments /> : <></>}
+              <div className="content-container">
+                {cohortClicked !== "" ? <Calendar /> : <></>}
+                {cohortClicked !== "" ? <CohortDetails /> : <></>}
+                {isStudentModalOpen ? <StudentDetail /> : ""}
+              </div>
+
             </div>
           </div>
           <Footer />
