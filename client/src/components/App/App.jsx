@@ -64,6 +64,7 @@ const AuthContent = () => {
             <div className="nav-container">
               <CohortNav />
             </div>
+
             <div className="content-display">
               {cohortClicked !== "" ? <Appointments /> : <></>}
               <div className="content-container">
@@ -71,6 +72,7 @@ const AuthContent = () => {
                 {cohortClicked !== "" ? <CohortDetails /> : <></>}
                 {isStudentModalOpen ? <StudentDetail /> : ""}
               </div>
+
             </div>
           </div>
           <Footer />

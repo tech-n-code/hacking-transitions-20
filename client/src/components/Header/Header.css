@@ -22,22 +22,29 @@
     width: 100%;
 }
 
-#greeting{
-    /* position: relative; */
+#greeting {
+    position: relative;
     text-align: center;
-    float: right;
-    bottom: 0;
-    top: 50%;
-    /* padding-bottom: 20px; */
     color: white;
     background-color: #0d0f4af4;
     font-size: 20px;
+    padding-bottom: 40px; /* Increase the padding to create space for the logout button */
 }
 
-#greeting-container{
-    font-family: 'proxima-nova', sans-serif;
-    color: white;
+
+#greeting h3 {
+    margin-bottom: 30px; /* Add margin below the greeting */
 }
+
+.logout-container {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin-right: 10px; /* Adjust the margin as needed */
+    transform: translateX(40%);
+}
+
+
 
 #title{
     text-align: center;
