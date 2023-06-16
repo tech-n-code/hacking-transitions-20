@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import Modal from "react-modal";
 import "./StudentDetails.css";
 import CohortContext from "../../context/CohortContext";
