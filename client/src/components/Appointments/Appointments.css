@@ -22,20 +22,42 @@
     border-top-right-radius: 10px;
     color: white;
     display: flex;
-    font-size: 25px;
+    font-size: 24px;
+    font-weight: bold;
     justify-content: center;
     min-height: 48px;
 }
 
 .buttons {
-    background-color: #4E70E0;
+    background-color: #0D0F4A;
     display: flex;
     justify-content: space-evenly;
-    padding-bottom: 8px;
-    padding-top: 8px;
+    padding-bottom: 14px;
+    /* padding-top: 5px; */
 }
 
-.addButton {
+.addButton,
+.editButton,
+.deleteButton {
+    background-color: #4E70E0;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 3px 6px 3px 6px;
+    width: 50px;
+    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+}
+
+.addButton:hover,
+.editButton:hover,
+.deleteButton:hover {
+    background-color: #EF6E47;
+}
+
+/* .addButton {
     background-color: rgb(33, 119, 22);
     border: 1px solid black;
     border-radius: 10px;
@@ -84,7 +106,7 @@
 
 .deleteButton:hover {
     background-color: rgb(244, 155, 155);
-}
+} */
 
 .studentNames {
     background-color: #EF6E47;
