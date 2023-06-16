@@ -21,10 +21,11 @@ function Register({ handleModeChange }) {
 
     try {
       const res = await axios.post("/api/register", { email, password, firstName, lastName });
+      const user = await axios.post("api/login", { email, password });
       // Insert JWT (res.data.token)
-      localStorage.setItem("token", res.data.token);
-      setUser(res.data.user);
-      console.log(res.data.token);
+      localStorage.setItem("token", user.data.token);
+      setUser(user.data.user);
+      //console.log(res.data.token);
     } catch (err) {
       console.log(err);
       if (err.response && err.response.status === 409) {
