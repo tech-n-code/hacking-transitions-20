@@ -24,11 +24,21 @@
 .prev-button {
     padding-left: 25px;
     cursor: pointer;
+    font-size: 24px;
+}
+
+.prev-button:hover {
+    color: #EF6E47;
 }
 
 .next-button {
     padding-right: 25px;
     cursor: pointer;
+    font-size: 24px;
+}
+
+.next-button:hover {
+    color: #EF6E47;
 }
 
 .weekdays {
