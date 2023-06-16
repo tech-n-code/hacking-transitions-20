@@ -1,39 +1,32 @@
-.footermenu {
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  display: flex;
-  justify-content: space-between;
-  white-space: nowrap;
-  overflow-x: auto;
-  list-style: none; 
-  padding: 0;
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: #0d0f4af4;
-  border-top: 1px solid #ccc;
-  align-items: center;
-  padding: 10px;
-  box-sizing: border-box;
-  color: white;
-  font-family: 'proxima-nova', sans-serif;
-}
-  
-.menuitems {
-  flex-grow: 1;
+.footer-container {
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    display: flex;
+    justify-content: space-between;
+    white-space: nowrap;
+    overflow-x: auto;
+    list-style: none;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #0D0F4A;
+    border-top: 1px solid #ccc;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+    color: white;
+    font-family: "proxima-nova", sans-serif;
 }
 
-.footermenu li:last-child {
-  margin-right: 0;
-  margin-left: auto;
+.footer-item a {
+    color: white;
+    flex-grow: 1;
+    font-size: 15px;
+    text-decoration: none;
+    margin: 0 15px 0 15px;
 }
 
-.footermenu li a {
-  display: inline-block;
-  /* justify-content: space-between;
-  margin-right: 10px; */
-  font-size: 15px;
-  text-decoration: none;
-  color: white;
-  font-family: 'proxima-nova', sans-serif;
+li {
+  margin: 0 15px 0 15px;
 }
