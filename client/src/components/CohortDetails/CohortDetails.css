@@ -28,6 +28,10 @@
     cursor: pointer;
 }
 
+.cohort-close:hover {
+    color:#EF6E47;
+}
+
 .cohort-basic-info {
     display: flex;
     justify-content: space-between;
