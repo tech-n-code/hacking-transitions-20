@@ -81,12 +81,12 @@ app.get("/api/appointments", async (req, res, next) =>{
 // Route to handle user registration
 app.post("/api/register", async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, firstName, lastName } = req.body;
     const hashedPassword = await bcrypt.hash(password, 10); // hashes the password with bcrypt and add 10 extra bits "salt"
     console.log(req.body);
 
     console.log("Attempting to insert:", email, hashedPassword);
-    const result = await db.query("INSERT INTO users (email, password) VALUES ($1, $2)", [email, hashedPassword]);
+    const result = await db.query("INSERT INTO users (email, password, firstname, lastname) VALUES ($1, $2, $3, $4)", [email, hashedPassword, firstName, lastName]);
     console.log('Query result:', result);
     // JSON Web tokens, yay
     const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '2h' });
@@ -120,7 +120,7 @@ app.post("/api/login", async (req, res) => {
       return res.status(400).json({ error: "Invalid email or password" });
     }
     // Create JWT
-    const token = jwt.sign({ email: user.email }, process.env.JWT_SECRET, { expiresIn: '2h' });
+    const token = jwt.sign({ email: user.email, firstname: user.firstname, lastname: user.lastname }, process.env.JWT_SECRET, { expiresIn: '2h' });
 
     // Exclude the password and other sensitive info
     const { password: _, ...safeUserData } = user;
@@ -137,6 +137,19 @@ app.get("/api/users", async (req, res, next) => {
   const result = await db.query("SELECT * FROM users").catch(next);
   res.send(result.rows);
 })
+
+//Route to get calendar events
+app.get("/api/calendar", async (req, res) => {
+  db.query(
+    "select ets_date as date, firstname || ' ' || lastname || ' ETS' as title from students",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result.rows);
+    }
+  );
+});
 
 //Route to POST appointment notes to appointments table:
 app.post('/api/appointments', async (req, res, next) => {
