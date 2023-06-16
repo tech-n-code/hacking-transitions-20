@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import CohortContext from "../../context/CohortContext";
 import "./CohortDetails.css";
 import { useState } from "react";
