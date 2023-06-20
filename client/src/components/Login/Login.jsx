@@ -7,9 +7,15 @@ function Login({ handleModeChange }) {
   const { setUser } = useUser();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
 
   const login = async (e) => {
     e.preventDefault();
+
+    if (!email.endsWith("@galvanize.com")) {
+      setErrorMsg("Email must end with @galvanize.com");
+      return;
+    }
 
     try {
       const res = await axios.post("/api/login", { email, password });
@@ -19,6 +25,7 @@ function Login({ handleModeChange }) {
       setUser(res.data.user);
     } catch (err) {
       console.error(err);
+      setErrorMsg("Incorrect username or password");
     }
   };
 
@@ -26,6 +33,11 @@ function Login({ handleModeChange }) {
     <div>
       <h2 className="form-title">Welcome Staff!</h2>
       <form className="login-form" onSubmit={login}>
+      {errorMsg && (
+          <p  style={{ textAlign: "center", color: 'red' }} id="request-error-msg" className="error text-center">
+            {errorMsg}
+          </p>
+        )}
         <input
           type="email"
           value={email}
