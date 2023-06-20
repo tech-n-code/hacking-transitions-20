@@ -58,9 +58,15 @@ function Register({ handleModeChange }) {
         />
         
         <button type="submit">Register</button>
-        <button type="button" onClick={() => handleModeChange("login")}>
-          Existing User
-        </button>
+        
+        <p style={{ textAlign: "center" }}>
+        Existing user 
+         click {" "}
+        <a href="#" onClick={() => handleModeChange("login")}>
+          here
+        </a>
+        {''} to login.
+      </p>
       </form>
       {error && <p>{error}</p>}
     </div>

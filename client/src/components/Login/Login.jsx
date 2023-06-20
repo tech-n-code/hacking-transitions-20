@@ -41,9 +41,14 @@ function Login({ handleModeChange }) {
           placeholder="Password"
         />
         <button type="submit">Login</button>
-        <button type="button" onClick={() => handleModeChange("register")}>
-          New User
-        </button>
+        <p style={{ textAlign: "center" }}>
+        Are you a new user?
+         Click {" "}
+        <a href="#" onClick={(event) => handleModeChange(event, "register")}>
+          here
+        </a>
+        {''} to register.
+      </p>
       </form>
     </div>
   );
