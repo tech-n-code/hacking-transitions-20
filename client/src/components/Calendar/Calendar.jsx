@@ -1,15 +1,27 @@
 import React, { useState, useEffect } from "react";
+import DayModal from "./DayModal";
+import Modal from "react-modal";
+Modal.setAppElement("#root");
 import './Calendar.css'
 
 
 const Calendar = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
-  // const [events] = useState([
-  //   { date: new Date(2023, 5, 10), title: "Meeting" },
-  //   { date: new Date(2023, 5, 15), title: "Birthday Party" },
-  //   { date: new Date(2023, 5, 22), title: "Conference" },
-  // ]);
   const [events, setEvents] = useState([]);
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [showDayModal, setShowDayModal] = useState(false);
+
+  const handleDayClick = (day) => {
+    setSelectedDate(day);
+    // console.log(selectedDate);
+    setShowDayModal(true);
+    // console.log("clicked");
+    // console.log(showDayModal);
+  };
+
+  const handleCloseModal = () =>{
+    setShowDayModal(false);
+  }
 
   useEffect(() => {
     fetch("/api/calendar")
@@ -47,11 +59,7 @@ const Calendar = () => {
   const days = [];
   const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   days.push(...weekDays);
-//   if (firstDayIndex > 7) {
-//     for (let i = firstDayIndex - 7; i > 0; i--) {
-//       days.push(null);
-//     }
-//   }
+
   for (let i = firstDayIndex; i > 0; i--) {
     days.push(null);
   }
@@ -89,6 +97,7 @@ const Calendar = () => {
               <div
                 key={index}
                 className={`day ${!day.isActive ? "day-inactive" : ""}`}
+                onClick={() => handleDayClick(date)}
               >
                 <div className="day-inner">
                   <div className="day-number">{day.day}</div>
@@ -99,6 +108,11 @@ const Calendar = () => {
           }
         })}
       </div>
+      {showDayModal && <DayModal
+        selectedDate={selectedDate}
+        isOpen={showDayModal}
+        handleCloseModal={handleCloseModal}/>}
+      
     </div>
   );
 };
