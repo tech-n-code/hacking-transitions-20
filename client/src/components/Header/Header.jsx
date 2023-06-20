@@ -7,6 +7,9 @@ export default function Header() {
     const user = useUser();
 
     const capitalizeFirstLetter = (word) => {
+        if (!word || word.length === 0) {
+            return "";
+        }
         const firstLetter = word.charAt(0);
         const firstLetterCap = firstLetter.toUpperCase();
         const remainingLetters = word.slice(1);
