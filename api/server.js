@@ -166,6 +166,21 @@ app.delete('/api/appointments/:student_id', async (req, res, next)=>{
   }
 })
 
+//Route to Delete individual appointments
+app.delete('/api/appointments/:appointment_id', async (req, res, next) => {
+  const appointmentId = req.params.appointment_id;
+
+  const result = await db
+    .query('DELETE FROM appointments WHERE id = $1 RETURNING *', [appointmentId])
+    .catch(next);
+
+  if (result.rows.length === 0) {
+    res.status(404).send("No Data To Delete");
+  } else {
+    res.sendStatus(200);
+  }
+});
+
 //PATCH/EDIT route for appointment notes in appointments table:
 app.patch('/api/appointments/:id', async (req, res, next) => {
   const id = Number.parseInt(req.params.id);
