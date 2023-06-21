@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import AppointmentContext from "../../context/AppointmentContext";
+import AppointmentContext from "../../context/AppointmentContext.jsx";
 import "./StudentAppointments.css"
 import Scroll from "./Scroll";
 
