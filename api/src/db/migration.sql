@@ -48,7 +48,7 @@ CREATE TABLE students (
   phonenumber BIGINT NOT NULL,
   email TEXT NOT NULL,
   dutystatus TEXT NOT NULL,
-  ets_date DATE NOT NULL
+  ets_date INT
 );
 
 CREATE TABLE appointments (
@@ -77,6 +77,20 @@ CREATE TABLE users (
   email VARCHAR(100) UNIQUE NOT NULL,
   password VARCHAR(100) NOT NULL
 );
+
+CREATE TABLE events (
+  id SERIAL PRIMARY KEY,
+  title TEXT NOT NULL,
+  startdate DATE NOT NULL,
+  enddate DATE NOT NULL,
+  allday BOOLEAN NOT NULL,
+  student_id INT NOT NULL,
+  FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
+);
+
+ALTER TABLE students 
+ADD CONSTRAINT fk_event_id FOREIGN KEY (ets_date) REFERENCES events(id);
+
 
 
 ALTER TABLE instructors 
