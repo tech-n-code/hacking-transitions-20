@@ -12,12 +12,13 @@ const NewCalendar = () => {
   };
 
   useEffect(() => {
-    fetch("/api/calendar")
+    fetch("/api/events")
       .then((res) => res.json())
       .then((data) => {
         const formattedEvents = data.map((event) => ({
-          date: new Date(event.date),
+          date: new Date(event.startdate),
           title: `${event.title}`,
+          allDay: `${event.allday}`,
         }));
         setEvents(formattedEvents);
       })
