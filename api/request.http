@@ -1,1 +1,17 @@
-### test post request
+### test delete request
+DELETE http://localhost:8000/api/appointments/3
+
+
+### test get request
+GET  http://localhost:8000/api/appointments
+
+### post req
+# POST http://localhost:8000/api/appointments
+
+# {
+
+#     "note": "test",
+#     "student_id": 55,
+#     "appointment_date": "2023-06-01T00:00:00.000Z"
+
+#     }

@@ -9,6 +9,22 @@ export default function StudentAppointments() {
   const [tasksToDelete, setTasksToDelete] = useState([]);
 
   const handleDeleteClick = (taskId) => {
+    //q: why is this fetch not working?
+    //a: because it's not a valid url
+    // fetch(`/api/appointments/${taskId}`, {
+
+
+
+    fetch(`/api/appointments/${taskId}`, {
+      method: "DELETE",
+  }).then(() => {
+      console.log('Note ' + taskId + ' has been deleted');
+      // setDeleteNote(false);
+      // setUpdate(true);
+  })
+  .catch((error) => {
+    console.error("Error deleting note:", error);
+  });
 
     fetch(`http://localhost:8000/api/appointments/${taskId}`, {
       method: "DELETE",
@@ -21,13 +37,6 @@ export default function StudentAppointments() {
         console.error("Error deleting note:", error);
       });
 
-      fetch(`/api/appointments/${taskId}`, {
-        method: "DELETE",
-    }).then(() => {
-        console.log('Note has been deleted');
-        // setDeleteNote(false);
-        // setUpdate(true);
-    })
   };
 
   return (
