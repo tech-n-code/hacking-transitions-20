@@ -100,3 +100,7 @@
     max-width: 400px;
     border-bottom: 1px solid #EF6E47;
 }
+
+.strikethrough-text {
+    text-decoration: line-through;
+}
