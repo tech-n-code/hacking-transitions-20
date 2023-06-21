@@ -36,9 +36,6 @@ const StudentDetail = () => {
       };
     }
   });
-  console.log(studentID);
-  console.log(appointments);
-  console.log(notes);
 
   const studentName =
     studentdata && studentdata.length > 0
@@ -181,14 +178,20 @@ const StudentDetail = () => {
           </thead>
           <tbody>
             {Object.keys(appointments).length > 0 ? (
-              Object.entries(appointments).map(([id, appointment], index) => (
+              Object.entries(appointments).map(([id, appointment], index) => {
+                const currentDate = new Date();
+                const appointmentDate = new Date(appointment.date);
+                const isStrikethrough = currentDate.getTime() > appointmentDate.getTime();
+                const apptDateFormatted = new Date(appointment.date).toLocaleDateString("en-US");
+                return (
                 <tr key={index}>
-                  <td className="student-details-appt">
-                    {new Date(appointment.date).toLocaleDateString("en-us")}
+                  <td className={`student-details-appt ${isStrikethrough ? 'strikethrough-text' : ''}`}>
+                    {apptDateFormatted}
                   </td>
                   <td className="student-details-appt">{appointment.note}</td>
                 </tr>
-              ))
+                );
+              })
             ) : (
               <tr>
                 <td className="student-details-appt">None.</td>
