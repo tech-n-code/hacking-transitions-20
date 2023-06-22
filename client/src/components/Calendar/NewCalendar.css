@@ -48,3 +48,6 @@
     padding-bottom: 10px;
 }
 
+.fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 0px;
+}
