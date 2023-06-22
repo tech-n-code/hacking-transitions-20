@@ -12,6 +12,7 @@ import { AuthProvider } from "react-auth-kit";
 import { UserProvider, useUser } from "../UserProvider.jsx";
 import "./App.css";
 import Calendar from "../Calendar/Calendar.jsx";
+import NewCalendar from "../Calendar/NewCalendar.jsx";
 import Logout from "../Logout/Logout.jsx";
 
 const App = () => {
@@ -66,7 +67,7 @@ const AuthContent = () => {
             <div className="content-display">
               {cohortClicked !== "" ? <Appointments /> : <></>}
               <div className="content-container">
-                {cohortClicked !== "" ? <Calendar /> : <></>}
+                {cohortClicked !== "" ? <NewCalendar /> : <></>}
                 {cohortClicked !== "" ? <CohortDetails /> : <></>}
                 {isStudentModalOpen ? <StudentDetail /> : ""}
               </div>
