@@ -33,9 +33,9 @@ export default function RightColumn(){
                 <span className="editButton" onClick={handleEditClick}>
                     Edit
                 </span>
-                <span className="deleteButton" onClick={handleDeleteClick}>
+                {/* <span className="deleteButton" onClick={handleDeleteClick}>
                     Delete
-                </span>
+                </span> */}
             </div>
             <div className="StudentNames">
                 <StudentAppointments/>
