@@ -1,11 +1,12 @@
 .cohort-details-container {
+    animation: fadeIn .5s ease-in forwards;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     border-radius: 10px;
-    font-size: 1vw;
+    font-size: 18px;
     background-color: #E0EAF8;
     border: 1px solid;
     height: fit-content;
-    width: calc(60vw);
+    width: 800px;
     box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
 }
 
@@ -13,9 +14,11 @@
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
     text-align: center;
-    color:#E0EAF8;
+    color:white;
     background-color: #0D0F4A;
     padding: 10px 0 10px 0;
+    font-size: 24px;
+    font-weight: bold;
     
 }
 
@@ -25,12 +28,26 @@
     cursor: pointer;
 }
 
+.cohort-close:hover {
+    color:#EF6E47;
+}
+
 .cohort-basic-info {
     display: flex;
     justify-content: space-between;
     padding: 10px 5% 10px 5%;
-    color: #E0EAF8;
+    color: white;
     background-color: #4E70E0;
+}
+
+.cohort-bacic-info-column {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.cohort-bacic-info-column span:nth-child(2) {
+    font-style: italic;
 }
 
 .cohort-details-table {
@@ -46,10 +63,12 @@
 .cohort-details-table-header {
     background-color:#EF6E47;
     cursor: default;
+    padding: 5px;
 }
 
 .cohort-student-entry {
-    padding: 5px 0 5px 0;
+    font-size: 14px;
+    padding: 5px;
     border-bottom: 1px solid #4E70E0;
     align-items: center;
 }
@@ -59,23 +78,32 @@
     cursor: pointer;
 }
 
-.cohort-details-circle{
-    height: 15px;
-    width: 15px;
-    border-radius: 50%;
+.cohort-details-badge {
+    display: flex;
+    border-radius: 50px;
     border: 2px solid lightgray;
-    position: relative;
-    left: 40%;
+    padding: 0 5px 0 5px;
+    justify-content: center;
 }
 
-#green {
-    background-color: green;
+#cohort-badge-green {
+    background-color: lightgreen;
 }
 
-#yellow {
+#cohort-badge-yellow {
     background-color: yellow;
 }
 
-#red {
+#cohort-badge-red {
     background-color: red;
+    color: white
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }

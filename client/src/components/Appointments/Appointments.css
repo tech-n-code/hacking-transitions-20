@@ -1,133 +1,134 @@
-/* .Appointments{
-    position: relative;
-    text-align: center;
-    width: 20%;
-    left: 79.85%;
-    margin-top: -7.6%;
-    -webkit-box-shadow: 0px 0px 24px 0px rgba(239,110,71,0.62);
-    -moz-box-shadow: 0px 0px 24px 0px rgba(239,110,71,0.62);
-    box-shadow: 0px 0px 24px 0px rgba(239,110,71,0.62);
-    animation: fadeIn .5s ease-in both;
-    z-index: 0;
-    border: transparent;
-    bottom: 75px;
-}
-
-.appointments{
-    border: 1px;
-}
-
-
-.RemindersHeader{
-    border: 1px solid #ef6e47;
-    font-size: 35px;
-    font-family: Times;
-    background-color: #0d0f4af4;
-    color: white;
-}
-
-.StudentNames{
-    font-family: Times;
-    font-size: 20px;
-    letter-spacing: .5px;
-    border: 1px;
-    word-spacing: 1px;
-}
-
-.buttons{
-    border: solid #ef6e47;
-    border-top: 0;
-    border: 1px;
-}
-
-button{
-    display: inline-block;
-    background-color: transparent;
-    width: 33.3%;
-    border: 0;
-    border-left: #0d0f4af4 solid;
-}
-
-button:hover{
-    background-color: #ef6e47c9;
-    color: white;
-    cursor: pointer;
-}
-p{
-    color: red
-}
-
-.Form{
-    width: 100%;
-    position: relative;
-    left: 0px;
-}
-
-.addButton{
-    border-left: 0;
-}
-
-.addSubmit{
-    border: black solid 1px;
-
-}
-
-.addCancel{
-    border: black solid 1px;
-
-}
-
-label {
-    font-weight: bolder;
-    text-decoration: underline;
-}
-
-@keyframes fadeIn {
-	from {
-		opacity: 0;
-		transform: translate3d(-10, -10%, 0);
-	}
-	to {
-		opacity: 1;
-		transform: translate3d(0, 0, 0);
-	}
-
-} */
-
 .Appointments {
-    border: orange solid;
+    animation: fadeIn .5s ease-in forwards;
+    background-color: #E0EAF8;
+    border: 1px solid black;
+    border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    max-height: 350px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    justify-content: flex-start;
+    margin-right: 8px;
+    max-height: 525px;
     max-width: 275px;
+    min-width: 275px;
+    padding-bottom: 5px;
+    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
 }
 
 .RemindersHeader {
     align-items: center;
-    background-color: darkblue;
+    background-color: #0D0F4A;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     color: white;
     display: flex;
-    font-size: 30px;
+    font-size: 24px;
+    font-weight: bold;
     justify-content: center;
+    min-height: 48px;
 }
 
 .buttons {
+    background-color: #0D0F4A;
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    margin-left: 25px;
-    margin-right: 25px;
-    margin-top: 10px;
+    justify-content: space-evenly;
+    padding-bottom: 14px;
+    /* padding-top: 5px; */
 }
 
-.studentNames {
-    background-color: orange;
+.addButton,
+.editButton,
+.deleteButton {
+    background-color: #4E70E0;
+    border: 1px solid black;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
     display: flex;
     justify-content: center;
+    padding: 3px 6px 3px 6px;
+    width: 50px;
+    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+}
+
+.addButton:hover,
+.editButton:hover,
+.deleteButton:hover {
+    background-color: #EF6E47;
+}
+
+/* .addButton {
+    background-color: rgb(33, 119, 22);
+    border: 1px solid black;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    width: 50px;
+    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+}
+
+.addButton:hover {
+    background-color: rgb(25, 187, 60);
+}
+
+.editButton {
+    background-color: rgb(159, 157, 21);
+    border: 1px solid black;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    width: 50px;
+    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+}
+
+.editButton:hover {
+    background-color: rgb(196, 201, 73);
+}
+
+.deleteButton {
+    background-color: rgb(217, 25, 25);
+    border: 1px solid black;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    padding: 5px;
+    width: 50px;
+    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+}
+
+.deleteButton:hover {
+    background-color: rgb(244, 155, 155);
+} */
+
+.studentNames {
+    background-color: #EF6E47;
+    display: flex;
+    font-weight: bold;
+    justify-content: center;
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 .reminder {
     font-style: italic;
     height: 50px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }

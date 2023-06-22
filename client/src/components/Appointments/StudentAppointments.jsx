@@ -1,6 +1,6 @@
-import React, { useContext, useState } from "react";
-import AppointmentContext from "../../context/AppointmentContext";
-import "./StudentAppointments.css";
+import React, { useContext } from "react";
+import AppointmentContext from "../../context/AppointmentContext.jsx";
+import "./StudentAppointments.css"
 import Scroll from "./Scroll";
 import DeleteReminder from "./DeleteReminder";
 

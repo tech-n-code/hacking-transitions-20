@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import CohortContext from "../../context/CohortContext";
 import "./CohortDetails.css";
 import { useState } from "react";
@@ -30,6 +30,18 @@ const CohortDetails = () => {
         }
     };
 
+    const getbadgeMsg = (givenDate) => {
+        const today = new Date();
+        const futureDate = new Date(givenDate);
+        if (today >= futureDate) {
+            return "Done";
+        } else {
+            const timeLeft = futureDate.getTime() - today.getTime();
+            const daysLeft = Math.ceil(timeLeft / (1000 * 60 * 60 * 24));
+            return `${daysLeft} days`;
+        }
+    }
+
     return (
         <div className="cohort-details-container">
             <div className="cohort-details-header">
@@ -47,10 +59,22 @@ const CohortDetails = () => {
                 </div>
             </div>
             <div className="cohort-basic-info">
-                <div>{`Start Date: ${cohorts[cohortIdForInfo].startdate}`}</div>
-                <div>{`End Date: ${cohorts[cohortIdForInfo].enddate}`}</div>
-                <div>{`Instructor: ${cohorts[cohortIdForInfo].instructor_id}`}</div>
-                <div>{`Number Of Students: ${cohorts[cohortIdForInfo].numberofstudents}`}</div>
+                <div className="cohort-bacic-info-column">
+                    <span>Start Date:</span>
+                    <span>{cohorts[cohortIdForInfo].startdate}</span>
+                </div>
+                <div className="cohort-bacic-info-column">
+                    <span>End Date:</span>
+                    <span>{cohorts[cohortIdForInfo].enddate}</span>
+                </div>
+                <div className="cohort-bacic-info-column">
+                    <span>Instructor:</span>
+                    <span>{cohorts[cohortIdForInfo].instructor_id}</span>
+                </div>
+                <div className="cohort-bacic-info-column">
+                    <span>Number Of Students:</span>
+                    <span>{cohorts[cohortIdForInfo].numberofstudents}</span>
+                </div>
             </div>
             <table className="cohort-details-table">
                 <thead>
@@ -65,10 +89,9 @@ const CohortDetails = () => {
                         <th className="cohort-details-table-header">
                             Duty Status
                         </th>
-                        <th className="cohort-details-table-header">
-                            ETS Date
+                        <th className="cohort-details-table-header" colSpan="2">
+                            ETS Status
                         </th>
-                        <th className="cohort-details-table-header">Status</th>
                         <th className="cohort-details-table-header">
                             Phone Number
                         </th>
@@ -85,7 +108,8 @@ const CohortDetails = () => {
                                 /(\d{3})(\d{3})(\d{4})/,
                                 "($1)-$2-$3"
                             );
-                        const setColor = assignColor(student.ets_date);
+                        const badgeColor = assignColor(student.ets_date);
+                        const badgeMsg = getbadgeMsg(student.ets_date);
                         return (
                             <tr
                                 key={index}
@@ -110,10 +134,10 @@ const CohortDetails = () => {
                                     {etsDate}
                                 </td>
                                 <td className="cohort-student-entry">
-                                    <div
-                                        className="cohort-details-circle"
-                                        id={setColor}
-                                    ></div>
+                                    <span
+                                        className="cohort-details-badge"
+                                        id={`cohort-badge-${badgeColor}`}
+                                    >{badgeMsg}</span>
                                 </td>
                                 <td className="cohort-student-entry">
                                     {formattedPhoneNumber}

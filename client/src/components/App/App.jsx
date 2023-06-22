@@ -4,7 +4,7 @@ import Footer from "../Footer/Footer.jsx";
 import StudentDetail from "../StudentDetails/StudentDetails.jsx";
 import Header from "../Header/Header.jsx";
 import CohortDetails from "../CohortDetails/CohortDetails.jsx";
-import CohortContext from "../../context/CohortContext";
+import CohortContext from "../../context/CohortContext.jsx";
 import Appointments from "../Appointments/Appointments.jsx";
 import Register from "../Register/Register.jsx";
 import Login from "../Login/Login.jsx";
@@ -15,8 +15,6 @@ import Calendar from "../Calendar/Calendar.jsx";
 import Logout from "../Logout/Logout.jsx";
 
 const App = () => {
-  const { cohortClicked, isStudentModalOpen } = useContext(CohortContext);
-
   return (
     <UserProvider>
       <AuthProvider
@@ -54,28 +52,24 @@ const AuthContent = () => {
             <Register handleModeChange={handleModeChange} />
           )}
           {/* <button onClick={() => handleModeChange(mode === 'login' ? 'register' : 'login')}>
-            {mode === 'login' ? 'New User' : 'Existing User'}
-          </button> */}
+    {mode === 'login' ? 'New User' : 'Existing User'}
+  </button> */}
         </div>
       )}
       {isAuthenticated && (
         <>
-          <div className="app-banner">
-            <div className="spare-container"></div>
+          <div className="body-container">
             <div className="nav-container">
               <CohortNav />
             </div>
-            <div className="logout-container">
-              <Logout />
-            </div>
-          </div>
-          <div className="body-container">
-            {cohortClicked !== "" ? <Appointments /> : <></>}
-            <div className="content-container">
-              {/* <Calendar /> */}
-              {cohortClicked !== "" ? <Calendar /> : <></>}
-              {cohortClicked !== "" ? <CohortDetails /> : <></>}
-              {isStudentModalOpen ? <StudentDetail /> : ""}
+
+            <div className="content-display">
+              {cohortClicked !== "" ? <Appointments /> : <></>}
+              <div className="content-container">
+                {cohortClicked !== "" ? <Calendar /> : <></>}
+                {cohortClicked !== "" ? <CohortDetails /> : <></>}
+                {isStudentModalOpen ? <StudentDetail /> : ""}
+              </div>
             </div>
           </div>
           <Footer />

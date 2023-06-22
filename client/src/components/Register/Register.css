@@ -1,5 +1,7 @@
-.register-form  {
-    background-color: #E0EAF8;
+.register-form {
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+        "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    background-color: #e0eaf8;
     border-radius: 10px;
     width: 400px;
     padding: 20px;
@@ -8,33 +10,35 @@
     display: flex;
     flex-direction: column;
     border: solid 1px;
-  }
+}
 
-  .form-title {
+.form-title {
     text-align: center;
-    color: #EF6E47;
+    color: #ef6e47;
     padding-bottom: 5px;
-  }
-  
-  .register-form input {
+}
+
+.register-form input {
     width: 95%;
     padding: 10px;
     margin: 10px 0;
     border-radius: 5px;
-    border: 1px solid #4E70E0;
-  }
-  
-  .register-form button {
-    background-color: #4E70E0;
-    color: #121010;
-    border: 2px solid;
+    border: 1px solid #4e70e0;
+}
+
+.register-form button {
+    background-color: #4e70e0;
+    color: white;
+    border: 1px solid black;
     font-weight: bold;
     border-radius: 5px;
     padding: 10px 15px;
     cursor: pointer;
     margin: 0 auto;
-  }
-  
-  .register-form button:hover {
-    background-color: #EF6E47;
-  }
+    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+    margin: 10px 0 10px 0;
+}
+
+.register-form button:hover {
+    background-color: #ef6e47;
+}

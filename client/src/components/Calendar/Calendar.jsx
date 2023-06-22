@@ -62,12 +62,12 @@ const Calendar = () => {
   return (
     <div className="calendar">
       <div className="header">
-        <button onClick={goToPrevMonth}>&lt;</button>
+        <span className="prev-button" onClick={goToPrevMonth}>&lt;</span>
         <h2>
           {currentDate.toLocaleString("default", { month: "long" })}{" "}
           {currentYear}
         </h2>
-        <button onClick={goToNextMonth}>&gt;</button>
+        <span className="next-button" onClick={goToNextMonth}>&gt;</span>
       </div>
       <div className="weekdays">
         {weekDays.map((day, index) => (
@@ -79,7 +79,7 @@ const Calendar = () => {
       <div className="days">
         {days.map((day, index) => {
           if (day === null) {
-            return <div key={index} className="day inactive"></div>;
+            return <div key={index} className="day-inactive"></div>;
           } else {
             const date = new Date(currentYear, currentMonth, day.day);
             const event = events.find(
@@ -88,7 +88,7 @@ const Calendar = () => {
             return (
               <div
                 key={index}
-                className={`day ${!day.isActive ? "inactive" : ""}`}
+                className={`day ${!day.isActive ? "day-inactive" : ""}`}
               >
                 <div className="day-inner">
                   <div className="day-number">{day.day}</div>

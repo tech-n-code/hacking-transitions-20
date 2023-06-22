@@ -1,32 +1,32 @@
-/* body{
-    background: #E0EAF8;
-} */
+body {
+  margin: 0;
+  padding: 0 0 50px 0;
+}
 .page-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-
-.app-banner {
-    align-items: center;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.logout-container {
-    display: flex;
-    justify-content: flex-end;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .body-container {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: center;
+}
+
+.content-display {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .content-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
