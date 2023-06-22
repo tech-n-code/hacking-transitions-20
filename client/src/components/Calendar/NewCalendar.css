@@ -1,0 +1,53 @@
+:root {
+    --fc-button-bg-color: #4E70E0;
+    --fc-button-hover-bg-color: #37a9ef;
+    --fc-button-active-bg-color: #EF6E47;
+    --fc-border-color: gray;
+}
+
+.fc {
+    background-color: #e0eaf8;
+    border: solid 1px rgb(0, 0, 0);
+    border-radius: 10px;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+}
+
+.fc-toolbar {
+    background-color: #0D0F4A;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    color: white;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    padding: 8px
+}
+
+.fc-button-group {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.fc-daygrid-day-frame {
+    /* border: solid 1px blue; */
+    /* border-radius: 10px; */
+    max-height: 50px;
+    overflow: scroll;
+}
+
+.fc-col-header-cell {
+    background-color: #EF6E47;
+    width: auto;
+}
+
+.fc-scrollgrid-sync-inner {
+    margin: 3px;
+}
+
+.fc-daygrid-day {
+    padding-bottom: 10px;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 0px;
+}
