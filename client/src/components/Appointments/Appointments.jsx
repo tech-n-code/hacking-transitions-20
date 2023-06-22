@@ -14,7 +14,14 @@ export default function RightColumn(){
 
 
     const handleAddClick = () =>{
-        setShowAddModal(true)
+        setShowAddModal(!showAddModal)
+        console.log(showAddModal)
+    }
+
+    const closeModal = (e) => {
+        
+        setShowAddModal(false);
+        console.log(showAddModal);
     }
 
     const handleEditClick = () =>{
@@ -44,9 +51,9 @@ export default function RightColumn(){
             <div className="StudentNames">
                 <StudentAppointments/>
             </div>
-            {showAddModal && <AddReminder setShowAddModal = {setShowAddModal}/>}
-            {editNote && <ChangeReminder setEditNote = {setEditNote}/>}
-            {deleteNote && <DeleteReminder setDeleteNote = {setDeleteNote}/>}
+            <AddReminder setShowAddModal = {setShowAddModal} closeModal = {closeModal} showAddModal = {showAddModal}/>
+           {editNote && <ChangeReminder setEditNote = {setEditNote}/>}
+           {deleteNote && <DeleteReminder setDeleteNote = {setDeleteNote}/>}
         </div>
     );
 }

@@ -4,8 +4,9 @@ import AppointmentContext from "../../context/AppointmentContext";
 import Modal from "react-modal";
 Modal.setAppElement("#root");
 
-export default function AddReminder(){
-    const { students, setUpdate, showAddModal, setShowAddModal } = useContext(AppointmentContext);
+export default function AddReminder({showAddModal, setShowAddModal}){
+    const { students, setUpdate, } = useContext(AppointmentContext);
+    // const [showAddModal, setShowAddModal ] = useState(AppointmentContext);
     // const {} = useContext(Appointments);
     const[ note, setNote ] = useState("");
     const [ selectedStudent, setSelectedStudent ] = useState("")
@@ -24,15 +25,31 @@ export default function AddReminder(){
             console.log('Note has been added');
             setShowAddModal(false);
             setUpdate(true);
+            setNote("");
+            setSelectedStudent("")
         })
         
     }
 
-function closeModal() {
-    e.preventDefault();
-    setShowAddModal(false);
-    console.log(showAddModal)
-}
+    function closeModal(){
+        setShowAddModal(false);
+        } 
+
+
+
+    // const closeModal = (e) => {
+        
+    //     setShowAddModal(false);
+    //     console.log(showAddModal);
+    // }
+
+    // const openModal = () => {
+    //     setShowAddModal(true);
+    //     // if (!setShowAddModal) {
+    //     //   setShowAddModal(true);
+    //     // }
+    //   };
+
 
     
     const modalStyle = {
@@ -51,11 +68,14 @@ function closeModal() {
             borderRadius: '10px',
             outline: 'none',
             padding: '30px'
+            
           }}
     
     return(
+        // <>
+        // {showAddModal && (
         <Modal 
-        isOpen={setShowAddModal}
+        isOpen={showAddModal}
         onRequestClose={closeModal}
         style={modalStyle}
         >
@@ -94,7 +114,7 @@ function closeModal() {
                     <button className="addSubmit" onClick={ handleSubmit }>Submit</button>
                         </span>
                         <span>
-                    <button className="addCancel" onClick={() => closeModal()}>
+                    <button className="addCancel" onClick={closeModal }>
                         Cancel
                     </button>
                         </span>
@@ -102,5 +122,7 @@ function closeModal() {
                 </form>
             </span>
             </Modal>
+        // )}
+        // </>
     )
 }
