@@ -198,11 +198,11 @@ app.post("/api/appointments", async (req, res, next) => {
 });
 
 //Route to DELETE appointment notes from appointment table:
-app.delete("/api/appointments/:student_id", async (req, res, next) => {
-  const student_id = req.params.student_id;
+app.delete("/api/appointments/:id", async (req, res, next) => {
+  const id = req.params.id;
   const result = await db
-    .query("DELETE FROM appointments WHERE student_id = $1 RETURNING *", [
-      student_id,
+    .query("DELETE FROM appointments WHERE id = $1 RETURNING *", [
+      id,
     ])
     .catch(next);
   if (result.rows) {
