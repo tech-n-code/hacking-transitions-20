@@ -1,0 +1,23 @@
+.event-tooltip {
+  position: absolute;
+  z-index: 9999;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.fc-event-main {
+  position: relative;
+  display: inline-block;
+}
+
+.event-tooltip {
+  display: none;
+  pointer-events: none;
+}
+
+.fc-event-main:hover .event-tooltip {
+  display: block;
+}

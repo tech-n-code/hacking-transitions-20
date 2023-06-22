@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import Modal from "react-modal";
+import "./NewCalendar.css";
 
 Modal.setAppElement("#root");
 
 const NewCalendar = () => {
+  const calendarRef = useRef(null);
   const [events, setEvents] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -20,6 +22,7 @@ const NewCalendar = () => {
   const handleEventClick = (info) => {
     setSelectedEvent(info.event);
     setModalIsOpen(true);
+    console.log(selectedEvent);
   };
 
   const handleModalClose = () => {
@@ -43,6 +46,37 @@ const NewCalendar = () => {
       });
   }, []);
 
+  useEffect(() => {
+    const calendarApi = calendarRef.current.getApi();
+
+    const updateEventRender = () => {
+      const eventElements =
+        calendarApi.el.getElementsByClassName("fc-event-main");
+
+      Array.from(eventElements).forEach((element) => {
+        const title = element.innerText;
+
+        const tooltip = document.createElement("div");
+        tooltip.className = "event-tooltip";
+        tooltip.textContent = title;
+
+        element.addEventListener("mouseenter", () => {
+          element.appendChild(tooltip);
+        });
+
+        element.addEventListener("mouseleave", () => {
+          element.removeChild(tooltip);
+        });
+      });
+    };
+
+    calendarApi.on("datesRender", updateEventRender);
+
+    return () => {
+      calendarApi.off("datesRender", updateEventRender);
+    };
+  }, []);
+
   const headerToolbar = {
     left: "prev,next today",
     center: "title",
@@ -52,6 +86,7 @@ const NewCalendar = () => {
   return (
     <div>
       <FullCalendar
+        ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
         initialView="dayGridMonth"
         events={events}
