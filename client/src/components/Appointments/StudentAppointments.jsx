@@ -1,77 +1,60 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import AppointmentContext from "../../context/AppointmentContext.jsx";
-import "./StudentAppointments.css"
+import "./StudentAppointments.css";
 import Scroll from "./Scroll";
 import DeleteReminder from "./DeleteReminder";
 
 export default function StudentAppointments() {
-  const { students, tasks, setNoteSelected, setTaskId } = useContext(AppointmentContext);
-  const [tasksToDelete, setTasksToDelete] = useState([]);
+  const { students, tasks, setNoteSelected, setTaskId } = useContext(
+    AppointmentContext
+  );
+  const [expandedNoteIds, setExpandedNoteIds] = useState([]);
 
-  const handleDeleteClick = (taskId) => {
-    //q: why is this fetch not working?
-    //a: because it's not a valid url
-    // fetch(`/api/appointments/${taskId}`, {
+  const handleNoteToggle = (taskId, event) => {
+    const target = event.target;
 
+    // Check if the event target matches the expand or collapse button
+    const isExpandButton = target.classList.contains("expandButton");
+    const isCollapseButton = target.classList.contains("collapseButton");
 
-
-    fetch(`/api/appointments/${taskId}`, {
-      method: "DELETE",
-  }).then(() => {
-      console.log('Note ' + taskId + ' has been deleted');
-      // setDeleteNote(false);
-      // setUpdate(true);
-  })
-  .catch((error) => {
-    console.error("Error deleting note:", error);
-  });
-
-    fetch(`http://localhost:8000/api/appointments/${taskId}`, {
-      method: "DELETE",
-    })
-      .then(() => {
-        console.log("Note has been deleted");
-        // setTasksToDelete((prevTasks) => [...prevTasks, taskId]);
-      })
-      .catch((error) => {
-        console.error("Error deleting note:", error);
+    if (isExpandButton || isCollapseButton) {
+      setExpandedNoteIds((prevExpandedNoteIds) => {
+        if (prevExpandedNoteIds.includes(taskId)) {
+          return prevExpandedNoteIds.filter((id) => id !== taskId); // Collapse the note if it is already expanded
+        } else {
+          return [...prevExpandedNoteIds, taskId]; // Expand the clicked note
+        }
       });
-
+    }
   };
 
   return (
     <div>
       <Scroll>
         {students.map((student, indexed) => {
-          const studentTasks = tasks.filter((task) => task.student_id === student.id);
-          const hasTasks = studentTasks.length > 0; // Check if the student has tasks
+          const studentTasks = tasks.filter(
+            (task) => task.student_id === student.id
+          );
+          const hasTasks = studentTasks.length > 0;
 
           return (
             <div key={indexed}>
-              {hasTasks && ( // Only render the student's name if there are tasks
+              {hasTasks && (
                 <div className="studentNames">
                   {student.firstname} {student.lastname}
                 </div>
               )}
               <div className="appointments">
-                {studentTasks.map((task, i) => {
-                  if (tasksToDelete.includes(task.id)) {
-                    return null; // Skip rendering the deleted task
-                  }
-                  return (
-                    <div key={i}>
-                      <div
-                        className="reminder"
-                        onClick={() => {
-                          setTaskId(task.id);
-                          setNoteSelected(task.note);
-                        }}
-                      >
-                        {task.note}
-                        <button className="deleteButton" onClick={() => handleDeleteClick(task.id)}>
-                          Delete
-                        </button>
-                      </div>
+                {studentTasks.map((task, i) => (
+                  <div key={i}>
+                    <div
+                      className="reminder"
+                      onClick={() => {
+                        setTaskId(task.id);
+                        setNoteSelected(task.note);
+                      }}
+                    >
+                      {task.note}
                     </div>
                   );
                 })}
