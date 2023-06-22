@@ -33,22 +33,9 @@ export default function AddReminder({showAddModal, setShowAddModal}){
 
     function closeModal(){
         setShowAddModal(false);
-        } 
+    } 
 
 
-
-    // const closeModal = (e) => {
-        
-    //     setShowAddModal(false);
-    //     console.log(showAddModal);
-    // }
-
-    // const openModal = () => {
-    //     setShowAddModal(true);
-    //     // if (!setShowAddModal) {
-    //     //   setShowAddModal(true);
-    //     // }
-    //   };
 
 
     
@@ -72,8 +59,7 @@ export default function AddReminder({showAddModal, setShowAddModal}){
           }}
     
     return(
-        // <>
-        // {showAddModal && (
+        
         <Modal 
         isOpen={showAddModal}
         onRequestClose={closeModal}
@@ -121,8 +107,7 @@ export default function AddReminder({showAddModal, setShowAddModal}){
                     </div>
                 </form>
             </span>
-            </Modal>
-        // )}
-        // </>
+        </Modal>
+        
     )
 }
