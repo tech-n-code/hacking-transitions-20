@@ -38,7 +38,9 @@
 
 .addButton,
 .editButton,
-.deleteButton {
+.deleteButton, 
+.addNoteSubmit,
+.addNoteCancel {
     background-color: #4E70E0;
     border: 1px solid black;
     border-radius: 10px;
@@ -53,9 +55,32 @@
 
 .addButton:hover,
 .editButton:hover,
-.deleteButton:hover {
+.deleteButton:hover,
+.addNoteSubmit:hover,
+.addNoteCancel:hover  {
     background-color: #EF6E47;
 }
+
+.deleteButton {
+    margin-left: auto;
+    margin-right: 5px;
+}
+.addNoteSubmit,
+.addNoteCancel {
+  margin: 0 auto;
+  display: block;
+  width: 100px;
+  padding: 8px
+}
+
+.buttonContainer {
+    margin-top: 10px; /* Adjust the spacing as needed */
+    margin-bottom: 10px;
+    
+}
+
+
+
 
 /* .addButton {
     background-color: rgb(33, 119, 22);
@@ -126,6 +151,7 @@
     padding-left: 5px;
     padding-right: 5px;
 }
+
 
 @keyframes fadeIn {
     0% {
