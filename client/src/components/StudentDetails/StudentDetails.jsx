@@ -66,6 +66,9 @@ const StudentDetail = () => {
   const badgeColor = assignColor(studentdata[0].ets_date);
 
   const modalStyle = {
+    overlay: {
+      zIndex: 1,
+    },
     content: {
       position: "absolute",
       top: "50%",
@@ -80,6 +83,7 @@ const StudentDetail = () => {
       outline: "none",
       padding: "30px",
       boxShadow: "0px 10px 20px -10px rgba(0, 0, 0, 0.75)",
+      zIndex: 2,
     },
   };
 

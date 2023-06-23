@@ -154,17 +154,54 @@ app.post('/api/appointments', async (req, res, next) => {
 })
 
 //Route to DELETE appointment notes from appointment table:
-app.delete('/api/appointments/:student_id', async (req, res, next)=>{
-  const student_id = req.params.student_id
+// app.delete('/api/appointments/:student_id', async (req, res, next)=>{
+//   const id = req.params.student_id
+//   const result = await db
+//     .query('DELETE FROM appointments WHERE student_id = $1 RETURNING *', [ id ])
+//     .catch(next);
+//   if(result.rows){
+//     res.sendStatus(200);
+//   } else {
+//     res.status(404).send("No Data To Delete")
+//   }
+// })
+
+// Route to Delete individual appointments
+app.delete('/api/appointments/:id', async (req, res, next) => {
+  const appointmentId = req.params.id;
+
   const result = await db
-    .query('DELETE FROM appointments WHERE student_id = $1 RETURNING *', [ student_id ])
+    .query('DELETE FROM appointments WHERE id = $1', [appointmentId], (err, result) => {
+      if (err) {
+        console.log(err)
+        res.status(500).send(err)
+      } else {
+        console.log(result.rows[0])
+      }
+    })
     .catch(next);
-  if(result.rows){
-    res.sendStatus(200);
+
+  if (result.rows.length === 0) {
+    res.status(404).send("No Data To Delete");
   } else {
-    res.status(404).send("No Data To Delete")
+    res.sendStatus(200);
   }
-})
+});
+
+//appointment DELETE route:
+// app.delete("/api/appointments/:id", (req, res) => {
+//   const appointmentId = req.params.id;
+//   pool.query("DELETE FROM appointments WHERE id = $1", [appointmentId], (err, result) => {
+//     if (err) {
+//       console.error(err);
+//       res.status(500).send("Internal server error");
+//     } else if (result.rowCount === 0) {
+//       res.status(404).send(`Appointment with ID ${appointmentId} not found`);
+//     } else {
+//       res.status(204).send(`Appointment was successfully deleted`);
+//     }
+//   });
+// });
 
 //PATCH/EDIT route for appointment notes in appointments table:
 app.patch('/api/appointments/:id', async (req, res, next) => {

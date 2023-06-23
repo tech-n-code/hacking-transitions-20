@@ -1,27 +1,43 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import AppointmentContext from "../../context/AppointmentContext.jsx";
 import "./StudentAppointments.css";
 import Scroll from "./Scroll";
 
 export default function StudentAppointments() {
-  const { students, tasks, setNoteSelected, setTaskId } = useContext(
-    AppointmentContext
-  );
+  const { students, tasks, setNoteSelected, setTaskId } =
+    useContext(AppointmentContext);
   const [expandedNoteIds, setExpandedNoteIds] = useState([]);
+  const [tasksToDelete, setTasksToDelete] = useState([]);
+
+  useEffect(() => {
+    // Remove deleted tasks from the state
+    setTasksToDelete([]);
+  }, [tasks]);
+
+  const handleDeleteClick = (taskId) => {
+    fetch(`/api/appointments/${taskId}`, {
+      method: "DELETE",
+    })
+      .then(() => {
+        console.log("Note " + taskId + " has been deleted");
+        setTasksToDelete((prevTasks) => [...prevTasks, taskId]);
+      })
+      .catch((error) => {
+        console.error("Error deleting note:", error);
+      });
+  };
 
   const handleNoteToggle = (taskId, event) => {
     const target = event.target;
-
-    // Check if the event target matches the expand or collapse button
     const isExpandButton = target.classList.contains("expandButton");
     const isCollapseButton = target.classList.contains("collapseButton");
 
     if (isExpandButton || isCollapseButton) {
       setExpandedNoteIds((prevExpandedNoteIds) => {
         if (prevExpandedNoteIds.includes(taskId)) {
-          return prevExpandedNoteIds.filter((id) => id !== taskId); // Collapse the note if it is already expanded
+          return prevExpandedNoteIds.filter((id) => id !== taskId);
         } else {
-          return [...prevExpandedNoteIds, taskId]; // Expand the clicked note
+          return [...prevExpandedNoteIds, taskId];
         }
       });
     }
@@ -45,6 +61,10 @@ export default function StudentAppointments() {
               )}
               <div className="appointments">
                 {studentTasks.map((task) => {
+                  if (tasksToDelete.includes(task.id)) {
+                    return null; // Skip rendering the deleted task
+                  }
+
                   const isExpanded = expandedNoteIds.includes(task.id);
                   const noteDisplay = isExpanded
                     ? task.note
@@ -52,13 +72,22 @@ export default function StudentAppointments() {
                     ? task.note.slice(0, 100) + "... "
                     : task.note;
                   const showSeeMoreButton = task.note.length > 100;
-                  const showCollapseButton = task.note.length > 100 && isExpanded;
+                  const showCollapseButton =
+                    task.note.length > 100 && isExpanded;
 
                   return (
                     <div key={task.id} className="noteContainer">
-                      <div className="reminder">
+                      <div
+                        className="reminder"
+                        onClick={() => {
+                          setTaskId(task.id);
+                          setNoteSelected(task.note);
+                        }}
+                      >
                         <div
-                          className={isExpanded ? "noteExpanded" : "noteCollapsed"}
+                          className={
+                            isExpanded ? "noteExpanded" : "noteCollapsed"
+                          }
                           onClick={(event) => handleNoteToggle(task.id, event)}
                         >
                           {noteDisplay}
@@ -69,12 +98,21 @@ export default function StudentAppointments() {
                         {showCollapseButton && (
                           <span
                             className="collapseButton"
-                            onClick={(event) => handleNoteToggle(task.id, event)}
+                            onClick={(event) =>
+                              handleNoteToggle(task.id, event
+)
+                            }
                           >
                             Collapse note
                           </span>
                         )}
                       </div>
+                      <button
+                        className="deleteButton"
+                        onClick={() => handleDeleteClick(task.id)}
+                      >
+                        Delete
+                      </button>
                     </div>
                   );
                 })}
