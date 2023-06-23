@@ -42,6 +42,7 @@ export default function AddReminder({showAddModal, setShowAddModal}){
     const modalStyle = {
         overlay:{
             zIndex: 100,
+            backgroundColor: 'rgba(0, 0, 0, 0.0)'
         },
         content:{
             position: 'absolute',
@@ -79,7 +80,7 @@ export default function AddReminder({showAddModal, setShowAddModal}){
                             margin: 'auto auto 30px',
                             display: 'block',
                             textAlign: 'center'
-                         }}>Add note</label>
+                         }}>Add Note</label>
                     </div>
                     <textarea 
                         // required

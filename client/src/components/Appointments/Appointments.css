@@ -70,7 +70,9 @@
   margin: 0 auto;
   display: block;
   width: 100px;
-  padding: 8px
+  padding: 8px;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .buttonContainer {
