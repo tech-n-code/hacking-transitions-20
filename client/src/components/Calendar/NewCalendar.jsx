@@ -4,35 +4,26 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import Modal from "react-modal";
+import AddEventForm from "./AddEventForm";
 import "./NewCalendar.css";
 
 Modal.setAppElement("#root");
 
 const NewCalendar = () => {
-  const calendarRef = useRef(null);
   const [events, setEvents] = useState([]);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState(null);
   const [isAddEventOpen, setIsAddEventOpen] = useState(false);
 
   const openAddEventModal = () => {
     setIsAddEventOpen(true);
   };
 
+  const handleModalClose = () => {
+    setIsAddEventOpen(false);
+  };
+
   const handleViewChange = (view) => {
     // Handle view change here if needed
     console.log("Selected view:", view);
-  };
-
-  const handleEventClick = (info) => {
-    setSelectedEvent(info.event);
-    setModalIsOpen(true);
-    console.log(selectedEvent);
-  };
-
-  const handleModalClose = () => {
-    setModalIsOpen(false);
-    setSelectedEvent(null);
   };
 
   useEffect(() => {
@@ -51,50 +42,17 @@ const NewCalendar = () => {
       });
   }, []);
 
-  useEffect(() => {
-    const calendarApi = calendarRef.current.getApi();
-
-    const updateEventRender = () => {
-      const eventElements =
-        calendarApi.el.getElementsByClassName("fc-event-main");
-
-      Array.from(eventElements).forEach((element) => {
-        const title = element.innerText;
-
-        const tooltip = document.createElement("div");
-        tooltip.className = "event-tooltip";
-        tooltip.textContent = title;
-
-        element.addEventListener("mouseenter", () => {
-          element.appendChild(tooltip);
-        });
-
-        element.addEventListener("mouseleave", () => {
-          element.removeChild(tooltip);
-        });
-      });
-    };
-
-    calendarApi.on("datesRender", updateEventRender);
-
-    return () => {
-      calendarApi.off("datesRender", updateEventRender);
-    };
-  }, []);
-
   const headerToolbar = {
-    left: "prev,next today",
+    left: `prev,next today addEventButton`,
     center: "title",
     right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
-    // extraButtons: [
-    //   {
-    //     text: "Add Event",
-    //     click: openAddEventModal,
-    //   },
-    // ],
   };
 
   const modalStyle = {
+    overlay: {
+      zIndex: 100,
+      backgroundColor: "rgba(0, 0, 0, 0.0)",
+    },
     content: {
       position: "absolute",
       top: "50%",
@@ -105,23 +63,29 @@ const NewCalendar = () => {
       height: "fit-content",
       width: "fit-content",
       border: "1px solid #ccc",
-      background: "#fff",
+      background: "#0D0A40",
+      color: "white",
       overflow: "auto",
       borderRadius: "10px",
       outline: "none",
       padding: "30px",
+      zIndex: 101,
     },
   };
 
   return (
     <div>
       <FullCalendar
-        ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
         initialView="dayGridMonth"
         events={events}
-        eventClick={handleEventClick}
         headerToolbar={headerToolbar}
+        customButtons={{
+          addEventButton: {
+            text: "Add Event",
+            click: openAddEventModal,
+          },
+        }}
         views={{
           week: {
             type: "timeGridWeek",
@@ -135,16 +99,12 @@ const NewCalendar = () => {
         onView={() => handleViewChange}
       />
       <Modal
-        isOpen={modalIsOpen}
+        isOpen={isAddEventOpen}
         onRequestClose={handleModalClose}
-        contentLabel="Event Details"
+        contentLabel="Add Event"
         style={modalStyle}
       >
-        <div>
-          <h2>{selectedEvent?.title}</h2>
-          <p>{selectedEvent?.startdate?.toDateString()}</p>
-          <button onClick={handleModalClose}>Close</button>
-        </div>
+        <AddEventForm />
       </Modal>
     </div>
   );
