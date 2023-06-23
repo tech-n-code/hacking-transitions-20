@@ -40,6 +40,9 @@ export default function AddReminder({showAddModal, setShowAddModal}){
 
     
     const modalStyle = {
+        overlay:{
+            zIndex: 100,
+        },
         content:{
             position: 'absolute',
             top: '50%',
@@ -54,7 +57,8 @@ export default function AddReminder({showAddModal, setShowAddModal}){
             overflow: 'auto',
             borderRadius: '10px',
             outline: 'none',
-            padding: '30px'
+            padding: '30px',
+            zIndex: 101,
             
           }}
     
