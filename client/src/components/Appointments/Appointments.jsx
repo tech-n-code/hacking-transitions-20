@@ -2,28 +2,31 @@ import React, { useState } from "react";
 import StudentAppointments from "./StudentAppointments";
 import "./Appointments.css"
 import AddReminder from "./AddReminder";
-import DeleteReminder from "./DeleteReminder";
 import ChangeReminder from "./ChangeReminder";
 
 export default function RightColumn(){
     const[ showAddModal, setShowAddModal ] = useState(false)
     const[ editNote, setEditNote ] = useState(false)
-    const[ deleteNote, setDeleteNote ] = useState(false)
     
 //a: use a div with a class of modal and a class of modal-content
 
 
     const handleAddClick = () =>{
-        setShowAddModal(true)
+        setShowAddModal(!showAddModal)
+        console.log(showAddModal)
+    }
+
+    const closeModal = (e) => {
+        
+        setShowAddModal(false);
+        console.log(showAddModal);
     }
 
     const handleEditClick = () =>{
         setEditNote(true)
     }
 
-    const handleDeleteClick = () =>{
-        setDeleteNote(true)
-    }
+
 
     return(
         <div className="Appointments">
@@ -34,19 +37,15 @@ export default function RightColumn(){
                 <span className="addButton" onClick={handleAddClick}>
                     Add
                 </span>
-                <span className="editButton" onClick={handleEditClick}>
-                    Edit
-                </span>
-                <span className="deleteButton" onClick={handleDeleteClick}>
+                {/* <span className="deleteButton" onClick={handleDeleteClick}>
                     Delete
-                </span>
+                </span> */}
             </div>
             <div className="StudentNames">
                 <StudentAppointments/>
             </div>
-            {showAddModal && <AddReminder setShowAddModal = {setShowAddModal}/>}
-            {editNote && <ChangeReminder setEditNote = {setEditNote}/>}
-            {deleteNote && <DeleteReminder setDeleteNote = {setDeleteNote}/>}
+            <AddReminder setShowAddModal = {setShowAddModal} closeModal = {closeModal} showAddModal = {showAddModal}/>
+           <ChangeReminder editNote = {editNote} setEditNote = {setEditNote}/>
         </div>
     );
 }

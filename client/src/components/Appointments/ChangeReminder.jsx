@@ -3,7 +3,7 @@ import "./Appointments.css"
 import AppointmentContext from "../../context/AppointmentContext";
 import Modal from "react-modal";
 
-export default function ChangeReminder({ setEditNote }){
+export default function ChangeReminder({ editNote, setEditNote }){
     const { noteSelected, taskId , setUpdate, setNoteSelected, showAddModal, setShowAddModal } = useContext(AppointmentContext);
     
     const handleSubmit = (e) => {
@@ -50,7 +50,7 @@ export default function ChangeReminder({ setEditNote }){
 
     return(
         <Modal 
-        isOpen={setShowAddModal}
+        isOpen={editNote}
         onRequestClose={closeModal}
         style={modalStyle}
         >

@@ -13,7 +13,11 @@ app.use(express.json());
 app.use(cors());
 
 app.get("/api/cohorts", async (req, res, next) => {
-  const result = await db.query("SELECT cohorts.*, instructors.lastname AS instructor_id FROM cohorts INNER JOIN instructors ON cohorts.instructor_id = instructors.id").catch(next);
+  const result = await db
+    .query(
+      "SELECT cohorts.*, instructors.lastname AS instructor_id FROM cohorts INNER JOIN instructors ON cohorts.instructor_id = instructors.id"
+    )
+    .catch(next);
   res.send(result.rows);
 });
 
@@ -30,9 +34,7 @@ app.get("/api/cohorts/:id", async (req, res, next) => {
 });
 
 app.get("/api/branches", async (req, res, next) => {
-  const result = await db
-    .query("SELECT * FROM branch")
-    .catch(next);
+  const result = await db.query("SELECT * FROM branch").catch(next);
 
   if (result.rows.length === 0) {
     res.sendStatus(404);
@@ -44,7 +46,9 @@ app.get("/api/branches", async (req, res, next) => {
 app.get("/api/cohorts/:cohortId/students", async (req, res, next) => {
   const cohortId = req.params.cohortId;
   const result = await db
-    .query(`SELECT students.* FROM students WHERE students.cohort_id = $1`, [cohortId])
+    .query(`SELECT students.* FROM students WHERE students.cohort_id = $1`, [
+      cohortId,
+    ])
     .catch(next);
   if (result.rows.length === 0) {
     res.sendStatus(404);
@@ -56,7 +60,9 @@ app.get("/api/cohorts/:cohortId/students", async (req, res, next) => {
 app.get("/api/students/:studentId", async (req, res, next) => {
   const studentId = req.params.studentId;
   const result = await db
-    .query(`SELECT students.* FROM students WHERE students.id = $1`, [studentId])
+    .query(`SELECT students.* FROM students WHERE students.id = $1`, [
+      studentId,
+    ])
     .catch(next);
   if (result.rows.length === 0) {
     res.sendStatus(404);
@@ -66,17 +72,15 @@ app.get("/api/students/:studentId", async (req, res, next) => {
 });
 
 // Route to get all tasks
-app.get("/api/appointments", async (req, res, next) =>{
+app.get("/api/appointments", async (req, res, next) => {
   // const tasks = req.params.tasks
-  const result = await db
-    .query(`SELECT * FROM appointments`)
-    .catch(next)
-  if(result.rows.length === 0){
+  const result = await db.query(`SELECT * FROM appointments`).catch(next);
+  if (result.rows.length === 0) {
     res.sendStatus(404);
-  } else{
-    res.send(result.rows)
+  } else {
+    res.send(result.rows);
   }
-})
+});
 
 // Route to handle user registration
 app.post("/api/register", async (req, res) => {
@@ -86,17 +90,22 @@ app.post("/api/register", async (req, res) => {
     console.log(req.body);
 
     console.log("Attempting to insert:", email, hashedPassword);
-    const result = await db.query("INSERT INTO users (email, password, firstname, lastname) VALUES ($1, $2, $3, $4)", [email, hashedPassword, firstName, lastName]);
-    console.log('Query result:', result);
+    const result = await db.query(
+      "INSERT INTO users (email, password, firstname, lastname) VALUES ($1, $2, $3, $4)",
+      [email, hashedPassword, firstName, lastName]
+    );
+    console.log("Query result:", result);
     // JSON Web tokens, yay
-    const token = jwt.sign({ email }, process.env.JWT_SECRET, { expiresIn: '2h' });
+    const token = jwt.sign({ email }, process.env.JWT_SECRET, {
+      expiresIn: "2h",
+    });
     res.status(200).json({ token });
   } catch (err) {
     console.log(err);
-    if (err.code === '23505') {
-    res.status(409).json({ error: "Email is already registeredd" });
+    if (err.code === "23505") {
+      res.status(409).json({ error: "Email is already registeredd" });
     } else {
-      res.status(500).json({ error: "Registration failed"});
+      res.status(500).json({ error: "Registration failed" });
     }
   }
 });
@@ -106,10 +115,12 @@ app.post("/api/login", async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const result = await db.query("SELECT * FROM users WHERE email = $1", [email]);
+    const result = await db.query("SELECT * FROM users WHERE email = $1", [
+      email,
+    ]);
     const user = result.rows[0];
     if (!user) {
-    return res.status(400).json({ error: "Invalid email or password" });
+      return res.status(400).json({ error: "Invalid email or password" });
     }
     // console.log(user);
     // Compare password to the hashed store
@@ -120,11 +131,15 @@ app.post("/api/login", async (req, res) => {
       return res.status(400).json({ error: "Invalid email or password" });
     }
     // Create JWT
-    const token = jwt.sign({ email: user.email, firstname: user.firstname, lastname: user.lastname }, process.env.JWT_SECRET, { expiresIn: '2h' });
+    const token = jwt.sign(
+      { email: user.email, firstname: user.firstname, lastname: user.lastname },
+      process.env.JWT_SECRET,
+      { expiresIn: "2h" }
+    );
 
     // Exclude the password and other sensitive info
     const { password: _, ...safeUserData } = user;
-    
+
     res.status(200).json({ token, user: safeUserData });
   } catch (err) {
     console.log(err);
@@ -136,7 +151,7 @@ app.post("/api/login", async (req, res) => {
 app.get("/api/users", async (req, res, next) => {
   const result = await db.query("SELECT * FROM users").catch(next);
   res.send(result.rows);
-})
+});
 
 //Route to get calendar events
 app.get("/api/calendar", async (req, res) => {
@@ -151,53 +166,74 @@ app.get("/api/calendar", async (req, res) => {
   );
 });
 
+//New Route for calendar events
+app.get("/api/events", async (req, res) => {
+  db.query(
+    "SELECT CONCAT(students.firstname, ' ', students.lastname ,': ', events.title ) AS title, events.startdate, events.enddate, events.allday FROM events LEFT JOIN students ON events.student_id = students.id;",
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result.rows);
+    }
+  );
+});
+
 //Route to POST appointment notes to appointments table:
-app.post('/api/appointments', async (req, res, next) => {
+app.post("/api/appointments", async (req, res, next) => {
   const note = req.body.note;
   const student_id = req.body.student_id;
 
   const result = await db
-    .query('INSERT INTO appointments (note, student_id) VALUES ($1, $2) RETURNING *;', [note, student_id])
+    .query(
+      "INSERT INTO appointments (note, student_id) VALUES ($1, $2) RETURNING *;",
+      [note, student_id]
+    )
     .catch(next);
-  if (result.rows.length === 0){
+  if (result.rows.length === 0) {
     res.sendStatus(404);
   } else {
-    res.send(result.rows)
+    res.send(result.rows);
   }
-})
+});
 
 //Route to DELETE appointment notes from appointment table:
-app.delete('/api/appointments/:student_id', async (req, res, next)=>{
-  const student_id = req.params.student_id
+app.delete("/api/appointments/:id", async (req, res, next) => {
+  const id = req.params.id;
   const result = await db
-    .query('DELETE FROM appointments WHERE student_id = $1 RETURNING *', [ student_id ])
+    .query("DELETE FROM appointments WHERE id = $1 RETURNING *", [
+      id,
+    ])
     .catch(next);
-  if(result.rows){
+  if (result.rows) {
     res.sendStatus(200);
   } else {
-    res.status(404).send("No Data To Delete")
+    res.status(404).send("No Data To Delete");
   }
-})
+});
 
 //PATCH/EDIT route for appointment notes in appointments table:
-app.patch('/api/appointments/:id', async (req, res, next) => {
+app.patch("/api/appointments/:id", async (req, res, next) => {
   const id = Number.parseInt(req.params.id);
-  const { note } = req.body
+  const { note } = req.body;
   const result = await db
-    .query('UPDATE appointments SET note=$1 WHERE id=$2 RETURNING *', [note, id])
+    .query("UPDATE appointments SET note=$1 WHERE id=$2 RETURNING *", [
+      note,
+      id,
+    ])
     .catch(next);
-  if(result.rows){
+  if (result.rows) {
     res.sendStatus(200);
   } else {
-    res.status(404).send("No Data to update")
+    res.status(404).send("No Data to update");
   }
-})
+});
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Internal Server Error");
 });
 // Serve the static assets AFTER the routes
-app.use(express.static("../client/src/dist"))
+app.use(express.static("../client/src/dist"));
 
 export default app;
