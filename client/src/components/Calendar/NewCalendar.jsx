@@ -13,6 +13,11 @@ const NewCalendar = () => {
   const [events, setEvents] = useState([]);
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
+  const [isAddEventOpen, setIsAddEventOpen] = useState(false);
+
+  const openAddEventModal = () => {
+    setIsAddEventOpen(true);
+  };
 
   const handleViewChange = (view) => {
     // Handle view change here if needed
@@ -81,6 +86,31 @@ const NewCalendar = () => {
     left: "prev,next today",
     center: "title",
     right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+    // extraButtons: [
+    //   {
+    //     text: "Add Event",
+    //     click: openAddEventModal,
+    //   },
+    // ],
+  };
+
+  const modalStyle = {
+    content: {
+      position: "absolute",
+      top: "50%",
+      bottom: "50%",
+      left: "50%",
+      right: "50%",
+      transform: "translate(-50%, -50%)",
+      height: "fit-content",
+      width: "fit-content",
+      border: "1px solid #ccc",
+      background: "#fff",
+      overflow: "auto",
+      borderRadius: "10px",
+      outline: "none",
+      padding: "30px",
+    },
   };
 
   return (
@@ -108,6 +138,7 @@ const NewCalendar = () => {
         isOpen={modalIsOpen}
         onRequestClose={handleModalClose}
         contentLabel="Event Details"
+        style={modalStyle}
       >
         <div>
           <h2>{selectedEvent?.title}</h2>
