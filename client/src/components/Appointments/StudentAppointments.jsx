@@ -99,14 +99,19 @@ export default function StudentAppointments() {
                           <span
                             className="collapseButton"
                             onClick={(event) =>
-                              handleNoteToggle(task.id, event
-)
+                              handleNoteToggle(task.id, event)
                             }
                           >
                             Collapse note
                           </span>
                         )}
                       </div>
+                      <button
+                      className="editButton"
+                      onClick={() => handleEditClick(task.id)}
+                      >
+                        Edit
+                      </button>
                       <button
                         className="deleteButton"
                         onClick={() => handleDeleteClick(task.id)}
