@@ -2,7 +2,7 @@
     --fc-button-bg-color: #4E70E0;
     --fc-button-hover-bg-color: #37a9ef;
     --fc-button-active-bg-color: #EF6E47;
-    --fc-border-color: gray;
+    --fc-border-color: transparent;
 }
 
 .fc {
@@ -11,6 +11,7 @@
     border-radius: 10px;
     font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
 }
 
 .fc-toolbar {
@@ -23,31 +24,39 @@
     padding: 8px
 }
 
+.fc .fc-toolbar.fc-header-toolbar {
+    margin-bottom: 0px;
+}
+
 .fc-button-group {
     margin-left: 10px;
     margin-right: 10px;
 }
 
-.fc-daygrid-day-frame {
-    /* border: solid 1px blue; */
-    /* border-radius: 10px; */
-    max-height: 50px;
-    overflow: scroll;
+.fc-col-header {
+    background-color: #EF6E47;
 }
 
 .fc-col-header-cell {
-    background-color: #EF6E47;
     width: auto;
 }
 
-.fc-scrollgrid-sync-inner {
-    margin: 3px;
+.fc-daygrid-day-frame {
+    height: 50px;
+    overflow: hidden;
+}
+
+.fc-daygrid-day-frame::-webkit-scrollbar {
+    width: 0;
+    overflow: auto;
+    background-color: transparent;
+}
+
+.fc-daygrid-day-frame:hover {
+    overflow: auto;
 }
 
 .fc-daygrid-day {
-    padding-bottom: 10px;
-}
-
-.fc .fc-toolbar.fc-header-toolbar {
-    margin-bottom: 0px;
+    overflow: auto;
+    border: solid 1px gray !important;
 }
