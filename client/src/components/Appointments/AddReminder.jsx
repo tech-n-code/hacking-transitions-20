@@ -40,6 +40,10 @@ export default function AddReminder({showAddModal, setShowAddModal}){
 
     
     const modalStyle = {
+        overlay:{
+            zIndex: 100,
+            backgroundColor: 'rgba(0, 0, 0, 0.0)'
+        },
         content:{
             position: 'absolute',
             top: '50%',
@@ -50,11 +54,13 @@ export default function AddReminder({showAddModal, setShowAddModal}){
             height: "fit-content",
             width: "fit-content",
             border: '1px solid #ccc',
-            background: '#fff',
+            background: '#0D0A40',
+            color: 'white',
             overflow: 'auto',
             borderRadius: '10px',
             outline: 'none',
-            padding: '30px'
+            padding: '30px',
+            zIndex: 101,
             
           }}
     
@@ -68,16 +74,22 @@ export default function AddReminder({showAddModal, setShowAddModal}){
             <span className="Form">
                 <form >
                     <div>
-                    <label >Add note</label>
+                    <label style={{
+                            fontSize: '24px',
+                            fontWeight: 'bold',
+                            margin: 'auto auto 30px',
+                            display: 'block',
+                            textAlign: 'center'
+                         }}>Add Note</label>
                     </div>
                     <textarea 
                         // required
                         value={ note }
                         onChange={(e) => setNote(e.target.value)}
-                        rows="5" cols="40"
+                        rows="10" cols="40"
                         ></textarea>
-                    <div>
-                    <select
+                    <div className="buttonContainer">
+                      <select
                         value={ selectedStudent }
                         onChange={(e) => setSelectedStudent(e.target.value)}
                         // required
@@ -97,10 +109,10 @@ export default function AddReminder({showAddModal, setShowAddModal}){
                     </div>
                     <div>
                         <span>
-                    <button className="addSubmit" onClick={ handleSubmit }>Submit</button>
+                    <button className="addNoteSubmit" onClick={ handleSubmit }>Submit</button>
                         </span>
                         <span>
-                    <button className="addCancel" onClick={closeModal }>
+                    <button className="addNoteCancel" onClick={closeModal }>
                         Cancel
                     </button>
                         </span>
