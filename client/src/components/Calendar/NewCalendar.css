@@ -1,3 +1,28 @@
+<<<<<<< HEAD
+.event-tooltip {
+  position: absolute;
+  z-index: 9999;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.fc-event-main {
+  position: relative;
+  display: inline-block;
+}
+
+.event-tooltip {
+  display: none;
+  pointer-events: none;
+}
+
+.fc-event-main:hover .event-tooltip {
+  display: block;
+}
+=======
 :root {
     --fc-button-bg-color: #4E70E0;
     --fc-button-hover-bg-color: #37a9ef;
@@ -60,3 +85,4 @@
     overflow: auto;
     border: solid 1px gray !important;
 }
+>>>>>>> origin/Dev
