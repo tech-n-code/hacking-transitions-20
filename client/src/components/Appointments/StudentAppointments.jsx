@@ -68,12 +68,12 @@ export default function StudentAppointments() {
                   const isExpanded = expandedNoteIds.includes(task.id);
                   const noteDisplay = isExpanded
                     ? task.note
-                    : task.note.length > 100
-                    ? task.note.slice(0, 100) + "... "
+                    : task.note.length > 70
+                    ? task.note.slice(0, 70) + "... "
                     : task.note;
-                  const showSeeMoreButton = task.note.length > 100;
+                  const showSeeMoreButton = task.note.length > 70;
                   const showCollapseButton =
-                    task.note.length > 100 && isExpanded;
+                    task.note.length > 70 && isExpanded;
 
                   return (
                     <div key={task.id} className="noteContainer">
