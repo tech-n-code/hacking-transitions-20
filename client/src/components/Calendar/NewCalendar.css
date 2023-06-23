@@ -6,6 +6,7 @@
 }
 
 .fc {
+    animation: fadeIn .5s ease-in forwards;
     background-color: #e0eaf8;
     border: solid 1px rgb(0, 0, 0);
     border-radius: 10px;
@@ -59,4 +60,13 @@
 .fc-daygrid-day {
     overflow: auto;
     border: solid 1px gray !important;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
 }
