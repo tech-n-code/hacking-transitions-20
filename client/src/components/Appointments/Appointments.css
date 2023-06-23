@@ -40,7 +40,9 @@
 .editButton,
 .deleteButton, 
 .addNoteSubmit,
-.addNoteCancel {
+.addNoteCancel,
+.confirmDeleteButton,
+.cancelDeleteButton {
     background-color: #4E70E0;
     border: 1px solid black;
     border-radius: 10px;
@@ -53,11 +55,22 @@
     box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
 }
 
+.confirmDeleteButton {
+    margin: 5px;
+    /* padding: 10px; */
+}
+
+.cancelDeleteButton {
+    margin: 5px;
+}
+
 .addButton:hover,
 .editButton:hover,
 .deleteButton:hover,
 .addNoteSubmit:hover,
-.addNoteCancel:hover  {
+.addNoteCancel:hover,
+.confirmDeleteButton:hover,
+.cancelDeleteButton:hover  {
     background-color: #EF6E47;
 }
 
