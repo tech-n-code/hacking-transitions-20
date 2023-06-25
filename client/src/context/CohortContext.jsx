@@ -15,7 +15,7 @@ export const CohortProvider = ({children}) => {
     const [studentID, setStudentClicked] = useState(1);
     const [studentdata, setStudentData] = useState(null);
     const [branchdata, setBranchData] = useState(null);
-    const [isStudentModalOpen, setIsStudentModalOpen] = useState(false)
+    const [studentModalOpen, setStudentModalOpen] = useState(false)
 
     const handleDropClicked = (value, id) =>{
         if(dropDownClicked === value){
@@ -33,15 +33,14 @@ export const CohortProvider = ({children}) => {
             setCohortClicked(cohort)
             setcohortId(id2)
             setCohortIdForInfo(id)
-            setIsStudentModalOpen(false)
-
+            setStudentModalOpen(false)
         } 
     }
 
-    useEffect(() => {
-        if(branchdata){
-        }
-    }, [studentdata]);
+    // useEffect(() => {
+    //     if(branchdata){
+    //     }
+    // }, [studentdata]);
 
     useEffect(() => {
         fetch(`http://localhost:8000/api/branches`)
@@ -57,10 +56,10 @@ export const CohortProvider = ({children}) => {
             .catch(error => console.log(error));
     }, []);
     
-    useEffect(() => {
-        if(studentdata){
-        }
-    }, [studentdata]);
+    // useEffect(() => {
+    //     if(studentdata){
+    //     }
+    // }, [studentdata]);
 
     useEffect(() => {
         fetch(`http://localhost:8000/api/students/${studentID}`)
@@ -103,12 +102,14 @@ export const CohortProvider = ({children}) => {
             .then(data => setStudentss(data))
             .catch(error => console.log(error));
     }, [cohortIds]);
+
     useEffect(() => {
         fetch(`/api/cohorts/${cohortIds}/students`)
             .then(response => response.json())
             .then(data => setStudentss(data))
             .catch(error => console.log(error));
     }, [cohortIds]);
+
     useEffect(() => {
         fetch(`/api/cohorts/${cohortId}/students`)
             .then(response => response.json())
@@ -147,9 +148,9 @@ export const CohortProvider = ({children}) => {
 
     return( <CohortContext.Provider value = {{
         studentID,
-        isStudentModalOpen,
+        studentModalOpen,
         setCohortClicked,
-        setIsStudentModalOpen,
+        setStudentModalOpen,
         studentdata,
         branchdata,
         setStudentClicked,
