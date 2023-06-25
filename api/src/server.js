@@ -2,9 +2,11 @@ import express from "express";
 import pg from "pg";
 import cors from "cors";
 import dotenv from "dotenv";
-dotenv.config();
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+
+dotenv.config();
+
 const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 
 const app = express();
@@ -71,10 +73,36 @@ app.get("/api/students/:studentId", async (req, res, next) => {
   }
 });
 
-// Route to get all tasks
-app.get("/api/appointments", async (req, res, next) => {
-  // const tasks = req.params.tasks
-  const result = await db.query(`SELECT * FROM appointments`).catch(next);
+// Route to get all events
+app.get("/api/events", async (req, res, next) => {
+  // const events = req.params.events
+  const result = await db.query(`SELECT * FROM events`).catch(next);
+  if (result.rows.length === 0) {
+    res.sendStatus(404);
+  } else {
+    res.send(result.rows);
+  }
+});
+
+// Route to get note by id
+app.get("/api/notes/:noteId", async (req, res, next) => {
+  const noteId = req.params.noteId;
+  const result = await db
+    .query(`SELECT notes.* FROM notes WHERE notes.id = $1`, [
+      noteId,
+    ])
+    .catch(next);
+  if (result.rows.length === 0) {
+    res.sendStatus(404);
+  } else {
+    res.send(result.rows);
+  }
+});
+
+// Route to get all notes
+app.get("/api/notes", async (req, res, next) => {
+  // const events = req.params.events
+  const result = await db.query(`SELECT * FROM notes`).catch(next);
   if (result.rows.length === 0) {
     res.sendStatus(404);
   } else {
@@ -153,23 +181,11 @@ app.get("/api/users", async (req, res, next) => {
   res.send(result.rows);
 });
 
-//Route to get calendar events
-app.get("/api/calendar", async (req, res) => {
-  db.query(
-    "select ets_date as date, firstname || ' ' || lastname || ' ETS' as title from students",
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      }
-      res.send(result.rows);
-    }
-  );
-});
 
 //New Route for calendar events
-app.get("/api/events", async (req, res) => {
+app.get("/api/events", async (req, res) => { //needs to be reworked to get individual fields instead of concat
   db.query(
-    "SELECT CONCAT(students.firstname, ' ', students.lastname ,': ', events.title ) AS title, events.startdate, events.enddate, events.allday FROM events LEFT JOIN students ON events.student_id = students.id;",
+    "SELECT CONCAT(students.firstname, ' ', students.lastname ,': ', events.title ) AS title, events.startdate, events.enddate, events.allday FROM events LEFT JOIN students ON events.student_id = students.id",
     (err, result) => {
       if (err) {
         console.log(err);
@@ -179,14 +195,14 @@ app.get("/api/events", async (req, res) => {
   );
 });
 
-//Route to POST appointment notes to appointments table:
-app.post("/api/appointments", async (req, res, next) => {
+//Route to POST notes:
+app.post("/api/notes", async (req, res, next) => { //need to find-replace 'appointments' with 'notes' in front-end
   const note = req.body.note;
   const student_id = req.body.student_id;
 
   const result = await db
     .query(
-      "INSERT INTO appointments (note, student_id) VALUES ($1, $2) RETURNING *;",
+      "INSERT INTO notes (note, student_id) VALUES ($1, $2) RETURNING *",
       [note, student_id]
     )
     .catch(next);
@@ -197,35 +213,35 @@ app.post("/api/appointments", async (req, res, next) => {
   }
 });
 
-//Route to DELETE appointment notes from appointment table:
-app.delete("/api/appointments/:id", async (req, res, next) => {
+//Route to DELETE notes:
+app.delete("/api/notes/:id", async (req, res, next) => { //need to find-replace 'appointments' with 'notes' in front-end
   const id = req.params.id;
   const result = await db
-    .query("DELETE FROM appointments WHERE id = $1 RETURNING *", [
+    .query("DELETE FROM notes WHERE id = $1 RETURNING *", [
       id,
     ])
     .catch(next);
-  if (result.rows) {
-    res.sendStatus(200);
-  } else {
+  if (result.rows.length === 0) {
     res.status(404).send("No Data To Delete");
+  } else {
+    res.sendStatus(200);
   }
 });
 
-//PATCH/EDIT route for appointment notes in appointments table:
-app.patch("/api/appointments/:id", async (req, res, next) => {
+//PATCH/EDIT route for notes:
+app.patch("/api/notes/:id", async (req, res, next) => { //need to find-replace 'appointments' with 'notes' in front-end
   const id = Number.parseInt(req.params.id);
   const { note } = req.body;
   const result = await db
-    .query("UPDATE appointments SET note=$1 WHERE id=$2 RETURNING *", [
+    .query("UPDATE notes SET note=$1 WHERE id=$2 RETURNING *", [
       note,
       id,
     ])
     .catch(next);
-  if (result.rows) {
-    res.sendStatus(200);
+  if (result.rows.length === 0) {
+    res.status(404).send("No Data To Delete");
   } else {
-    res.status(404).send("No Data to update");
+    res.sendStatus(200);
   }
 });
 
@@ -233,6 +249,7 @@ app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send("Internal Server Error");
 });
+
 // Serve the static assets AFTER the routes
 app.use(express.static("../client/src/dist"));
 
