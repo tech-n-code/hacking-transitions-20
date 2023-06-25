@@ -12,7 +12,7 @@ const CohortDetails = () => {
         students,
         assignColor,
         setStudentClicked,
-        setIsStudentModalOpen,
+        setStudentModalOpen,
     } = useContext(CohortContext);
 
     const getBranchName = (branchId) => {
@@ -51,7 +51,7 @@ const CohortDetails = () => {
                         className="cohort-close"
                         onClick={() => {
                             setCohortClicked("");
-                            setIsStudentModalOpen(false);
+                            setStudentModalOpen(false);
                         }}
                     >
                         X
@@ -115,7 +115,7 @@ const CohortDetails = () => {
                                 key={index}
                                 onClick={() => {
                                     setStudentClicked(student.id);
-                                    setIsStudentModalOpen(true);
+                                    setStudentModalOpen(true);
                                 }}
                             >
                                 <td className="cohort-student-entry">
