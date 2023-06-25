@@ -11,31 +11,31 @@ const StudentDetail = () => {
     studentdata,
     branchdata,
     assignColor,
-    isStudentModalOpen,
-    setIsStudentModalOpen,
+    studentModalOpen,
+    setStudentModalOpen,
   } = useContext(CohortContext);
 
-  const { tasks } = useContext(AppointmentContext);
+  const { notes } = useContext(AppointmentContext);
 
-  const appointments = {};
-  const notes = {};
+  // const appointments = {};
+  // const notes = {};
 
-  tasks.forEach((task) => {
-    const { id, note, student_id, appointment_date } = task;
+  // tasks.forEach((task) => {
+  //   const { id, note, student_id, appointment_date } = task;
 
-    if (student_id === studentID && appointment_date !== null) {
-      appointments[id] = {
-        id: id,
-        note: note,
-        date: appointment_date,
-      };
-    } else if (student_id === studentID && appointment_date === null) {
-      notes[id] = {
-        id: id,
-        note: note,
-      };
-    }
-  });
+  //   if (student_id === studentID && appointment_date !== null) {
+  //     appointments[id] = {
+  //       id: id,
+  //       note: note,
+  //       date: appointment_date,
+  //     };
+  //   } else if (student_id === studentID && appointment_date === null) {
+  //     notes[id] = {
+  //       id: id,
+  //       note: note,
+  //     };
+  //   }
+  // });
 
   const studentName =
     studentdata && studentdata.length > 0
@@ -102,12 +102,12 @@ const StudentDetail = () => {
   const badgeMsg = getbadgeMsg(studentdata[0].ets_date);
 
   function closeModal() {
-    setIsStudentModalOpen(false);
+    setStudentModalOpen(false);
   }
 
   return (
     <Modal
-      isOpen={isStudentModalOpen}
+      isOpen={studentModalOpen}
       onRequestClose={closeModal}
       style={modalStyle}
     >
@@ -120,7 +120,7 @@ const StudentDetail = () => {
                 <div
                   className="student-exit"
                   onClick={() => {
-                    setIsStudentModalOpen(false);
+                    setStudentModalOpen(false);
                   }}
                 >
                   X
@@ -213,12 +213,17 @@ const StudentDetail = () => {
             </tr>
           </thead>
           <tbody>
-            {Object.keys(notes).length > 0 ? (
-              Object.entries(notes).map(([id, note], index) => (
+            {notes
+              .filter((note) => note.student_id === studentID)
+              .map(([id, note], index) => (
                 <tr key={index}>
                   <td className="student-details-appt">{note.note}</td>
                 </tr>
-              ))
+              ))}
+            {notes.filter((note) => note.student_id === studentID).length === 0 ? (
+              <tr>
+                <td className="student-details-appt">None.</td>
+              </tr>
             ) : (
               <tr>
                 <td className="student-details-appt">None.</td>
