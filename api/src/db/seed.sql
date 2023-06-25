@@ -1,487 +1,303 @@
-INSERT INTO tasks (name) VALUES
-    ('Clear CIF'),
-    ('Signatures from S1 battallion'),
-    ('Financial meeting'),
-    ('Signatures from Ed center'),
-    ('Finish TAP process');
-
 INSERT INTO branch (name) VALUES
     ('Air Force'),
     ('Army'),
     ('Marines'),
     ('Navy');
 
-INSERT INTO branch_tasks (task_id, branch_id) VALUES
-    (1, 1),
-    (2, 2);
+INSERT INTO instructors (firstname, middlename, lastname, email, location, cohort_id) VALUES
+    ('Jane', 'Dunno', 'Doe1', 'JaneDoe@fakemail.com', 'Austin, Texas', 1),
+    ('Jon', NULL, 'Doe2', 'JonDoe@fakeemail.com', 'Cincinnati, OH', 2),
+    ('Phil', NULL, 'Watkins', 'PWatkins@galvanize.com', 'Dallas, Texas', 3),
+    ('Danny', NULL, 'Andrews', 'DAndrews@galvanize.com', 'Tulsa, Oklahoma', 4);
 
-INSERT INTO instructors (firstname, middlename, lastname, email, location) VALUES
-    ('Jane', 'Dunno', 'Doe1', 'JaneDoe@fakemail.com', 'Austin, Texas'),
-    ('Jon', NULL, 'Doe2', 'JonDoe@fakeemail.com', 'Cincinnati, OH'),
-    ('Phil', NULL, 'Watkins', 'PWatkins@galvanize.com', 'Dallas, Texas'),
-    ('Danny', NULL, 'Andrews', 'DAndrews@galvanize.com', 'Tulsa, Oklahoma');
+INSERT INTO cohorts (courseid, startdate, enddate, numberofstudents, instructor_id) VALUES
+    ('MCSP-19', '2023-1-17', '2023-5-26', 14, 1),
+    ('MCSP-21', '2023-3-6', '2023-8-25', 15, 2),
+    ('MCSP-22', '2023-5-30', '2023-10-27', 15, 3),
+    ('MCSP-23', '2023-6-5', '2023-11-24', 16, 4);
 
-INSERT INTO students (firstname, middlename, lastname, age, location, base, active, phonenumber, email, dutystatus, ets_date) VALUES
-    ('Sarah', 'Lynn', 'Marks', 35, 'Clarksville, KY', 'Ft. Campbell', TRUE, 2707981234, 'stoneage@aol.com', 'Outprocessed', null),
-    ('Chris', 'P', 'Bacon', 80, 'Villages, FL', NULL, FALSE, 7276437382, 'Bacon&Eggs@fakemail.com', 'Outprocessed', null),
-    ('Mike Ro', 'P', 'Ennis', 25, 'San Francisco, CA', 'Travis Air Force Base', TRUE, 4158299673, 'OverCompensate@fakemail.com', 'Pending', null),
-    ('Jed', 'I', 'Knight', 38, 'Elkhart, IN', 'Grisson Air Reserve Base', TRUE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Pending', null),
-    ('Deja', NULL, 'Viau', 22, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Pending', null),
-    ('Tara', NULL, 'Dactyl', 42, 'Hinesville, GA', 'Ft. Stewart', TRUE, 9127671432, 'Triceratops@fakemail.com', 'Pending', null),
-    ('Iva', 'Anita', 'Takashita', 27, 'Fort Riley, KS', 'Ft. Riley', TRUE, 7858913456, 'GottaGo@fakemail.com', 'Outprocessed', null),
-    ('Steve', NULL, 'Sharts', 23, 'Clarksville, KY', 'Ft. Campbell', TRUE, 2708476524, 'fakeemail@fakeemail.com', 'Pending', null),
-    ('Sam', NULL, 'Sung', 24, 'Villages, FL', NULL, FALSE, 7276437382, 'Bacon&Eggs@fakemail.com', 'Outprocessed', null),
-    ('Saad', NULL, 'Man', 25, 'San Francisco, CA', 'Travis Air Force Base', TRUE, 4158299673, 'OverCompensate@fakemail.com', 'Pending', null),
-    ('Batman', 'Bin', 'Suparman', 26, 'Elkhart, IN', 'Grisson Air Reserve Base', TRUE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Pending', null),
-    ('Kash', NULL, 'Register', 27, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Pending', null),
-    ('Jack', NULL, 'Daniels', 28,'Hinesville, GA', 'Ft. Stewart', TRUE, 9127671432, 'Triceratops@fakemail.com', 'Pending', null),
-    ('Krystal', NULL, 'Ball', 29,'Fort Riley, KS', 'Ft. Riley', TRUE, 7858913456, 'GottaGo@fakemail.com', 'Outprocessed', null),
-    ('Shaquille', NULL, 'Oatmeal', 35, 'Clarksville, KY', 'Ft. Campbell', TRUE, 2707981234, 'stoneage@aol.com', 'Outprocessed', null),
-    ('Cranjus', NULL, 'McBasketball', 80, 'Villages, FL', NULL, FALSE, 7276437382, 'Bacon&Eggs@fakemail.com', 'Outprocessed', null),
-    ('Dill', NULL, 'Funk', 25, 'San Francisco, CA', 'Travis Air Force Base', TRUE, 4158299673, 'OverCompensate@fakemail.com', 'Pending', null),
-    ('Mary', 'Beth', 'BethBeth', 38, 'Elkhart, IN', 'Grisson Air Reserve Base', TRUE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Pending', null),
-    ('Beefy', NULL, 'McWhatnow', 22, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Pending', null),
-    ('Captain', 'Melvin', 'Seashore', 42, 'Hinesville, GA', 'Ft. Stewart', TRUE, 9127671432, 'Triceratops@fakemail.com', 'Pending', null),
-    ('Dr. Shrimp', NULL, 'PuertoRico', 27, 'Fort Riley, KS', 'Ft. Riley', TRUE, 7858913456, 'GottaGo@fakemail.com', 'Outprocessed', null),
-    ('Simmy', NULL, 'Kanstandyourbitz', 23, 'Clarksville, KY', 'Ft. Campbell', TRUE, 2708476524, 'fakeemail@fakeemail.com', 'Pending', null),
-    ('Wandamian', NULL, 'Crucifixplate', 24, 'Villages, FL', NULL, FALSE, 7276437382, 'Bacon&Eggs@fakemail.com', 'Outprocessed', null),
-    ('Denise', NULL, 'Fat', 25, 'San Francisco, CA', 'Travis Air Force Base', TRUE, 4158299673, 'OverCompensate@fakemail.com', 'Pending', null),
-    ('Jury', NULL, 'Prosciutto', 26, 'Elkhart, IN', 'Grisson Air Reserve Base', TRUE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Pending', null),
-    ('RickyTicky', NULL, 'BobbyWobbin', 27, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Pending', null),
-    ('Dadood', NULL, 'Frumcheers', 28,'Hinesville, GA', 'Ft. Stewart', TRUE, 9127671432, 'Triceratops@fakemail.com', 'Pending', null),
-    ('Avocarter', NULL, 'Phucks', 29,'Fort Riley, KS', 'Ft. Riley', TRUE, 7858913456, 'GottaGo@fakemail.com', 'Outprocessed', null),
-    ('Hungary', NULL, 'Denk', 35, 'Clarksville, KY', 'Ft. Campbell', TRUE, 2707981234, 'stoneage@aol.com', 'Outprocessed', null),
-    ('Count', NULL, 'Ravioli', 80, 'Villages, FL', NULL, FALSE, 7276437382, 'Bacon&Eggs@fakemail.com', 'Outprocessed', null),
-    ('Dungareese', NULL, 'Weatherspoons', 25, 'San Francisco, CA', 'Travis Air Force Base', TRUE, 4158299673, 'OverCompensate@fakemail.com', 'Pending', null),
-    ('Dusty', NULL, 'Shidiz', 38, 'Elkhart, IN', 'Grisson Air Reserve Base', TRUE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Pending', null),
-    ('Rachel', NULL, 'Dahubbahubba', 22, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Pending', null),
-    ('Moist', NULL, 'Kite', 42, 'Hinesville, GA', 'Ft. Stewart', TRUE, 9127671432, 'Triceratops@fakemail.com', 'Pending', null),
-    ('Chug-Chug', 'Pickles', 'Takashita', 27, 'Fort Riley, KS', 'Ft. Riley', TRUE, 7858913456, 'GottaGo@fakemail.com', 'Outprocessed', null),
-    ('Stevia', NULL, 'Flunt', 23, 'Clarksville, KY', 'Ft. Campbell', TRUE, 2708476524, 'fakeemail@fakeemail.com', 'Pending', null),
-    ('Cumby', NULL, 'OBoombox', 24, 'Villages, FL', NULL, FALSE, 7276437382, 'Bacon&Eggs@fakemail.com', 'Outprocessed', null),
-    ('Melba', 'Moses', 'Wolfenstein', 25, 'San Francisco, CA', 'Travis Air Force Base', TRUE, 4158299673, 'OverCompensate@fakemail.com', 'Pending', null),
-    ('Church', 'Pewpewpew', 'Suparman', 26, 'Elkhart, IN', 'Grisson Air Reserve Base', TRUE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Pending', null),
-    ('Lumpy', NULL, 'Dumper', 27, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Pending', null),
-    ('Disfatt', NULL, 'Bidge', 28,'Hinesville, GA', 'Ft. Stewart', TRUE, 9127671432, 'Triceratops@fakemail.com', 'Pending', null),
-    ('Diddy', NULL, 'Doodat', 29,'Fort Riley, KS', 'Ft. Riley', TRUE, 7858913456, 'GottaGo@fakemail.com', 'Outprocessed', null),
-    ('Jabreakit', NULL, 'Jubawdit', 35, 'Clarksville, KY', 'Ft. Campbell', TRUE, 2707981234, 'stoneage@aol.com', 'Outprocessed', null),
-    ('Cowabunga', NULL, 'Peppermill', 80, 'Villages, FL', NULL, FALSE, 7276437382, 'Bacon&Eggs@fakemail.com', 'Outprocessed', null),
-    ('Henny', NULL, 'Cabbagehead', 25, 'San Francisco, CA', 'Travis Air Force Base', TRUE, 4158299673, 'OverCompensate@fakemail.com', 'Pending', null),
-    ('Sharty', NULL, 'Waffles', 38, 'Elkhart, IN', 'Grisson Air Reserve Base', TRUE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Pending', null),
-    ('Nabi', NULL, 'Cankles', 22, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Pending', null),
-    ('Mark-Pat-Bill-Joe', NULL, 'Dinosaur', 42, 'Hinesville, GA', 'Ft. Stewart', TRUE, 9127671432, 'Triceratops@fakemail.com', 'Pending', null),
-    ('Bull', NULL, 'Shiatsu', 27, 'Fort Riley, KS', 'Ft. Riley', TRUE, 7858913456, 'GottaGo@fakemail.com', 'Outprocessed', null),
-    ('Heimlich', NULL, 'Manure', 23, 'Clarksville, KY', 'Ft. Campbell', TRUE, 2708476524, 'fakeemail@fakeemail.com', 'Pending', null),
-    ('Eetwont', NULL, 'Flush', 24, 'Villages, FL', NULL, FALSE, 7276437382, 'Bacon&Eggs@fakemail.com', 'Outprocessed', null),
-    ('Aunt', NULL, 'Tim', 25, 'San Francisco, CA', 'Travis Air Force Base', TRUE, 4158299673, 'OverCompensate@fakemail.com', 'Pending', null),
-    ('Dawn', NULL, 'Shawty', 26, 'Elkhart, IN', 'Grisson Air Reserve Base', TRUE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Pending', null),
-    ('Earl', NULL, 'Turlet', 27, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Pending', null),
-    ('Corky', NULL, 'Marinara', 28,'Hinesville, GA', 'Ft. Stewart', TRUE, 9127671432, 'Triceratops@fakemail.com', 'Pending', null),
-    ('Densel', NULL, 'Washingmachine', 29,'Fort Riley, KS', 'Ft. Riley', TRUE, 7858913456, 'GottaGo@fakemail.com', 'Outprocessed', null),
-    ('GaryGar', NULL, 'GarGary', 26, 'Elkhart, IN', 'Grisson Air Reserve Base', TRUE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Pending', null),
-    ('Shart', NULL, 'Simpson', 27, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Pending', null),
-    ('Tatiana', NULL, 'Ohnoyoudidnt', 28,'Hinesville, GA', 'Ft. Stewart', TRUE, 9127671432, 'Triceratops@fakemail.com', 'Pending', null),
-    ('Rustic', NULL, 'HillBilly', 29,'Fort Riley, KS', 'Ft. Riley', TRUE, 7858913456, 'GottaGo@fakemail.com', 'Outprocessed', null);
+ALTER TABLE instructors
+ADD CONSTRAINT fk_cohort_id FOREIGN KEY (cohort_id) REFERENCES cohorts(id) ON DELETE CASCADE;
 
-INSERT INTO cohorts (courseid, startdate, enddate, numberofstudents) VALUES
-    ('MCSP-19', '01/17/2023', '05/26/2013', 15),
-    ('MCSP-01', '06/01/1912', '11/18/1912', 15),
-    ('MCSP-22', '05/29/2023', '10/29/2023', 15),
-    ('MCSP-23', '06/10/2023', '11/23/2023', 15);
+INSERT INTO students (firstname, middlename, lastname, age, location, base, active, phonenumber, email, dutystatus, branch_id, instructor_id, cohort_id) VALUES
+    ('Sarah', 'Lynn', 'Marks', 35, 'Clarksville, KY', 'Ft. Campbell', FALSE, 2707981234, 'stoneage@aol.com', 'Outprocessed', 2, 1, 1),
+    ('Chris', 'P', 'Bacon', 80, 'Villages, FL', NULL, FALSE, 7276437382, 'Bacon&Eggs@fakemail.com', 'Outprocessed', 2, 1, 1),
+    ('Mike Ro', 'P', 'Ennis', 25, 'San Francisco, CA', 'Travis Air Force Base', TRUE, 4158299673, 'OverCompensate@fakemail.com', 'Pending', 1, 1, 1),
+    ('Jed', 'I', 'Knight', 38, 'Elkhart, IN', 'Grisson Air Reserve Base', TRUE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Pending', 1, 1, 1),
+    ('Deja', NULL, 'Viau', 22, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Outprocessed', 4, 1, 1),
+    ('Tara', NULL, 'Dactyl', 42, 'Hinesville, GA', 'Ft. Stewart', TRUE, 9127671432, 'Triceratops@fakemail.com', 'Pending', 2, 1, 1),
+    ('Iva', 'Anita', 'Takashita', 27, 'Fort Riley, KS', 'Ft. Riley', TRUE, 7858913456, 'GottaGo@fakemail.com', 'Pending', 2, 1, 1),
+    ('Steve', NULL, 'Sharts', 23, 'Clarksville, KY', 'Ft. Campbell', TRUE, 2708476524, 'fakeemail@fakeemail.com', 'Pending', 1, 1, 1),
+    ('Sam', NULL, 'Sung', 24, 'Villages, FL', NULL, FALSE, 7276437382, 'Bacon&Eggs@fakemail.com', 'Outprocessed', 3, 1, 1),
+    ('Saad', NULL, 'Man', 25, 'San Francisco, CA', 'Travis Air Force Base', TRUE, 4158299673, 'OverCompensate@fakemail.com', 'Pending', 1, 1, 1),
+    ('Batman', 'Bin', 'Suparman', 26, 'Elkhart, IN', 'Grisson Air Reserve Base', TRUE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Pending', 1, 1, 1),
+    ('Kash', NULL, 'Register', 27, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Outprocessed', 4, 1, 1),
+    ('Jack', NULL, 'Daniels', 28,'Hinesville, GA', 'Ft. Stewart', TRUE, 9127671432, 'Triceratops@fakemail.com', 'Pending', 2, 1, 1),
+    ('Krystal', NULL, 'Ball', 29,'Fort Riley, KS', 'Ft. Riley', FALSE, 7858913456, 'GottaGo@fakemail.com', 'Outprocessed', 2, 1, 1),
+    ('Shaquille', NULL, 'Oatmeal', 35, 'Clarksville, KY', 'Ft. Campbell', TRUE, 2707981234, 'stoneage@aol.com', 'Pending', 2, 2, 2),
+    ('Cranjus', NULL, 'McBasketball', 80, 'Villages, FL', NULL, TRUE, 7276437382, 'Bacon&Eggs@fakemail.com', 'Pending', 1, 2, 2),
+    ('Dill', NULL, 'Funk', 25, 'San Francisco, CA', 'Travis Air Force Base', TRUE, 4158299673, 'OverCompensate@fakemail.com', 'Pending', 1, 2, 2),
+    ('Mary', 'Beth', 'BethBeth', 38, 'Elkhart, IN', 'Grisson Air Reserve Base', TRUE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Pending', 1, 2, 2),
+    ('Beefy', NULL, 'McWhatnow', 22, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Outprocessed', 3, 2, 2),
+    ('Captain', 'Melvin', 'Seashore', 42, 'Hinesville, GA', 'Ft. Stewart', FALSE, 9127671432, 'Triceratops@fakemail.com', 'Outprocessed', 2, 2, 2),
+    ('Dr. Shrimp', NULL, 'PuertoRico', 27, 'Fort Riley, KS', 'Ft. Riley', TRUE, 7858913456, 'GottaGo@fakemail.com', 'Pending', 1, 2, 2),
+    ('Simmy', NULL, 'Kanstandyourbitz', 23, 'Clarksville, KY', 'Ft. Campbell', TRUE, 2708476524, 'fakeemail@fakeemail.com', 'Pending', 1, 2, 2),
+    ('Wandamian', NULL, 'Crucifixplate', 24, 'Villages, FL', NULL, FALSE, 7276437382, 'Bacon&Eggs@fakemail.com', 'Outprocessed', 3, 2, 2),
+    ('Denise', NULL, 'Fat', 25, 'San Francisco, CA', 'Travis Air Force Base', TRUE, 4158299673, 'OverCompensate@fakemail.com', 'Pending', 1, 2, 2),
+    ('Jury', NULL, 'Prosciutto', 26, 'Elkhart, IN', 'Grisson Air Reserve Base', TRUE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Pending', 1, 2, 2),
+    ('RickyTicky', NULL, 'BobbyWobbin', 27, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Outprocessed', 3, 2, 2),
+    ('Dadood', NULL, 'Frumcheers', 28,'Hinesville, GA', 'Ft. Stewart', FALSE, 9127671432, 'Triceratops@fakemail.com', 'Outprocessed', 2, 2, 2),
+    ('Avocarter', NULL, 'Phucks', 29,'Fort Riley, KS', 'Ft. Riley', TRUE, 7858913456, 'GottaGo@fakemail.com', 'Pending', 2, 2, 2),
+    ('Hungary', NULL, 'Denk', 35, 'Clarksville, KY', 'Ft. Campbell', FALSE, 2707981234, 'stoneage@aol.com', 'Outprocessed', 1, 2, 2),
+    ('Count', NULL, 'Ravioli', 80, 'Villages, FL', NULL, FALSE, 7276437382, 'Bacon&Eggs@fakemail.com', 'Outprocessed', 4, 3, 3),
+    ('Dungareese', NULL, 'Weatherspoons', 25, 'San Francisco, CA', 'Travis Air Force Base', FALSE, 4158299673, 'OverCompensate@fakemail.com', 'Outprocessed', 3, 3, 3),
+    ('Dusty', NULL, 'Shidiz', 38, 'Elkhart, IN', 'Grisson Air Reserve Base', FALSE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Outprocessed', 1, 3, 3),
+    ('Rachel', NULL, 'Dahubbahubba', 22, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Outprocessed', 4, 3, 3),
+    ('Moist', NULL, 'Kite', 42, 'Hinesville, GA', 'Ft. Stewart', TRUE, 9127671432, 'Triceratops@fakemail.com', 'Pending', 1, 3, 3),
+    ('Chug-Chug', 'Pickles', 'Takashita', 27, 'Fort Riley, KS', 'Ft. Riley', FALSE, 7858913456, 'GottaGo@fakemail.com', 'Outprocessed', 2, 3, 3),
+    ('Stevia', NULL, 'Flunt', 23, 'Clarksville, KY', 'Ft. Campbell', FALSE, 2708476524, 'fakeemail@fakeemail.com', 'Outprocessed', 2, 3, 3),
+    ('Cumby', NULL, 'OBoombox', 24, 'Villages, FL', NULL, FALSE, 7276437382, 'Bacon&Eggs@fakemail.com', 'Outprocessed', 4, 3, 3),
+    ('Melba', 'Moses', 'Wolfenstein', 25, 'San Francisco, CA', 'Travis Air Force Base', TRUE, 4158299673, 'OverCompensate@fakemail.com', 'Pending', 3, 3, 3),
+    ('Church', 'Pewpewpew', 'Suparman', 26, 'Elkhart, IN', 'Grisson Air Reserve Base', FALSE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Outprocessed', 1, 3, 3),
+    ('Lumpy', NULL, 'Dumper', 27, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Outprocessed', 3, 3, 3),
+    ('Disfatt', NULL, 'Bidge', 28,'Hinesville, GA', 'Ft. Stewart', TRUE, 9127671432, 'Triceratops@fakemail.com', 'Pending', 1, 3, 3),
+    ('Diddy', NULL, 'Doodat', 29,'Fort Riley, KS', 'Ft. Riley', FALSE, 7858913456, 'GottaGo@fakemail.com', 'Outprocessed', 2, 3, 3),
+    ('Jabreakit', NULL, 'Jubawdit', 35, 'Clarksville, KY', 'Ft. Campbell', FALSE, 2707981234, 'stoneage@aol.com', 'Outprocessed', 2, 3, 3),
+    ('Cowabunga', NULL, 'Peppermill', 80, 'Villages, FL', NULL, TRUE, 7276437382, 'Bacon&Eggs@fakemail.com', 'Pending', 3, 3, 3),
+    ('Henny', NULL, 'Cabbagehead', 25, 'San Francisco, CA', 'Travis Air Force Base', FALSE, 4158299673, 'OverCompensate@fakemail.com', 'Outprocessed', 1, 4, 4),
+    ('Sharty', NULL, 'Waffles', 38, 'Elkhart, IN', 'Grisson Air Reserve Base', FALSE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Outprocessed', 1, 4, 4),
+    ('Nabi', NULL, 'Cankles', 22, 'Austin, TX', NULL, TRUE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Pending', 3, 4, 4),
+    ('Mark-Pat-Bill-Joe', NULL, 'Dinosaur', 42, 'Hinesville, GA', 'Ft. Stewart', TRUE, 9127671432, 'Triceratops@fakemail.com', 'Pending', 2, 4, 4),
+    ('Bull', NULL, 'Shiatsu', 27, 'Fort Riley, KS', 'Ft. Riley', FALSE, 7858913456, 'GottaGo@fakemail.com', 'Outprocessed', 2, 4, 4),
+    ('Heimlich', NULL, 'Manure', 23, 'Clarksville, KY', 'Ft. Campbell', TRUE, 2708476524, 'fakeemail@fakeemail.com', 'Pending', 1, 4, 4),
+    ('Eetwont', NULL, 'Flush', 24, 'Villages, FL', NULL, TRUE, 7276437382, 'Bacon&Eggs@fakemail.com', 'Pending', 3, 4, 4),
+    ('Aunt', NULL, 'Tim', 25, 'San Francisco, CA', 'Travis Air Force Base', TRUE, 4158299673, 'OverCompensate@fakemail.com', 'Pending', 1, 4, 4),
+    ('Dawn', NULL, 'Shawty', 26, 'Elkhart, IN', 'Grisson Air Reserve Base', FALSE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Outprocessed', 1, 4, 4),
+    ('Earl', NULL, 'Turlet', 27, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Outprocessed', 4, 4, 4),
+    ('Corky', NULL, 'Marinara', 28,'Hinesville, GA', 'Ft. Stewart', TRUE, 9127671432, 'Triceratops@fakemail.com', 'Pending', 2, 4, 4),
+    ('Densel', NULL, 'Washingmachine', 29,'Fort Riley, KS', 'Ft. Riley', FALSE, 7858913456, 'GottaGo@fakemail.com', 'Outprocessed', 2, 4, 4),
+    ('GaryGar', NULL, 'GarGary', 26, 'Elkhart, IN', 'Grisson Air Reserve Base', TRUE, 9304734927, 'ForceBeWithYou@fakemail.com', 'Pending', 1, 4, 4),
+    ('Shart', NULL, 'Simpson', 27, 'Austin, TX', NULL, FALSE, 5125609246, 'ItsHappeningAgain@fakemail.com', 'Outprocessed', 3, 4, 4),
+    ('Tatiana', NULL, 'Ohnoyoudidnt', 28,'Hinesville, GA', 'Ft. Stewart', FALSE, 9127671432, 'Triceratops@fakemail.com', 'Outprocessed', 1, 4, 4),
+    ('Rustic', NULL, 'HillBilly', 29,'Fort Riley, KS', 'Ft. Riley', FALSE, 7858913456, 'GottaGo@fakemail.com', 'Outprocessed', 2, 4, 4);
 
-INSERT INTO student_tasks (completed) VALUES   
-    (TRUE),
-    (FALSE);
+INSERT INTO events (title, startdate, enddate, allday, student_id, note_id) VALUES
+    ('ETS', '2023-02-10 00:00:00', '2023-02-10 00:00:00', TRUE, 1, NULL),
+    ('ETS', '2023-02-25 00:00:00', '2023-02-25 00:00:00', TRUE, 2, NULL),
+    ('ETS', '2023-06-30 00:00:00', '2023-06-30 00:00:00', TRUE, 3, NULL),
+    ('ETS', '2023-07-14 00:00:00', '2023-07-14 00:00:00', TRUE, 4, NULL),
+    ('ETS', '2023-05-23 00:00:00', '2023-05-23 00:00:00', TRUE, 5, NULL),
+    ('ETS', '2023-09-02 00:00:00', '2023-09-02 00:00:00', TRUE, 6, NULL),
+    ('ETS', '2023-08-03 00:00:00', '2023-08-03 00:00:00', TRUE, 7, NULL),
+    ('ETS', '2023-10-11 00:00:00', '2023-10-11 00:00:00', TRUE, 8, NULL),
+    ('ETS', '2023-03-18 00:00:00', '2023-03-18 00:00:00', TRUE, 9, NULL),
+    ('ETS', '2023-07-02 00:00:00', '2023-07-02 00:00:00', TRUE, 10, NULL),
+    ('ETS', '2023-07-14 00:00:00', '2023-07-14 00:00:00', TRUE, 11, NULL),
+    ('ETS', '2023-05-20 00:00:00', '2023-05-20 00:00:00', TRUE, 12, NULL),
+    ('ETS', '2023-09-10 00:00:00', '2023-09-10 00:00:00', TRUE, 13, NULL),
+    ('ETS', '2023-05-03 00:00:00', '2023-05-03 00:00:00', TRUE, 14, NULL),
+    ('ETS', '2023-02-10 00:00:00', '2023-02-10 00:00:00', TRUE, 15, NULL),
+    ('ETS', '2023-08-11 00:00:00', '2023-08-11 00:00:00', TRUE, 16, NULL),
+    ('ETS', '2023-07-15 00:00:00', '2023-07-15 00:00:00', TRUE, 17, NULL),
+    ('ETS', '2023-07-14 00:00:00', '2023-07-14 00:00:00', TRUE, 18, NULL),
+    ('ETS', '2023-05-23 00:00:00', '2023-05-23 00:00:00', TRUE, 19, NULL),
+    ('ETS', '2023-06-02 00:00:00', '2023-06-02 00:00:00', TRUE, 20, NULL),
+    ('ETS', '2023-07-26 00:00:00', '2023-07-26 00:00:00', TRUE, 21, NULL),
+    ('ETS', '2023-10-11 00:00:00', '2023-10-11 00:00:00', TRUE, 22, NULL),
+    ('ETS', '2023-04-05 00:00:00', '2023-04-05 00:00:00', TRUE, 23, NULL),
+    ('ETS', '2023-08-20 00:00:00', '2023-08-20 00:00:00', TRUE, 24, NULL),
+    ('ETS', '2023-07-19 00:00:00', '2023-07-19 00:00:00', TRUE, 25, NULL),
+    ('ETS', '2023-05-03 00:00:00', '2023-05-03 00:00:00', TRUE, 26, NULL),
+    ('ETS', '2023-06-14 00:00:00', '2023-06-14 00:00:00', TRUE, 27, NULL),
+    ('ETS', '2023-09-03 00:00:00', '2023-09-03 00:00:00', TRUE, 28, NULL),
+    ('ETS', '2023-02-16 00:00:00', '2023-02-16 00:00:00', TRUE, 29, NULL),
+    ('ETS', '2023-04-21 00:00:00', '2023-04-21 00:00:00', TRUE, 30, NULL),
+    ('ETS', '2023-03-22 00:00:00', '2023-03-22 00:00:00', TRUE, 31, NULL),
+    ('ETS', '2023-04-12 00:00:00', '2023-04-12 00:00:00', TRUE, 32, NULL),
+    ('ETS', '2023-06-19 00:00:00', '2023-06-19 00:00:00', TRUE, 33, NULL),
+    ('ETS', '2023-07-06 00:00:00', '2023-07-06 00:00:00', TRUE, 34, NULL),
+    ('ETS', '2023-05-17 00:00:00', '2023-05-17 00:00:00', TRUE, 35, NULL),
+    ('ETS', '2023-06-01 00:00:00', '2023-06-01 00:00:00', TRUE, 36, NULL),
+    ('ETS', '2023-05-04 00:00:00', '2023-05-04 00:00:00', TRUE, 37, NULL),
+    ('ETS', '2023-11-07 00:00:00', '2023-11-07 00:00:00', TRUE, 38, NULL),
+    ('ETS', '2023-04-22 00:00:00', '2023-04-22 00:00:00', TRUE, 39, NULL),
+    ('ETS', '2023-06-03 00:00:00', '2023-06-03 00:00:00', TRUE, 40, NULL),
+    ('ETS', '2023-09-24 00:00:00', '2023-09-24 00:00:00', TRUE, 41, NULL),
+    ('ETS', '2023-05-18 00:00:00', '2023-05-18 00:00:00', TRUE, 42, NULL),
+    ('ETS', '2023-06-02 00:00:00', '2023-06-02 00:00:00', TRUE, 43, NULL),
+    ('ETS', '2023-08-03 00:00:00', '2023-08-03 00:00:00', TRUE, 44, NULL),
+    ('ETS', '2023-02-22 00:00:00', '2023-02-22 00:00:00', TRUE, 45, NULL),
+    ('ETS', '2023-03-25 00:00:00', '2023-03-25 00:00:00', TRUE, 46, NULL),
+    ('ETS', '2023-08-06 00:00:00', '2023-08-06 00:00:00', TRUE, 47, NULL),
+    ('ETS', '2023-07-13 00:00:00', '2023-07-13 00:00:00', TRUE, 48, NULL),
+    ('ETS', '2023-05-27 00:00:00', '2023-05-27 00:00:00', TRUE, 49, NULL),
+    ('ETS', '2023-11-20 00:00:00', '2023-11-20 00:00:00', TRUE, 50, NULL),
+    ('ETS', '2023-08-19 00:00:00', '2023-08-19 00:00:00', TRUE, 51, NULL),
+    ('ETS', '2023-10-13 00:00:00', '2023-10-13 00:00:00', TRUE, 52, NULL),
+    ('ETS', '2023-04-17 00:00:00', '2023-04-17 00:00:00', TRUE, 53, NULL),
+    ('ETS', '2023-06-16 00:00:00', '2023-06-16 00:00:00', TRUE, 54, NULL),
+    ('ETS', '2023-07-10 00:00:00', '2023-07-10 00:00:00', TRUE, 55, NULL),
+    ('ETS', '2023-05-19 00:00:00', '2023-05-19 00:00:00', TRUE, 56, NULL),
+    ('ETS', '2023-09-08 00:00:00', '2023-09-08 00:00:00', TRUE, 57, NULL),
+    ('ETS', '2023-06-03 00:00:00', '2023-06-03 00:00:00', TRUE, 58, NULL),
+    ('ETS', '2023-02-09 00:00:00', '2023-02-09 00:00:00', TRUE, 59, NULL),
+    ('ETS', '2023-04-25 00:00:00', '2023-04-25 00:00:00', TRUE, 60, NULL);
 
-INSERT INTO appointments (note, student_id, appointment_date) VALUES  
-    ('Resume needs some work', 1, '06/01/2023' ),
-    ('Needs to find 3 companies interested in applying for', 2, '06/01/2023'),
-    ('Finished going over resume', 3, '06/13/2023'),
-    ('Go over practice interview in Pramp', 4, '06/07/2023'),
-    ('Discusee Developer Journal', 5, '06/11/2023'),
-    ('Go over Parin attributes', 6, '06/13/2023'),
-    ('Answer interview questions to one low score specific Parin attribute', 7, '06/15/2023'),
-    ('Fixed resume bullet points to fit STAR method', 1, '06/15/2023'),
-    ('Job scan resume to fit 3 job descriptions', 2, '06/18/2023'),
-    ('Review interview student had with company', 3, '06/19/2023');
+INSERT INTO events (title, startdate, enddate, allday, student_id, note_id) VALUES
+    ('VA appointment', '2023-02-15 08:00:00', '2023-02-15 09:00:00', FALSE, 1, NULL),
+    ('VA appointment', '2023-03-14 10:00:00', '2023-03-14 11:00:00', FALSE, 2, NULL),
+    ('VA appointment', '2023-04-10 13:00:00', '2023-04-10 14:00:00', FALSE, 3, NULL),
+    ('VA appointment', '2023-04-20 14:00:00', '2023-04-20 15:00:00', FALSE, 5, NULL),
+    ('VA appointment', '2023-05-11 15:00:00', '2023-05-11 16:00:00', FALSE, 8, NULL),
+    ('Out-processing', '2023-04-03 00:00:00', '2023-04-03 00:00:00', TRUE, 4, NULL),
+    ('Out-processing', '2023-04-12 00:00:00', '2023-04-12 00:00:00', TRUE, 6, NULL),
+    ('Out-processing', '2023-05-09 00:00:00', '2023-05-09 00:00:00', TRUE, 7, NULL),
+    ('Out-processing', '2023-05-15 00:00:00', '2023-05-15 00:00:00', TRUE, 10, NULL),
+    ('Out-processing', '2023-05-25 00:00:00', '2023-05-25 00:00:00', TRUE, 11, NULL),
+    ('Job fair', '2023-04-19 08:00:00', '2023-04-19 11:00:00', FALSE, 12, NULL),
+    ('Job fair', '2023-04-26 08:00:00', '2023-04-26 11:00:00', FALSE, 13, NULL),
+    ('Job fair', '2023-05-03 13:00:00', '2023-05-03 15:00:00', FALSE, 14, NULL),
+    ('Job fair', '2023-05-10 13:00:00', '2023-05-10 15:00:00', FALSE, 1, NULL),
+    ('Job fair', '2023-05-17 14:00:00', '2023-05-17 16:00:00', FALSE, 2, NULL),
+    ('Interview', '2023-05-01 09:00:00', '2023-05-01 09:30:00', FALSE, 3, NULL),
+    ('Interview', '2023-05-09 09:30:00', '2023-05-09 10:00:00', FALSE, 4, NULL),
+    ('Interview', '2023-05-11 10:00:00', '2023-05-11 10:30:00', FALSE, 5, NULL),
+    ('Interview', '2023-05-17 10:30:00', '2023-05-17 11:00:00', FALSE, 6, NULL),
+    ('Interview', '2023-05-19 11:00:00', '2023-05-19 11:30:00', FALSE, 7, NULL),
+    ('Traveling', '2023-04-02 00:00:00', '2023-04-02 00:00:00', TRUE, 8, NULL),
+    ('Traveling', '2023-04-07 00:00:00', '2023-04-07 00:00:00', TRUE, 9, NULL),
+    ('Traveling', '2023-04-14 00:00:00', '2023-04-14 00:00:00', TRUE, 10, NULL),
+    ('Traveling', '2023-05-07 00:00:00', '2023-05-07 00:00:00', TRUE, 11, NULL),
+    ('Traveling', '2023-05-12 00:00:00', '2023-05-12 00:00:00', TRUE, 12, NULL),
+    ('Moving', '2023-05-05 00:00:00', '2023-05-05 00:00:00', TRUE, 13, NULL),
+    ('Moving', '2023-05-04 00:00:00', '2023-05-04 00:00:00', TRUE, 14, NULL),
+    ('Moving', '2023-05-08 00:00:00', '2023-05-08 00:00:00', TRUE, 1, NULL),
+    ('Moving', '2023-05-15 00:00:00', '2023-05-15 00:00:00', TRUE, 2, NULL),
+    ('Moving', '2023-05-19 00:00:00', '2023-05-19 00:00:00', TRUE, 3, NULL),
+    ('VA appointment', '2023-03-15 08:00:00', '2023-03-15 09:00:00', FALSE, 15, NULL),
+    ('VA appointment', '2023-04-20 10:00:00', '2023-04-20 11:00:00', FALSE, 16, NULL),
+    ('VA appointment', '2023-05-10 13:00:00', '2023-05-10 14:00:00', FALSE, 17, NULL),
+    ('VA appointment', '2023-06-20 14:00:00', '2023-06-20 15:00:00', FALSE, 18, NULL),
+    ('VA appointment', '2023-07-11 15:00:00', '2023-07-11 16:00:00', FALSE, 19, NULL),
+    ('Out-processing', '2023-05-03 00:00:00', '2023-05-03 00:00:00', TRUE, 17, NULL),
+    ('Out-processing', '2023-05-12 00:00:00', '2023-05-12 00:00:00', TRUE, 20, NULL),
+    ('Out-processing', '2023-06-09 00:00:00', '2023-06-09 00:00:00', TRUE, 24, NULL),
+    ('Out-processing', '2023-06-15 00:00:00', '2023-06-15 00:00:00', TRUE, 25, NULL),
+    ('Out-processing', '2023-07-25 00:00:00', '2023-07-25 00:00:00', TRUE, 28, NULL),
+    ('Job fair', '2023-06-19 08:00:00', '2023-06-19 11:00:00', FALSE, 21, NULL),
+    ('Job fair', '2023-06-26 08:00:00', '2023-06-26 11:00:00', FALSE, 22, NULL),
+    ('Job fair', '2023-07-03 13:00:00', '2023-07-03 15:00:00', FALSE, 23, NULL),
+    ('Job fair', '2023-07-10 13:00:00', '2023-07-10 15:00:00', FALSE, 24, NULL),
+    ('Job fair', '2023-08-17 14:00:00', '2023-08-17 16:00:00', FALSE, 25, NULL),
+    ('Interview', '2023-07-03 09:00:00', '2023-07-03 09:30:00', FALSE, 26, NULL),
+    ('Interview', '2023-07-10 09:30:00', '2023-07-10 10:00:00', FALSE, 27, NULL),
+    ('Interview', '2023-08-11 10:00:00', '2023-08-11 10:30:00', FALSE, 28, NULL),
+    ('Interview', '2023-08-17 10:30:00', '2023-08-17 11:00:00', FALSE, 29, NULL),
+    ('Interview', '2023-08-18 11:00:00', '2023-08-18 11:30:00', FALSE, 15, NULL),
+    ('Traveling', '2023-05-01 00:00:00', '2023-05-01 00:00:00', TRUE, 16, NULL),
+    ('Traveling', '2023-06-07 00:00:00', '2023-06-07 00:00:00', TRUE, 17, NULL),
+    ('Traveling', '2023-06-14 00:00:00', '2023-06-14 00:00:00', TRUE, 18, NULL),
+    ('Traveling', '2023-07-07 00:00:00', '2023-07-07 00:00:00', TRUE, 19, NULL),
+    ('Traveling', '2023-07-12 00:00:00', '2023-07-12 00:00:00', TRUE, 20, NULL),
+    ('Moving', '2023-05-05 00:00:00', '2023-05-05 00:00:00', TRUE, 21, NULL),
+    ('Moving', '2023-06-04 00:00:00', '2023-06-04 00:00:00', TRUE, 22, NULL),
+    ('Moving', '2023-06-07 00:00:00', '2023-06-07 00:00:00', TRUE, 23, NULL),
+    ('Moving', '2023-08-15 00:00:00', '2023-08-15 00:00:00', TRUE, 24, NULL),
+    ('Moving', '2023-08-18 00:00:00', '2023-08-18 00:00:00', TRUE, 25, NULL),
+    ('VA appointment', '2023-05-15 08:00:00', '2023-05-15 09:00:00', FALSE, 30, NULL),
+    ('VA appointment', '2023-06-20 10:00:00', '2023-06-20 11:00:00', FALSE, 31, NULL),
+    ('VA appointment', '2023-07-10 13:00:00', '2023-07-10 14:00:00', FALSE, 32, NULL),
+    ('VA appointment', '2023-08-21 14:00:00', '2023-08-21 15:00:00', FALSE, 33, NULL),
+    ('VA appointment', '2023-09-12 15:00:00', '2023-09-12 16:00:00', FALSE, 35, NULL),
+    ('Out-processing', '2023-08-03 00:00:00', '2023-08-03 00:00:00', TRUE, 34, NULL),
+    ('Out-processing', '2023-09-12 00:00:00', '2023-09-12 00:00:00', TRUE, 38, NULL),
+    ('Out-processing', '2023-09-08 00:00:00', '2023-09-08 00:00:00', TRUE, 41, NULL),
+    ('Out-processing', '2023-09-15 00:00:00', '2023-09-15 00:00:00', TRUE, 44, NULL),
+    ('Job fair', '2023-08-18 08:00:00', '2023-08-18 11:00:00', FALSE, 36, NULL),
+    ('Job fair', '2023-09-05 08:00:00', '2023-09-05 11:00:00', FALSE, 37, NULL),
+    ('Job fair', '2023-09-26 13:00:00', '2023-09-26 15:00:00', FALSE, 38, NULL),
+    ('Job fair', '2023-10-10 13:00:00', '2023-10-10 15:00:00', FALSE, 39, NULL),
+    ('Job fair', '2023-10-17 14:00:00', '2023-10-17 16:00:00', FALSE, 40, NULL),
+    ('Interview', '2023-09-06 09:00:00', '2023-09-06 09:30:00', FALSE, 41, NULL),
+    ('Interview', '2023-09-14 09:30:00', '2023-09-14 10:00:00', FALSE, 42, NULL),
+    ('Interview', '2023-10-12 10:00:00', '2023-10-12 10:30:00', FALSE, 43, NULL),
+    ('Interview', '2023-10-18 10:30:00', '2023-10-18 11:00:00', FALSE, 44, NULL),
+    ('Interview', '2023-10-23 11:00:00', '2023-10-23 11:30:00', FALSE, 30, NULL),
+    ('Traveling', '2023-07-03 00:00:00', '2023-07-03 00:00:00', TRUE, 31, NULL),
+    ('Traveling', '2023-07-07 00:00:00', '2023-07-07 00:00:00', TRUE, 32, NULL),
+    ('Traveling', '2023-07-14 00:00:00', '2023-07-14 00:00:00', TRUE, 33, NULL),
+    ('Traveling', '2023-08-07 00:00:00', '2023-08-07 00:00:00', TRUE, 34, NULL),
+    ('Traveling', '2023-08-11 00:00:00', '2023-08-11 00:00:00', TRUE, 35, NULL),
+    ('Moving', '2023-08-01 00:00:00', '2023-08-01 00:00:00', TRUE, 36, NULL),
+    ('Moving', '2023-08-16 00:00:00', '2023-08-16 00:00:00', TRUE, 37, NULL),
+    ('Moving', '2023-09-07 00:00:00', '2023-09-07 00:00:00', TRUE, 38, NULL),
+    ('Moving', '2023-09-15 00:00:00', '2023-09-15 00:00:00', TRUE, 39, NULL),
+    ('Moving', '2023-09-18 00:00:00', '2023-09-18 00:00:00', TRUE, 41, NULL);
 
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '10-Feb-2023', '10-Feb-2023', true, 1);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '25-Apr-2023', '25-Apr-2023', true, 2);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '20-Jun-2023', '20-Jun-2023', true, 3);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '14-Jul-2023', '14-Jul-2023', true, 4);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '23-May-2023', '23-May-2023', true, 5);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '02-Jun-2023', '02-Jun-2023', true, 6);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '03-May-2023', '03-May-2023', true, 7);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '11-Oct-2023', '11-Oct-2023', true, 8);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '25-Apr-2023', '25-Apr-2023', true, 9);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '20-Jun-2023', '20-Jun-2023', true, 10);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '14-Jul-2023', '14-Jul-2023', true, 11);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '23-May-2023', '23-May-2023', true, 12);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '02-Jun-2023', '02-Jun-2023', true, 13);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '03-May-2023', '03-May-2023', true, 14);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '10-Feb-2023', '10-Feb-2023', true, 15);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '25-Apr-2023', '25-Apr-2023', true, 16);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '20-Jun-2023', '20-Jun-2023', true, 17);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '14-Jul-2023', '14-Jul-2023', true, 18);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '23-May-2023', '23-May-2023', true, 19);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '02-Jun-2023', '02-Jun-2023', true, 20);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '03-May-2023', '03-May-2023', true, 21);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '11-Oct-2023', '11-Oct-2023', true, 22);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '25-Apr-2023', '25-Apr-2023', true, 23);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '20-Jun-2023', '20-Jun-2023', true, 24);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '14-Jul-2023', '14-Jul-2023', true, 25);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '23-May-2023', '23-May-2023', true, 26);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '02-Jun-2023', '02-Jun-2023', true, 27);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '03-May-2023', '03-May-2023', true, 28);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '10-Feb-2023', '10-Feb-2023', true, 29);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '25-Apr-2023', '25-Apr-2023', true, 30);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '10-Feb-2023', '10-Feb-2023', true, 31);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '25-Apr-2023', '25-Apr-2023', true, 32);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '20-Jun-2023', '20-Jun-2023', true, 33);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '14-Jul-2023', '14-Jul-2023', true, 34);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '23-May-2023', '23-May-2023', true, 35);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '02-Jun-2023', '02-Jun-2023', true, 36);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '03-May-2023', '03-May-2023', true, 37);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '11-Oct-2023', '11-Oct-2023', true, 38);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '25-Apr-2023', '25-Apr-2023', true, 39);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '20-Jun-2023', '20-Jun-2023', true, 40);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '14-Jul-2023', '14-Jul-2023', true, 41);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '23-May-2023', '23-May-2023', true, 42);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '02-Jun-2023', '02-Jun-2023', true, 43);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '03-May-2023', '03-May-2023', true, 44);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '10-Feb-2023', '10-Feb-2023', true, 45);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '25-Apr-2023', '25-Apr-2023', true, 46);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '20-Jun-2023', '20-Jun-2023', true, 47);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '14-Jul-2023', '14-Jul-2023', true, 48);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '23-May-2023', '23-May-2023', true, 49);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '02-Jun-2023', '02-Jun-2023', true, 50);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '03-May-2023', '03-May-2023', true, 51);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '11-Oct-2023', '11-Oct-2023', true, 52);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '25-Apr-2023', '25-Apr-2023', true, 53);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '20-Jun-2023', '20-Jun-2023', true, 54);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '14-Jul-2023', '14-Jul-2023', true, 55);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '23-May-2023', '23-May-2023', true, 56);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '02-Jun-2023', '02-Jun-2023', true, 57);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '03-May-2023', '03-May-2023', true, 58);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '10-Feb-2023', '10-Feb-2023', true, 59);
-insert into events (title, startdate, enddate, allday, student_id) values ('ETS_Date', '25-Apr-2023', '25-Apr-2023', true, 60);
+INSERT INTO notes (note, student_id, event_id) VALUES
+    ('Resume needs some work', 1, NULL),
+    ('Needs to find 3 companies interested in applying for', 2, NULL),
+    ('Behind on Mini-modules', 2, NULL),
+    ('Finish going over resume', 3, NULL),
+    ('Go over practice interview in Pramp', 4, NULL),
+    ('Behind on Mini-modules', 4, NULL),
+    ('Discus Developer Journal', 5, NULL),
+    ('Go over Paring attributes', 6, NULL),
+    ('Behind on Mini-modules', 6, NULL),
+    ('Answer interview questions to one low score specific Paring attribute', 7, NULL),
+    ('Fix resume bullet points to fit STAR method', 8, NULL),
+    ('Behind on Mini-modules', 8, NULL),
+    ('Job scan resume to fit 3 job descriptions', 9, NULL),
+    ('Review interview student had with company', 10, NULL),
+    ('Behind on Mini-modules', 10, NULL),
+    ('Behind on Mini-modules', 11, NULL),
+    ('Review Cover Letter', 12, NULL),
+    ('Behind on Mini-modules', 12, NULL),
+    ('Add latest project to resume', 13, NULL),
+    ('Needs to submit sprint retro survey', 14, NULL),
+    ('Behind on Mini-modules', 14, NULL),
+    ('Resume needs some work', 15, NULL),
+    ('Needs to find 3 companies interested in applying for', 16, NULL),
+    ('Behind on Mini-modules', 16, NULL),
+    ('Finish going over resume', 17, NULL),
+    ('Go over practice interview in Pramp', 18, NULL),
+    ('Behind on Mini-modules', 18, NULL),
+    ('Discus Developer Journal', 19, NULL),
+    ('Go over Paring attributes', 20, NULL),
+    ('Behind on Mini-modules', 20, NULL),
+    ('Answer interview questions to one low score specific Paring attribute', 21, NULL),
+    ('Fix resume bullet points to fit STAR method', 22, NULL),
+    ('Behind on Mini-modules', 22, NULL),
+    ('Job scan resume to fit 3 job descriptions', 23, NULL),
+    ('Review interview student had with company', 24, NULL),
+    ('Behind on Mini-modules', 24, NULL),
+    ('Behind on Mini-modules', 25, NULL),
+    ('Review Cover Letter', 26, NULL),
+    ('Behind on Mini-modules', 26, NULL),
+    ('Add latest project to resume', 27, NULL),
+    ('Needs to submit sprint retro survey', 28, NULL),
+    ('Behind on Mini-modules', 28, NULL),
+    ('Resume needs some work', 30, NULL),
+    ('Needs to find 3 companies interested in applying for', 31, NULL),
+    ('Behind on Mini-modules', 31, NULL),
+    ('Finish going over resume', 32, NULL),
+    ('Go over practice interview in Pramp', 33, NULL),
+    ('Behind on Mini-modules', 33, NULL),
+    ('Discus Developer Journal', 34, NULL),
+    ('Go over Paring attributes', 35, NULL),
+    ('Behind on Mini-modules', 35, NULL),
+    ('Answer interview questions to one low score specific Paring attribute', 36, NULL),
+    ('Fix resume bullet points to fit STAR method', 37, NULL),
+    ('Behind on Mini-modules', 37, NULL),
+    ('Job scan resume to fit 3 job descriptions', 38, NULL),
+    ('Review interview student had with company', 39, NULL),
+    ('Behind on Mini-modules', 39, NULL),
+    ('Behind on Mini-modules', 40, NULL),
+    ('Review Cover Letter', 41, NULL),
+    ('Behind on Mini-modules', 41, NULL),
+    ('Add latest project to resume', 42, NULL),
+    ('Needs to submit sprint retro survey', 43, NULL),
+    ('Behind on Mini-modules', 43, NULL);
 
-UPDATE instructors SET cohort_id = 1 WHERE id = 1;
-UPDATE instructors SET cohort_id = 2 WHERE id = 2;
-UPDATE instructors SET cohort_id = 3 WHERE id = 3;
-UPDATE instructors SET cohort_id = 4 WHERE id = 4;
-
-UPDATE students SET branch_id = 1 WHERE id = 1;
-UPDATE students SET branch_id = 2 WHERE id = 2;
-UPDATE students SET branch_id = 3 WHERE id = 3;
-UPDATE students SET branch_id = 4 WHERE id = 4;
-UPDATE students SET branch_id = 1 WHERE id = 5;
-UPDATE students SET branch_id = 2 WHERE id = 6;
-UPDATE students SET branch_id = 3 WHERE id = 7;
-UPDATE students SET branch_id = 4 WHERE id = 8;
-UPDATE students SET branch_id = 1 WHERE id = 9;
-UPDATE students SET branch_id = 2 WHERE id = 10;
-UPDATE students SET branch_id = 3 WHERE id = 11;
-UPDATE students SET branch_id = 4 WHERE id = 12;
-UPDATE students SET branch_id = 1 WHERE id = 13;
-UPDATE students SET branch_id = 2 WHERE id = 14;
-UPDATE students SET branch_id = 3 WHERE id = 15;
-UPDATE students SET branch_id = 1 WHERE id = 16;
-UPDATE students SET branch_id = 2 WHERE id = 17;
-UPDATE students SET branch_id = 3 WHERE id = 18;
-UPDATE students SET branch_id = 4 WHERE id = 19;
-UPDATE students SET branch_id = 1 WHERE id = 20;
-UPDATE students SET branch_id = 2 WHERE id = 21;
-UPDATE students SET branch_id = 3 WHERE id = 22;
-UPDATE students SET branch_id = 4 WHERE id = 23;
-UPDATE students SET branch_id = 1 WHERE id = 24;
-UPDATE students SET branch_id = 2 WHERE id = 25;
-UPDATE students SET branch_id = 3 WHERE id = 26;
-UPDATE students SET branch_id = 4 WHERE id = 27;
-UPDATE students SET branch_id = 1 WHERE id = 28;
-UPDATE students SET branch_id = 2 WHERE id = 29;
-UPDATE students SET branch_id = 3 WHERE id = 30;
-UPDATE students SET branch_id = 1 WHERE id = 31;
-UPDATE students SET branch_id = 2 WHERE id = 32;
-UPDATE students SET branch_id = 3 WHERE id = 33;
-UPDATE students SET branch_id = 4 WHERE id = 34;
-UPDATE students SET branch_id = 1 WHERE id = 35;
-UPDATE students SET branch_id = 2 WHERE id = 36;
-UPDATE students SET branch_id = 3 WHERE id = 37;
-UPDATE students SET branch_id = 4 WHERE id = 38;
-UPDATE students SET branch_id = 1 WHERE id = 39;
-UPDATE students SET branch_id = 2 WHERE id = 40;
-UPDATE students SET branch_id = 3 WHERE id = 41;
-UPDATE students SET branch_id = 4 WHERE id = 42;
-UPDATE students SET branch_id = 1 WHERE id = 43;
-UPDATE students SET branch_id = 2 WHERE id = 44;
-UPDATE students SET branch_id = 3 WHERE id = 45;
-UPDATE students SET branch_id = 1 WHERE id = 46;
-UPDATE students SET branch_id = 2 WHERE id = 47;
-UPDATE students SET branch_id = 3 WHERE id = 48;
-UPDATE students SET branch_id = 4 WHERE id = 49;
-UPDATE students SET branch_id = 1 WHERE id = 50;
-UPDATE students SET branch_id = 2 WHERE id = 51;
-UPDATE students SET branch_id = 3 WHERE id = 52;
-UPDATE students SET branch_id = 4 WHERE id = 53;
-UPDATE students SET branch_id = 1 WHERE id = 54;
-UPDATE students SET branch_id = 2 WHERE id = 55;
-UPDATE students SET branch_id = 3 WHERE id = 56;
-UPDATE students SET branch_id = 4 WHERE id = 57;
-UPDATE students SET branch_id = 1 WHERE id = 58;
-UPDATE students SET branch_id = 2 WHERE id = 59;
-UPDATE students SET branch_id = 3 WHERE id = 60;
-
-UPDATE students SET instructor_id = 1 WHERE id = 1;
-UPDATE students SET instructor_id = 1 WHERE id = 2;
-UPDATE students SET instructor_id = 1 WHERE id = 3;
-UPDATE students SET instructor_id = 1 WHERE id = 4;
-UPDATE students SET instructor_id = 1 WHERE id = 5;
-UPDATE students SET instructor_id = 1 WHERE id = 6;
-UPDATE students SET instructor_id = 1 WHERE id = 7;
-UPDATE students SET instructor_id = 1 WHERE id = 8;
-UPDATE students SET instructor_id = 1 WHERE id = 9;
-UPDATE students SET instructor_id = 1 WHERE id = 10;
-UPDATE students SET instructor_id = 1 WHERE id = 11;
-UPDATE students SET instructor_id = 1 WHERE id = 12;
-UPDATE students SET instructor_id = 1 WHERE id = 13;
-UPDATE students SET instructor_id = 1 WHERE id = 14;
-UPDATE students SET instructor_id = 1 WHERE id = 15;
-UPDATE students SET instructor_id = 2 WHERE id = 16;
-UPDATE students SET instructor_id = 2 WHERE id = 17;
-UPDATE students SET instructor_id = 2 WHERE id = 18;
-UPDATE students SET instructor_id = 2 WHERE id = 19;
-UPDATE students SET instructor_id = 2 WHERE id = 20;
-UPDATE students SET instructor_id = 2 WHERE id = 21;
-UPDATE students SET instructor_id = 2 WHERE id = 22;
-UPDATE students SET instructor_id = 2 WHERE id = 23;
-UPDATE students SET instructor_id = 2 WHERE id = 24;
-UPDATE students SET instructor_id = 2 WHERE id = 25;
-UPDATE students SET instructor_id = 2 WHERE id = 26;
-UPDATE students SET instructor_id = 2 WHERE id = 27;
-UPDATE students SET instructor_id = 2 WHERE id = 28;
-UPDATE students SET instructor_id = 2 WHERE id = 29;
-UPDATE students SET instructor_id = 2 WHERE id = 30;
-UPDATE students SET instructor_id = 3 WHERE id = 31;
-UPDATE students SET instructor_id = 3 WHERE id = 32;
-UPDATE students SET instructor_id = 3 WHERE id = 33;
-UPDATE students SET instructor_id = 3 WHERE id = 34;
-UPDATE students SET instructor_id = 3 WHERE id = 35;
-UPDATE students SET instructor_id = 3 WHERE id = 36;
-UPDATE students SET instructor_id = 3 WHERE id = 37;
-UPDATE students SET instructor_id = 3 WHERE id = 38;
-UPDATE students SET instructor_id = 3 WHERE id = 39;
-UPDATE students SET instructor_id = 3 WHERE id = 40;
-UPDATE students SET instructor_id = 3 WHERE id = 41;
-UPDATE students SET instructor_id = 3 WHERE id = 42;
-UPDATE students SET instructor_id = 3 WHERE id = 43;
-UPDATE students SET instructor_id = 3 WHERE id = 44;
-UPDATE students SET instructor_id = 3 WHERE id = 45;
-UPDATE students SET instructor_id = 4 WHERE id = 46;
-UPDATE students SET instructor_id = 4 WHERE id = 47;
-UPDATE students SET instructor_id = 4 WHERE id = 48;
-UPDATE students SET instructor_id = 4 WHERE id = 49;
-UPDATE students SET instructor_id = 4 WHERE id = 50;
-UPDATE students SET instructor_id = 4 WHERE id = 51;
-UPDATE students SET instructor_id = 4 WHERE id = 52;
-UPDATE students SET instructor_id = 4 WHERE id = 53;
-UPDATE students SET instructor_id = 4 WHERE id = 54;
-UPDATE students SET instructor_id = 4 WHERE id = 55;
-UPDATE students SET instructor_id = 4 WHERE id = 56;
-UPDATE students SET instructor_id = 4 WHERE id = 57;
-UPDATE students SET instructor_id = 4 WHERE id = 58;
-UPDATE students SET instructor_id = 4 WHERE id = 59;
-UPDATE students SET instructor_id = 4 WHERE id = 60;
-
-UPDATE students SET cohort_id = 1 WHERE id = 1;
-UPDATE students SET cohort_id = 1 WHERE id = 2;
-UPDATE students SET cohort_id = 1 WHERE id = 3;
-UPDATE students SET cohort_id = 1 WHERE id = 4;
-UPDATE students SET cohort_id = 1 WHERE id = 5;
-UPDATE students SET cohort_id = 1 WHERE id = 6;
-UPDATE students SET cohort_id = 1 WHERE id = 7;
-UPDATE students SET cohort_id = 1 WHERE id = 8;
-UPDATE students SET cohort_id = 1 WHERE id = 9;
-UPDATE students SET cohort_id = 1 WHERE id = 10;
-UPDATE students SET cohort_id = 1 WHERE id = 11;
-UPDATE students SET cohort_id = 1 WHERE id = 12;
-UPDATE students SET cohort_id = 1 WHERE id = 13;
-UPDATE students SET cohort_id = 1 WHERE id = 14;
-UPDATE students SET cohort_id = 1 WHERE id = 15;
-UPDATE students SET cohort_id = 2 WHERE id = 16;
-UPDATE students SET cohort_id = 2 WHERE id = 17;
-UPDATE students SET cohort_id = 2 WHERE id = 18;
-UPDATE students SET cohort_id = 2 WHERE id = 19;
-UPDATE students SET cohort_id = 2 WHERE id = 20;
-UPDATE students SET cohort_id = 2 WHERE id = 21;
-UPDATE students SET cohort_id = 2 WHERE id = 22;
-UPDATE students SET cohort_id = 2 WHERE id = 23;
-UPDATE students SET cohort_id = 2 WHERE id = 24;
-UPDATE students SET cohort_id = 2 WHERE id = 25;
-UPDATE students SET cohort_id = 2 WHERE id = 26;
-UPDATE students SET cohort_id = 2 WHERE id = 27;
-UPDATE students SET cohort_id = 2 WHERE id = 28;
-UPDATE students SET cohort_id = 2 WHERE id = 29;
-UPDATE students SET cohort_id = 2 WHERE id = 30;
-UPDATE students SET cohort_id = 3 WHERE id = 31;
-UPDATE students SET cohort_id = 3 WHERE id = 32;
-UPDATE students SET cohort_id = 3 WHERE id = 33;
-UPDATE students SET cohort_id = 3 WHERE id = 34;
-UPDATE students SET cohort_id = 3 WHERE id = 35;
-UPDATE students SET cohort_id = 3 WHERE id = 36;
-UPDATE students SET cohort_id = 3 WHERE id = 37;
-UPDATE students SET cohort_id = 3 WHERE id = 38;
-UPDATE students SET cohort_id = 3 WHERE id = 39;
-UPDATE students SET cohort_id = 3 WHERE id = 40;
-UPDATE students SET cohort_id = 3 WHERE id = 41;
-UPDATE students SET cohort_id = 3 WHERE id = 42;
-UPDATE students SET cohort_id = 3 WHERE id = 43;
-UPDATE students SET cohort_id = 3 WHERE id = 44;
-UPDATE students SET cohort_id = 3 WHERE id = 45;
-UPDATE students SET cohort_id = 4 WHERE id = 46;
-UPDATE students SET cohort_id = 4 WHERE id = 47;
-UPDATE students SET cohort_id = 4 WHERE id = 48;
-UPDATE students SET cohort_id = 4 WHERE id = 49;
-UPDATE students SET cohort_id = 4 WHERE id = 50;
-UPDATE students SET cohort_id = 4 WHERE id = 51;
-UPDATE students SET cohort_id = 4 WHERE id = 52;
-UPDATE students SET cohort_id = 4 WHERE id = 53;
-UPDATE students SET cohort_id = 4 WHERE id = 54;
-UPDATE students SET cohort_id = 4 WHERE id = 55;
-UPDATE students SET cohort_id = 4 WHERE id = 56;
-UPDATE students SET cohort_id = 4 WHERE id = 57;
-UPDATE students SET cohort_id = 4 WHERE id = 58;
-UPDATE students SET cohort_id = 4 WHERE id = 59;
-UPDATE students SET cohort_id = 4 WHERE id = 60;
-
-UPDATE students SET appointments = 'Medical' WHERE id = 1;
-UPDATE students SET appointments = 'Clothing' WHERE id = 2;
-UPDATE students SET appointments = 'Clearing' WHERE id = 3;
-UPDATE students SET appointments = 'Command survey' WHERE id = 4;
-UPDATE students SET appointments = 'Outprocessing' WHERE id = 5;
-UPDATE students SET appointments = 'Turn-in' WHERE id = 6;
-UPDATE students SET appointments = 'Range Day' WHERE id = 7;
-UPDATE students SET appointments = 'Medical' WHERE id = 8;
-UPDATE students SET appointments = 'Clothing' WHERE id = 9;
-UPDATE students SET appointments = 'Clearing' WHERE id = 10;
-UPDATE students SET appointments = 'Command survey' WHERE id = 11;
-UPDATE students SET appointments = 'Outprocessing' WHERE id = 12;
-UPDATE students SET appointments = 'Turn-in' WHERE id = 13;
-UPDATE students SET appointments = 'Range Day' WHERE id = 14;
-UPDATE students SET appointments = 'Turn-in' WHERE id = 15;
-UPDATE students SET appointments = 'Medical' WHERE id = 16;
-UPDATE students SET appointments = 'Clothing' WHERE id = 17;
-UPDATE students SET appointments = 'Clearing' WHERE id = 18;
-UPDATE students SET appointments = 'Command survey' WHERE id = 19;
-UPDATE students SET appointments = 'Outprocessing' WHERE id = 20;
-UPDATE students SET appointments = 'Turn-in' WHERE id = 21;
-UPDATE students SET appointments = 'Range Day' WHERE id = 22;
-UPDATE students SET appointments = 'Medical' WHERE id = 23;
-UPDATE students SET appointments = 'Clothing' WHERE id = 24;
-UPDATE students SET appointments = 'Clearing' WHERE id = 25;
-UPDATE students SET appointments = 'Command survey' WHERE id = 26;
-UPDATE students SET appointments = 'Outprocessing' WHERE id = 27;
-UPDATE students SET appointments = 'Turn-in' WHERE id = 28;
-UPDATE students SET appointments = 'Range Day' WHERE id = 29;
-UPDATE students SET appointments = 'Turn-in' WHERE id = 30;
-UPDATE students SET appointments = 'Medical' WHERE id = 31;
-UPDATE students SET appointments = 'Clothing' WHERE id = 32;
-UPDATE students SET appointments = 'Clearing' WHERE id = 33;
-UPDATE students SET appointments = 'Command survey' WHERE id = 34;
-UPDATE students SET appointments = 'Outprocessing' WHERE id = 35;
-UPDATE students SET appointments = 'Turn-in' WHERE id = 36;
-UPDATE students SET appointments = 'Range Day' WHERE id = 37;
-UPDATE students SET appointments = 'Medical' WHERE id = 38;
-UPDATE students SET appointments = 'Clothing' WHERE id = 39;
-UPDATE students SET appointments = 'Clearing' WHERE id = 40;
-UPDATE students SET appointments = 'Command survey' WHERE id = 41;
-UPDATE students SET appointments = 'Outprocessing' WHERE id = 42;
-UPDATE students SET appointments = 'Turn-in' WHERE id = 43;
-UPDATE students SET appointments = 'Range Day' WHERE id = 44;
-UPDATE students SET appointments = 'Turn-in' WHERE id = 45;
-UPDATE students SET appointments = 'Medical' WHERE id = 46;
-UPDATE students SET appointments = 'Clothing' WHERE id = 47;
-UPDATE students SET appointments = 'Clearing' WHERE id = 48;
-UPDATE students SET appointments = 'Command survey' WHERE id = 49;
-UPDATE students SET appointments = 'Outprocessing' WHERE id = 50;
-UPDATE students SET appointments = 'Turn-in' WHERE id = 51;
-UPDATE students SET appointments = 'Range Day' WHERE id = 52;
-UPDATE students SET appointments = 'Medical' WHERE id = 53;
-UPDATE students SET appointments = 'Clothing' WHERE id = 54;
-UPDATE students SET appointments = 'Clearing' WHERE id = 55;
-UPDATE students SET appointments = 'Command survey' WHERE id = 56;
-UPDATE students SET appointments = 'Outprocessing' WHERE id = 57;
-UPDATE students SET appointments = 'Turn-in' WHERE id = 58;
-UPDATE students SET appointments = 'Range Day' WHERE id = 59;
-UPDATE students SET appointments = 'Turn-in' WHERE id = 60;
-
-UPDATE students SET ets_date = 1 WHERE id = 1;
-UPDATE students SET ets_date = 2 WHERE id = 2;
-UPDATE students SET ets_date = 3 WHERE id = 3;
-UPDATE students SET ets_date = 4 WHERE id = 4;
-UPDATE students SET ets_date = 5 WHERE id = 5;
-UPDATE students SET ets_date = 6 WHERE id = 6;
-UPDATE students SET ets_date = 7 WHERE id = 7;
-UPDATE students SET ets_date = 8 WHERE id = 8;
-UPDATE students SET ets_date = 9 WHERE id = 9;
-UPDATE students SET ets_date = 10 WHERE id = 10;
-UPDATE students SET ets_date = 11 WHERE id = 11;
-UPDATE students SET ets_date = 12 WHERE id = 12;
-UPDATE students SET ets_date = 13 WHERE id = 13;
-UPDATE students SET ets_date = 14 WHERE id = 14;
-UPDATE students SET ets_date = 15 WHERE id = 15;
-UPDATE students SET ets_date = 16 WHERE id = 16;
-UPDATE students SET ets_date = 17 WHERE id = 17;
-UPDATE students SET ets_date = 18 WHERE id = 18;
-UPDATE students SET ets_date = 19 WHERE id = 19;
-UPDATE students SET ets_date = 20 WHERE id = 20;
-UPDATE students SET ets_date = 21 WHERE id = 21;
-UPDATE students SET ets_date = 22 WHERE id = 22;
-UPDATE students SET ets_date = 23 WHERE id = 23;
-UPDATE students SET ets_date = 24 WHERE id = 24;
-UPDATE students SET ets_date = 25 WHERE id = 25;
-UPDATE students SET ets_date = 26 WHERE id = 26;
-UPDATE students SET ets_date = 27 WHERE id = 27;
-UPDATE students SET ets_date = 28 WHERE id = 28;
-UPDATE students SET ets_date = 29 WHERE id = 29;
-UPDATE students SET ets_date = 30 WHERE id = 30;
-UPDATE students SET ets_date = 31 WHERE id = 31;
-UPDATE students SET ets_date = 32 WHERE id = 32;
-UPDATE students SET ets_date = 33 WHERE id = 33;
-UPDATE students SET ets_date = 34 WHERE id = 34;
-UPDATE students SET ets_date = 35 WHERE id = 35;
-UPDATE students SET ets_date = 36 WHERE id = 36;
-UPDATE students SET ets_date = 37 WHERE id = 37;
-UPDATE students SET ets_date = 38 WHERE id = 38;
-UPDATE students SET ets_date = 39 WHERE id = 39;
-UPDATE students SET ets_date = 40 WHERE id = 40;
-UPDATE students SET ets_date = 41 WHERE id = 41;
-UPDATE students SET ets_date = 42 WHERE id = 42;
-UPDATE students SET ets_date = 43 WHERE id = 43;
-UPDATE students SET ets_date = 44 WHERE id = 44;
-UPDATE students SET ets_date = 45 WHERE id = 45;
-UPDATE students SET ets_date = 46 WHERE id = 46;
-UPDATE students SET ets_date = 47 WHERE id = 47;
-UPDATE students SET ets_date = 48 WHERE id = 48;
-UPDATE students SET ets_date = 49 WHERE id = 49;
-UPDATE students SET ets_date = 50 WHERE id = 50;
-UPDATE students SET ets_date = 51 WHERE id = 51;
-UPDATE students SET ets_date = 52 WHERE id = 52;
-UPDATE students SET ets_date = 53 WHERE id = 53;
-UPDATE students SET ets_date = 54 WHERE id = 54;
-UPDATE students SET ets_date = 55 WHERE id = 55;
-UPDATE students SET ets_date = 56 WHERE id = 56;
-UPDATE students SET ets_date = 57 WHERE id = 57;
-UPDATE students SET ets_date = 58 WHERE id = 58;
-UPDATE students SET ets_date = 59 WHERE id = 59;
-UPDATE students SET ets_date = 60 WHERE id = 60;
-
-UPDATE cohorts SET instructor_id = 1 WHERE id = 1;
-UPDATE cohorts SET instructor_id = 2 WHERE id = 2;
-UPDATE cohorts SET instructor_id = 3 WHERE id = 3;
-UPDATE cohorts SET instructor_id = 4 WHERE id = 4;
-
-UPDATE student_tasks SET student_id = 1 WHERE id = 1;
-UPDATE student_tasks SET student_id = 2 WHERE id = 2;
-UPDATE student_tasks SET branch_tasks_id = 1 WHERE id = 1;
-UPDATE student_tasks SET branch_tasks_id = 2 WHERE id = 2;
+ALTER TABLE events
+ADD CONSTRAINT fk_note_id FOREIGN KEY (note_id) REFERENCES notes(id) ON DELETE CASCADE;
