@@ -30,7 +30,7 @@ function CohortNavDrops() {
 							<div
 								className='LcCohort'
 								onClick={() =>
-									handleCohortClicked(cohort.courseid, cohort.id - 1, cohort.id)
+									handleCohortClicked(cohort.courseid, cohort.id - 1, cohort.id) //why -1 ???
 								}
 							>
 								{cohort.courseid}
