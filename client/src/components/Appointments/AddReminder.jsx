@@ -13,14 +13,14 @@ export default function AddReminder({showAddModal, setShowAddModal}){
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const appointmentNote = {
+        const newNote = {
             note: `${note}`,
             student_id: `${selectedStudent}`
         }
-        fetch(`/api/appointments`, {
+        fetch(`/api/notes`, {
             method: "POST",
             headers: { "Content-Type" : "application/json"},
-            body: JSON.stringify(appointmentNote)
+            body: JSON.stringify(newNote)
         }).then(() =>{
             console.log('Note has been added');
             setShowAddModal(false);
@@ -35,10 +35,6 @@ export default function AddReminder({showAddModal, setShowAddModal}){
         setShowAddModal(false);
     } 
 
-
-
-
-    
     const modalStyle = {
         overlay:{
             zIndex: 100,
