@@ -4,40 +4,39 @@ import "./StudentAppointments.css";
 import Scroll from "./Scroll";
 
 export default function StudentAppointments() {
-  const { students, tasks, setNoteSelected, setTaskId } =
-    useContext(AppointmentContext);
+  const { students, notes, setNoteSelected, setNoteId } = useContext(AppointmentContext);
   const [expandedNoteIds, setExpandedNoteIds] = useState([]);
-  const [tasksToDelete, setTasksToDelete] = useState([]);
+  const [notesToDelete, setnotesToDelete] = useState([]);
 
   useEffect(() => {
-    // Remove deleted tasks from the state
-    setTasksToDelete([]);
-  }, [tasks]);
+    // Remove deleted notes from the state
+    setnotesToDelete([]);
+  }, [notes]);
 
-  const handleDeleteClick = (taskId) => {
-    fetch(`/api/appointments/${taskId}`, {
+  const handleDeleteClick = (noteId) => {
+    fetch(`/api/notes/${noteId}`, {
       method: "DELETE",
     })
       .then(() => {
-        console.log("Note " + taskId + " has been deleted");
-        setTasksToDelete((prevTasks) => [...prevTasks, taskId]);
+        console.log("Note " + noteId + " has been deleted");
+        setnotesToDelete((prevNotes) => [...prevNotes, noteId]);
       })
       .catch((error) => {
         console.error("Error deleting note:", error);
       });
   };
 
-  const handleNoteToggle = (taskId, event) => {
+  const handleNoteToggle = (noteId, event) => {
     const target = event.target;
     const isExpandButton = target.classList.contains("expandButton");
     const isCollapseButton = target.classList.contains("collapseButton");
 
     if (isExpandButton || isCollapseButton) {
       setExpandedNoteIds((prevExpandedNoteIds) => {
-        if (prevExpandedNoteIds.includes(taskId)) {
-          return prevExpandedNoteIds.filter((id) => id !== taskId);
+        if (prevExpandedNoteIds.includes(noteId)) {
+          return prevExpandedNoteIds.filter((id) => id !== noteId);
         } else {
-          return [...prevExpandedNoteIds, taskId];
+          return [...prevExpandedNoteIds, noteId];
         }
       });
     }
@@ -47,48 +46,48 @@ export default function StudentAppointments() {
     <div>
       <Scroll>
         {students.map((student, indexed) => {
-          const studentTasks = tasks.filter(
-            (task) => task.student_id === student.id
+          const studentNotes = notes.filter(
+            (note) => note.student_id === student.id
           );
-          const hasTasks = studentTasks.length > 0;
+          const hasNotes = studentNotes.length > 0;
 
           return (
             <div key={indexed}>
-              {hasTasks && (
+              {hasNotes && (
                 <div className="studentNames">
                   {student.firstname} {student.lastname}
                 </div>
               )}
               <div className="appointments">
-                {studentTasks.map((task) => {
-                  if (tasksToDelete.includes(task.id)) {
-                    return null; // Skip rendering the deleted task
+                {studentNotes.map((note) => {
+                  if (notesToDelete.includes(note.id)) {
+                    return null; // Skip rendering the deleted note
                   }
 
-                  const isExpanded = expandedNoteIds.includes(task.id);
+                  const isExpanded = expandedNoteIds.includes(note.id);
                   const noteDisplay = isExpanded
-                    ? task.note
-                    : task.note.length > 100
-                    ? task.note.slice(0, 100) + "... "
-                    : task.note;
-                  const showSeeMoreButton = task.note.length > 100;
+                    ? note.note
+                    : note.note.length > 100
+                    ? note.note.slice(0, 100) + "... "
+                    : note.note;
+                  const showSeeMoreButton = note.note.length > 100;
                   const showCollapseButton =
-                    task.note.length > 100 && isExpanded;
+                    note.note.length > 100 && isExpanded;
 
                   return (
-                    <div key={task.id} className="noteContainer">
+                    <div key={note.id} className="noteContainer">
                       <div
                         className="reminder"
                         onClick={() => {
-                          setTaskId(task.id);
-                          setNoteSelected(task.note);
+                          setNoteId(note.id);
+                          setNoteSelected(note.note);
                         }}
                       >
                         <div
                           className={
                             isExpanded ? "noteExpanded" : "noteCollapsed"
                           }
-                          onClick={(event) => handleNoteToggle(task.id, event)}
+                          onClick={(event) => handleNoteToggle(note.id, event)}
                         >
                           {noteDisplay}
                           {!isExpanded && showSeeMoreButton && (
@@ -99,7 +98,7 @@ export default function StudentAppointments() {
                           <span
                             className="collapseButton"
                             onClick={(event) =>
-                              handleNoteToggle(task.id, event
+                              handleNoteToggle(note.id, event
 )
                             }
                           >
@@ -109,7 +108,7 @@ export default function StudentAppointments() {
                       </div>
                       <button
                         className="deleteButton"
-                        onClick={() => handleDeleteClick(task.id)}
+                        onClick={() => handleDeleteClick(note.id)}
                       >
                         Delete
                       </button>
