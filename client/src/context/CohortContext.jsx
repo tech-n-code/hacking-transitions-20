@@ -5,20 +5,20 @@ const CohortContext = createContext();
 
 export const CohortProvider = ({children}) => {
     const [ update, setUpdate ] = useState(false);
-    const [cohorts, setCohorts] = useState([]);
-    const [students, setStudents] = useState([]);
-    const [instructors, setInstructors] = useState([]);
-    const [cohortClicked, setCohortClicked] = useState("");
-    const [cohortClickedId, setCohortClickedId] = useState(1);
-    const [studentID, setStudentClicked] = useState(1);
-    const [studentdata, setStudentData] = useState(null);
-    const [branchdata, setBranchData] = useState(null);
-    const [studentModalOpen, setStudentModalOpen] = useState(false);
+    const [ cohorts, setCohorts ] = useState([]);
+    const [ students, setStudents ] = useState([]);
+    const [ instructors, setInstructors ] = useState([]);
+    const [ cohortClicked, setCohortClicked ] = useState("");
+    const [ cohortClickedId, setCohortClickedId ] = useState(1);
+    const [ studentID, setStudentClicked ] = useState(1);
+    const [ studentdata, setStudentData ] = useState(null);
+    const [ branchdata, setBranchData ] = useState(null);
+    const [ studentModalOpen, setStudentModalOpen ] = useState(false);
 
     const handleCohortClicked = (cohortTitle, cohortId) => {
         if(cohortClicked === cohortTitle){
             setCohortClicked("");
-        }else{
+        } else {
             setCohortClicked(cohortTitle);
             setCohortClickedId(cohortId);
             setStudentModalOpen(false);
@@ -28,7 +28,7 @@ export const CohortProvider = ({children}) => {
 
     //Gets all branches
     useEffect(() => {
-        fetch(`/api/branches`)
+        fetch('/api/branches')
             .then(response => response.json())
             .then(data => setBranchData(data))
             .catch(error => console.error(error));
