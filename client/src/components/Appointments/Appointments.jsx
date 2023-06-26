@@ -13,13 +13,13 @@ export default function RightColumn(){
 
     const handleAddClick = () =>{
         setShowAddModal(!showAddModal)
-        console.log(showAddModal)
+        console.log('Show Modal: ' + showAddModal)
     }
 
     const closeModal = (e) => {
         
         setShowAddModal(false);
-        console.log(showAddModal);
+        console.log('Show Modal: ' + showAddModal);
     }
 
     const handleEditClick = () =>{
