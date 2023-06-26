@@ -22,9 +22,9 @@ export default function RightColumn(){
         console.log(showAddModal);
     }
 
-    const handleEditClick = () =>{
-        setEditNote(true)
-    }
+    // const handleEditClick = () =>{
+    //     setEditNote(true)
+    // }
 
 
 
@@ -37,9 +37,9 @@ export default function RightColumn(){
                 <span className="addButton" onClick={handleAddClick}>
                     Add
                 </span>
-                <span className="editButton" onClick={handleEditClick}>
+                {/* <span className="editButton" onClick={handleEditClick}>
                     Edit
-                </span>
+                </span> */}
                 {/* <span className="deleteButton" onClick={handleDeleteClick}>
                     Delete
                 </span> */}
@@ -48,7 +48,7 @@ export default function RightColumn(){
                 <StudentAppointments/>
             </div>
             <AddReminder setShowAddModal = {setShowAddModal} closeModal = {closeModal} showAddModal = {showAddModal}/>
-           {editNote && <ChangeReminder setEditNote = {setEditNote}/>}
+           <ChangeReminder editNote = {editNote} setEditNote = {setEditNote}/>
         </div>
     );
 }
