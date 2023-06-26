@@ -2,12 +2,21 @@ import React, { useContext, useState, useEffect } from "react";
 import AppointmentContext from "../../context/AppointmentContext.jsx";
 import "./StudentAppointments.css";
 import Scroll from "./Scroll";
+import ChangeReminder from "./ChangeReminder";
 
 export default function StudentAppointments() {
   const { students, tasks, setNoteSelected, setTaskId } =
     useContext(AppointmentContext);
   const [expandedNoteIds, setExpandedNoteIds] = useState([]);
   const [tasksToDelete, setTasksToDelete] = useState([]);
+
+  const[ editNote, setEditNote ] = useState(false)
+
+    const handleEditClick = () =>{
+        setEditNote(true)
+        console.log(editNote)
+    }
+
   const [deleteConfirmation, setDeleteConfirmation] = useState(null);
 
   useEffect(() => {
@@ -119,6 +128,17 @@ export default function StudentAppointments() {
                           </span>
                         )}
                       </div>
+
+                      <button
+                        className="editButton"
+                        onClick={
+                          () => { handleEditClick(task.id)
+                          setTaskId(task.id);
+                          setNoteSelected(task.note);
+                        }}
+                      >
+                        Edit
+                      </button>
                       {deleteConfirmation === task.id ? (
                         <div>
                           <button
@@ -142,6 +162,7 @@ export default function StudentAppointments() {
                           Delete
                         </button>
                       )}
+
                     </div>
                   );
                 })}
@@ -150,6 +171,7 @@ export default function StudentAppointments() {
           );
         })}
       </Scroll>
+      <ChangeReminder editNote = {editNote} setEditNote = {setEditNote}/>
     </div>
   );
 }
