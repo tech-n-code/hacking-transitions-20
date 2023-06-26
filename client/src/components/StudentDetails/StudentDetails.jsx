@@ -11,59 +11,67 @@ const StudentDetail = () => {
     studentdata,
     branchdata,
     assignColor,
+    formatDate,
     studentModalOpen,
     setStudentModalOpen,
   } = useContext(CohortContext);
 
-  const { notes } = useContext(AppointmentContext);
+  const { notes, events } = useContext(AppointmentContext);
 
-  // const appointments = {};
-  // const notes = {};
+  const studentNotes = notes.filter((note) => note.student_id === studentID);
+  const studentEvents = events.filter((event) => event.student_id === studentID);
 
-  // tasks.forEach((task) => {
-  //   const { id, note, student_id, appointment_date } = task;
-
-  //   if (student_id === studentID && appointment_date !== null) {
-  //     appointments[id] = {
-  //       id: id,
-  //       note: note,
-  //       date: appointment_date,
-  //     };
-  //   } else if (student_id === studentID && appointment_date === null) {
-  //     notes[id] = {
-  //       id: id,
-  //       note: note,
-  //     };
-  //   }
-  // });
-
-  const studentName =
-    studentdata && studentdata.length > 0
-      ? studentdata[0].firstname + " " + studentdata[0].lastname
-      : "";
-  const studentStatus =
-    studentdata && studentdata.length > 0 ? studentdata[0].dutystatus : "";
-  const studentInstallation =
-    studentdata && studentdata.length > 0 ? studentdata[0].base : "";
-  const studentLocation =
-    studentdata && studentdata.length > 0 ? studentdata[0].location : "";
-  const studentEmail =
-    studentdata && studentdata.length > 0 ? studentdata[0].email : "";
-  let studentBranch = "";
-
-  if (branchdata && branchdata.length > 0) {
-    const foundBranch = branchdata.find(
-      (branch) => branch.id === studentdata[0].branch_id
-    );
-    studentBranch = foundBranch ? foundBranch.name : "";
-  }
+  const studentName = studentdata && studentdata.length > 0
+    ? studentdata[0].firstname + " " + studentdata[0].lastname
+    : "";
+  const studentStatus = studentdata && studentdata.length > 0 
+    ? studentdata[0].dutystatus
+    : "";
+  const studentInstallation = studentdata && studentdata.length > 0
+    ? studentdata[0].base
+    : "";
+  const studentLocation = studentdata && studentdata.length > 0
+    ? studentdata[0].location
+    : "";
+  const studentEmail = studentdata && studentdata.length > 0
+    ? studentdata[0].email
+    : "";
 
   const formattedPhoneNumber = studentdata[0].phonenumber.replace(
     /(\d{3})(\d{3})(\d{4})/,
     "($1)-$2-$3"
   );
-  const etsDate = new Date(studentdata[0].ets_date).toLocaleDateString("en-us");
-  const badgeColor = assignColor(studentdata[0].ets_date);
+  
+  const getBadgeMsg = (givenDate) => {
+    const today = new Date();
+    const futureDate = new Date(givenDate);
+    if (today >= futureDate) {
+      return "Done";
+    } else {
+      const timeLeft = futureDate.getTime() - today.getTime();
+      const daysLeft = Math.ceil(timeLeft / (1000 * 60 * 60 * 24));
+      return `${daysLeft} days`;
+    }
+  };
+  
+  const getStudentETS = (givenStudentId) => {
+    const studentETS = events.find((event) =>
+      event.title === 'ETS' && event.student_id === givenStudentId);
+    const studentETSdate = studentETS ? studentETS.startdate : null;
+    return studentETSdate;
+  }
+  
+  const getStudentBranch = (givenStudentBranchId) => {
+    const foundBranch = branchdata.find((branch) =>
+      branch.id === givenStudentBranchId);
+    const studentBranch = foundBranch ? foundBranch.name : null;
+    return studentBranch;
+  }
+
+  const studentBranch = getStudentBranch(studentdata[0].branch_id);
+  const studentETSdate = getStudentETS(studentID);
+  const badgeColor = assignColor(studentETSdate);
+  const badgeMsg = getBadgeMsg(studentETSdate);
 
   const modalStyle = {
     overlay: {
@@ -86,20 +94,6 @@ const StudentDetail = () => {
       zIndex: 2,
     },
   };
-
-  const getbadgeMsg = (givenDate) => {
-    const today = new Date();
-    const futureDate = new Date(givenDate);
-    if (today >= futureDate) {
-      return "Done";
-    } else {
-      const timeLeft = futureDate.getTime() - today.getTime();
-      const daysLeft = Math.ceil(timeLeft / (1000 * 60 * 60 * 24));
-      return `${daysLeft} days`;
-    }
-  };
-
-  const badgeMsg = getbadgeMsg(studentdata[0].ets_date);
 
   function closeModal() {
     setStudentModalOpen(false);
@@ -156,7 +150,7 @@ const StudentDetail = () => {
             <tr>
               <td className="column1">ETS Date:</td>
               <td className="column2">
-                <span>{etsDate}</span>
+                <span>{formatDate(studentETSdate)}</span>
                 <span
                   className="student-details-badge"
                   id={`student-badge-${badgeColor}`}
@@ -181,18 +175,17 @@ const StudentDetail = () => {
             </tr>
           </thead>
           <tbody>
-            {Object.keys(appointments).length > 0 ? (
-              Object.entries(appointments).map(([id, appointment], index) => {
+            {events.length > 0 ? (
+              studentEvents.map((studentEvent, index) => {
                 const currentDate = new Date();
-                const appointmentDate = new Date(appointment.date);
+                const appointmentDate = new Date(studentEvent.startdate);
                 const isStrikethrough = currentDate.getTime() > appointmentDate.getTime();
-                const apptDateFormatted = new Date(appointment.date).toLocaleDateString("en-US");
                 return (
                 <tr key={index}>
                   <td className={`student-details-appt ${isStrikethrough ? 'strikethrough-text' : ''}`}>
-                    {apptDateFormatted}
+                    {formatDate(studentEvent.startdate)}
                   </td>
-                  <td className="student-details-appt">{appointment.note}</td>
+                  <td className="student-details-appt">{studentEvent.title}</td>
                 </tr>
                 );
               })
@@ -213,17 +206,16 @@ const StudentDetail = () => {
             </tr>
           </thead>
           <tbody>
-            {notes
-              .filter((note) => note.student_id === studentID)
-              .map(([id, note], index) => (
+            {notes.length > 0 ? (
+              studentNotes.map((studentNote, index) => {
+                return (
                 <tr key={index}>
-                  <td className="student-details-appt">{note.note}</td>
+                  <td className={`student-details-appt`}>
+                    {studentNote.note}
+                  </td>
                 </tr>
-              ))}
-            {notes.filter((note) => note.student_id === studentID).length === 0 ? (
-              <tr>
-                <td className="student-details-appt">None.</td>
-              </tr>
+                );
+              })
             ) : (
               <tr>
                 <td className="student-details-appt">None.</td>
