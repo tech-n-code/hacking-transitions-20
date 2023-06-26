@@ -126,7 +126,6 @@ export default function AddReminder({showAddModal, setShowAddModal}){
                     <button className="addNoteCancel" onClick={closeModal }>
                         Cancel
                     </button>
-                    <button>N</button>
                         </span>
                     </div>
                 </form>
