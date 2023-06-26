@@ -1,36 +1,51 @@
-### test get all events
-GET  http://localhost:8000/api/events
-
-
-### test delete note by id
-DELETE http://localhost:8000/api/notes/14
-
-
-
-
-### test get all notes
-GET  http://localhost:8000/api/notes
-
-
-### test get note by id
-GET  http://localhost:8000/api/notes/2
-
-
-### test delete note by id
-DELETE http://localhost:8000/api/notes/14
-
-
-
-### test get student by id
-GET http://localhost:8000/api/students/3
+### test get all branches
+GET http://localhost:8000/api/branches
 
 
 ### test get all cohorts
 GET http://localhost:8000/api/cohorts
 
 
-### test get all students for a cohort
+### test get all instructors
+GET http://localhost:8000/api/instructors
+
+
+### test get a cohort by cohortId
+GET http://localhost:8000/api/cohorts/1
+
+
+### test get all students in a cohort by cohortId
 GET http://localhost:8000/api/cohorts/1/students
+
+
+### test get student by id
+GET http://localhost:8000/api/students/3
+
+
+### test get all events
+GET http://localhost:8000/api/events
+
+
+### test get all events by cohortId
+GET http://localhost:8000/api/cohorts/1/events
+
+
+### test get all notes
+GET http://localhost:8000/api/notes
+
+
+### test get all notes by cohortId
+GET http://localhost:8000/api/cohorts/3/notes
+
+
+### test get a note by noteId
+GET http://localhost:8000/api/notes/2
+
+
+
+### test delete note by id
+DELETE http://localhost:8000/api/notes/14
+
 
 
 ### post req
