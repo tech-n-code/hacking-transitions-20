@@ -23,10 +23,9 @@ CREATE TABLE instructors (
 
 CREATE TABLE cohorts (
   id SERIAL PRIMARY KEY,
-  courseid VARCHAR (10) NOT NULL,
+  title VARCHAR (10) NOT NULL,
   startdate DATE NOT NULL,
   enddate DATE NOT NULL,
-  numberofstudents INT NOT NULL,
   instructor_id INT,
   CONSTRAINT fk_instructor_id FOREIGN KEY (instructor_id) REFERENCES instructors(id) ON DELETE CASCADE
 );
