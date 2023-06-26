@@ -5,10 +5,18 @@ import Scroll from "./Scroll";
 import ChangeReminder from "./ChangeReminder";
 
 export default function StudentAppointments() {
-  const { students, tasks, setNoteSelected, setTaskId } =
-    useContext(AppointmentContext);
+  const { students, notes, setNoteSelected, setNoteId } = useContext(AppointmentContext);
   const [expandedNoteIds, setExpandedNoteIds] = useState([]);
-  const [tasksToDelete, setTasksToDelete] = useState([]);
+  const [notesToDelete, setNotesToDelete] = useState([]);
+
+  const[ editNote, setEditNote ] = useState(false);
+
+  const handleEditClick = () =>{
+    setEditNote(true);
+    console.log(editNote);
+  }
+
+  const [deleteConfirmation, setDeleteConfirmation] = useState(null);
 
   const[ editNote, setEditNote ] = useState(false)
 
@@ -20,28 +28,28 @@ export default function StudentAppointments() {
   const [deleteConfirmation, setDeleteConfirmation] = useState(null);
 
   useEffect(() => {
-    // Remove deleted tasks from the state
-    setTasksToDelete([]);
-  }, [tasks]);
+    // Remove deleted notes from the state
+    setNotesToDelete([]);
+  }, [notes]);
 
-  const handleDeleteClick = (taskId) => {
-    setDeleteConfirmation(taskId);
+  const handleDeleteClick = (noteId) => {
+    setDeleteConfirmation(noteId);
   };
 
   const handleConfirmDeleteClick = () => {
     if (deleteConfirmation) {
-      fetch(`/api/appointments/${deleteConfirmation}`, {
+      fetch(`/api/notes/${noteId}`, {
         method: "DELETE",
       })
-        .then(() => {
-          console.log("Note " + deleteConfirmation + " has been deleted");
-          setTasksToDelete((prevTasks) => [...prevTasks, deleteConfirmation]);
-          setDeleteConfirmation(null);
-        })
-        .catch((error) => {
-          console.error("Error deleting note:", error);
-          setDeleteConfirmation(null);
-        });
+      .then(() => {
+        console.log("Note " + deleteConfirmation + " has been deleted");
+        setNotesToDelete((prevNotes) => [...prevNotes, deleteConfirmation]);
+        setDeleteConfirmation(null);
+      })
+      .catch((error) => {
+        console.error("Error deleting note:", error);
+        setDeleteConfirmation(null);
+      });
     }
   };
 
@@ -49,17 +57,17 @@ export default function StudentAppointments() {
     setDeleteConfirmation(null);
   };
 
-  const handleNoteToggle = (taskId, event) => {
+  const handleNoteToggle = (noteId, event) => {
     const target = event.target;
     const isExpandButton = target.classList.contains("expandButton");
     const isCollapseButton = target.classList.contains("collapseButton");
 
     if (isExpandButton || isCollapseButton) {
       setExpandedNoteIds((prevExpandedNoteIds) => {
-        if (prevExpandedNoteIds.includes(taskId)) {
-          return prevExpandedNoteIds.filter((id) => id !== taskId);
+        if (prevExpandedNoteIds.includes(noteId)) {
+          return prevExpandedNoteIds.filter((id) => id !== noteId);
         } else {
-          return [...prevExpandedNoteIds, taskId];
+          return [...prevExpandedNoteIds, noteId];
         }
       });
     }
@@ -69,48 +77,47 @@ export default function StudentAppointments() {
     <div>
       <Scroll>
         {students.map((student, indexed) => {
-          const studentTasks = tasks.filter(
-            (task) => task.student_id === student.id
+          const studentNotes = notes.filter(
+            (note) => note.student_id === student.id
           );
-          const hasTasks = studentTasks.length > 0;
+          const hasNotes = studentNotes.length > 0;
 
           return (
             <div key={indexed}>
-              {hasTasks && (
+              {hasNotes && (
                 <div className="studentNames">
                   {student.firstname} {student.lastname}
                 </div>
               )}
               <div className="appointments">
-                {studentTasks.map((task) => {
-                  if (tasksToDelete.includes(task.id)) {
-                    return null; // Skip rendering the deleted task
+                {studentNotes.map((note) => {
+                  if (notesToDelete.includes(note.id)) {
+                    return null; // Skip rendering the deleted note
                   }
 
-                  const isExpanded = expandedNoteIds.includes(task.id);
+                  const isExpanded = expandedNoteIds.includes(note.id);
                   const noteDisplay = isExpanded
-                    ? task.note
-                    : task.note.length > 70
-                    ? task.note.slice(0, 70) + "... "
-                    : task.note;
-                  const showSeeMoreButton = task.note.length > 70;
+                    ? note.note
+                    : note.note.length > 70
+                    ? note.note.slice(0, 70) + "... "
+                    : note.note;
+                  const showSeeMoreButton = note.note.length > 70;
                   const showCollapseButton =
-                    task.note.length > 70 && isExpanded;
-
+                    note.note.length > 70 && isExpanded;
                   return (
-                    <div key={task.id} className="noteContainer">
+                    <div key={note.id} className="noteContainer">
                       <div
                         className="reminder"
                         onClick={() => {
-                          setTaskId(task.id);
-                          setNoteSelected(task.note);
+                          setNoteId(note.id);
+                          setNoteSelected(note.note);
                         }}
                       >
                         <div
                           className={
                             isExpanded ? "noteExpanded" : "noteCollapsed"
                           }
-                          onClick={(event) => handleNoteToggle(task.id, event)}
+                          onClick={(event) => handleNoteToggle(note.id, event)}
                         >
                           {noteDisplay}
                           {!isExpanded && showSeeMoreButton && (
@@ -121,7 +128,7 @@ export default function StudentAppointments() {
                           <span
                             className="collapseButton"
                             onClick={(event) =>
-                              handleNoteToggle(task.id, event)
+                              handleNoteToggle(note.id, event)
                             }
                           >
                             Collapse note
@@ -132,14 +139,14 @@ export default function StudentAppointments() {
                       <button
                         className="editButton"
                         onClick={
-                          () => { handleEditClick(task.id)
-                          setTaskId(task.id);
-                          setNoteSelected(task.note);
+                          () => { handleEditClick(note.id)
+                          setNoteId(note.id);
+                          setNoteSelected(note.note);
                         }}
                       >
                         Edit
                       </button>
-                      {deleteConfirmation === task.id ? (
+                      {deleteConfirmation === note.id ? (
                         <div>
                           <button
                             className="confirmDeleteButton"
@@ -157,12 +164,11 @@ export default function StudentAppointments() {
                       ) : (
                         <button
                           className="deleteButton"
-                          onClick={() => handleDeleteClick(task.id)}
+                          onClick={() => handleDeleteClick(note.id)}
                         >
                           Delete
                         </button>
                       )}
-
                     </div>
                   );
                 })}

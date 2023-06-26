@@ -4,7 +4,8 @@ import AppointmentContext from "../../context/AppointmentContext";
 import Modal from "react-modal";
 
 export default function ChangeReminder({ editNote, setEditNote }){
-    const { noteSelected, taskId , setUpdate, setNoteSelected, showAddModal, setShowAddModal } = useContext(AppointmentContext);
+    const { noteSelected, noteId , setUpdate, setNoteSelected, showAddModal, setShowAddModal } = useContext(AppointmentContext);
+
     
     // const handleEditClick = () =>{
     //     setEditNote(true)
@@ -13,7 +14,7 @@ export default function ChangeReminder({ editNote, setEditNote }){
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        fetch(`/api/appointments/${taskId}`, {
+        fetch(`/api/notes/${noteId}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ note: noteSelected }) // Wrap noteSelected in an object with the key "note"
@@ -54,7 +55,7 @@ export default function ChangeReminder({ editNote, setEditNote }){
           }}
 
           function closeModal(){
-            setIsStudentModalOpen(false)
+            setStudentModalOpen(false)
             } 
 
     return(

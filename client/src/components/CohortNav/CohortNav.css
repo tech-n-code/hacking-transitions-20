@@ -52,7 +52,7 @@
     color: white;
 }
 
-.cohortNavDrop.LCwasClicked {
+.cohortNavDrop.cohortClicked {
     background-color: #0D0F4A;
     border-radius: 10px;
     color: white;

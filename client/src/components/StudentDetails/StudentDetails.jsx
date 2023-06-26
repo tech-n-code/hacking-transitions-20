@@ -6,126 +6,78 @@ import AppointmentContext from "../../context/AppointmentContext.jsx";
 Modal.setAppElement("#root");
 import AddReminder from "../Appointments/AddReminder";
 
-
-
 const StudentDetail = () => {
   const {
     studentID,
     studentdata,
     branchdata,
     assignColor,
-    isStudentModalOpen,
-    setIsStudentModalOpen,
+    formatDate,
+    studentModalOpen,
+    setStudentModalOpen,
   } = useContext(CohortContext);
 
-  // const { tasks} = useContext(AppointmentContext);
+  const { notes, events, showAddModal, setShowAddModal } = useContext(AppointmentContext);
 
-  const {showAddModal, setShowAddModal} = useContext(AppointmentContext);
-  const [selectedStudent, setSelectedStudent] = useState("");
+  const studentNotes = notes.filter((note) => note.student_id === studentID);
+  const studentEvents = events.filter((event) => event.student_id === studentID);
 
-  
-  const { students, tasks, setNoteSelected, setTaskId } =
-  useContext(AppointmentContext);
-
-
-
-
-  const handleAddReminder = () => {
-      // setIsStudentModalOpen(false);
-      setShowAddModal(true);
-  }
-  const handleEditReminder = () => {
-    setEditeNote(true);
-  
-  }
-
-  const handleDeleteClick = (e) => {
-    // e.preventDefault();
-
-    fetch(`http://localhost:8000/api/appointments/${selectedStudent}`, {
-      method: "DELETE",
-    })
-      .then(() => {
-        console.log("Note has been deleted");
-        setUpdate(true);
-      })
-      .catch((error) => {
-        console.error("Error deleting note:", error);
-      });
-
-      fetch(`/api/appointments/${selectedStudent}`, {
-        method: "DELETE",
-    }).then(() => {
-        console.log('Note has been deleted');
-        setDeleteNote(false);
-        setUpdate(true);
-    })
-  };
-
-  const handleConfirmDeleteClick = () => {
-    if (deleteConfirmation) {
-      fetch(`/api/appointments/${deleteConfirmation}`, {
-        method: "DELETE",
-      })
-        .then(() => {
-          console.log("Note " + deleteConfirmation + " has been deleted");
-          setTasksToDelete((prevTasks) => [...prevTasks, deleteConfirmation]);
-          setDeleteConfirmation(null);
-        })
-        .catch((error) => {
-          console.error("Error deleting note:", error);
-          setDeleteConfirmation(null);
-        });
-    }
-  };
-
-  const appointments = {};
-  const notes = {};
-
-  tasks.forEach((task) => {
-    const { id, note, student_id, appointment_date } = task;
-
-    if (student_id === studentID && appointment_date !== null) {
-      appointments[id] = {
-        id: id,
-        note: note,
-        date: appointment_date,
-      };
-    } else if (student_id === studentID && appointment_date === null) {
-      notes[id] = {
-        id: id,
-        note: note,
-      };
-    }
-  });
-
-  const studentName =
-    studentdata && studentdata.length > 0
-      ? studentdata[0].firstname + " " + studentdata[0].lastname
-      : "";
-  const studentStatus =
-    studentdata && studentdata.length > 0 ? studentdata[0].dutystatus : "";
-  const studentInstallation =
-    studentdata && studentdata.length > 0 ? studentdata[0].base : "";
-  const studentLocation =
-    studentdata && studentdata.length > 0 ? studentdata[0].location : "";
-  const studentEmail =
-    studentdata && studentdata.length > 0 ? studentdata[0].email : "";
-  let studentBranch = "";
-
-  if (branchdata && branchdata.length > 0) {
-    const foundBranch = branchdata.find(
-      (branch) => branch.id === studentdata[0].branch_id
-    );
-    studentBranch = foundBranch ? foundBranch.name : "";
-  }
+  const studentName = studentdata && studentdata.length > 0
+    ? studentdata[0].firstname + " " + studentdata[0].lastname
+    : "";
+  const studentStatus = studentdata && studentdata.length > 0 
+    ? studentdata[0].dutystatus
+    : "";
+  const studentInstallation = studentdata && studentdata.length > 0
+    ? studentdata[0].base
+    : "";
+  const studentLocation = studentdata && studentdata.length > 0
+    ? studentdata[0].location
+    : "";
+  const studentEmail = studentdata && studentdata.length > 0
+    ? studentdata[0].email
+    : "";
 
   const formattedPhoneNumber = studentdata[0].phonenumber.replace(
     /(\d{3})(\d{3})(\d{4})/,
     "($1)-$2-$3"
   );
-  const etsDate = new Date(studentdata[0].ets_date).toLocaleDateString("en-us");
-  const badgeColor = assignColor(studentdata[0].ets_date);
+  
+  const handleAddReminder = () => {
+    // setIsStudentModalOpen(false);
+    setShowAddModal(true);
+}
+
+  const getBadgeMsg = (givenDate) => {
+    const today = new Date();
+    const futureDate = new Date(givenDate);
+    if (today >= futureDate) {
+      return "Done";
+    } else {
+      const timeLeft = futureDate.getTime() - today.getTime();
+      const daysLeft = Math.ceil(timeLeft / (1000 * 60 * 60 * 24));
+      return `${daysLeft} days`;
+    }
+  };
+  
+  const getStudentETS = (givenStudentId) => {
+    const studentETS = events.find((event) =>
+      event.title === 'ETS' && event.student_id === givenStudentId);
+    const studentETSdate = studentETS ? studentETS.startdate : null;
+    return studentETSdate;
+  }
+  
+  const getStudentBranch = (givenStudentBranchId) => {
+    const foundBranch = branchdata.find((branch) =>
+      branch.id === givenStudentBranchId);
+    const studentBranch = foundBranch ? foundBranch.name : null;
+    return studentBranch;
+  }
+
+  const studentBranch = getStudentBranch(studentdata[0].branch_id);
+  const studentETSdate = getStudentETS(studentID);
+  const badgeColor = assignColor(studentETSdate);
+  const badgeMsg = getBadgeMsg(studentETSdate);
 
   const modalStyle = {
     overlay: {
@@ -149,28 +101,13 @@ const StudentDetail = () => {
     },
   };
 
-  const getbadgeMsg = (givenDate) => {
-    const today = new Date();
-    const futureDate = new Date(givenDate);
-    if (today >= futureDate) {
-      return "Done";
-    } else {
-      const timeLeft = futureDate.getTime() - today.getTime();
-      const daysLeft = Math.ceil(timeLeft / (1000 * 60 * 60 * 24));
-      return `${daysLeft} days`;
-    }
-  };
-
-  const badgeMsg = getbadgeMsg(studentdata[0].ets_date);
-
   function closeModal() {
-    setIsStudentModalOpen(false);
-    setShowAddModal(false); 
+    setStudentModalOpen(false);
   }
 
   return (
     <Modal
-      isOpen={isStudentModalOpen}
+      isOpen={studentModalOpen}
       onRequestClose={closeModal}
       style={modalStyle}
     >
@@ -183,7 +120,7 @@ const StudentDetail = () => {
                 <div
                   className="student-exit"
                   onClick={() => {
-                    setIsStudentModalOpen(false);
+                    setStudentModalOpen(false);
                   }}
                 >
                   X
@@ -219,7 +156,7 @@ const StudentDetail = () => {
             <tr>
               <td className="column1">ETS Date:</td>
               <td className="column2">
-                <span>{etsDate}</span>
+                <span>{formatDate(studentETSdate)}</span>
                 <span
                   className="student-details-badge"
                   id={`student-badge-${badgeColor}`}
@@ -244,18 +181,17 @@ const StudentDetail = () => {
             </tr>
           </thead>
           <tbody>
-            {Object.keys(appointments).length > 0 ? (
-              Object.entries(appointments).map(([id, appointment], index) => {
+            {events.length > 0 ? (
+              studentEvents.map((studentEvent, index) => {
                 const currentDate = new Date();
-                const appointmentDate = new Date(appointment.date);
+                const appointmentDate = new Date(studentEvent.startdate);
                 const isStrikethrough = currentDate.getTime() > appointmentDate.getTime();
-                const apptDateFormatted = new Date(appointment.date).toLocaleDateString("en-US");
                 return (
                 <tr key={index}>
                   <td className={`student-details-appt ${isStrikethrough ? 'strikethrough-text' : ''}`}>
-                    {apptDateFormatted}
+                    {formatDate(studentEvent.startdate)}
                   </td>
-                  <td className="student-details-appt">{appointment.note}</td>
+                  <td className="student-details-appt">{studentEvent.title}</td>
                 </tr>
                 );
               })
@@ -277,24 +213,28 @@ const StudentDetail = () => {
             </tr>
           </thead>
           <tbody>
-            {Object.keys(notes).length > 0 ? (
-              Object.entries(notes).map(([id, note], index) => (
+            {notes.length > 0 ? (
+              studentNotes.map((studentNote, index) => {
+                return (
                 <tr key={index}>
-                  <td className="student-details-appt">{note.note}
-                  <button 
+                  <td className={`student-details-appt`}>
+                    {studentNote.note}
+                    <button 
+
                   style={{marginRight: '5px', marginLeft: 'auto'}}
                   className='addButton' onClick={handleAddReminder}
                   >Edit</button>
                   <button
-                          style={{marginRight: '5px', marginLeft: 'auto'}}
-                          className="deleteButton"
-                          onClick={handleDeleteClick}
-                        >
-                          Delete
-                        </button>
+                      style={{marginRight: '5px', marginLeft: 'auto'}}
+                      className="deleteButton"
+                      // onClick={handleDeleteClick}
+                    >
+                      Delete
+                  </button>
                   </td>
                 </tr>
-              ))
+                );
+              })
             ) : (
               <tr>
                 <td className="student-details-appt">None.</td>
