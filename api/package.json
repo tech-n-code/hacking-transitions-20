@@ -9,12 +9,12 @@
     "test": "echo 'add tests'"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15",
+    "nodemon": "^1.14.9",
     "supertest": "^6.3.3",
     "vitest": "^0.29.2"
   },
   "dependencies": {
-    "bcrypt": "^5.1.0",
+    "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
     "express": "^4.17.3",

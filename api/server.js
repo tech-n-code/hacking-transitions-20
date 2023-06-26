@@ -206,16 +206,26 @@ app.delete('/api/appointments/:id', async (req, res, next) => {
 //PATCH/EDIT route for appointment notes in appointments table:
 app.patch('/api/appointments/:id', async (req, res, next) => {
   const id = Number.parseInt(req.params.id);
-  const { note } = req.body
-  const result = await db
-    .query('UPDATE appointments SET note=$1 WHERE id=$2 RETURNING *', [note, id])
-    .catch(next);
-  if(result.rows){
-    res.sendStatus(200);
-  } else {
-    res.status(404).send("No Data to update")
+  if (Number.isNaN(id)) {
+    res.status(400).send("Invalid appointment ID");
+    return;
   }
-})
+  const { note } = req.body;
+  try {
+    const result = await db.query('UPDATE appointments SET note=$1 WHERE id=$2 RETURNING *', [note, id]);
+
+    if (result && result.rows) {
+      res.sendStatus(200);
+    } else {
+      res.status(404).send("No Data to update");
+    }
+  } catch (error) {
+    console.error('Error updating note:', error);
+    next(error);
+  }
+});
+
+
 
 app.use((err, req, res, next) => {
   console.error(err.stack);

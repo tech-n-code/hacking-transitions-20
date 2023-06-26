@@ -2,12 +2,20 @@ import React, { useContext, useState, useEffect } from "react";
 import AppointmentContext from "../../context/AppointmentContext.jsx";
 import "./StudentAppointments.css";
 import Scroll from "./Scroll";
+import ChangeReminder from "./ChangeReminder";
 
 export default function StudentAppointments() {
   const { students, tasks, setNoteSelected, setTaskId } =
     useContext(AppointmentContext);
   const [expandedNoteIds, setExpandedNoteIds] = useState([]);
   const [tasksToDelete, setTasksToDelete] = useState([]);
+  const[ editNote, setEditNote ] = useState(false)
+
+
+    const handleEditClick = () =>{
+        setEditNote(true)
+        console.log(editNote)
+    }
 
   useEffect(() => {
     // Remove deleted tasks from the state
@@ -99,8 +107,7 @@ export default function StudentAppointments() {
                           <span
                             className="collapseButton"
                             onClick={(event) =>
-                              handleNoteToggle(task.id, event
-)
+                              handleNoteToggle(task.id, event)
                             }
                           >
                             Collapse note
@@ -108,8 +115,18 @@ export default function StudentAppointments() {
                         )}
                       </div>
                       <button
+                        className="editButton"
+                        onClick={
+                          () => { handleEditClick(task.id)
+                          setTaskId(task.id);
+                          setNoteSelected(task.note);
+                        }}
+                      >
+                        Edit
+                      </button>
+                      <button
                         className="deleteButton"
-                        onClick={() => handleDeleteClick(task.id)}
+                        onClick={() => handleDeleteClick()}
                       >
                         Delete
                       </button>
@@ -121,6 +138,7 @@ export default function StudentAppointments() {
           );
         })}
       </Scroll>
+      <ChangeReminder editNote = {editNote} setEditNote = {setEditNote}/>
     </div>
   );
 }
