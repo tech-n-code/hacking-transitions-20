@@ -5,25 +5,17 @@ import Scroll from "./Scroll";
 import ChangeReminder from "./ChangeReminder";
 
 export default function StudentAppointments() {
-  const { students, notes, setNoteSelected, setNoteId } = useContext(AppointmentContext);
+  const { students, notes, setNoteSelected, setNoteId } =
+    useContext(AppointmentContext);
   const [expandedNoteIds, setExpandedNoteIds] = useState([]);
   const [notesToDelete, setNotesToDelete] = useState([]);
 
-  const[ editNote, setEditNote ] = useState(false);
+  const [editNote, setEditNote] = useState(false);
 
-  const handleEditClick = () =>{
+  const handleEditClick = () => {
     setEditNote(true);
     console.log(editNote);
-  }
-
-  const [deleteConfirmation, setDeleteConfirmation] = useState(null);
-
-  const[ editNote, setEditNote ] = useState(false)
-
-    const handleEditClick = () =>{
-        setEditNote(true)
-        console.log(editNote)
-    }
+  };
 
   const [deleteConfirmation, setDeleteConfirmation] = useState(null);
 
@@ -36,20 +28,21 @@ export default function StudentAppointments() {
     setDeleteConfirmation(noteId);
   };
 
-  const handleConfirmDeleteClick = () => {
-    if (deleteConfirmation) {
+  const handleConfirmDeleteClick = (noteId) => {
+    if (noteId) {
+      // Check if the noteId is provided
       fetch(`/api/notes/${noteId}`, {
         method: "DELETE",
       })
-      .then(() => {
-        console.log("Note " + deleteConfirmation + " has been deleted");
-        setNotesToDelete((prevNotes) => [...prevNotes, deleteConfirmation]);
-        setDeleteConfirmation(null);
-      })
-      .catch((error) => {
-        console.error("Error deleting note:", error);
-        setDeleteConfirmation(null);
-      });
+        .then(() => {
+          console.log("Note " + noteId + " has been deleted");
+          setNotesToDelete((prevNotes) => [...prevNotes, noteId]);
+          setDeleteConfirmation(null);
+        })
+        .catch((error) => {
+          console.error("Error deleting note:", error);
+          setDeleteConfirmation(null);
+        });
     }
   };
 
@@ -138,8 +131,8 @@ export default function StudentAppointments() {
 
                       <button
                         className="editButton"
-                        onClick={
-                          () => { handleEditClick(note.id)
+                        onClick={() => {
+                          handleEditClick(note.id);
                           setNoteId(note.id);
                           setNoteSelected(note.note);
                         }}
@@ -150,10 +143,13 @@ export default function StudentAppointments() {
                         <div>
                           <button
                             className="confirmDeleteButton"
-                            onClick={handleConfirmDeleteClick}
+                            onClick={() =>
+                              handleConfirmDeleteClick(deleteConfirmation)
+                            }
                           >
                             Confirm
                           </button>
+
                           <button
                             className="cancelDeleteButton"
                             onClick={handleCancelDeleteClick}
@@ -177,7 +173,7 @@ export default function StudentAppointments() {
           );
         })}
       </Scroll>
-      <ChangeReminder editNote = {editNote} setEditNote = {setEditNote}/>
+      <ChangeReminder editNote={editNote} setEditNote={setEditNote} />
     </div>
   );
 }

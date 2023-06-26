@@ -274,21 +274,20 @@ app.delete("/api/notes/:noteId", async (req, res, next) => { //need to find-repl
 });
 
 //PATCH/EDIT route for a note by noteId:
-app.patch("/api/notes/:noteId", async (req, res, next) => { //need to find-replace 'appointments' with 'notes' in front-end
-  const noteId = req.params; // old --> const id = Number.parseInt(req.params.noteId);
+// PATCH/EDIT route for a note by noteId:
+app.patch("/api/notes/:noteId", async (req, res, next) => {
+  const noteId = parseInt(req.params.noteId); // Convert noteId to a number
   const { note } = req.body;
   const result = await db
-    .query("UPDATE notes SET note = $1 WHERE id = $2 RETURNING *", [
-      note,
-      noteId,
-    ])
+    .query("UPDATE notes SET note = $1 WHERE id = $2 RETURNING *", [note, noteId])
     .catch(next);
   if (result.rows.length === 0) {
-    res.status(404).send("No Data To Delete");
+    res.status(404).send("No Data To Update");
   } else {
     res.sendStatus(200);
   }
 });
+
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
