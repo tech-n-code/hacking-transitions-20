@@ -5,7 +5,12 @@ import Modal from "react-modal";
 
 export default function ChangeReminder({ editNote, setEditNote }){
     const { noteSelected, noteId , setUpdate, setNoteSelected, showAddModal, setShowAddModal } = useContext(AppointmentContext);
+
     
+    // const handleEditClick = () =>{
+    //     setEditNote(true)
+    // }
+
     const handleSubmit = (e) => {
         e.preventDefault();
 

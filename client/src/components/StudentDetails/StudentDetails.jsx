@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Modal from "react-modal";
 import "./StudentDetails.css";
 import CohortContext from "../../context/CohortContext.jsx";
@@ -220,6 +220,7 @@ const StudentDetail = () => {
                   <td className={`student-details-appt`}>
                     {studentNote.note}
                     <button 
+
                   style={{marginRight: '5px', marginLeft: 'auto'}}
                   className='addButton' onClick={handleAddReminder}
                   >Edit</button>
@@ -243,7 +244,7 @@ const StudentDetail = () => {
         </table>
         <AddReminder showAddModal={showAddModal} setShowAddModal={setShowAddModal} />
       </div>
-    </Modal>
+     </Modal>
   );
 };
 

@@ -48,13 +48,13 @@ export default function AddReminder({showAddModal, setShowAddModal}){
             transform: "translate(-50%, -50%)",
             height: "fit-content",
             width: "fit-content",
-            border: '1px solid #ccc',
-            background: '#0D0A40',
+            border: '1px solid #000',
+            background: '#E0EAF8',
             color: 'white',
             overflow: 'auto',
             borderRadius: '10px',
-            outline: 'none',
-            padding: '30px',
+            outline: 'black',
+            padding: '15px',
             zIndex: 101,
             
           }}
@@ -111,7 +111,6 @@ export default function AddReminder({showAddModal, setShowAddModal}){
                         rows="10" cols="40"
                         ></textarea>
                     <div className="buttonContainer">
-                        
                     </div>
                     <div>
                         <span>

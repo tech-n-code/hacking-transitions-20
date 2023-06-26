@@ -18,6 +18,15 @@ export default function StudentAppointments() {
 
   const [deleteConfirmation, setDeleteConfirmation] = useState(null);
 
+  const[ editNote, setEditNote ] = useState(false)
+
+    const handleEditClick = () =>{
+        setEditNote(true)
+        console.log(editNote)
+    }
+
+  const [deleteConfirmation, setDeleteConfirmation] = useState(null);
+
   useEffect(() => {
     // Remove deleted notes from the state
     setNotesToDelete([]);
@@ -95,7 +104,6 @@ export default function StudentAppointments() {
                   const showSeeMoreButton = note.note.length > 70;
                   const showCollapseButton =
                     note.note.length > 70 && isExpanded;
-
                   return (
                     <div key={note.id} className="noteContainer">
                       <div
@@ -120,14 +128,14 @@ export default function StudentAppointments() {
                           <span
                             className="collapseButton"
                             onClick={(event) =>
-                              handleNoteToggle(note.id, event
-)
+                              handleNoteToggle(note.id, event)
                             }
                           >
                             Collapse note
                           </span>
                         )}
                       </div>
+
                       <button
                         className="editButton"
                         onClick={
