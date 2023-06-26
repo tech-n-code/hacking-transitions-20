@@ -292,6 +292,7 @@ const StudentDetail = () => {
                         >
                           Delete
                         </button>
+                        <button>N</button>
                   </td>
                   
                 
