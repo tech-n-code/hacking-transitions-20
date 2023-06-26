@@ -4,12 +4,11 @@ import CohortContext from "./CohortContext.jsx";
 const AppointmentContext = createContext();
 
 export const AppointmentProvider = ({ children }) => {
-    const { cohortClickedId } = useContext(CohortContext);
+    const { cohortClickedId, update, setUpdate } = useContext(CohortContext);
     const [ students, setStudents ] = useState([]);
     const [ student, setStudent ] = useState("");
     const [ notes, setNotes ] = useState([]);
     const [ events, setEvents ] =useState([]);
-    const [ update, setUpdate ] = useState(false);
     const [ noteId, setNoteId ] = useState(null);
     const [ noteSelected, setNoteSelected ] = useState("");
     const [ showAddModal, setShowAddModal ] = useState(false);

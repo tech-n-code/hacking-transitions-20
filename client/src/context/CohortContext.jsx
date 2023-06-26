@@ -4,7 +4,7 @@ import AppointmentContext from "./AppointmentContext.jsx";
 const CohortContext = createContext();
 
 export const CohortProvider = ({children}) => {
-    const { setUpdate } = useContext(AppointmentContext);
+    const [ update, setUpdate ] = useState(false);
     const [cohorts, setCohorts] = useState([]);
     const [students, setStudents] = useState([]);
     const [instructors, setInstructors] = useState([]);
@@ -57,7 +57,6 @@ export const CohortProvider = ({children}) => {
             .then(data => setStudentData(data))
             .catch(error => console.error(error));
     }, [studentID]);
-
 
     //Gets all students on a cohort by cohortId
     useEffect(() => {
@@ -115,6 +114,8 @@ export const CohortProvider = ({children}) => {
         setStudentClicked,
         instructors,
         setInstructors,
+        update,
+        setUpdate,
         assignColor,
         formatDate,
     }}>
