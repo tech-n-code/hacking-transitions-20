@@ -9,13 +9,15 @@ export default function StudentAppointments() {
     useContext(AppointmentContext);
   const [expandedNoteIds, setExpandedNoteIds] = useState([]);
   const [tasksToDelete, setTasksToDelete] = useState([]);
-  const[ editNote, setEditNote ] = useState(false)
 
+  const[ editNote, setEditNote ] = useState(false)
 
     const handleEditClick = () =>{
         setEditNote(true)
         console.log(editNote)
     }
+
+  const [deleteConfirmation, setDeleteConfirmation] = useState(null);
 
   useEffect(() => {
     // Remove deleted tasks from the state
@@ -23,16 +25,28 @@ export default function StudentAppointments() {
   }, [tasks]);
 
   const handleDeleteClick = (taskId) => {
-    fetch(`/api/appointments/${taskId}`, {
-      method: "DELETE",
-    })
-      .then(() => {
-        console.log("Note " + taskId + " has been deleted");
-        setTasksToDelete((prevTasks) => [...prevTasks, taskId]);
+    setDeleteConfirmation(taskId);
+  };
+
+  const handleConfirmDeleteClick = () => {
+    if (deleteConfirmation) {
+      fetch(`/api/appointments/${deleteConfirmation}`, {
+        method: "DELETE",
       })
-      .catch((error) => {
-        console.error("Error deleting note:", error);
-      });
+        .then(() => {
+          console.log("Note " + deleteConfirmation + " has been deleted");
+          setTasksToDelete((prevTasks) => [...prevTasks, deleteConfirmation]);
+          setDeleteConfirmation(null);
+        })
+        .catch((error) => {
+          console.error("Error deleting note:", error);
+          setDeleteConfirmation(null);
+        });
+    }
+  };
+
+  const handleCancelDeleteClick = () => {
+    setDeleteConfirmation(null);
   };
 
   const handleNoteToggle = (taskId, event) => {
@@ -114,6 +128,7 @@ export default function StudentAppointments() {
                           </span>
                         )}
                       </div>
+
                       <button
                         className="editButton"
                         onClick={
@@ -130,6 +145,31 @@ export default function StudentAppointments() {
                       >
                         Delete
                       </button>
+
+                      {deleteConfirmation === task.id ? (
+                        <div>
+                          <button
+                            className="confirmDeleteButton"
+                            onClick={handleConfirmDeleteClick}
+                          >
+                            Confirm
+                          </button>
+                          <button
+                            className="cancelDeleteButton"
+                            onClick={handleCancelDeleteClick}
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          className="deleteButton"
+                          onClick={() => handleDeleteClick(task.id)}
+                        >
+                          Delete
+                        </button>
+                      )}
+
                     </div>
                   );
                 })}
