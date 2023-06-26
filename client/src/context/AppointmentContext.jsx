@@ -28,7 +28,7 @@ export const AppointmentProvider = ({ children }) => {
             .then(response => response.json())
             .then(data =>setNotes(data))
             .catch(error => console.error(error));
-    }, [update === true]);
+    }, [update, cohortClickedId]);
     
     //Gets all events in a cohort
     useEffect(() => {
@@ -37,7 +37,7 @@ export const AppointmentProvider = ({ children }) => {
             .then(response => response.json())
             .then(data =>setEvents(data))
             .catch(error => console.error(error));
-    }, [update === true]);
+    }, [update, cohortClickedId]);
 
     return( <AppointmentContext.Provider value = {{
         students,
