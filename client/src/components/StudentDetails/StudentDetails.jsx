@@ -1,9 +1,12 @@
-import React, { useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Modal from "react-modal";
 import "./StudentDetails.css";
 import CohortContext from "../../context/CohortContext.jsx";
 import AppointmentContext from "../../context/AppointmentContext.jsx";
 Modal.setAppElement("#root");
+import AddReminder from "../Appointments/AddReminder";
+
+
 
 const StudentDetail = () => {
   const {
@@ -15,7 +18,66 @@ const StudentDetail = () => {
     setIsStudentModalOpen,
   } = useContext(CohortContext);
 
-  const { tasks } = useContext(AppointmentContext);
+  // const { tasks} = useContext(AppointmentContext);
+
+  const {showAddModal, setShowAddModal} = useContext(AppointmentContext);
+  const [selectedStudent, setSelectedStudent] = useState("");
+
+  
+  const { students, tasks, setNoteSelected, setTaskId } =
+  useContext(AppointmentContext);
+
+
+
+
+  const handleAddReminder = () => {
+      // setIsStudentModalOpen(false);
+      setShowAddModal(true);
+  }
+  const handleEditReminder = () => {
+    setEditeNote(true);
+  
+  }
+
+  const handleDeleteClick = (e) => {
+    // e.preventDefault();
+
+    fetch(`http://localhost:8000/api/appointments/${selectedStudent}`, {
+      method: "DELETE",
+    })
+      .then(() => {
+        console.log("Note has been deleted");
+        setUpdate(true);
+      })
+      .catch((error) => {
+        console.error("Error deleting note:", error);
+      });
+
+      fetch(`/api/appointments/${selectedStudent}`, {
+        method: "DELETE",
+    }).then(() => {
+        console.log('Note has been deleted');
+        setDeleteNote(false);
+        setUpdate(true);
+    })
+  };
+
+  const handleConfirmDeleteClick = () => {
+    if (deleteConfirmation) {
+      fetch(`/api/appointments/${deleteConfirmation}`, {
+        method: "DELETE",
+      })
+        .then(() => {
+          console.log("Note " + deleteConfirmation + " has been deleted");
+          setTasksToDelete((prevTasks) => [...prevTasks, deleteConfirmation]);
+          setDeleteConfirmation(null);
+        })
+        .catch((error) => {
+          console.error("Error deleting note:", error);
+          setDeleteConfirmation(null);
+        });
+    }
+  };
 
   const appointments = {};
   const notes = {};
@@ -103,6 +165,7 @@ const StudentDetail = () => {
 
   function closeModal() {
     setIsStudentModalOpen(false);
+    setShowAddModal(false); 
   }
 
   return (
@@ -209,6 +272,7 @@ const StudentDetail = () => {
             <tr>
               <th className="student-details-appt-header" colSpan="2">
                 Notes:
+                <button style={{marginRight: '5px', marginLeft: 'auto'}} className='addButton' onClick={handleAddReminder}>Add </button>
               </th>
             </tr>
           </thead>
@@ -216,7 +280,21 @@ const StudentDetail = () => {
             {Object.keys(notes).length > 0 ? (
               Object.entries(notes).map(([id, note], index) => (
                 <tr key={index}>
-                  <td className="student-details-appt">{note.note}</td>
+                  <td className="student-details-appt">{note.note}
+                  <button 
+                  style={{marginRight: '5px', marginLeft: 'auto'}}
+                  className='addButton' onClick={handleAddReminder}
+                  >Edit</button>
+                  <button
+                          style={{marginRight: '5px', marginLeft: 'auto'}}
+                          className="deleteButton"
+                          onClick={handleDeleteClick}
+                        >
+                          Delete
+                        </button>
+                  </td>
+                  
+                
                 </tr>
               ))
             ) : (
@@ -226,8 +304,9 @@ const StudentDetail = () => {
             )}
           </tbody>
         </table>
+        <AddReminder showAddModal={showAddModal} setShowAddModal={setShowAddModal} />
       </div>
-    </Modal>
+     </Modal>
   );
 };
 
