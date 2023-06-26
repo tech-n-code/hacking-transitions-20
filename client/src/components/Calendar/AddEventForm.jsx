@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 
-const AddEventForm = () => {
+const AddEventForm = ({ handleModalClose }) => {
   const [title, setTitle] = useState("");
   const [startDateTime, setStartDateTime] = useState("");
+  const [startDate, setStartDate] = useState(new Date());
   const [endDateTime, setEndDateTime] = useState("");
   const [allDayEvent, setAllDayEvent] = useState(false);
 
@@ -10,12 +11,12 @@ const AddEventForm = () => {
     setTitle(event.target.value);
   };
 
-  const handleStartDateTimeChange = (datetime) => {
-    setStartDateTime(datetime);
+  const handleStartDateTimeChange = (e) => {
+    setStartDateTime(e.target.value);
   };
 
-  const handleEndDateTimeChange = (datetime) => {
-    setEndDateTime(datetime);
+  const handleEndDateTimeChange = (e) => {
+    setEndDateTime(e.target.value);
   };
 
   const handleAllDayEventChange = (event) => {
@@ -27,18 +28,24 @@ const AddEventForm = () => {
 
     // Handle form submission here
     console.log("Title:", title);
-    console.log("Start Date/Time:", startDateTime.toString());
-    console.log("End Date/Time:", endDateTime.toString());
+    console.log("Start Date/Time:", startDateTime);
+    console.log("End Date/Time:", endDateTime);
     console.log("All-Day Event:", allDayEvent);
+
+    //API Route to add event to database
 
     // Clear form inputs
     setTitle("");
     setStartDateTime("");
     setEndDateTime("");
     setAllDayEvent(false);
+
+    //Close Modal
+    handleModalClose();
   };
 
   return (
+    // <LocalizationProvider dateAdapter={dateAdapter}>
     <form onSubmit={handleSubmit}>
       <div>
         <label>Title:</label>
@@ -46,9 +53,19 @@ const AddEventForm = () => {
       </div>
       <div>
         <label>Start Date/Time:</label>
+        <input
+          type="datetime-local"
+          value={startDateTime}
+          onChange={handleStartDateTimeChange}
+        />
       </div>
       <div>
         <label>End Date/Time:</label>
+        <input
+          type="datetime-local"
+          value={endDateTime}
+          onChange={handleEndDateTimeChange}
+        />
       </div>
       <div>
         <label>
@@ -61,7 +78,11 @@ const AddEventForm = () => {
         </label>
       </div>
       <button type="submit">Submit</button>
+      <button type="button" onClick={handleModalClose}>
+        Cancel
+      </button>
     </form>
+    // </LocalizationProvider>
   );
 };
 

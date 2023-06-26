@@ -104,7 +104,7 @@ const NewCalendar = () => {
         contentLabel="Add Event"
         style={modalStyle}
       >
-        <AddEventForm />
+        <AddEventForm handleModalClose={handleModalClose} />
       </Modal>
     </div>
   );
