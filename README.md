@@ -29,31 +29,32 @@ A Full-Stack React application for transition managers to keep track of students
 - [`bcrypt`](https://www.npmjs.com/package/bcrypt) - A library to help you hash passwords.
 - [`JSON web tokens`](https://jwt.io/) - Open, industry standard RFC 7519 method for representing claims securely between two parties.
 - [`docker`](https://www.docker.com/) - Containerization framework for dev and deployment.
-- [`heroku`](https://www.heroku.com) - Cloud application platform.
+- [`render`](https://www.render.com) - Cloud application platform.
 
 ## Installation
 1. This application builds the development environment inside Docker, so after forking/cloning, make sure you have Docker desktop running.
 2. In your terminal run `cp .env.example .env; cp api/.env.example api/.env` - Copy required environment variables.
-3. In your terminal run `npm install; npm install --prefix=api; npm install --prefix=client` - Install all dependencies.
+3. In your terminal run `npm install; npm install --prefix=api; npm install --prefix=client` - Install all dependencies to inlcude: express, postgres, react, bcrypt, react-testing-library, react-auth-kit, cos, cypress, and vite.
 4. In your terminal run `docker compose up --build` - From the root directory (Note* the --build command ensures dependencies are installed alongside the Docker container build).
-5. Visit deployed application @ https://hacking-transitions.herokuapp.com.
-6. *Note: Since the database for the deployed application is hosted on Heroku, any changes to the data, or structure of the ERD must be pushed to heroku manually by using Heroku's CLI and adding/removing/altering the data from there. Updating the included migration and seed files will not affect the deployed version.
+5. Visit deployed application @ [https://hacking-transitions.tech-n-code.com/](https://hacking-transitions.tech-n-code.com/).
+6. *Note: Since the database for the deployed application is hosted on Render, any changes to the data, or structure of the ERD must be pushed to Render manually by using Heroku's CLI and adding/removing/altering the data from there. Updating the included migration and seed files will not affect the deployed version.
 
 ## Usage
 For Staff Members charged with assisting students as they transition from military service.
 
 ## Screenshot
-![alt text](assets/images/hacking-transitions-1.png)
+![Home Page](assets/images/HT_homepage.png)
+![alt text](assets/images/hacking-transitionsOLD-1.png)
 
 ## Contributors
-Matthew Drevon (Software Engineer) || Josh Benton (User Interface Owner) || Will Franceschini(Architectural Owner) || Blake Barkman (Project Manager) || Dennis Kennedy (Software Engineer) || Kimberly Jenkins (Software Engineer)
+Blake Barkman (Project Manager) ||  Josh Benton (User Interface Owner) || Will Franceschini(Architectural Owner) || Matthew Drevon (Software Engineer) || Dennis Kennedy (Software Engineer)  ||Kimberly Jenkins (Software Engineer)
 
 ## Tests
 Full E2E test suite with Cypress, Multiple unit tests written for various components throughout the entire application with Vitest & react-test-library, and development testing with Postman during API development to test routes.
 
 ## Questions
 Contact information (GitHub usernames) of the developers:
-Burman - burman92 || Steve - EZSteezy || Kevin - kevin-foreman || Brennan - Alphie1028 || Josh - Velkore || Todd - todd-j-topicz 
+Blake - burman92 || Josh - EZSteezy || Will - kevin-foreman || Matthew - Alphie1028 || Dennis - Velkore || Kimberly - Spirit1269 
 
 ## License
 The license used for this project is MIT.
