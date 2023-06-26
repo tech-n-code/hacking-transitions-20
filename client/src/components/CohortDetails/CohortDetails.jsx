@@ -1,19 +1,23 @@
 import React, { useContext } from "react";
 import CohortContext from "../../context/CohortContext";
 import "./CohortDetails.css";
-import { useState } from "react";
+import AppointmentContext from "../../context/AppointmentContext.jsx";
 
 const CohortDetails = () => {
     const {
         cohortClicked,
-        cohortIdForInfo,
+        cohortClickedId,
         cohorts,
         setCohortClicked,
         students,
+        instructors,
         assignColor,
+        formatDate,
         setStudentClicked,
         setStudentModalOpen,
     } = useContext(CohortContext);
+
+    const { events } = useContext(AppointmentContext);
 
     const getBranchName = (branchId) => {
         switch (branchId) {
@@ -30,7 +34,11 @@ const CohortDetails = () => {
         }
     };
 
-    const getbadgeMsg = (givenDate) => {
+    const cohortInstructor = instructors.find((instructor) => instructor.cohort_id === cohortClickedId);
+
+    const cohortInstructorName = cohortInstructor ? `${cohortInstructor.firstname} ${cohortInstructor.lastname}` : null;
+
+    const getBadgeMsg = (givenDate) => {
         const today = new Date();
         const futureDate = new Date(givenDate);
         if (today >= futureDate) {
@@ -40,6 +48,12 @@ const CohortDetails = () => {
             const daysLeft = Math.ceil(timeLeft / (1000 * 60 * 60 * 24));
             return `${daysLeft} days`;
         }
+    }
+
+    const getStudentETS = (givenStudentId) => {
+        const studentETS = events.find((event) => event.title === 'ETS' && event.student_id === givenStudentId);
+        const studentETSdate = studentETS ? studentETS.startdate : null;
+        return studentETSdate;
     }
 
     return (
@@ -61,19 +75,19 @@ const CohortDetails = () => {
             <div className="cohort-basic-info">
                 <div className="cohort-bacic-info-column">
                     <span>Start Date:</span>
-                    <span>{cohorts[cohortIdForInfo].startdate}</span>
+                    <span>{formatDate(cohorts[cohortClickedId].startdate)}</span>
                 </div>
                 <div className="cohort-bacic-info-column">
                     <span>End Date:</span>
-                    <span>{cohorts[cohortIdForInfo].enddate}</span>
+                    <span>{formatDate(cohorts[cohortClickedId].enddate)}</span>
                 </div>
                 <div className="cohort-bacic-info-column">
                     <span>Instructor:</span>
-                    <span>{cohorts[cohortIdForInfo].instructor_id}</span>
+                    <span>{cohortInstructorName}</span>
                 </div>
                 <div className="cohort-bacic-info-column">
                     <span>Number Of Students:</span>
-                    <span>{cohorts[cohortIdForInfo].numberofstudents}</span>
+                    <span>{students.length}</span>
                 </div>
             </div>
             <table className="cohort-details-table">
@@ -100,16 +114,14 @@ const CohortDetails = () => {
                 <tbody>
                     {students.map((student, index) => {
                         const branch = getBranchName(student.branch_id);
-                        const etsDate = new Date(
-                            student.ets_date
-                        ).toLocaleDateString("en-US");
+                        const etsDate = formatDate(getStudentETS(student.id));
                         const formattedPhoneNumber =
                             student.phonenumber.replace(
                                 /(\d{3})(\d{3})(\d{4})/,
                                 "($1)-$2-$3"
                             );
-                        const badgeColor = assignColor(student.ets_date);
-                        const badgeMsg = getbadgeMsg(student.ets_date);
+                        const badgeColor = assignColor(etsDate);
+                        const badgeMsg = getBadgeMsg(etsDate);
                         return (
                             <tr
                                 key={index}
