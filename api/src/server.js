@@ -80,17 +80,6 @@ app.get("/api/cohorts/:cohortId/students", async (req, res, next) => {
   }
 });
 
-//Route for ???
-// app.get("/api/cohorts", async (req, res, next) => { //weird, needs refactor
-//   const result = await db
-//     .query(
-//       "SELECT cohorts.*, instructors.lastname AS instructor_id FROM cohorts INNER JOIN instructors ON cohorts.instructor_id = instructors.id"
-//     )
-//     .catch(next);
-//   res.send(result.rows);
-// });
-
-
 //Route to get a student by studentId
 app.get("/api/students/:studentId", async (req, res, next) => {
   const { studentId } = req.params;
@@ -251,19 +240,6 @@ app.get("/api/users", async (req, res, next) => {
     res.send(result.rows);
   }
 });
-
-//New Route for calendar events
-// app.get("/api/events", async (req, res) => { //needs to be reworked to get individual fields instead of concat
-//   db.query(
-//     "SELECT CONCAT(students.firstname, ' ', students.lastname ,': ', events.title ) AS title, events.startdate, events.enddate, events.allday FROM events LEFT JOIN students ON events.student_id = students.id",
-//     (err, result) => {
-//       if (err) {
-//         console.log(err);
-//       }
-//       res.send(result.rows);
-//     }
-//   );
-// });
 
 //Route to POST new note
 app.post("/api/notes", async (req, res, next) => {
