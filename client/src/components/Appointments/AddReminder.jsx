@@ -42,7 +42,7 @@ export default function AddReminder({showAddModal, setShowAddModal}){
     const modalStyle = {
         overlay:{
             zIndex: 100,
-            backgroundColor: 'rgba(0, 0, 0, 0.01)'
+          
         },
         content:{
             position: 'absolute',
@@ -101,6 +101,7 @@ export default function AddReminder({showAddModal, setShowAddModal}){
                                 >
                                     {student.firstname} {student.lastname}
                                 </option>
+                                
                             )
                         })}
                     </select>
