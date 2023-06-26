@@ -4,7 +4,8 @@ import CohortContext from "../../context/CohortContext";
 
 function CohortNav() {
   const {
-		handleCohortClicked,
+		cohortClicked,
+    handleCohortClicked,
 		cohorts,
 	} = useContext(CohortContext);
   
@@ -14,9 +15,12 @@ function CohortNav() {
       <div className="cohortNavDrop-container">
         <>
           {cohorts.map((cohort, index) => {
+            const buttonClass = cohortClicked === cohort.title ? "cohortClicked" : "cohortNotClicked";
             return (
               <React.Fragment key={index}>
-                <div className="cohortNavDrop" onClick = {() => handleCohortClicked(cohort.title, cohort.id)}>
+                <div
+                className={`cohortNavDrop ${buttonClass}`}
+                onClick = {() => handleCohortClicked(cohort.title, cohort.id)}>
                   {cohort.title}
                 </div>
               </React.Fragment >
