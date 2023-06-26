@@ -38,7 +38,6 @@ export default function AddReminder({showAddModal, setShowAddModal}){
     const modalStyle = {
         overlay:{
             zIndex: 100,
-            backgroundColor: 'rgba(0, 0, 0, 0.0)'
         },
         content:{
             position: 'absolute',
@@ -60,32 +59,30 @@ export default function AddReminder({showAddModal, setShowAddModal}){
             
           }}
     
-    return(
-        
+        return(
+    
         <Modal 
         isOpen={showAddModal}
         onRequestClose={closeModal}
         style={modalStyle}
         >
+            <div className="modalOverlay">
             <span className="Form">
                 <form >
                     <div>
                     <label style={{
                             fontSize: '24px',
+                            fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
                             fontWeight: 'bold',
-                            margin: 'auto auto 30px',
+                            margin: '10px auto 10px',
                             display: 'block',
                             textAlign: 'center'
-                         }}>Add Note</label>
-                    </div>
-                    <textarea 
-                        // required
-                        value={ note }
-                        onChange={(e) => setNote(e.target.value)}
-                        rows="10" cols="40"
-                        ></textarea>
-                    <div className="buttonContainer">
-                      <select
+                        }}>Add Note</label>
+                        <select
+                        style={{
+                            margin: 'auto auto 20px',
+                            display: 'block',
+                        }}
                         value={ selectedStudent }
                         onChange={(e) => setSelectedStudent(e.target.value)}
                         // required
@@ -99,9 +96,22 @@ export default function AddReminder({showAddModal, setShowAddModal}){
                                 >
                                     {student.firstname} {student.lastname}
                                 </option>
+                                
                             )
                         })}
                     </select>
+                    </div>
+                    <textarea 
+                        // required
+                        value={ note }
+                        onChange={(e) => setNote(e.target.value)}
+                        style={{
+                            fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
+                        }}
+                        rows="10" cols="40"
+                        ></textarea>
+                    <div className="buttonContainer">
+                        
                     </div>
                     <div>
                         <span>
@@ -115,6 +125,7 @@ export default function AddReminder({showAddModal, setShowAddModal}){
                     </div>
                 </form>
             </span>
+            </div>
         </Modal>
         
     )
