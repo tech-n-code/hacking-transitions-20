@@ -58,8 +58,8 @@ CREATE TABLE students (
 CREATE TABLE events (
   id SERIAL PRIMARY KEY,
   title TEXT NOT NULL,
-  startdate TIMESTAMP NOT NULL,
-  enddate TIMESTAMP NOT NULL,
+  startdate TIMESTAMPTZ NOT NULL,
+  enddate TIMESTAMPTZ NOT NULL,
   allday BOOLEAN NOT NULL,
   student_id INT NOT NULL,
   note_id INT,
