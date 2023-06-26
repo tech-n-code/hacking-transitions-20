@@ -2,28 +2,50 @@ import React, { useContext, useState, useEffect } from "react";
 import AppointmentContext from "../../context/AppointmentContext.jsx";
 import "./StudentAppointments.css";
 import Scroll from "./Scroll";
+import ChangeReminder from "./ChangeReminder";
 
 export default function StudentAppointments() {
   const { students, notes, setNoteSelected, setNoteId } = useContext(AppointmentContext);
   const [expandedNoteIds, setExpandedNoteIds] = useState([]);
-  const [notesToDelete, setnotesToDelete] = useState([]);
+  const [notesToDelete, setNotesToDelete] = useState([]);
+
+  const[ editNote, setEditNote ] = useState(false);
+
+  const handleEditClick = () =>{
+    setEditNote(true);
+    console.log(editNote);
+  }
+
+  const [deleteConfirmation, setDeleteConfirmation] = useState(null);
 
   useEffect(() => {
     // Remove deleted notes from the state
-    setnotesToDelete([]);
+    setNotesToDelete([]);
   }, [notes]);
 
   const handleDeleteClick = (noteId) => {
-    fetch(`/api/notes/${noteId}`, {
-      method: "DELETE",
-    })
+    setDeleteConfirmation(noteId);
+  };
+
+  const handleConfirmDeleteClick = () => {
+    if (deleteConfirmation) {
+      fetch(`/api/notes/${noteId}`, {
+        method: "DELETE",
+      })
       .then(() => {
-        console.log("Note " + noteId + " has been deleted");
-        setnotesToDelete((prevNotes) => [...prevNotes, noteId]);
+        console.log("Note " + deleteConfirmation + " has been deleted");
+        setNotesToDelete((prevNotes) => [...prevNotes, deleteConfirmation]);
+        setDeleteConfirmation(null);
       })
       .catch((error) => {
         console.error("Error deleting note:", error);
+        setDeleteConfirmation(null);
       });
+    }
+  };
+
+  const handleCancelDeleteClick = () => {
+    setDeleteConfirmation(null);
   };
 
   const handleNoteToggle = (noteId, event) => {
@@ -67,12 +89,12 @@ export default function StudentAppointments() {
                   const isExpanded = expandedNoteIds.includes(note.id);
                   const noteDisplay = isExpanded
                     ? note.note
-                    : note.note.length > 100
-                    ? note.note.slice(0, 100) + "... "
+                    : note.note.length > 70
+                    ? note.note.slice(0, 70) + "... "
                     : note.note;
-                  const showSeeMoreButton = note.note.length > 100;
+                  const showSeeMoreButton = note.note.length > 70;
                   const showCollapseButton =
-                    note.note.length > 100 && isExpanded;
+                    note.note.length > 70 && isExpanded;
 
                   return (
                     <div key={note.id} className="noteContainer">
@@ -107,11 +129,38 @@ export default function StudentAppointments() {
                         )}
                       </div>
                       <button
-                        className="deleteButton"
-                        onClick={() => handleDeleteClick(note.id)}
+                        className="editButton"
+                        onClick={
+                          () => { handleEditClick(note.id)
+                          setNoteId(note.id);
+                          setNoteSelected(note.note);
+                        }}
                       >
-                        Delete
+                        Edit
                       </button>
+                      {deleteConfirmation === note.id ? (
+                        <div>
+                          <button
+                            className="confirmDeleteButton"
+                            onClick={handleConfirmDeleteClick}
+                          >
+                            Confirm
+                          </button>
+                          <button
+                            className="cancelDeleteButton"
+                            onClick={handleCancelDeleteClick}
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          className="deleteButton"
+                          onClick={() => handleDeleteClick(note.id)}
+                        >
+                          Delete
+                        </button>
+                      )}
                     </div>
                   );
                 })}
@@ -120,6 +169,7 @@ export default function StudentAppointments() {
           );
         })}
       </Scroll>
+      <ChangeReminder editNote = {editNote} setEditNote = {setEditNote}/>
     </div>
   );
 }
