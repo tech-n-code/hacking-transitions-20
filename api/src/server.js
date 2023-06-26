@@ -14,20 +14,35 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
+//Route to get all branches
+app.get("/api/branches", async (req, res, next) => {
+  const result = await db
+    .query("SELECT * FROM branch")
+    .catch(next);
+  if (result.rows.length === 0) {
+    res.sendStatus(404);
+  } else {
+    res.send(result.rows);
+  }
+});
+
+//Route to get all cohorts
 app.get("/api/cohorts", async (req, res, next) => {
   const result = await db
-    .query(
-      "SELECT cohorts.*, instructors.lastname AS instructor_id FROM cohorts INNER JOIN instructors ON cohorts.instructor_id = instructors.id"
-    )
+    .query("SELECT * FROM cohorts")
     .catch(next);
-  res.send(result.rows);
+  if (result.rows.length === 0) {
+    res.sendStatus(404);
+  } else {
+    res.send(result.rows);
+  }
 });
 
-app.get("/api/cohorts/:id", async (req, res, next) => {
+//Route to get all instructors
+app.get("/api/instructors", async (req, res, next) => {
   const result = await db
-    .query("SELECT * FROM cohorts WHERE id = $1", [req.params.id])
+    .query("SELECT * FROM instructors")
     .catch(next);
-
   if (result.rows.length === 0) {
     res.sendStatus(404);
   } else {
@@ -35,9 +50,14 @@ app.get("/api/cohorts/:id", async (req, res, next) => {
   }
 });
 
-app.get("/api/branches", async (req, res, next) => {
-  const result = await db.query("SELECT * FROM branch").catch(next);
-
+//Route to get a cohort by cohortId
+app.get("/api/cohorts/:cohortId", async (req, res, next) => {
+  const { cohortId } = req.params;
+  const result = await db
+    .query("SELECT * FROM cohorts WHERE id = $1", [
+      cohortId
+    ])
+    .catch(next);
   if (result.rows.length === 0) {
     res.sendStatus(404);
   } else {
@@ -45,11 +65,12 @@ app.get("/api/branches", async (req, res, next) => {
   }
 });
 
+//Route to get all students in a cohort by cohortId
 app.get("/api/cohorts/:cohortId/students", async (req, res, next) => {
-  const cohortId = req.params.cohortId;
+  const { cohortId } = req.params;
   const result = await db
-    .query(`SELECT students.* FROM students WHERE students.cohort_id = $1`, [
-      cohortId,
+    .query("SELECT students.* FROM students WHERE students.cohort_id = $1", [
+      cohortId
     ])
     .catch(next);
   if (result.rows.length === 0) {
@@ -59,11 +80,23 @@ app.get("/api/cohorts/:cohortId/students", async (req, res, next) => {
   }
 });
 
+//Route for ???
+// app.get("/api/cohorts", async (req, res, next) => { //weird, needs refactor
+//   const result = await db
+//     .query(
+//       "SELECT cohorts.*, instructors.lastname AS instructor_id FROM cohorts INNER JOIN instructors ON cohorts.instructor_id = instructors.id"
+//     )
+//     .catch(next);
+//   res.send(result.rows);
+// });
+
+
+//Route to get a student by studentId
 app.get("/api/students/:studentId", async (req, res, next) => {
-  const studentId = req.params.studentId;
+  const { studentId } = req.params;
   const result = await db
-    .query(`SELECT students.* FROM students WHERE students.id = $1`, [
-      studentId,
+    .query("SELECT students.* FROM students WHERE students.id = $1", [
+      studentId
     ])
     .catch(next);
   if (result.rows.length === 0) {
@@ -73,10 +106,11 @@ app.get("/api/students/:studentId", async (req, res, next) => {
   }
 });
 
-// Route to get all events
+//Route to get all events
 app.get("/api/events", async (req, res, next) => {
-  // const events = req.params.events
-  const result = await db.query(`SELECT * FROM events`).catch(next);
+  const result = await db
+    .query("SELECT * FROM events")
+    .catch(next);
   if (result.rows.length === 0) {
     res.sendStatus(404);
   } else {
@@ -84,12 +118,54 @@ app.get("/api/events", async (req, res, next) => {
   }
 });
 
-// Route to get note by id
+//Route to get all events by cohortId
+app.get("/api/cohorts/:cohortId/events", async (req, res, next) => {
+  const { cohortId } = req.params;
+  const result = await db
+    .query(`SELECT * FROM events WHERE student_id IN (SELECT id FROM students WHERE cohort_id = $1)`, [
+      cohortId
+    ])
+    .catch(next);
+  if (result.rows.length === 0) {
+    res.sendStatus(404);
+  } else {
+    res.send(result.rows);
+  }
+});
+
+//Route to get all notes
+app.get("/api/notes", async (req, res, next) => {
+  const result = await db
+    .query("SELECT * FROM notes")
+    .catch(next);
+  if (result.rows.length === 0) {
+    res.sendStatus(404);
+  } else {
+    res.send(result.rows);
+  }
+});
+
+//Route to get all notes by cohortId
+app.get("/api/cohorts/:cohortId/notes", async (req, res, next) => {
+  const { cohortId } = req.params;
+  const result = await db
+    .query(`SELECT * FROM notes WHERE student_id IN (SELECT id FROM students WHERE cohort_id = $1)`, [
+      cohortId
+    ])
+    .catch(next);
+  if (result.rows.length === 0) {
+    res.sendStatus(404);
+  } else {
+    res.send(result.rows);
+  }
+});
+
+//Route to get a note by noteId
 app.get("/api/notes/:noteId", async (req, res, next) => {
-  const noteId = req.params.noteId;
+  const { noteId } = req.params;
   const result = await db
     .query(`SELECT notes.* FROM notes WHERE notes.id = $1`, [
-      noteId,
+      noteId
     ])
     .catch(next);
   if (result.rows.length === 0) {
@@ -99,18 +175,7 @@ app.get("/api/notes/:noteId", async (req, res, next) => {
   }
 });
 
-// Route to get all notes
-app.get("/api/notes", async (req, res, next) => {
-  // const events = req.params.events
-  const result = await db.query(`SELECT * FROM notes`).catch(next);
-  if (result.rows.length === 0) {
-    res.sendStatus(404);
-  } else {
-    res.send(result.rows);
-  }
-});
-
-// Route to handle user registration
+//Route to handle user registration
 app.post("/api/register", async (req, res) => {
   try {
     const { email, password, firstName, lastName } = req.body;
@@ -129,9 +194,9 @@ app.post("/api/register", async (req, res) => {
     });
     res.status(200).json({ token });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     if (err.code === "23505") {
-      res.status(409).json({ error: "Email is already registeredd" });
+      res.status(409).json({ error: "Email is already registered" });
     } else {
       res.status(500).json({ error: "Registration failed" });
     }
@@ -175,31 +240,35 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-// Simple route to check users
+// Route to get all users
 app.get("/api/users", async (req, res, next) => {
-  const result = await db.query("SELECT * FROM users").catch(next);
-  res.send(result.rows);
+  const result = await db
+    .query("SELECT * FROM users")
+    .catch(next);
+  if (result.rows.length === 0) {
+    res.sendStatus(404);
+  } else {
+    res.send(result.rows);
+  }
 });
-
 
 //New Route for calendar events
-app.get("/api/events", async (req, res) => { //needs to be reworked to get individual fields instead of concat
-  db.query(
-    "SELECT CONCAT(students.firstname, ' ', students.lastname ,': ', events.title ) AS title, events.startdate, events.enddate, events.allday FROM events LEFT JOIN students ON events.student_id = students.id",
-    (err, result) => {
-      if (err) {
-        console.log(err);
-      }
-      res.send(result.rows);
-    }
-  );
-});
+// app.get("/api/events", async (req, res) => { //needs to be reworked to get individual fields instead of concat
+//   db.query(
+//     "SELECT CONCAT(students.firstname, ' ', students.lastname ,': ', events.title ) AS title, events.startdate, events.enddate, events.allday FROM events LEFT JOIN students ON events.student_id = students.id",
+//     (err, result) => {
+//       if (err) {
+//         console.log(err);
+//       }
+//       res.send(result.rows);
+//     }
+//   );
+// });
 
-//Route to POST notes:
-app.post("/api/notes", async (req, res, next) => { //need to find-replace 'appointments' with 'notes' in front-end
-  const note = req.body.note;
-  const student_id = req.body.student_id;
-
+//Route to POST new note
+app.post("/api/notes", async (req, res, next) => {
+  const { note } = req.body;
+  const { student_id } = req.body;
   const result = await db
     .query(
       "INSERT INTO notes (note, student_id) VALUES ($1, $2) RETURNING *",
@@ -213,12 +282,12 @@ app.post("/api/notes", async (req, res, next) => { //need to find-replace 'appoi
   }
 });
 
-//Route to DELETE notes:
-app.delete("/api/notes/:id", async (req, res, next) => { //need to find-replace 'appointments' with 'notes' in front-end
-  const id = req.params.id;
+//Route to DELETE a note by noteId:
+app.delete("/api/notes/:noteId", async (req, res, next) => { //need to find-replace 'appointments' with 'notes' in front-end
+  const { noteId } = req.params;
   const result = await db
     .query("DELETE FROM notes WHERE id = $1 RETURNING *", [
-      id,
+      noteId,
     ])
     .catch(next);
   if (result.rows.length === 0) {
@@ -228,14 +297,14 @@ app.delete("/api/notes/:id", async (req, res, next) => { //need to find-replace 
   }
 });
 
-//PATCH/EDIT route for notes:
-app.patch("/api/notes/:id", async (req, res, next) => { //need to find-replace 'appointments' with 'notes' in front-end
-  const id = Number.parseInt(req.params.id);
+//PATCH/EDIT route for a note by noteId:
+app.patch("/api/notes/:noteId", async (req, res, next) => { //need to find-replace 'appointments' with 'notes' in front-end
+  const noteId = req.params; // old --> const id = Number.parseInt(req.params.noteId);
   const { note } = req.body;
   const result = await db
-    .query("UPDATE notes SET note=$1 WHERE id=$2 RETURNING *", [
+    .query("UPDATE notes SET note = $1 WHERE id = $2 RETURNING *", [
       note,
-      id,
+      noteId,
     ])
     .catch(next);
   if (result.rows.length === 0) {
