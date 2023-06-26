@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
@@ -6,15 +6,17 @@ import listPlugin from "@fullcalendar/list";
 // import Modal from "react-modal";
 import "./NewCalendar.css";
 import { Tooltip } from 'react-tooltip';
+import AppointmentContext from "../../context/AppointmentContext.jsx";
 
 // Modal.setAppElement("#root");
 
 const NewCalendar = () => {
   // const calendarRef = useRef(null);
-  const [events, setEvents] = useState([]);
   // const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isAddEventOpen, setIsAddEventOpen] = useState(false);
+  const [calendarEvents, setCalendarEvents] = useState([]);
+  const { events } = useContext(AppointmentContext);
 
   // const openAddEventModal = () => {
   //   setIsAddEventOpen(true);
@@ -22,13 +24,13 @@ const NewCalendar = () => {
 
   const handleViewChange = (view) => {
     // Handle view change here if needed
-    console.log("Selected view:", view);
+    console.log("Selected view: " + view);
   };
 
   const handleEventClick = (info) => {
     setSelectedEvent(info.event);
     // setModalIsOpen(true);
-    console.log(selectedEvent);
+    console.log("Selected event: " + selectedEvent);
   };
 
   // const handleModalClose = () => {
@@ -37,24 +39,14 @@ const NewCalendar = () => {
   // };
 
   useEffect(() => {
-    fetch("/api/events")
-      .then((res) => res.json())
-      .then((data) => {
-        const formattedEvents = data.map((event) => {
-          const title = event.title === "ETS_Date" ? "(ETS)" : event.title;
-          return {
-            date: new Date(event.startdate),
-            title: title,
-            allDay: event.allday,
-          };
-        });
-        setEvents(formattedEvents);
-        console.log(formattedEvents)
-      })
-      .catch((err) => {
-        console.error("Error fetching Calendar events: ", err);
-      });
+    const formattedEvents = events.map((event) => ({
+      date: new Date(event.startdate),
+      title: event.title,
+      allDay: event.allday,
+    }));
+    setCalendarEvents(formattedEvents);
   }, []);
+  
 
   // useEffect(() => {
   //   fetch("/api/events")
@@ -141,7 +133,7 @@ const NewCalendar = () => {
         // ref={calendarRef}
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
         initialView="dayGridMonth"
-        events={events}
+        events={calendarEvents}
         eventClick={handleEventClick}
         headerToolbar={headerToolbar}
         views={{
