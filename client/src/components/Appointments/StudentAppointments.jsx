@@ -139,13 +139,6 @@ export default function StudentAppointments() {
                       >
                         Edit
                       </button>
-                      <button
-                        className="deleteButton"
-                        onClick={() => handleDeleteClick()}
-                      >
-                        Delete
-                      </button>
-
                       {deleteConfirmation === task.id ? (
                         <div>
                           <button

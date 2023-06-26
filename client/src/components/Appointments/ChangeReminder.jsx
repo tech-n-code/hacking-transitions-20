@@ -65,9 +65,6 @@ export default function ChangeReminder({ editNote, setEditNote }){
         >
         <span className="Form">
             <form onSubmit={ handleSubmit }>
-                <div>
-                <label> Click note you would like to edit </label>
-                </div>
                 <textarea 
                     required
                     value={ noteSelected }
