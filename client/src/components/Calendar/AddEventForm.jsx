@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import AppointmentContext from "../../context/AppointmentContext";
 
 const AddEventForm = ({ handleModalClose }) => {
   const [title, setTitle] = useState("");
   const [startDateTime, setStartDateTime] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
   const [endDateTime, setEndDateTime] = useState("");
   const [allDayEvent, setAllDayEvent] = useState(false);
+  const [selectedStudent, setSelectedStudent] = useState("");
+  const { students, setUpdate } = useContext(AppointmentContext);
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -31,6 +33,7 @@ const AddEventForm = ({ handleModalClose }) => {
     console.log("Start Date/Time:", startDateTime);
     console.log("End Date/Time:", endDateTime);
     console.log("All-Day Event:", allDayEvent);
+    console.log("Student:", selectedStudent);
 
     //API Route to add event to database
 
@@ -76,6 +79,23 @@ const AddEventForm = ({ handleModalClose }) => {
             onChange={handleAllDayEventChange}
           />
         </label>
+      </div>
+      <div>
+        <label>Student:</label>
+        <select
+          style={{ margin: "auto auto 20px", display: "block" }}
+          value={selectedStudent}
+          onChange={(e) => setSelectedStudent(e.target.value)}
+        >
+          <option value=""> Please select a student</option>
+          {students.map((student, x) => {
+            return (
+              <option key={x} value={student.id}>
+                {student.firstname} {student.lastname}
+              </option>
+            );
+          })}
+        </select>
       </div>
       <button type="submit">Submit</button>
       <button type="button" onClick={handleModalClose}>
