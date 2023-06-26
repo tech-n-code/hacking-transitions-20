@@ -4,6 +4,7 @@ import "./StudentDetails.css";
 import CohortContext from "../../context/CohortContext.jsx";
 import AppointmentContext from "../../context/AppointmentContext.jsx";
 Modal.setAppElement("#root");
+import AddReminder from "../Appointments/AddReminder";
 
 const StudentDetail = () => {
   const {
@@ -16,7 +17,7 @@ const StudentDetail = () => {
     setStudentModalOpen,
   } = useContext(CohortContext);
 
-  const { notes, events } = useContext(AppointmentContext);
+  const { notes, events, showAddModal, setShowAddModal } = useContext(AppointmentContext);
 
   const studentNotes = notes.filter((note) => note.student_id === studentID);
   const studentEvents = events.filter((event) => event.student_id === studentID);
@@ -42,6 +43,11 @@ const StudentDetail = () => {
     "($1)-$2-$3"
   );
   
+  const handleAddReminder = () => {
+    // setIsStudentModalOpen(false);
+    setShowAddModal(true);
+}
+
   const getBadgeMsg = (givenDate) => {
     const today = new Date();
     const futureDate = new Date(givenDate);
@@ -202,6 +208,7 @@ const StudentDetail = () => {
             <tr>
               <th className="student-details-appt-header" colSpan="2">
                 Notes:
+                <button style={{marginRight: '5px', marginLeft: 'auto'}} className='addButton' onClick={handleAddReminder}>Add </button>
               </th>
             </tr>
           </thead>
@@ -212,6 +219,17 @@ const StudentDetail = () => {
                 <tr key={index}>
                   <td className={`student-details-appt`}>
                     {studentNote.note}
+                    <button 
+                  style={{marginRight: '5px', marginLeft: 'auto'}}
+                  className='addButton' onClick={handleAddReminder}
+                  >Edit</button>
+                  <button
+                      style={{marginRight: '5px', marginLeft: 'auto'}}
+                      className="deleteButton"
+                      // onClick={handleDeleteClick}
+                    >
+                      Delete
+                  </button>
                   </td>
                 </tr>
                 );
@@ -223,6 +241,7 @@ const StudentDetail = () => {
             )}
           </tbody>
         </table>
+        <AddReminder showAddModal={showAddModal} setShowAddModal={setShowAddModal} />
       </div>
     </Modal>
   );
