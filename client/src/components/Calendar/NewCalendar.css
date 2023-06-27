@@ -62,6 +62,10 @@
     border: solid 1px gray !important;
 }
 
+.calendar-tooltip {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 @keyframes fadeIn {
     0% {
         opacity: 0;
