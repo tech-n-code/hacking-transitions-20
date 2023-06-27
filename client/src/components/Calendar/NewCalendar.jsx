@@ -3,17 +3,29 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
+import AddEventForm from "./AddEventForm";
+import Modal from "react-modal";
 import "./NewCalendar.css";
 import AppointmentContext from "../../context/AppointmentContext.jsx";
 import CohortContext from "../../context/CohortContext.jsx";
-import { Tooltip } from 'react-tooltip';
+import { Tooltip } from "react-tooltip";
 
 const NewCalendar = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isAddEventOpen, setIsAddEventOpen] = useState(false);
   const [calendarEvents, setCalendarEvents] = useState([]);
+  // const [openAddEventModal, setOpenAddEventModal] = useState(false);
   const { events } = useContext(AppointmentContext);
-  const { students, cohortClickedId, update, setUpdate } = useContext(CohortContext);
+  const { students, cohortClickedId, update, setUpdate } =
+    useContext(CohortContext);
+
+  const handleModalClose = () => {
+    setIsAddEventOpen(false);
+  };
+
+  const openAddEventModal = () => {
+    setIsAddEventOpen(true);
+  };
 
   // const handleViewChange = (view) => {
   //   console.log("Selected view: " + view);
@@ -25,12 +37,13 @@ const NewCalendar = () => {
   };
 
   const getEventOwner = (givenStudentId) => {
-    const eventOwner = students.find((student) =>
-    student.id === givenStudentId);
+    const eventOwner = students.find(
+      (student) => student.id === givenStudentId
+    );
     const eventOwnerFirstName = eventOwner ? eventOwner.firstname : null;
     const eventOwnerLastName = eventOwner ? eventOwner.lastname : null;
     return eventOwnerFirstName + " " + eventOwnerLastName;
-  }
+  };
 
   useEffect(() => {
     setUpdate(false)
@@ -51,9 +64,34 @@ const NewCalendar = () => {
   }, [update, events, cohortClickedId]);
 
   const headerToolbar = {
-    left: "prev,next today",
+    left: `prev,next today addEventButton`,
     center: "title",
     right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+  };
+
+  const modalStyle = {
+    overlay: {
+      zIndex: 100,
+      backgroundColor: "rgba(0, 0, 0, 0.0)",
+    },
+    content: {
+      position: "absolute",
+      top: "50%",
+      bottom: "50%",
+      left: "50%",
+      right: "50%",
+      transform: "translate(-50%, -50%)",
+      height: "fit-content",
+      width: "fit-content",
+      border: "1px solid #ccc",
+      background: "#0D0A40",
+      color: "white",
+      overflow: "auto",
+      borderRadius: "10px",
+      outline: "none",
+      padding: "30px",
+      zIndex: 101,
+    },
   };
 
   return (
@@ -77,6 +115,12 @@ const NewCalendar = () => {
         }}
         eventClick={handleEventClick}
         headerToolbar={headerToolbar}
+        customButtons={{
+          addEventButton: {
+            text: "Add Event",
+            click: openAddEventModal,
+          },
+        }}
         views={{
           week: {
             type: "timeGridWeek",
@@ -89,6 +133,15 @@ const NewCalendar = () => {
         }}
         // onView={() => handleViewChange}
       />
+      <Modal
+        isOpen={isAddEventOpen}
+        onRequestClose={handleModalClose}
+        contentLabel="Add Event"
+        style={modalStyle}
+      >
+        <AddEventForm handleModalClose={handleModalClose} />
+      </Modal>
+
       {calendarEvents.map((event) => (
         <Tooltip
         className="calendar-tooltip"
