@@ -5,6 +5,7 @@ import CohortContext from "../../context/CohortContext.jsx";
 import AppointmentContext from "../../context/AppointmentContext.jsx";
 Modal.setAppElement("#root");
 import AddReminder from "../Appointments/AddReminder";
+import ChangeReminder from "../Appointments/ChangeReminder";
 
 const StudentDetail = () => {
   const {
@@ -17,7 +18,7 @@ const StudentDetail = () => {
     setStudentModalOpen,
   } = useContext(CohortContext);
 
-  const { notes, events, showAddModal, setShowAddModal } = useContext(AppointmentContext);
+  const { notes, events, showAddModal, setShowAddModal, } = useContext(AppointmentContext);
 
   const studentNotes = notes.filter((note) => note.student_id === studentID);
   const studentEvents = events.filter((event) => event.student_id === studentID);
@@ -46,7 +47,46 @@ const StudentDetail = () => {
   const handleAddReminder = () => {
     // setIsStudentModalOpen(false);
     setShowAddModal(true);
-}
+  }
+  const [editNote, setEditNote] = useState(false);
+
+  const handleChangeReminder =()=>{
+    setEditNote(true);
+  }
+
+  const [deleteConfirmation, setDeleteConfirmation] = useState(null);
+  const [notesToDelete, setNotesToDelete] = useState([]);
+
+  useEffect(() => {
+    // Remove deleted notes from the state
+    setNotesToDelete([]);
+  }, [notes]);
+
+  const handleDeleteClick = (noteId) => {
+    setDeleteConfirmation(noteId);
+  };
+
+  const handleConfirmDeleteClick = (noteId) => {
+    if (noteId) {
+      // Check if the noteId is provided
+      fetch(`/api/notes/${noteId}`, {
+        method: "DELETE",
+      })
+        .then(() => {
+          console.log("Note " + noteId + " has been deleted");
+          setNotesToDelete((prevNotes) => [...prevNotes, noteId]);
+          setDeleteConfirmation(null);
+        })
+        .catch((error) => {
+          console.error("Error deleting note:", error);
+          setDeleteConfirmation(null);
+        });
+    }
+  };
+
+  const handleCancelDeleteClick = () => {
+    setDeleteConfirmation(null);
+  };
 
   const getBadgeMsg = (givenDate) => {
     const today = new Date();
@@ -222,15 +262,34 @@ const StudentDetail = () => {
                     <button 
 
                   style={{marginRight: '5px', marginLeft: 'auto'}}
-                  className='addButton' onClick={handleAddReminder}
+                  className='editButton' onClick={handleChangeReminder}
                   >Edit</button>
-                  <button
-                      style={{marginRight: '5px', marginLeft: 'auto'}}
-                      className="deleteButton"
-                      // onClick={handleDeleteClick}
-                    >
-                      Delete
-                  </button>
+                   {deleteConfirmation === studentNote.id ? (
+                        <div>
+                          <button
+                            className="confirmDeleteButton"
+                            onClick={() =>
+                              handleConfirmDeleteClick(deleteConfirmation)
+                            }
+                          >
+                            Confirm
+                          </button>
+
+                          <button
+                            className="cancelDeleteButton"
+                            onClick={handleCancelDeleteClick}
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      ) : (
+                        <button
+                          className="deleteButton"
+                          onClick={() => handleDeleteClick(studentNote.id)}
+                        >
+                          Delete
+                        </button>
+                      )}
                   </td>
                 </tr>
                 );
@@ -243,6 +302,7 @@ const StudentDetail = () => {
           </tbody>
         </table>
         <AddReminder showAddModal={showAddModal} setShowAddModal={setShowAddModal} />
+        <ChangeReminder editNote = {editNote} setEditNote = {setEditNote}/>
       </div>
      </Modal>
   );
