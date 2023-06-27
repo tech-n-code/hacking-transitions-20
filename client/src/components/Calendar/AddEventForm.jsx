@@ -62,6 +62,7 @@ const AddEventForm = ({ handleModalClose }) => {
 
     //Close Modal
     handleModalClose();
+    setUpdate(true);
   };
 
   return (
