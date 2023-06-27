@@ -19,8 +19,6 @@ const NewCalendar = () => {
   const { students, cohortClickedId, update, setUpdate } =
     useContext(CohortContext);
 
-  console.log(events);
-
   const handleModalClose = () => {
     setIsAddEventOpen(false);
   };
@@ -29,9 +27,9 @@ const NewCalendar = () => {
     setIsAddEventOpen(true);
   };
 
-  const handleViewChange = (view) => {
-    console.log("Selected view: " + view);
-  };
+  // const handleViewChange = (view) => {
+  //   console.log("Selected view: " + view);
+  // };
 
   const handleEventClick = (info) => {
     setSelectedEvent(info.event);
@@ -48,18 +46,22 @@ const NewCalendar = () => {
   };
 
   useEffect(() => {
-    setUpdate(false);
-    const formattedEvents = events.map((event) => ({
-      start: new Date(event.startdate),
-      end: new Date(event.enddate),
-      title: event.title + ": " + getEventOwner(event.student_id),
-      allDay: event.allday,
-      extendedProps: {
-        "data-tip": event.title + ": " + getEventOwner(event.student_id),
-      },
-    }));
+    setUpdate(false)
+    let formattedEvents = [];
+    if (events.length > 0) {
+      formattedEvents = events.map((event) => ({
+        start: new Date(event.startdate),
+        end: new Date(event.enddate),
+        title: event.title + ": " + getEventOwner(event.student_id),
+        allDay: event.allday,
+        extendedProps: {
+          'data-tip': event.title + ": " + getEventOwner(event.student_id),
+          'tooltip-id': event.id
+        }
+      }));
+    }
     setCalendarEvents(formattedEvents);
-  }, [update, cohortClickedId]);
+  }, [update, events, cohortClickedId]);
 
   const headerToolbar = {
     left: `prev,next today addEventButton`,
@@ -97,10 +99,20 @@ const NewCalendar = () => {
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
         initialView="dayGridMonth"
+        initialDate="2023-05-01"
         events={calendarEvents}
-        eventContent={({ event }) => (
-          <div data-tip={event.extendedProps["data-tip"]}>{event.title}</div>
-        )}
+        eventContent={({ event }) => {
+          const tooltipId = event.extendedProps['tooltip-id'];
+          return (
+            <div 
+            data-tooltip-id={tooltipId}
+            data-tooltip-content={event.extendedProps['data-tip']}
+            data-tooltip-place="top"
+            >
+              {event.title}
+            </div>
+          );
+        }}
         eventClick={handleEventClick}
         headerToolbar={headerToolbar}
         customButtons={{
@@ -119,7 +131,7 @@ const NewCalendar = () => {
             duration: { days: 1 },
           },
         }}
-        onView={() => handleViewChange}
+        // onView={() => handleViewChange}
       />
       <Modal
         isOpen={isAddEventOpen}
@@ -129,6 +141,14 @@ const NewCalendar = () => {
       >
         <AddEventForm handleModalClose={handleModalClose} />
       </Modal>
+
+      {calendarEvents.map((event) => (
+        <Tooltip
+        className="calendar-tooltip"
+        key={event.extendedProps['tooltip-id']}
+        id={event.extendedProps['tooltip-id']}
+        />
+    ))}
     </div>
   );
 };

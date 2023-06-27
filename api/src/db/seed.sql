@@ -5,16 +5,16 @@ INSERT INTO branch (name) VALUES
     ('Navy');
 
 INSERT INTO instructors (firstname, middlename, lastname, email, location, cohort_id) VALUES
-    ('Jane', 'Dunno', 'Doe1', 'JaneDoe@fakemail.com', 'Austin, Texas', 1),
-    ('Jon', NULL, 'Doe2', 'JonDoe@fakeemail.com', 'Cincinnati, OH', 2),
+    ('Jane', 'Dunno', 'Doe', 'JaneDoe@fakemail.com', 'Austin, Texas', 1),
+    ('Jon', NULL, 'McSnort', 'JonDoe@fakeemail.com', 'Cincinnati, OH', 2),
     ('Phil', NULL, 'Watkins', 'PWatkins@galvanize.com', 'Dallas, Texas', 3),
-    ('Danny', NULL, 'Andrews', 'DAndrews@galvanize.com', 'Tulsa, Oklahoma', 4);
+    ('Danny', NULL, 'Whiskerpants', 'DAndrews@galvanize.com', 'Tulsa, Oklahoma', 4);
 
 INSERT INTO cohorts (title, startdate, enddate, instructor_id) VALUES
-    ('MCSP-19', '2023-1-17', '2023-5-26', 1),
-    ('MCSP-21', '2023-3-6', '2023-8-25', 2),
-    ('MCSP-22', '2023-5-30', '2023-10-27', 3),
-    ('MCSP-23', '2023-6-5', '2023-11-24', 4);
+    ('MCSP-19', '2023-01-17', '2023-05-26', 1),
+    ('MCSP-21', '2023-03-06', '2023-08-25', 2),
+    ('MCSP-22', '2023-05-30', '2023-10-27', 3),
+    ('MCSP-23', '2023-06-05', '2023-11-24', 4);
 
 ALTER TABLE instructors
 ADD CONSTRAINT fk_cohort_id FOREIGN KEY (cohort_id) REFERENCES cohorts(id) ON DELETE CASCADE;
@@ -236,10 +236,11 @@ INSERT INTO events (title, startdate, enddate, allday, student_id, note_id) VALU
 
 INSERT INTO notes (note, student_id, event_id) VALUES
     ('Resume needs some work', 1, NULL),
-    ('Needs to find 3 companies interested in applying for', 2, NULL),
+    ('Needs to find 5 companies interested in applying for; Oracle, Netflix, Salesforce, AirBnB, Activision Blizzard.', 2, NULL),
     ('Behind on Mini-modules', 2, NULL),
     ('Finish going over resume', 3, NULL),
     ('Go over practice interview in Pramp', 4, NULL),
+    ('Student expressed interest in becoming a SIER; wants an office call and reference material to prepare for the process.', 4, NULL),
     ('Behind on Mini-modules', 4, NULL),
     ('Discus Developer Journal', 5, NULL),
     ('Go over Paring attributes', 6, NULL),
@@ -257,10 +258,11 @@ INSERT INTO notes (note, student_id, event_id) VALUES
     ('Needs to submit sprint retro survey', 14, NULL),
     ('Behind on Mini-modules', 14, NULL),
     ('Resume needs some work', 15, NULL),
-    ('Needs to find 3 companies interested in applying for', 16, NULL),
+    ('Needs to find 5 companies interested in applying for; Oracle, Netflix, Salesforce, AirBnB, Activision Blizzard.', 16, NULL),
     ('Behind on Mini-modules', 16, NULL),
     ('Finish going over resume', 17, NULL),
     ('Go over practice interview in Pramp', 18, NULL),
+    ('Student expressed interest in becoming a SIER; wants an office call and reference material to prepare for the process.', 18, NULL),
     ('Behind on Mini-modules', 18, NULL),
     ('Discus Developer Journal', 19, NULL),
     ('Go over Paring attributes', 20, NULL),
@@ -278,10 +280,11 @@ INSERT INTO notes (note, student_id, event_id) VALUES
     ('Needs to submit sprint retro survey', 28, NULL),
     ('Behind on Mini-modules', 28, NULL),
     ('Resume needs some work', 30, NULL),
-    ('Needs to find 3 companies interested in applying for', 31, NULL),
+    ('Needs to find 5 companies interested in applying for; Oracle, Netflix, Salesforce, AirBnB, Activision Blizzard.', 31, NULL),
     ('Behind on Mini-modules', 31, NULL),
     ('Finish going over resume', 32, NULL),
     ('Go over practice interview in Pramp', 33, NULL),
+    ('Student expressed interest in becoming a SIER; wants an office call and reference material to prepare for the process.', 33, NULL),
     ('Behind on Mini-modules', 33, NULL),
     ('Discus Developer Journal', 34, NULL),
     ('Go over Paring attributes', 35, NULL),
