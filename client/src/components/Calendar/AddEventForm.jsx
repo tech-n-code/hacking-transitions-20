@@ -36,6 +36,21 @@ const AddEventForm = ({ handleModalClose }) => {
     console.log("Student:", selectedStudent);
 
     //API Route to add event to database
+    const event = {
+      title: `${title}`,
+      startDateTime: `${startDateTime}`,
+      endDateTime: `${endDateTime}`,
+      allDayEvent: `${allDayEvent}`,
+      student_id: `${selectedStudent}`,
+    };
+    fetch(`/api/events`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(event),
+    }).then(() => {
+      console.log("Event has been added");
+      setUpdate(true);
+    });
 
     // Clear form inputs
     setTitle("");

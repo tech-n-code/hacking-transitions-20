@@ -179,6 +179,26 @@ app.get("/api/events", async (req, res) => {
   );
 });
 
+//Route to add events
+app.post("/api/events", async (req, res) => {
+  const title = req.body.title;
+  const startdate = req.body.startdate;
+  const enddate = req.body.enddate;
+  const allday = req.body.allday;
+  const student_id = req.body.student_id;
+
+  db.query(
+    "INSERT INTO events (title, startdate, enddate, allday, student_id) VALUES ($1, $2, $3, $4, $5)",
+    [title, startdate, enddate, allday, student_id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result.rows);
+    }
+  );
+});
+
 //Route to POST appointment notes to appointments table:
 app.post("/api/appointments", async (req, res, next) => {
   const note = req.body.note;
@@ -201,9 +221,7 @@ app.post("/api/appointments", async (req, res, next) => {
 app.delete("/api/appointments/:id", async (req, res, next) => {
   const id = req.params.id;
   const result = await db
-    .query("DELETE FROM appointments WHERE id = $1 RETURNING *", [
-      id,
-    ])
+    .query("DELETE FROM appointments WHERE id = $1 RETURNING *", [id])
     .catch(next);
   if (result.rows) {
     res.sendStatus(200);
