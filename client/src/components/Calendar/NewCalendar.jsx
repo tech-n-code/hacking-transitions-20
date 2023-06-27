@@ -42,7 +42,8 @@ const NewCalendar = () => {
         title: event.title + ": " + getEventOwner(event.student_id),
         allDay: event.allday,
         extendedProps: {
-          'data-tip': event.title + ": " + getEventOwner(event.student_id)
+          'data-tip': event.title + ": " + getEventOwner(event.student_id),
+          'tooltip-id': event.id
         }
       }));
     }
@@ -61,11 +62,18 @@ const NewCalendar = () => {
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
         initialView="dayGridMonth"
         events={calendarEvents}
-        eventContent={({ event }) => (
-          <div data-tip={event.extendedProps['data-tip']}>
-            {event.title}
-          </div>
-        )}
+        eventContent={({ event }) => {
+          const tooltipId = event.extendedProps['tooltip-id'];
+          return (
+            <div 
+            data-tooltip-id={tooltipId}
+            data-tooltip-content={event.extendedProps['data-tip']}
+            data-tooltip-place="top"
+            >
+              {event.title}
+            </div>
+          );
+        }}
         eventClick={handleEventClick}
         headerToolbar={headerToolbar}
         views={{
@@ -80,7 +88,13 @@ const NewCalendar = () => {
         }}
         onView={() => handleViewChange}
       />
-      <Tooltip effect="solid" />
+      {calendarEvents.map((event) => (
+        <Tooltip
+        className="calendar-tooltip"
+        key={event.extendedProps['tooltip-id']}
+        id={event.extendedProps['tooltip-id']}
+        />
+    ))}
     </div>
   );
 };
