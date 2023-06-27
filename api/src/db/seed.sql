@@ -11,10 +11,10 @@ INSERT INTO instructors (firstname, middlename, lastname, email, location, cohor
     ('Danny', NULL, 'Andrews', 'DAndrews@galvanize.com', 'Tulsa, Oklahoma', 4);
 
 INSERT INTO cohorts (title, startdate, enddate, instructor_id) VALUES
-    ('MCSP-19', '2023-1-17', '2023-5-26', 1),
-    ('MCSP-21', '2023-3-6', '2023-8-25', 2),
-    ('MCSP-22', '2023-5-30', '2023-10-27', 3),
-    ('MCSP-23', '2023-6-5', '2023-11-24', 4);
+    ('MCSP-19', '2023-01-17', '2023-05-26', 1),
+    ('MCSP-21', '2023-03-06', '2023-08-25', 2),
+    ('MCSP-22', '2023-05-30', '2023-10-27', 3),
+    ('MCSP-23', '2023-06-05', '2023-11-24', 4);
 
 ALTER TABLE instructors
 ADD CONSTRAINT fk_cohort_id FOREIGN KEY (cohort_id) REFERENCES cohorts(id) ON DELETE CASCADE;
