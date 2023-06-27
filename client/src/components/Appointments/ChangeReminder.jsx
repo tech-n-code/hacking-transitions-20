@@ -34,7 +34,7 @@ export default function ChangeReminder({ editNote, setEditNote }){
     const modalStyle = {
         overlay:{
             zIndex: 100,
-            backgroundColor: 'rgba(0, 0, 0, 0.0)'
+            
         },
         content:{
             position: 'absolute',
@@ -45,12 +45,13 @@ export default function ChangeReminder({ editNote, setEditNote }){
             transform: "translate(-50%, -50%)",
             height: "fit-content",
             width: "fit-content",
-            border: '1px solid #ccc',
-            background: '#fff',
+            border: '1px solid #000',
+            background: '#E0EAF8',
+            color: 'white',
             overflow: 'auto',
             borderRadius: '10px',
-            outline: 'none',
-            padding: '30px',
+            outline: 'black',
+            padding: '15px',
             zIndex: 101,
           }}
 
@@ -64,8 +65,18 @@ export default function ChangeReminder({ editNote, setEditNote }){
         onRequestClose={closeModal}
         style={modalStyle}
         >
+    <div className="modalOverlay">
         <span className="Form">
             <form onSubmit={ handleSubmit }>
+                <div>
+                <label style={{
+                            fontSize: '24px',
+                            fontFamily: "'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif",
+                            fontWeight: 'bold',
+                            margin: '10px auto 10px',
+                            display: 'block',
+                            textAlign: 'center'
+                        }}>Edit Note</label>
                 <textarea 
                     required
                     value={ noteSelected }
@@ -74,16 +85,18 @@ export default function ChangeReminder({ editNote, setEditNote }){
                     >{noteSelected}</textarea>      
                     <div>
                     <span>
-                <button className="addSubmit" >Submit</button>
+                <button className="addNoteSubmit" >Submit</button>
                     </span>
                     <span>
-                <button className="addCancel" onClick={() => {setEditNote(false), setNoteSelected("")}}>
+                <button className="addNoteCancel" onClick={() => {setEditNote(false), setNoteSelected("")}}>
                     Cancel
                 </button>
                     </span>
-                    </div>       
+                    </div> 
+                    </div>      
             </form>
         </span>
+        </div>
             </Modal>
     )
 }
