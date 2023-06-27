@@ -15,8 +15,6 @@ const NewCalendar = () => {
   const { events } = useContext(AppointmentContext);
   const { students, cohortClickedId, update, setUpdate } = useContext(CohortContext);
 
-  console.log(events);
-
   const handleViewChange = (view) => {
     console.log("Selected view: " + view);
   };
@@ -36,17 +34,20 @@ const NewCalendar = () => {
 
   useEffect(() => {
     setUpdate(false)
-    const formattedEvents = events.map((event) => ({
-      start: new Date(event.startdate),
-      end: new Date(event.enddate),
-      title: event.title + ": " + getEventOwner(event.student_id),
-      allDay: event.allday,
-      extendedProps: {
-        'data-tip': event.title + ": " + getEventOwner(event.student_id)
-      }
-    }));
+    let formattedEvents = [];
+    if (events.length > 0) {
+      formattedEvents = events.map((event) => ({
+        start: new Date(event.startdate),
+        end: new Date(event.enddate),
+        title: event.title + ": " + getEventOwner(event.student_id),
+        allDay: event.allday,
+        extendedProps: {
+          'data-tip': event.title + ": " + getEventOwner(event.student_id)
+        }
+      }));
+    }
     setCalendarEvents(formattedEvents);
-  }, [update, cohortClickedId]);
+  }, [update, events, cohortClickedId]);
 
   const headerToolbar = {
     left: "prev,next today",
