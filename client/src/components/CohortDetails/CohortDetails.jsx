@@ -38,6 +38,10 @@ const CohortDetails = () => {
 
     const cohortInstructorName = cohortInstructor ? `${cohortInstructor.firstname} ${cohortInstructor.lastname}` : null;
 
+    const cohortRecord = cohorts.find((cohort) => cohort.id === cohortClickedId);
+    const cohortStartDate = cohortRecord ? formatDate(cohortRecord.startdate) : null;
+    const cohortEndDate = cohortRecord ? formatDate(cohortRecord.enddate) : null;
+
     const getBadgeMsg = (givenDate) => {
         const today = new Date();
         const futureDate = new Date(givenDate);
@@ -75,11 +79,11 @@ const CohortDetails = () => {
             <div className="cohort-basic-info">
                 <div className="cohort-bacic-info-column">
                     <span>Start Date:</span>
-                    <span>{formatDate(cohorts[cohortClickedId].startdate)}</span>
+                    <span>{cohortStartDate}</span>
                 </div>
                 <div className="cohort-bacic-info-column">
                     <span>End Date:</span>
-                    <span>{formatDate(cohorts[cohortClickedId].enddate)}</span>
+                    <span>{cohortEndDate}</span>
                 </div>
                 <div className="cohort-bacic-info-column">
                     <span>Instructor:</span>
