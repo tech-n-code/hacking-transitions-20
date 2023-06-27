@@ -15,9 +15,9 @@ const NewCalendar = () => {
   const { events } = useContext(AppointmentContext);
   const { students, cohortClickedId, update, setUpdate } = useContext(CohortContext);
 
-  const handleViewChange = (view) => {
-    console.log("Selected view: " + view);
-  };
+  // const handleViewChange = (view) => {
+  //   console.log("Selected view: " + view);
+  // };
 
   const handleEventClick = (info) => {
     setSelectedEvent(info.event);
@@ -61,6 +61,7 @@ const NewCalendar = () => {
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
         initialView="dayGridMonth"
+        initialDate="2023-05-01"
         events={calendarEvents}
         eventContent={({ event }) => {
           const tooltipId = event.extendedProps['tooltip-id'];
@@ -86,7 +87,7 @@ const NewCalendar = () => {
             duration: { days: 1 },
           },
         }}
-        onView={() => handleViewChange}
+        // onView={() => handleViewChange}
       />
       {calendarEvents.map((event) => (
         <Tooltip
