@@ -5,27 +5,27 @@ import Scroll from "./Scroll";
 import ChangeReminder from "./ChangeReminder";
 
 export default function StudentAppointments() {
-  const { students, notes, setNoteSelected, setNoteId } =
-    useContext(AppointmentContext);
+  const { students, notes, setNoteSelected, setNoteId } = useContext(
+    AppointmentContext
+  );
   const [expandedNoteIds, setExpandedNoteIds] = useState([]);
   const [notesToDelete, setNotesToDelete] = useState([]);
-
   const [editNote, setEditNote] = useState(false);
+  const [deleteConfirmation, setDeleteConfirmation] = useState(null);
+  const [isDeleteButtonClicked, setIsDeleteButtonClicked] = useState(false); // Add state for delete button click
+  const [deletedNoteId, setDeletedNoteId] = useState(null); // Track the noteId for which the delete button is clicked
 
-  const handleEditClick = () => {
+  const handleEditClick = (noteId) => {
     setEditNote(true);
     console.log(editNote);
+    setNoteId(noteId);
+    setNoteSelected(note.note);
   };
-
-  const [deleteConfirmation, setDeleteConfirmation] = useState(null);
-
-  useEffect(() => {
-    // Remove deleted notes from the state
-    setNotesToDelete([]);
-  }, [notes]);
 
   const handleDeleteClick = (noteId) => {
     setDeleteConfirmation(noteId);
+    setIsDeleteButtonClicked(true); // Update delete button click state
+    setDeletedNoteId(noteId); // Set the noteId for which the delete button is clicked
   };
 
   const handleConfirmDeleteClick = (noteId) => {
@@ -38,17 +38,28 @@ export default function StudentAppointments() {
           console.log("Note " + noteId + " has been deleted");
           setNotesToDelete((prevNotes) => [...prevNotes, noteId]);
           setDeleteConfirmation(null);
+          setIsDeleteButtonClicked(false); // Reset delete button click state
+          setDeletedNoteId(null); // Reset the noteId for which the delete button is clicked
         })
         .catch((error) => {
           console.error("Error deleting note:", error);
           setDeleteConfirmation(null);
+          setIsDeleteButtonClicked(false); // Reset delete button click state
+          setDeletedNoteId(null); // Reset the noteId for which the delete button is clicked
         });
     }
   };
 
   const handleCancelDeleteClick = () => {
     setDeleteConfirmation(null);
+    setIsDeleteButtonClicked(false); // Reset delete button click state
+    setDeletedNoteId(null); // Reset the noteId for which the delete button is clicked
   };
+
+  useEffect(() => {
+    // Remove deleted notes from the state
+    setNotesToDelete([]);
+  }, [notes]);
 
   const handleNoteToggle = (noteId, event) => {
     const target = event.target;
@@ -97,74 +108,80 @@ export default function StudentAppointments() {
                   const showSeeMoreButton = note.note.length > 70;
                   const showCollapseButton =
                     note.note.length > 70 && isExpanded;
+                  const isNoteDeleted = deletedNoteId === note.id; // Check if the note is deleted
+
                   return (
                     <div key={note.id} className="noteContainer">
-                      <div
-                        className="reminder"
-                        onClick={() => {
-                          setNoteId(note.id);
-                          setNoteSelected(note.note);
-                        }}
-                      >
+                      <div className="reminder-container">
                         <div
-                          className={
-                            isExpanded ? "noteExpanded" : "noteCollapsed"
-                          }
-                          onClick={(event) => handleNoteToggle(note.id, event)}
+                          className="reminder"
+                          onClick={() => {
+                            setNoteId(note.id);
+                            setNoteSelected(note.note);
+                          }}
                         >
-                          {noteDisplay}
-                          {!isExpanded && showSeeMoreButton && (
-                            <span className="expandButton">Expand note</span>
-                          )}
-                        </div>
-                        {showCollapseButton && (
-                          <span
-                            className="collapseButton"
+                          <div
+                            className={
+                              isExpanded ? "noteExpanded" : "noteCollapsed"
+                            }
                             onClick={(event) =>
                               handleNoteToggle(note.id, event)
                             }
                           >
-                            Collapse note
-                          </span>
-                        )}
+                            {noteDisplay}
+                            {!isExpanded && showSeeMoreButton && (
+                              <span className="expandButton">Expand note</span>
+                            )}
+                          </div>
+                          {showCollapseButton && (
+                            <span
+                              className="collapseButton"
+                              onClick={(event) =>
+                                handleNoteToggle(note.id, event)
+                              }
+                            >
+                              Collapse note
+                            </span>
+                          )}
+                        </div>
                       </div>
 
-                      <button
-                        className="editButton"
-                        onClick={() => {
-                          handleEditClick(note.id);
-                          setNoteId(note.id);
-                          setNoteSelected(note.note);
-                        }}
-                      >
-                        Edit
-                      </button>
-                      {deleteConfirmation === note.id ? (
-                        <div>
+                      <div className="reminder-button-container">
+                        {isDeleteButtonClicked && isNoteDeleted ? null : ( // Conditionally render the editButton
                           <button
-                            className="confirmDeleteButton"
-                            onClick={() =>
-                              handleConfirmDeleteClick(deleteConfirmation)
-                            }
+                            className="editButton"
+                            onClick={() => handleEditClick(note.id)}
                           >
-                            Confirm
+                            Edit
                           </button>
+                        )}
+                        {deleteConfirmation === note.id ? (
+                          <div>
+                            <button
+                              className="confirmDeleteButton"
+                              onClick={() =>
+                                handleConfirmDeleteClick(deleteConfirmation)
+                              }
+                            >
+                              Confirm
+                            </button>
 
+                            <button
+                              className="cancelDeleteButton"
+                              onClick={handleCancelDeleteClick}
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        ) : (
                           <button
-                            className="cancelDeleteButton"
-                            onClick={handleCancelDeleteClick}
+                            className="deleteButton"
+                            onClick={() => handleDeleteClick(note.id)}
                           >
-                            Cancel
+                            Delete
                           </button>
-                        </div>
-                      ) : (
-                        <button
-                          className="deleteButton"
-                          onClick={() => handleDeleteClick(note.id)}
-                        >
-                          Delete
-                        </button>
-                      )}
+                        )}
+                      </div>
                     </div>
                   );
                 })}
