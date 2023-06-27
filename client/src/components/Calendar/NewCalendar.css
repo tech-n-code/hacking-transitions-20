@@ -1,72 +1,85 @@
+.event-tooltip {
+  position: absolute;
+  z-index: 9999;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.fc-event-main {
+  position: relative;
+  display: inline-block;
+}
+
+.event-tooltip {
+  display: none;
+  pointer-events: none;
+}
+
+.fc-event-main:hover .event-tooltip {
+  display: block;
+}
 :root {
-    --fc-button-bg-color: #4E70E0;
-    --fc-button-hover-bg-color: #37a9ef;
-    --fc-button-active-bg-color: #EF6E47;
-    --fc-border-color: transparent;
+  --fc-button-bg-color: #4e70e0;
+  --fc-button-hover-bg-color: #37a9ef;
+  --fc-button-active-bg-color: #ef6e47;
+  --fc-border-color: transparent;
 }
 
 .fc {
-    animation: fadeIn .5s ease-in forwards;
-    background-color: #e0eaf8;
-    border: solid 1px rgb(0, 0, 0);
-    border-radius: 10px;
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+  background-color: #e0eaf8;
+  border: solid 1px rgb(0, 0, 0);
+  border-radius: 10px;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
 }
 
 .fc-toolbar {
-    background-color: #0D0F4A;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    color: white;
-    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+  background-color: #0d0f4a;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: white;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
     "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
-    padding: 8px
+  padding: 8px;
 }
 
 .fc .fc-toolbar.fc-header-toolbar {
-    margin-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 .fc-button-group {
-    margin-left: 10px;
-    margin-right: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .fc-col-header {
-    background-color: #EF6E47;
+  background-color: #ef6e47;
 }
 
 .fc-col-header-cell {
-    width: auto;
+  width: auto;
 }
 
 .fc-daygrid-day-frame {
-    height: 50px;
-    overflow: hidden;
+  height: 50px;
+  overflow: hidden;
 }
 
 .fc-daygrid-day-frame::-webkit-scrollbar {
-    width: 0;
-    overflow: auto;
-    background-color: transparent;
+  width: 0;
+  overflow: auto;
+  background-color: transparent;
 }
 
 .fc-daygrid-day-frame:hover {
-    overflow: auto;
+  overflow: auto;
 }
 
 .fc-daygrid-day {
-    overflow: auto;
-    border: solid 1px gray !important;
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-    }
-    100% {
-        opacity: 1;
-    }
+  overflow: auto;
+  border: solid 1px gray !important;
 }
