@@ -102,12 +102,12 @@ export default function StudentAppointments() {
                   const isExpanded = expandedNoteIds.includes(note.id);
                   const noteDisplay = isExpanded
                     ? note.note
-                    : note.note.length > 70
-                    ? note.note.slice(0, 70) + "... "
+                    : note.note.length > 60
+                    ? note.note.slice(0, 60) + "... "
                     : note.note;
-                  const showSeeMoreButton = note.note.length > 70;
+                  const showSeeMoreButton = note.note.length > 60;
                   const showCollapseButton =
-                    note.note.length > 70 && isExpanded;
+                    note.note.length > 60 && isExpanded;
                   const isNoteDeleted = deletedNoteId === note.id; // Check if the note is deleted
 
                   return (
