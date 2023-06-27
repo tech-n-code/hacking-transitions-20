@@ -5,7 +5,7 @@ import AddReminder from "./AddReminder";
 import ChangeReminder from "./ChangeReminder";
 
 export default function RightColumn(){
-    const[ showAddModal, setShowAddModal ] = useState(false)
+    const[ showAddModal, setShowAddModal ] = useState(false) //this exist already in AppointmentContext
     const[ editNote, setEditNote ] = useState(false)
     
 //a: use a div with a class of modal and a class of modal-content
@@ -13,20 +13,17 @@ export default function RightColumn(){
 
     const handleAddClick = () =>{
         setShowAddModal(!showAddModal)
-        console.log(showAddModal)
+        console.log('Show Modal: ' + showAddModal);
     }
 
     const closeModal = (e) => {
-        
         setShowAddModal(false);
-        console.log(showAddModal);
+        console.log('Show Modal: ' + showAddModal);
     }
 
     // const handleEditClick = () =>{
     //     setEditNote(true)
     // }
-
-
 
     return(
         <div className="Appointments">
@@ -48,7 +45,7 @@ export default function RightColumn(){
                 <StudentAppointments/>
             </div>
             <AddReminder setShowAddModal = {setShowAddModal} closeModal = {closeModal} showAddModal = {showAddModal}/>
-           <ChangeReminder editNote = {editNote} setEditNote = {setEditNote}/>
+            <ChangeReminder editNote = {editNote} setEditNote = {setEditNote}/>
         </div>
     );
 }

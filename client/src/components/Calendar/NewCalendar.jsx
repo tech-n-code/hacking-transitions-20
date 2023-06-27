@@ -1,46 +1,60 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
-import Modal from "react-modal";
-import AddEventForm from "./AddEventForm";
-import "./NewCalendar.css";
 
-Modal.setAppElement("#root");
+import Modal from "react-modal";
+import "./NewCalendar.css";
+import AppointmentContext from "../../context/AppointmentContext.jsx";
+import CohortContext from "../../context/CohortContext.jsx";
+import { Tooltip } from "react-tooltip";
 
 const NewCalendar = () => {
-  const [events, setEvents] = useState([]);
+  const [selectedEvent, setSelectedEvent] = useState(null);
   const [isAddEventOpen, setIsAddEventOpen] = useState(false);
+  const [calendarEvents, setCalendarEvents] = useState([]);
+  const { events } = useContext(AppointmentContext);
+  const { students, cohortClickedId, update, setUpdate } =
+    useContext(CohortContext);
 
-  const openAddEventModal = () => {
-    setIsAddEventOpen(true);
-  };
+  console.log(events);
 
   const handleModalClose = () => {
     setIsAddEventOpen(false);
   };
 
   const handleViewChange = (view) => {
-    // Handle view change here if needed
-    console.log("Selected view:", view);
+    console.log("Selected view: " + view);
+  };
+
+  const handleEventClick = (info) => {
+    setSelectedEvent(info.event);
+    console.log("Selected event: " + selectedEvent);
+  };
+
+  const getEventOwner = (givenStudentId) => {
+    const eventOwner = students.find(
+      (student) => student.id === givenStudentId
+    );
+    const eventOwnerFirstName = eventOwner ? eventOwner.firstname : null;
+    const eventOwnerLastName = eventOwner ? eventOwner.lastname : null;
+    return eventOwnerFirstName + " " + eventOwnerLastName;
   };
 
   useEffect(() => {
-    fetch("/api/events")
-      .then((res) => res.json())
-      .then((data) => {
-        const formattedEvents = data.map((event) => ({
-          date: new Date(event.startdate),
-          title: `${event.title}`,
-          allDay: `${event.allday}`,
-        }));
-        setEvents(formattedEvents);
-      })
-      .catch((err) => {
-        console.error("Error fetching Calendar events: ", err);
-      });
-  }, []);
+    setUpdate(false);
+    const formattedEvents = events.map((event) => ({
+      start: new Date(event.startdate),
+      end: new Date(event.enddate),
+      title: event.title + ": " + getEventOwner(event.student_id),
+      allDay: event.allday,
+      extendedProps: {
+        "data-tip": event.title + ": " + getEventOwner(event.student_id),
+      },
+    }));
+    setCalendarEvents(formattedEvents);
+  }, [update, cohortClickedId]);
 
   const headerToolbar = {
     left: `prev,next today addEventButton`,
@@ -78,7 +92,11 @@ const NewCalendar = () => {
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
         initialView="dayGridMonth"
-        events={events}
+        events={calendarEvents}
+        eventContent={({ event }) => (
+          <div data-tip={event.extendedProps["data-tip"]}>{event.title}</div>
+        )}
+        eventClick={handleEventClick}
         headerToolbar={headerToolbar}
         customButtons={{
           addEventButton: {

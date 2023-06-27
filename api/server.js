@@ -65,11 +65,11 @@ app.get("/api/students/:studentId", async (req, res, next) => {
   }
 });
 
-// Route to get all tasks
-app.get("/api/appointments", async (req, res, next) =>{
-  // const tasks = req.params.tasks
+// Route to get all events
+app.get("/api/events", async (req, res, next) =>{
+  // const events = req.params.events
   const result = await db
-    .query(`SELECT * FROM appointments`)
+    .query(`SELECT * FROM events`)
     .catch(next)
   if(result.rows.length === 0){
     res.sendStatus(404);

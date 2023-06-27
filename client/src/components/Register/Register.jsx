@@ -28,7 +28,7 @@ function Register({ handleModeChange }) {
       setUser(user.data.user);
       //console.log(res.data.token);
     } catch (err) {
-      console.log(err);
+      console.error(err);
       if (err.response && err.response.status === 409) {
         setError("User is already registered, please log in");
       } else {

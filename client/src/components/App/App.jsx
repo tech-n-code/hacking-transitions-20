@@ -36,7 +36,7 @@ const AuthContent = () => {
   const [mode, setMode] = useState("login"); // Add a new state variable called "mode" and initialize it to "login"
   const { isAuthenticated } = useUser(); // Get the new isAuthenticated variable from the context
 
-  const { cohortClicked, isStudentModalOpen } = useContext(CohortContext);
+  const { cohortClicked, studentModalOpen } = useContext(CohortContext);
 
   const handleModeChange = (newMode) => {
     setMode(newMode);
@@ -52,9 +52,6 @@ const AuthContent = () => {
           ) : (
             <Register handleModeChange={handleModeChange} />
           )}
-          {/* <button onClick={() => handleModeChange(mode === 'login' ? 'register' : 'login')}>
-    {mode === 'login' ? 'New User' : 'Existing User'}
-  </button> */}
         </div>
       )}
       {isAuthenticated && (
@@ -69,7 +66,7 @@ const AuthContent = () => {
               <div className="content-container">
                 {cohortClicked !== "" ? <NewCalendar /> : <></>}
                 {cohortClicked !== "" ? <CohortDetails /> : <></>}
-                {isStudentModalOpen ? <StudentDetail /> : ""}
+                {studentModalOpen ? <StudentDetail /> : ""}
               </div>
             </div>
           </div>

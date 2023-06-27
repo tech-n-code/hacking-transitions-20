@@ -1,29 +1,14 @@
-DROP TABLE IF EXISTS instructors CASCADE;
-DROP TABLE IF EXISTS students CASCADE;
-DROP TABLE IF EXISTS cohorts CASCADE;
-DROP TABLE IF EXISTS student_tasks CASCADE;
-DROP TABLE IF EXISTS branch_tasks CASCADE;
-DROP TABLE IF EXISTS tasks CASCADE;
 DROP TABLE IF EXISTS branch CASCADE;
-DROP TABLE IF EXISTS appointments CASCADE;
-drop table if exists users;
-
-CREATE TABLE tasks (
-  id SERIAL PRIMARY KEY,
-  name TEXT NOT NULL
-);
+DROP TABLE IF EXISTS instructors CASCADE;
+DROP TABLE IF EXISTS cohorts CASCADE;
+DROP TABLE IF EXISTS students CASCADE;
+DROP TABLE IF EXISTS events CASCADE;
+DROP TABLE IF EXISTS notes CASCADE;
+DROP TABLE IF EXISTS users;
 
 CREATE TABLE branch (
   id SERIAL PRIMARY KEY,
   name TEXT NOT NULL
-);
-
-CREATE TABLE branch_tasks (
-  id SERIAL PRIMARY KEY,
-  task_id INT NOT NULL,
-  branch_id INT NOT NULL,
-  FOREIGN KEY (task_id) REFERENCES tasks(id) ON DELETE CASCADE,
-  FOREIGN KEY (branch_id) REFERENCES branch(id) ON DELETE CASCADE
 );
 
 CREATE TABLE instructors (
@@ -32,9 +17,23 @@ CREATE TABLE instructors (
   middlename VARCHAR (30),
   lastname VARCHAR (30) NOT NULL,
   email VARCHAR (255) NOT NULL,
-  location TEXT NOT NULL
+  location TEXT NOT NULL,
+  cohort_id INT
 );
 
+CREATE TABLE cohorts (
+  id SERIAL PRIMARY KEY,
+  title VARCHAR (10) NOT NULL,
+  startdate DATE NOT NULL,
+  enddate DATE NOT NULL,
+  instructor_id INT,
+  CONSTRAINT fk_instructor_id FOREIGN KEY (instructor_id) REFERENCES instructors(id) ON DELETE CASCADE
+);
+
+-- //The 2 lines below were added to the seed.sql file after seeding cohorts table to circumvent fk_cohort_id constraint error.
+
+-- ALTER TABLE instructors
+-- ADD CONSTRAINT fk_cohort_id FOREIGN KEY (cohort_id) REFERENCES cohorts(id) ON DELETE CASCADE;
 
 CREATE TABLE students (
   id SERIAL PRIMARY KEY,
@@ -48,77 +47,43 @@ CREATE TABLE students (
   phonenumber BIGINT NOT NULL,
   email TEXT NOT NULL,
   dutystatus TEXT NOT NULL,
-  ets_date INT
-);
-
-CREATE TABLE appointments (
-  id SERIAL PRIMARY KEY,
-  note TEXT NOT NULL,
-  student_id INT NOT NULL,
-  FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
-);
-
-
-CREATE TABLE cohorts (
-  id SERIAL PRIMARY KEY,
-  courseid VARCHAR (255) NOT NULL,
-  startdate TEXT NOT NULL,
-  enddate TEXT NOT NULL,
-  numberofstudents INT NOT NULL
-);
-
-CREATE TABLE student_tasks (
-  id SERIAL PRIMARY KEY,
-  completed BOOLEAN NOT NULL
-);
-
-CREATE TABLE users (
-  id SERIAL PRIMARY KEY,
-  email VARCHAR(100) UNIQUE NOT NULL,
-  password VARCHAR(100) NOT NULL
+  branch_id INT,
+  instructor_id INT,
+  cohort_id INT,
+  CONSTRAINT fk_branch_id FOREIGN KEY (branch_id) REFERENCES branch(id) ON DELETE CASCADE,
+  CONSTRAINT fk_instructor_id FOREIGN KEY (instructor_id) REFERENCES instructors(id) ON DELETE CASCADE,
+  CONSTRAINT fk_cohort_id FOREIGN KEY (cohort_id) REFERENCES cohorts(id) ON DELETE CASCADE
 );
 
 CREATE TABLE events (
   id SERIAL PRIMARY KEY,
   title TEXT NOT NULL,
-  startdate DATE NOT NULL,
-  enddate DATE NOT NULL,
+  startdate TIMESTAMPTZ NOT NULL,
+  enddate TIMESTAMPTZ NOT NULL,
   allday BOOLEAN NOT NULL,
   student_id INT NOT NULL,
-  FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
+  note_id INT,
+  CONSTRAINT fk_student_id FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE
 );
 
-ALTER TABLE students 
-ADD CONSTRAINT fk_event_id FOREIGN KEY (ets_date) REFERENCES events(id);
+CREATE TABLE notes (
+  id SERIAL PRIMARY KEY,
+  note TEXT NOT NULL,
+  student_id INT NOT NULL,
+  event_id INT,
+  CONSTRAINT fk_student_id FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
+  CONSTRAINT fk_event_id FOREIGN KEY (event_id) REFERENCES events(id) ON DELETE CASCADE
+);
 
+-- //The 2 lines below were added to the seed.sql file after seeding notes table to circumvent fk_note_id constraint error.
 
+-- ALTER TABLE events
+-- ADD CONSTRAINT fk_note_id FOREIGN KEY (note_id) REFERENCES notes(id) ON DELETE CASCADE;
 
-ALTER TABLE instructors 
-ADD COLUMN cohort_id INT,
-ADD CONSTRAINT fk_cohort_id FOREIGN KEY (cohort_id) REFERENCES cohorts(id) ON DELETE CASCADE;
-
-ALTER TABLE students 
-ADD COLUMN branch_id INT,
-ADD COLUMN instructor_id INT,
-ADD COLUMN cohort_id INT,
-ADD COLUMN appointments VARCHAR (100),
-ADD CONSTRAINT fk_branch_id FOREIGN KEY (branch_id) REFERENCES branch(id) ON DELETE CASCADE,
-ADD CONSTRAINT fk_instructor_id FOREIGN KEY (instructor_id) REFERENCES instructors(id) ON DELETE CASCADE,
-ADD CONSTRAINT fk_cohort_id FOREIGN KEY (cohort_id) REFERENCES cohorts(id) ON DELETE CASCADE;
-
-ALTER TABLE cohorts 
-ADD COLUMN instructor_id INT,
-ADD CONSTRAINT fk_instructor_id FOREIGN KEY (instructor_id) REFERENCES instructors(id) ON DELETE CASCADE;
-
-ALTER TABLE student_tasks
-ADD COLUMN student_id INT,
-ADD COLUMN branch_tasks_id INT,
-ADD CONSTRAINT fk_student_id FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE,
-ADD CONSTRAINT fk_branch_tasks_id FOREIGN KEY (branch_tasks_id) REFERENCES branch_tasks(id) ON DELETE CASCADE;
-
-ALTER TABLE users
-ADD COLUMN firstname VARCHAR(100) ,
-ADD COLUMN lastname VARCHAR(100) ;
-
-ALTER TABLE appointments
-ADD COLUMN appointment_date DATE;
+CREATE TABLE users (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(100) UNIQUE NOT NULL,
+  password VARCHAR(100) NOT NULL,
+  firstname VARCHAR(100),
+  lastname VARCHAR(100)
+);

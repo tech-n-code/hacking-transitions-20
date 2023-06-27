@@ -4,45 +4,53 @@ import CohortContext from "./CohortContext.jsx";
 const AppointmentContext = createContext();
 
 export const AppointmentProvider = ({ children }) => {
+    const { cohortClickedId, update, setUpdate } = useContext(CohortContext);
     const [ students, setStudents ] = useState([]);
-    const { cohortIdForInfo } = useContext(CohortContext);
-    const [ tasks, setTasks ] = useState([]);
-    const [ update, setUpdate ] = useState(false);
-    const [ edit, setEdit ] = useState("");
     const [ student, setStudent ] = useState("");
-    const [ taskId, setTaskId ] = useState(null);
+    const [ notes, setNotes ] = useState([]);
+    const [ events, setEvents ] =useState([]);
+    const [ noteId, setNoteId ] = useState(null);
     const [ noteSelected, setNoteSelected ] = useState("");
-    const[ showAddModal, setShowAddModal ] = useState(false)
+    const [ showAddModal, setShowAddModal ] = useState(false);
 
+    //Gets all students in a cohort
     useEffect(() => {
-        fetch(`/api/cohorts/${cohortIdForInfo + 1}/students`)
+        fetch(`/api/cohorts/${cohortClickedId}/students`)
             .then(response => response.json())
             .then(data => setStudents(data))
-            .catch(error => console.log(error));
-    }, [cohortIdForInfo]);
+            .catch(error => console.error(error));
+    }, [cohortClickedId]);
 
+    //Gets all notes in a cohort
     useEffect(() => {
         setUpdate(false)
-        
-        fetch('/api/appointments')
+        fetch(`/api/cohorts/${cohortClickedId}/notes`)
             .then(response => response.json())
-            .then(data =>setTasks(data))
-            .catch(error => console.log(error));
-    }, [update===true]);
+            .then(data =>setNotes(data))
+            .catch(error => console.error(error));
+    }, [update, cohortClickedId]);
     
+    //Gets all events in a cohort
+    useEffect(() => {
+        setUpdate(false)
+        fetch(`/api/cohorts/${cohortClickedId}/events`)
+            .then(response => response.json())
+            .then(data =>setEvents(data))
+            .catch(error => console.error(error));
+    }, [update, cohortClickedId]);
+
     return( <AppointmentContext.Provider value = {{
         students,
-        tasks,
-        update,
-        setUpdate,
-        edit,
-        setEdit,
         student,
         setStudent,
+        notes,
+        events,
+        update,
+        setUpdate,
         noteSelected,
         setNoteSelected,
-        taskId,
-        setTaskId,
+        noteId,
+        setNoteId,
         showAddModal,
         setShowAddModal
     }}>
