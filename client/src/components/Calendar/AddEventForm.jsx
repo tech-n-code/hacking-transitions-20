@@ -36,20 +36,22 @@ const AddEventForm = ({ handleModalClose }) => {
     console.log("Student:", selectedStudent);
 
     //API Route to add event to database
-    const event = {
+    const newEvent = {
       title: `${title}`,
-      startDateTime: `${startDateTime}`,
-      endDateTime: `${endDateTime}`,
+      startdate: `${startDateTime}`,
+      enddate: `${endDateTime}`,
       allDayEvent: `${allDayEvent}`,
       student_id: `${selectedStudent}`,
     };
+
+    console.log(newEvent);
     fetch(`/api/events`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(event),
+      body: JSON.stringify(newEvent),
     }).then(() => {
       console.log("Event has been added");
-      setUpdate(true);
+      //setUpdate(true);
     });
 
     // Clear form inputs
@@ -63,7 +65,6 @@ const AddEventForm = ({ handleModalClose }) => {
   };
 
   return (
-    // <LocalizationProvider dateAdapter={dateAdapter}>
     <form onSubmit={handleSubmit}>
       <div>
         <label>Title:</label>
@@ -117,7 +118,6 @@ const AddEventForm = ({ handleModalClose }) => {
         Cancel
       </button>
     </form>
-    // </LocalizationProvider>
   );
 };
 

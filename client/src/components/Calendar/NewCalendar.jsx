@@ -3,7 +3,7 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
-
+import AddEventForm from "./AddEventForm";
 import Modal from "react-modal";
 import "./NewCalendar.css";
 import AppointmentContext from "../../context/AppointmentContext.jsx";
@@ -14,6 +14,7 @@ const NewCalendar = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isAddEventOpen, setIsAddEventOpen] = useState(false);
   const [calendarEvents, setCalendarEvents] = useState([]);
+  // const [openAddEventModal, setOpenAddEventModal] = useState(false);
   const { events } = useContext(AppointmentContext);
   const { students, cohortClickedId, update, setUpdate } =
     useContext(CohortContext);
@@ -22,6 +23,10 @@ const NewCalendar = () => {
 
   const handleModalClose = () => {
     setIsAddEventOpen(false);
+  };
+
+  const openAddEventModal = () => {
+    setIsAddEventOpen(true);
   };
 
   const handleViewChange = (view) => {

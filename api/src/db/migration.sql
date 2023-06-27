@@ -60,7 +60,7 @@ CREATE TABLE events (
   title TEXT NOT NULL,
   startdate TIMESTAMPTZ NOT NULL,
   enddate TIMESTAMPTZ NOT NULL,
-  allday BOOLEAN NOT NULL,
+  allday BOOLEAN,
   student_id INT NOT NULL,
   note_id INT,
   CONSTRAINT fk_student_id FOREIGN KEY (student_id) REFERENCES students(id) ON DELETE CASCADE

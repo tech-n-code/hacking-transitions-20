@@ -240,6 +240,22 @@ app.get("/api/events", async (req, res) => {
   );
 });
 
+//Route to add events to calendar
+app.post("/api/events", async (req, res) => {
+  console.log(req.body);
+  const { title, startdate, enddate, allday, student_id } = req.body;
+  db.query(
+    "INSERT INTO events (title, startdate, enddate, allday, student_id) VALUES ($1, $2, $3, $4, $5)",
+    [title, startdate, enddate, allday, student_id],
+    (err, result) => {
+      if (err) {
+        console.log(err);
+      }
+      res.send(result.rows);
+    }
+  );
+});
+
 //Route to POST appointment notes to appointments table:
 app.post("/api/appointments", async (req, res, next) => {
   const note = req.body.note;
