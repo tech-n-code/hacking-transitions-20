@@ -11,9 +11,7 @@ import Login from "../Login/Login.jsx";
 import { AuthProvider } from "react-auth-kit";
 import { UserProvider, useUser } from "../UserProvider.jsx";
 import "./App.css";
-import Calendar from "../Calendar/Calendar.jsx";
 import NewCalendar from "../Calendar/NewCalendar.jsx";
-import Logout from "../Logout/Logout.jsx";
 
 const App = () => {
   return (
