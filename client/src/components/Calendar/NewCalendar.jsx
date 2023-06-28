@@ -14,7 +14,6 @@ const NewCalendar = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isAddEventOpen, setIsAddEventOpen] = useState(false);
   const [calendarEvents, setCalendarEvents] = useState([]);
-  // const [openAddEventModal, setOpenAddEventModal] = useState(false);
   const { events } = useContext(AppointmentContext);
   const { students, cohortClickedId, update, setUpdate } =
     useContext(CohortContext);
@@ -26,10 +25,6 @@ const NewCalendar = () => {
   const openAddEventModal = () => {
     setIsAddEventOpen(true);
   };
-
-  // const handleViewChange = (view) => {
-  //   console.log("Selected view: " + view);
-  // };
 
   const handleEventClick = (info) => {
     setSelectedEvent(info.event);
@@ -72,7 +67,6 @@ const NewCalendar = () => {
   const modalStyle = {
     overlay: {
       zIndex: 100,
-      backgroundColor: "rgba(0, 0, 0, 0.0)",
     },
     content: {
       position: "absolute",
@@ -81,15 +75,18 @@ const NewCalendar = () => {
       left: "50%",
       right: "50%",
       transform: "translate(-50%, -50%)",
+      display: "flex",
       height: "fit-content",
-      width: "fit-content",
-      border: "1px solid #ccc",
-      background: "#0D0A40",
-      color: "white",
-      overflow: "auto",
-      borderRadius: "10px",
-      outline: "none",
-      padding: "30px",
+      minWidth: "275px",
+      justifyContent: "center",
+      border: '1px solid #000',
+      background: '#E0EAF8',
+      color: 'white',
+      overflow: 'auto',
+      borderRadius: '10px',
+      outline: 'black',
+      padding: '15px',
+      boxShadow: "0px 10px 20px -10px rgba(0, 0, 0, 0.75)",
       zIndex: 101,
     },
   };
@@ -131,7 +128,6 @@ const NewCalendar = () => {
             duration: { days: 1 },
           },
         }}
-        // onView={() => handleViewChange}
       />
       <Modal
         isOpen={isAddEventOpen}
