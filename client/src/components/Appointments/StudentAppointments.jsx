@@ -5,11 +5,10 @@ import Scroll from "./Scroll";
 import ChangeReminder from "./ChangeReminder";
 
 export default function StudentAppointments() {
-  const { students, notes, setNoteSelected, setNoteId } = useContext(
+  const { students, notes, setNoteSelected, setNoteId, notesToDelete, setNotesToDelete } = useContext(
     AppointmentContext
   );
   const [expandedNoteIds, setExpandedNoteIds] = useState([]);
-  const [notesToDelete, setNotesToDelete] = useState([]);
   const [editNote, setEditNote] = useState(false);
   const [deleteConfirmation, setDeleteConfirmation] = useState(null);
   const [isDeleteButtonClicked, setIsDeleteButtonClicked] = useState(false); // Add state for delete button click
