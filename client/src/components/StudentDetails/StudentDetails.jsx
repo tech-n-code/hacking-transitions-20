@@ -18,8 +18,20 @@ const StudentDetail = () => {
     setStudentModalOpen,
   } = useContext(CohortContext);
 
-  const { notes, events, showAddModal, setShowAddModal, } = useContext(AppointmentContext);
+  const {
+    notes,
+    events,
+    showAddModal,
+    setShowAddModal,
+    notesToDelete,
+    setNotesToDelete,
+    setNoteSelected,
+    setNoteId,
+  } = useContext(AppointmentContext);
 
+  const [deleteConfirmation, setDeleteConfirmation] = useState(null);
+  const [editNote, setEditNote] = useState(false);
+  
   const studentNotes = notes.filter((note) => note.student_id === studentID);
   const studentEvents = events.filter((event) => event.student_id === studentID);
 
@@ -45,31 +57,17 @@ const StudentDetail = () => {
   );
   
   const handleAddReminder = () => {
-    // setIsStudentModalOpen(false);
     setShowAddModal(true);
     
   }
-  const [editNote, setEditNote] = useState(false);
-  
-  
 
   const handleChangeReminder =(note)=>{
     setEditNote(true);
     console.log(editNote);
     setNoteId(note.id);
     setNoteSelected(note.note);
-    
   }
 
-  const [deleteConfirmation, setDeleteConfirmation] = useState(null);
-  const [notesToDelete, setNotesToDelete] = useState([]);
-  const { students, setNoteSelected, setNoteId } = useContext(
-    AppointmentContext
-  );
-  const [isDeleteButtonClicked, setIsDeleteButtonClicked] = useState(false);
-  const [deletedNoteId, setDeletedNoteId] = useState(null); 
-  
-  
   useEffect(() => {
     // Remove deleted notes from the state
     setNotesToDelete([]);
@@ -77,8 +75,6 @@ const StudentDetail = () => {
 
   const handleDeleteClick = (noteId) => {
     setDeleteConfirmation(noteId);
-    setIsDeleteButtonClicked(true);
-    setDeletedNoteId(noteId);
   };
 
   const handleConfirmDeleteClick = (noteId) => {
@@ -91,29 +87,18 @@ const StudentDetail = () => {
           console.log("Note " + noteId + " has been deleted");
           setNotesToDelete((prevNotes) => [...prevNotes, noteId]);
           setDeleteConfirmation(null);
-          setIsDeleteButtonClicked(false);
-          setDeletedNoteId(null);
         })
         .catch((error) => {
           console.error("Error deleting note:", error);
           setDeleteConfirmation(null);
-          setIsDeleteButtonClicked(false);
-          setDeletedNoteId(null);
         });
     }
     
   };
-  
 
   const handleCancelDeleteClick = () => {
     setDeleteConfirmation(null);
   };
-
-  useEffect(() => {
-    // Remove deleted notes from the state
-    setNotesToDelete([]);
-  }, [notes]);
-
 
   const getBadgeMsg = (givenDate) => {
     const today = new Date();
