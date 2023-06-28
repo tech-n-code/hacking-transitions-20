@@ -104,3 +104,29 @@
 .strikethrough-text {
     text-decoration: line-through;
 }
+
+.student-details-notes-container {
+    display: flex;
+    flex-direction: row;
+    max-width: 500px;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 5px;
+}
+
+.student-details-notes {
+    color: black;
+    padding: 5px;
+    border-bottom: 1px solid #EF6E47;
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.student-details-notes-btns-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-left: 10px;
+}
