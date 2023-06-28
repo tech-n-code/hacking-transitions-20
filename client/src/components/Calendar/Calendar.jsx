@@ -1,118 +1,150 @@
-import React, { useState, useEffect } from "react";
-import DayModal from "./DayModal";
+import React, { useState, useEffect, useContext, useRef } from "react";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
+import timeGridPlugin from "@fullcalendar/timegrid";
+import listPlugin from "@fullcalendar/list";
+import AddEventForm from "./AddEventForm";
 import Modal from "react-modal";
-Modal.setAppElement("#root");
-import './Calendar.css'
-
+import "./Calendar.css";
+import AppointmentContext from "../../context/AppointmentContext.jsx";
+import CohortContext from "../../context/CohortContext.jsx";
+import { Tooltip } from "react-tooltip";
 
 const Calendar = () => {
-  const [currentDate, setCurrentDate] = useState(new Date());
-  const [events, setEvents] = useState([]);
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [showDayModal, setShowDayModal] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState(null);
+  const [isAddEventOpen, setIsAddEventOpen] = useState(false);
+  const [calendarEvents, setCalendarEvents] = useState([]);
+  const { events } = useContext(AppointmentContext);
+  const { students, cohortClickedId, update, setUpdate } =
+    useContext(CohortContext);
 
-  const handleDayClick = (day) => {
-    setSelectedDate(day);
-    // console.log(selectedDate);
-    setShowDayModal(true);
-    // console.log("clicked");
-    // console.log(showDayModal);
+  const handleModalClose = () => {
+    setIsAddEventOpen(false);
   };
 
-  const handleCloseModal = () =>{
-    setShowDayModal(false);
-  }
+  const openAddEventModal = () => {
+    setIsAddEventOpen(true);
+  };
+
+  const handleEventClick = (info) => {
+    setSelectedEvent(info.event);
+    console.log("Selected event: " + selectedEvent);
+  };
+
+  const getEventOwner = (givenStudentId) => {
+    const eventOwner = students.find(
+      (student) => student.id === givenStudentId
+    );
+    const eventOwnerFirstName = eventOwner ? eventOwner.firstname : null;
+    const eventOwnerLastName = eventOwner ? eventOwner.lastname : null;
+    return eventOwnerFirstName + " " + eventOwnerLastName;
+  };
 
   useEffect(() => {
-    fetch("/api/calendar")
-    .then((res) => res.json())
-    .then((data) => { 
-      const formattedEvents = data.map((event) => ({
-        date: new Date(event.date),
-        title: `${event.title}`
+    setUpdate(false)
+    let formattedEvents = [];
+    if (events.length > 0) {
+      formattedEvents = events.map((event) => ({
+        start: new Date(event.startdate),
+        end: new Date(event.enddate),
+        title: event.title + ": " + getEventOwner(event.student_id),
+        allDay: event.allday,
+        extendedProps: {
+          'data-tip': event.title + ": " + getEventOwner(event.student_id),
+          'tooltip-id': event.id
+        }
       }));
-      setEvents(formattedEvents);
-    })
-    .catch((err) => {
-      console.error("Error fetching Calendar events: ", err)
-    });
-  }, []);
+    }
+    setCalendarEvents(formattedEvents);
+  }, [update, events, cohortClickedId]);
 
-  const goToPrevMonth = () => {
-    setCurrentDate(
-      (prevDate) => new Date(prevDate.getFullYear(), prevDate.getMonth() - 1, 1)
-    );
+  const headerToolbar = {
+    left: `prev,next today addEventButton`,
+    center: "title",
+    right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
   };
 
-  const goToNextMonth = () => {
-    setCurrentDate(
-      (prevDate) => new Date(prevDate.getFullYear(), prevDate.getMonth() + 1, 1)
-    );
+  const modalStyle = {
+    overlay: {
+      zIndex: 100,
+    },
+    content: {
+      position: "absolute",
+      top: "50%",
+      bottom: "50%",
+      left: "50%",
+      right: "50%",
+      transform: "translate(-50%, -50%)",
+      display: "flex",
+      height: "fit-content",
+      minWidth: "275px",
+      justifyContent: "center",
+      border: '1px solid #000',
+      background: '#E0EAF8',
+      color: 'white',
+      overflow: 'auto',
+      borderRadius: '10px',
+      outline: 'black',
+      padding: '15px',
+      boxShadow: "0px 10px 20px -10px rgba(0, 0, 0, 0.75)",
+      zIndex: 101,
+    },
   };
-
-  const currentYear = currentDate.getFullYear();
-  const currentMonth = currentDate.getMonth();
-  const daysInMonth = new Date(currentYear, currentMonth + 1, 0).getDate();
-  const firstDayIndex = new Date(currentYear, currentMonth, 1).getDay();
-  const prevMonthDays = new Date(currentYear, currentMonth, 0).getDate();
-
-  const days = [];
-  const weekDays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  days.push(...weekDays);
-
-  for (let i = firstDayIndex; i > 0; i--) {
-    days.push(null);
-  }
-  for (let i = 1; i <= daysInMonth; i++) {
-    days.push({ day: i, isActive: true });
-  }
 
   return (
-    <div className="calendar">
-      <div className="header">
-        <span className="prev-button" onClick={goToPrevMonth}>&lt;</span>
-        <h2>
-          {currentDate.toLocaleString("default", { month: "long" })}{" "}
-          {currentYear}
-        </h2>
-        <span className="next-button" onClick={goToNextMonth}>&gt;</span>
-      </div>
-      <div className="weekdays">
-        {weekDays.map((day, index) => (
-          <div key={index} className="weekday">
-            {day}
-          </div>
-        ))}
-      </div>
-      <div className="days">
-        {days.map((day, index) => {
-          if (day === null) {
-            return <div key={index} className="day-inactive"></div>;
-          } else {
-            const date = new Date(currentYear, currentMonth, day.day);
-            const event = events.find(
-              (event) => event.date.toDateString() === date.toDateString()
-            );
-            return (
-              <div
-                key={index}
-                className={`day ${!day.isActive ? "day-inactive" : ""}`}
-                onClick={() => handleDayClick(date)}
-              >
-                <div className="day-inner">
-                  <div className="day-number">{day.day}</div>
-                  {event && <span className="event">{event.title}</span>}
-                </div>
-              </div>
-            );
-          }
-        })}
-      </div>
-      {showDayModal && <DayModal
-        selectedDate={selectedDate}
-        isOpen={showDayModal}
-        handleCloseModal={handleCloseModal}/>}
-      
+    <div>
+      <FullCalendar
+        plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
+        initialView="dayGridMonth"
+        initialDate="2023-05-01"
+        events={calendarEvents}
+        eventContent={({ event }) => {
+          const tooltipId = event.extendedProps['tooltip-id'];
+          return (
+            <div 
+            data-tooltip-id={tooltipId}
+            data-tooltip-content={event.extendedProps['data-tip']}
+            data-tooltip-place="top"
+            >
+              {event.title}
+            </div>
+          );
+        }}
+        eventClick={handleEventClick}
+        headerToolbar={headerToolbar}
+        customButtons={{
+          addEventButton: {
+            text: "Add Event",
+            click: openAddEventModal,
+          },
+        }}
+        views={{
+          week: {
+            type: "timeGridWeek",
+            duration: { weeks: 1 },
+          },
+          day: {
+            type: "timeGridDay",
+            duration: { days: 1 },
+          },
+        }}
+      />
+      <Modal
+        isOpen={isAddEventOpen}
+        onRequestClose={handleModalClose}
+        contentLabel="Add Event"
+        style={modalStyle}
+      >
+        <AddEventForm handleModalClose={handleModalClose} />
+      </Modal>
+
+      {calendarEvents.map((event) => (
+        <Tooltip
+        className="calendar-tooltip"
+        key={event.extendedProps['tooltip-id']}
+        id={event.extendedProps['tooltip-id']}
+        />
+    ))}
     </div>
   );
 };

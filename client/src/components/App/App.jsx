@@ -12,8 +12,6 @@ import { AuthProvider } from "react-auth-kit";
 import { UserProvider, useUser } from "../UserProvider.jsx";
 import "./App.css";
 import Calendar from "../Calendar/Calendar.jsx";
-import NewCalendar from "../Calendar/NewCalendar.jsx";
-import Logout from "../Logout/Logout.jsx";
 
 const App = () => {
   return (
@@ -64,7 +62,7 @@ const AuthContent = () => {
             <div className="content-display">
               {cohortClicked !== "" ? <Appointments /> : <></>}
               <div className="content-container">
-                {cohortClicked !== "" ? <NewCalendar /> : <></>}
+                {cohortClicked !== "" ? <Calendar /> : <></>}
                 {cohortClicked !== "" ? <CohortDetails /> : <></>}
                 {studentModalOpen ? <StudentDetail /> : ""}
               </div>

@@ -257,7 +257,7 @@ app.post("/api/events", async (req, res) => {
 });
 
 //Route to POST appointment notes to appointments table:
-app.post("/api/appointments", async (req, res, next) => {
+app.post("/api/notes", async (req, res, next) => {
   const note = req.body.note;
   const student_id = req.body.student_id;
 
@@ -289,7 +289,6 @@ app.delete("/api/notes/:noteId", async (req, res, next) => {
 });
 
 //PATCH/EDIT route for a note by noteId:
-// PATCH/EDIT route for a note by noteId:
 app.patch("/api/notes/:noteId", async (req, res, next) => {
   const noteId = parseInt(req.params.noteId); // Convert noteId to a number
   const { note } = req.body;
