@@ -94,6 +94,7 @@ const Calendar = () => {
   return (
     <div>
       <FullCalendar
+        className="calendar-tooltip"
         plugins={[dayGridPlugin, timeGridPlugin, listPlugin]}
         initialView="dayGridMonth"
         initialDate="2023-05-01"
