@@ -11,6 +11,7 @@ export const AppointmentProvider = ({ children }) => {
     const [ events, setEvents ] =useState([]);
     const [ noteId, setNoteId ] = useState(null);
     const [ noteSelected, setNoteSelected ] = useState("");
+    const [notesToDelete, setNotesToDelete] = useState([]);
     const [ showAddModal, setShowAddModal ] = useState(false);
 
     //Gets all students in a cohort
@@ -52,7 +53,9 @@ export const AppointmentProvider = ({ children }) => {
         noteId,
         setNoteId,
         showAddModal,
-        setShowAddModal
+        setShowAddModal,
+        notesToDelete,
+        setNotesToDelete
     }}>
         {children}
     </AppointmentContext.Provider>
