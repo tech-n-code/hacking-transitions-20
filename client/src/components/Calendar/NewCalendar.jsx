@@ -5,12 +5,12 @@ import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
 import AddEventForm from "./AddEventForm";
 import Modal from "react-modal";
-import "./NewCalendar.css";
+import "./Calendar.css";
 import AppointmentContext from "../../context/AppointmentContext.jsx";
 import CohortContext from "../../context/CohortContext.jsx";
 import { Tooltip } from "react-tooltip";
 
-const NewCalendar = () => {
+const Calendar = () => {
   const [selectedEvent, setSelectedEvent] = useState(null);
   const [isAddEventOpen, setIsAddEventOpen] = useState(false);
   const [calendarEvents, setCalendarEvents] = useState([]);
@@ -149,4 +149,4 @@ const NewCalendar = () => {
   );
 };
 
-export default NewCalendar;
+export default Calendar;

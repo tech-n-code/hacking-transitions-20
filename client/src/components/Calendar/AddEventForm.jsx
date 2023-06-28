@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import "./NewCalendar.css";
+import "./Calendar.css";
 import AppointmentContext from "../../context/AppointmentContext";
 
 const AddEventForm = ({ handleModalClose }) => {
