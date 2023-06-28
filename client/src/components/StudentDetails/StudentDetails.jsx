@@ -47,16 +47,29 @@ const StudentDetail = () => {
   const handleAddReminder = () => {
     // setIsStudentModalOpen(false);
     setShowAddModal(true);
+    
   }
   const [editNote, setEditNote] = useState(false);
+  
+  
 
-  const handleChangeReminder =()=>{
+  const handleChangeReminder =(note)=>{
     setEditNote(true);
+    console.log(editNote);
+    setNoteId(note.id);
+    setNoteSelected(note.note);
+    
   }
 
   const [deleteConfirmation, setDeleteConfirmation] = useState(null);
   const [notesToDelete, setNotesToDelete] = useState([]);
-
+  const { students, setNoteSelected, setNoteId } = useContext(
+    AppointmentContext
+  );
+  const [isDeleteButtonClicked, setIsDeleteButtonClicked] = useState(false);
+  const [deletedNoteId, setDeletedNoteId] = useState(null); 
+  
+  
   useEffect(() => {
     // Remove deleted notes from the state
     setNotesToDelete([]);
@@ -64,6 +77,8 @@ const StudentDetail = () => {
 
   const handleDeleteClick = (noteId) => {
     setDeleteConfirmation(noteId);
+    setIsDeleteButtonClicked(true);
+    setDeletedNoteId(noteId);
   };
 
   const handleConfirmDeleteClick = (noteId) => {
@@ -76,17 +91,29 @@ const StudentDetail = () => {
           console.log("Note " + noteId + " has been deleted");
           setNotesToDelete((prevNotes) => [...prevNotes, noteId]);
           setDeleteConfirmation(null);
+          setIsDeleteButtonClicked(false);
+          setDeletedNoteId(null);
         })
         .catch((error) => {
           console.error("Error deleting note:", error);
           setDeleteConfirmation(null);
+          setIsDeleteButtonClicked(false);
+          setDeletedNoteId(null);
         });
     }
+    
   };
+  
 
   const handleCancelDeleteClick = () => {
     setDeleteConfirmation(null);
   };
+
+  useEffect(() => {
+    // Remove deleted notes from the state
+    setNotesToDelete([]);
+  }, [notes]);
+
 
   const getBadgeMsg = (givenDate) => {
     const today = new Date();
@@ -253,53 +280,60 @@ const StudentDetail = () => {
             </tr>
           </thead>
           <tbody>
-            {notes.length > 0 ? (
-              studentNotes.map((studentNote, index) => {
-                return (
-                <tr key={index}>
-                  <td className={`student-details-appt`}>
-                    {studentNote.note}
-                    <button 
+  {notes.length > 0 ? (
+    studentNotes.map((studentNote, index) => {
+      if (notesToDelete.includes(studentNote.id)) {
+                    return null;
+      }
 
-                  style={{marginRight: '5px', marginLeft: 'auto'}}
-                  className='editButton' onClick={handleChangeReminder}
-                  >Edit</button>
-                   {deleteConfirmation === studentNote.id ? (
-                        <div>
-                          <button
-                            className="confirmDeleteButton"
-                            onClick={() =>
-                              handleConfirmDeleteClick(deleteConfirmation)
-                            }
-                          >
-                            Confirm
-                          </button>
+      return (
+        <tr key={index}>
+          <td className="student-details-appt">
+            {studentNote.note}
+            <button
+              style={{ marginRight: '5px', marginLeft: 'auto' }}
+              className='editButton'
+              onClick={() => handleChangeReminder(studentNote)}
+            >
+              Edit
+            </button>
+            {deleteConfirmation === studentNote.id ? (
+              <div>
+                <button
+                  style={{ marginRight: '5px', marginLeft: 'auto' }}
+                  className="confirmDeleteButton"
+                  onClick={() => handleConfirmDeleteClick(deleteConfirmation)}
+                >
+                  Confirm
+                </button>
 
-                          <button
-                            className="cancelDeleteButton"
-                            onClick={handleCancelDeleteClick}
-                          >
-                            Cancel
-                          </button>
-                        </div>
-                      ) : (
-                        <button
-                          className="deleteButton"
-                          onClick={() => handleDeleteClick(studentNote.id)}
-                        >
-                          Delete
-                        </button>
-                      )}
-                  </td>
-                </tr>
-                );
-              })
+                <button
+                  style={{ marginRight: '5px', marginLeft: 'auto' }}
+                  className="cancelDeleteButton"
+                  onClick={handleCancelDeleteClick}
+                >
+                  Cancel
+                </button>
+              </div>
             ) : (
-              <tr>
-                <td className="student-details-appt">None.</td>
-              </tr>
+              <button
+                style={{ marginRight: '5px', marginLeft: 'auto' }}
+                className="deleteButton"
+                onClick={() => handleDeleteClick(studentNote.id)}
+              >
+                Delete
+              </button>
             )}
-          </tbody>
+          </td>
+        </tr>
+      );
+    })
+  ) : (
+    <tr>
+      <td className="student-details-appt">None.</td>
+    </tr>
+  )}
+</tbody>
         </table>
         <AddReminder showAddModal={showAddModal} setShowAddModal={setShowAddModal} />
         <ChangeReminder editNote = {editNote} setEditNote = {setEditNote}/>
