@@ -15,10 +15,10 @@ export default function StudentAppointments() {
   const [isDeleteButtonClicked, setIsDeleteButtonClicked] = useState(false); // Add state for delete button click
   const [deletedNoteId, setDeletedNoteId] = useState(null); // Track the noteId for which the delete button is clicked
 
-  const handleEditClick = (noteId) => {
+  const handleEditClick = (note) => {
     setEditNote(true);
     console.log(editNote);
-    setNoteId(noteId);
+    setNoteId(note.id);
     setNoteSelected(note.note);
   };
 
@@ -150,7 +150,7 @@ export default function StudentAppointments() {
                         {isDeleteButtonClicked && isNoteDeleted ? null : ( // Conditionally render the editButton
                           <button
                             className="editButton"
-                            onClick={() => handleEditClick(note.id)}
+                            onClick={() => handleEditClick(note)}
                           >
                             Edit
                           </button>
