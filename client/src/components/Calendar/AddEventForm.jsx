@@ -1,4 +1,5 @@
 import React, { useState, useContext } from "react";
+import "./NewCalendar.css";
 import AppointmentContext from "../../context/AppointmentContext";
 
 const AddEventForm = ({ handleModalClose }) => {
@@ -7,6 +8,7 @@ const AddEventForm = ({ handleModalClose }) => {
   const [endDateTime, setEndDateTime] = useState("");
   const [allDayEvent, setAllDayEvent] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState("");
+  const [addEventErrorMsg, setaddEventErrorMsg] = useState("");
   const { students, setUpdate } = useContext(AppointmentContext);
 
   const handleTitleChange = (event) => {
@@ -44,6 +46,11 @@ const AddEventForm = ({ handleModalClose }) => {
       student_id: `${selectedStudent}`,
     };
 
+    if (!newEvent.title || !newEvent.startdate || !newEvent.enddate || !newEvent.allDayEvent || !newEvent.student_id) {
+      setaddEventErrorMsg("Incomplete Form")
+      return;
+    }
+
     console.log(newEvent);
     fetch(`/api/events`, {
       method: "POST",
@@ -51,7 +58,6 @@ const AddEventForm = ({ handleModalClose }) => {
       body: JSON.stringify(newEvent),
     }).then(() => {
       console.log("Event has been added");
-      //setUpdate(true);
     });
 
     // Clear form inputs
@@ -66,59 +72,69 @@ const AddEventForm = ({ handleModalClose }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <label>Title:</label>
-        <input type="text" value={title} onChange={handleTitleChange} />
-      </div>
-      <div>
-        <label>Start Date/Time:</label>
-        <input
-          type="datetime-local"
-          value={startDateTime}
-          onChange={handleStartDateTimeChange}
-        />
-      </div>
-      <div>
-        <label>End Date/Time:</label>
-        <input
-          type="datetime-local"
-          value={endDateTime}
-          onChange={handleEndDateTimeChange}
-        />
-      </div>
-      <div>
-        <label>
-          All-Day Event:
+    <div className="calendar-AddEventModal">
+      <form onSubmit={handleSubmit}>
+        <div className="calendar-AddEventModal-elements">
+          <label>Title:</label>
+          <input type="text" value={title} onChange={handleTitleChange} />
+        </div>
+        <div className="calendar-AddEventModal-elements">
+          <label>Start Date/Time:</label>
           <input
-            type="checkbox"
-            checked={allDayEvent}
-            onChange={handleAllDayEventChange}
+            type="datetime-local"
+            value={startDateTime}
+            onChange={handleStartDateTimeChange}
           />
-        </label>
-      </div>
-      <div>
-        <label>Student:</label>
-        <select
-          style={{ margin: "auto auto 20px", display: "block" }}
-          value={selectedStudent}
-          onChange={(e) => setSelectedStudent(e.target.value)}
-        >
-          <option value=""> Please select a student</option>
-          {students.map((student, x) => {
-            return (
-              <option key={x} value={student.id}>
-                {student.firstname} {student.lastname}
-              </option>
-            );
-          })}
-        </select>
-      </div>
-      <button type="submit">Submit</button>
-      <button type="button" onClick={handleModalClose}>
-        Cancel
-      </button>
-    </form>
+        </div>
+        <div className="calendar-AddEventModal-elements">
+          <label>End Date/Time:</label>
+          <input
+            type="datetime-local"
+            value={endDateTime}
+            onChange={handleEndDateTimeChange}
+          />
+        </div>
+        <div className="calendar-AddEventModal-elements">
+          <label>
+            All-Day Event:
+            <input
+              type="checkbox"
+              checked={allDayEvent}
+              onChange={handleAllDayEventChange}
+            />
+          </label>
+        </div>
+        <div className="calendar-AddEventModal-elements">
+          <label>Student:</label>
+          <select
+            value={selectedStudent}
+            onChange={(e) => setSelectedStudent(e.target.value)}
+          >
+            <option value=""> Please select a student</option>
+            {students.map((student, x) => {
+              return (
+                <option key={x} value={student.id}>
+                  {student.firstname} {student.lastname}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+          <div className="calendar-ModalBtnContainer-outter">
+            <div className="calendar-ModalBtnContainer">
+              <button className="calendar-ModalButton" type="submit">Submit</button>
+              <button className="calendar-ModalButton" type="button" onClick={handleModalClose}>
+                Cancel
+              </button>
+            </div>
+          </div>
+            <div className="calendar-AddEventModal-error-container">
+              <div className="calendar-AddEventModal-error">
+                {addEventErrorMsg && <p>{addEventErrorMsg}</p>}
+              </div>
+            </div>
+      </form>
+    </div>
   );
 };
 
