@@ -55,8 +55,8 @@ export default function AddReminder({showAddModal, setShowAddModal}){
             borderRadius: '10px',
             outline: 'black',
             padding: '15px',
+            boxShadow: "0px 10px 20px -10px rgba(0, 0, 0, 0.75)",
             zIndex: 101,
-            
           }}
     
         return(
