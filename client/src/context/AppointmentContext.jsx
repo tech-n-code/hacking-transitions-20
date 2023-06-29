@@ -4,16 +4,21 @@ import CohortContext from "./CohortContext.jsx";
 const AppointmentContext = createContext();
 
 export const AppointmentProvider = ({ children }) => {
-    const { cohortClickedId, update, setUpdate } = useContext(CohortContext);
+    const { 
+        cohortClickedId,
+        update,
+        setUpdate
+    } = useContext(CohortContext);
+
     const [ students, setStudents ] = useState([]);
-    const [ student, setStudent ] = useState("");
     const [ notes, setNotes ] = useState([]);
     const [ events, setEvents ] =useState([]);
     const [ noteId, setNoteId ] = useState(null);
     const [ noteSelected, setNoteSelected ] = useState("");
-    const [notesToDelete, setNotesToDelete] = useState([]);
+    const [ notesToDelete, setNotesToDelete ] = useState([]);
     const [ showAddModal, setShowAddModal ] = useState(false);
-
+    const [ selectedStudent, setSelectedStudent ] = useState("");
+    
     //Gets all students in a cohort
     useEffect(() => {
         fetch(`/api/cohorts/${cohortClickedId}/students`)
@@ -42,8 +47,6 @@ export const AppointmentProvider = ({ children }) => {
 
     return( <AppointmentContext.Provider value = {{
         students,
-        student,
-        setStudent,
         notes,
         events,
         update,
@@ -55,7 +58,9 @@ export const AppointmentProvider = ({ children }) => {
         showAddModal,
         setShowAddModal,
         notesToDelete,
-        setNotesToDelete
+        setNotesToDelete,
+        selectedStudent,
+        setSelectedStudent,
     }}>
         {children}
     </AppointmentContext.Provider>
