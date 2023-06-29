@@ -3,9 +3,9 @@ import Modal from "react-modal";
 import "./StudentDetails.css";
 import CohortContext from "../../context/CohortContext.jsx";
 import AppointmentContext from "../../context/AppointmentContext.jsx";
-Modal.setAppElement("#root");
 import AddReminder from "../Appointments/AddReminder";
 import ChangeReminder from "../Appointments/ChangeReminder";
+Modal.setAppElement("#root");
 
 const StudentDetail = () => {
   const {
@@ -58,7 +58,6 @@ const StudentDetail = () => {
   
   const handleAddReminder = () => {
     setShowAddModal(true);
-    
   }
 
   const handleChangeReminder =(note)=>{
@@ -93,7 +92,6 @@ const StudentDetail = () => {
           setDeleteConfirmation(null);
         });
     }
-    
   };
 
   const handleCancelDeleteClick = () => {
@@ -117,14 +115,14 @@ const StudentDetail = () => {
       event.title === 'ETS' && event.student_id === givenStudentId);
     const studentETSdate = studentETS ? studentETS.startdate : null;
     return studentETSdate;
-  }
+  };
   
   const getStudentBranch = (givenStudentBranchId) => {
     const foundBranch = branchdata.find((branch) =>
       branch.id === givenStudentBranchId);
     const studentBranch = foundBranch ? foundBranch.name : null;
     return studentBranch;
-  }
+  };
 
   const studentBranch = getStudentBranch(studentdata[0].branch_id);
   const studentETSdate = getStudentETS(studentID);
@@ -265,60 +263,60 @@ const StudentDetail = () => {
             </tr>
           </thead>
           <tbody>
-  {notes.length > 0 ? (
-    studentNotes.map((studentNote, index) => {
-      if (notesToDelete.includes(studentNote.id)) {
-                    return null;
-      }
-
-      return (
-        <tr key={index}>
-          <td className="student-details-appt">
-            {studentNote.note}
-            <button
-              style={{ marginRight: '5px', marginLeft: 'auto' }}
-              className='editButton'
-              onClick={() => handleChangeReminder(studentNote)}
-            >
-              Edit
-            </button>
-            {deleteConfirmation === studentNote.id ? (
-              <div>
-                <button
-                  style={{ marginRight: '5px', marginLeft: 'auto' }}
-                  className="confirmDeleteButton"
-                  onClick={() => handleConfirmDeleteClick(deleteConfirmation)}
-                >
-                  Confirm
-                </button>
-
-                <button
-                  style={{ marginRight: '5px', marginLeft: 'auto' }}
-                  className="cancelDeleteButton"
-                  onClick={handleCancelDeleteClick}
-                >
-                  Cancel
-                </button>
-              </div>
+            {notes.length > 0 ? (
+              studentNotes.map((studentNote, index) => {
+                if (notesToDelete.includes(studentNote.id)) {
+                  return null;
+                }
+                return (
+                  <tr className="student-details-notes-container" key={index}>
+                    <td className="student-details-notes">
+                      {studentNote.note}
+                      <div className="student-details-notes-btns-container">
+                        <button
+                          style={{ marginRight: '5px', marginLeft: 'auto' }}
+                          className='editButton'
+                          onClick={() => handleChangeReminder(studentNote)}
+                        >
+                          Edit
+                        </button>
+                        {deleteConfirmation === studentNote.id ? (
+                          <div>
+                            <button
+                              style={{ marginRight: '5px', marginLeft: 'auto' }}
+                              className="confirmDeleteButton"
+                              onClick={() => handleConfirmDeleteClick(deleteConfirmation)}
+                            >
+                              Confirm
+                            </button>
+                            <button
+                              style={{ marginRight: '5px', marginLeft: 'auto' }}
+                              className="cancelDeleteButton"
+                              onClick={handleCancelDeleteClick}
+                            >
+                              Cancel
+                            </button>
+                          </div>
+                        ) : (
+                          <button
+                            style={{ marginRight: '5px', marginLeft: 'auto' }}
+                            className="deleteButton"
+                            onClick={() => handleDeleteClick(studentNote.id)}
+                          >
+                            Delete
+                          </button>
+                        )}
+                        </div>
+                    </td>
+                  </tr>
+                );
+              })
             ) : (
-              <button
-                style={{ marginRight: '5px', marginLeft: 'auto' }}
-                className="deleteButton"
-                onClick={() => handleDeleteClick(studentNote.id)}
-              >
-                Delete
-              </button>
+              <tr>
+                <td className="student-details-appt">None.</td>
+              </tr>
             )}
-          </td>
-        </tr>
-      );
-    })
-  ) : (
-    <tr>
-      <td className="student-details-appt">None.</td>
-    </tr>
-  )}
-</tbody>
+          </tbody>
         </table>
         <AddReminder showAddModal={showAddModal} setShowAddModal={setShowAddModal} />
         <ChangeReminder editNote = {editNote} setEditNote = {setEditNote}/>
