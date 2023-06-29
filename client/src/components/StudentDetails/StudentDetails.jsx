@@ -139,6 +139,7 @@ const StudentDetail = () => {
       left: "50%",
       transform: "translate(-50%, -50%)",
       height: "fit-content",
+      maxHeight: "900px",
       width: "fit-content",
       border: "1px solid",
       background: "#E0EAF8",
