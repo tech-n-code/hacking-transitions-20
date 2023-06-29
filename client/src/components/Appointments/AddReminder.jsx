@@ -5,11 +5,14 @@ import Modal from "react-modal";
 Modal.setAppElement("#root");
 
 export default function AddReminder({showAddModal, setShowAddModal}){
-    const { students, setUpdate, } = useContext(AppointmentContext);
-    // const [showAddModal, setShowAddModal ] = useState(AppointmentContext);
-    // const {} = useContext(Appointments);
+    const { 
+        students,
+        setUpdate,
+        selectedStudent,
+        setSelectedStudent
+    } = useContext(AppointmentContext);
+
     const[ note, setNote ] = useState("");
-    const [ selectedStudent, setSelectedStudent ] = useState("")
 
     const handleSubmit = (e) => {
         e.preventDefault();
