@@ -300,7 +300,31 @@ INSERT INTO notes (note, student_id, event_id) VALUES
     ('Behind on Mini-modules', 41, NULL),
     ('Add latest project to resume', 42, NULL),
     ('Needs to submit sprint retro survey', 43, NULL),
-    ('Behind on Mini-modules', 43, NULL);
+    ('Behind on Mini-modules', 43, NULL),
+    ('Resume needs some work', 45, NULL),
+    ('Needs to find 5 companies interested in applying for; Oracle, Netflix, Salesforce, AirBnB, Activision Blizzard.', 46, NULL),
+    ('Behind on Mini-modules', 46, NULL),
+    ('Finish going over resume', 47, NULL),
+    ('Go over practice interview in Pramp', 48, NULL),
+    ('Student expressed interest in becoming a SIER; wants an office call and reference material to prepare for the process.', 49, NULL),
+    ('Behind on Mini-modules', 49, NULL),
+    ('Discus Developer Journal', 50, NULL),
+    ('Go over Paring attributes', 51, NULL),
+    ('Behind on Mini-modules', 51, NULL),
+    ('Answer interview questions to one low score specific Paring attribute', 52, NULL),
+    ('Fix resume bullet points to fit STAR method', 53, NULL),
+    ('Behind on Mini-modules', 53, NULL),
+    ('Job scan resume to fit 3 job descriptions', 54, NULL),
+    ('Review interview student had with company', 55, NULL),
+    ('Behind on Mini-modules', 55, NULL),
+    ('Behind on Mini-modules', 56, NULL),
+    ('Review Cover Letter', 57, NULL),
+    ('Behind on Mini-modules', 57, NULL),
+    ('Add latest project to resume', 58, NULL),
+    ('Needs to submit sprint retro survey', 59, NULL),
+    ('Behind on Mini-modules', 59, NULL),
+    ('Resume needs some work', 60, NULL),
+    ('Needs to find 5 companies interested in applying for; Oracle, Netflix, Salesforce, AirBnB, Activision Blizzard.', 45, NULL);
 
 ALTER TABLE events
 ADD CONSTRAINT fk_note_id FOREIGN KEY (note_id) REFERENCES notes(id) ON DELETE CASCADE;
