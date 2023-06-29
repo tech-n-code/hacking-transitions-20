@@ -10,6 +10,8 @@ Modal.setAppElement("#root");
 const StudentDetail = () => {
   const {
     studentID,
+    update,
+    setUpdate,
     studentdata,
     branchdata,
     assignColor,
@@ -89,6 +91,7 @@ const StudentDetail = () => {
           console.log("Note " + noteId + " has been deleted");
           setNotesToDelete((prevNotes) => [...prevNotes, noteId]);
           setDeleteConfirmation(null);
+          setUpdate(true);
         })
         .catch((error) => {
           console.error("Error deleting note:", error);
