@@ -15,8 +15,13 @@ const Calendar = () => {
   const [isAddEventOpen, setIsAddEventOpen] = useState(false);
   const [calendarEvents, setCalendarEvents] = useState([]);
   const { events } = useContext(AppointmentContext);
-  const { students, cohortClickedId, update, setUpdate } =
-    useContext(CohortContext);
+  const { 
+    students,
+    cohortClickedId,
+    update,
+    setUpdate,
+    formatDateWithTime
+  } = useContext(CohortContext);
 
   const handleModalClose = () => {
     setIsAddEventOpen(false);
@@ -41,19 +46,24 @@ const Calendar = () => {
   };
 
   useEffect(() => {
-    setUpdate(false)
+    setUpdate(false);
     let formattedEvents = [];
     if (events.length > 0) {
-      formattedEvents = events.map((event) => ({
-        start: new Date(event.startdate),
-        end: new Date(event.enddate),
-        title: event.title + ": " + getEventOwner(event.student_id),
-        allDay: event.allday,
-        extendedProps: {
-          'data-tip': event.title + ": " + getEventOwner(event.student_id),
-          'tooltip-id': event.id
-        }
-      }));
+      formattedEvents = events.map((event) => {
+        const formattedStartDate = formatDateWithTime(event.startdate);
+        const tooltipContent = `<span class="tooltip-student-name">${getEventOwner(event.student_id)}</span><br />Event: ${event.title}<br />${formattedStartDate}`;
+  
+        return {
+          start: new Date(event.startdate),
+          end: new Date(event.enddate),
+          title: event.title + ": " + getEventOwner(event.student_id),
+          allDay: event.allday,
+          extendedProps: {
+            'data-tip': tooltipContent,
+            'tooltip-id': event.id,
+          },
+        };
+      });
     }
     setCalendarEvents(formattedEvents);
   }, [update, events, cohortClickedId]);
@@ -103,7 +113,7 @@ const Calendar = () => {
           return (
             <div 
             data-tooltip-id={tooltipId}
-            data-tooltip-content={event.extendedProps['data-tip']}
+            data-tooltip-html={event.extendedProps['data-tip']}
             data-tooltip-place="top"
             >
               {event.title}
@@ -119,14 +129,13 @@ const Calendar = () => {
           },
         }}
         views={{
-          week: {
-            type: "timeGridWeek",
-            duration: { weeks: 1 },
-          },
-          day: {
-            type: "timeGridDay",
-            duration: { days: 1 },
-          },
+          month: {
+            type: "dayGridMonth",
+            titleFormat: { year: 'numeric', month: 'short', day: 'numeric' },
+            dayMaxEvents: true,
+            dayMaxEventRows: 0,
+            showNonCurrentDates: true
+          }
         }}
       />
       <Modal
@@ -137,7 +146,6 @@ const Calendar = () => {
       >
         <AddEventForm handleModalClose={handleModalClose} />
       </Modal>
-
       {calendarEvents.map((event) => (
         <Tooltip
         className="calendar-tooltip"
