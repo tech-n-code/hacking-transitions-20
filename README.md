@@ -21,7 +21,6 @@ A Full-Stack React application for transition managers to keep track of students
 1. In your terminal run `cp .env.example .env; cp api/.env.example api/.env` - Copy required environment variables.
 1. In your terminal run `npm install; npm install --prefix=api; npm install --prefix=client` - Install all dependencies.
 1. In your terminal run `docker compose up --build` - From the root directory (Note* the --build command ensures dependencies are installed alongside the Docker container build).
-1. Visit deployed application @ https://hacking-transitions.herokuapp.com.
 1. *Note: Since the database for the deployed application is hosted on Heroku, any changes to the data, or structure of the ERD must be pushed to heroku manually by using Heroku's CLI and adding/removing/altering the data from there. Updating the included migration and seed files will not affect the deployed version.
 
 ## Technologies
@@ -68,11 +67,23 @@ A Full-Stack React application for transition managers to keep track of students
 
 ## Usage
 
-For Staff Members charged with assisting students as they transition from military service.
+For Staff Members charged with assisting students with their transition from military service.
 
-## Screenshots
+## Improvements
 
-![alt text](assets/images/hacking-transitions-1.png)
+![Improvemnets Slide 1](assets/images/BlueOcean_improvements-1.jpeg)
+
+![Improvemnets Slide 1](assets/images/BlueOcean_improvements-2.jpeg)
+
+## Screenshots & Video links
+
+[![Before Demo](assets/images/hacking-transitions-before.png)](assets/videos/hacking-transitions_before.mp4)
+
+- Visit BEFORE deployed application @ https://hacking-transitions.herokuapp.com.
+
+[![After Demo](assets/images/hacking-transitions-after.png)](assets/videos/hacking-transitions_after.mp4)
+
+- Visit AFTER deployed application @ `COMING SOON!`
 
 ## Contributors
 
