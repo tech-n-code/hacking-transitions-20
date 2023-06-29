@@ -94,6 +94,17 @@
     padding: 10px;
 }
 
+.student-details-notes-header {
+    display: flex;
+    color: black;
+    font-weight: bold;
+    background-color:#EF6E47;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 10px;
+    justify-content: center;
+}
+
 .student-details-appt {
     color: black;
     padding: 5px;
