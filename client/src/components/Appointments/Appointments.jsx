@@ -5,7 +5,7 @@ import AddReminder from "./AddReminder";
 import ChangeReminder from "./ChangeReminder";
 
 export default function RightColumn(){
-    const[ showAddModal, setShowAddModal ] = useState(false) //this exist already in AppointmentContext
+    const[ showAddModal, setShowAddModal ] = useState(false)
     const[ editNote, setEditNote ] = useState(false)
     
 //a: use a div with a class of modal and a class of modal-content
