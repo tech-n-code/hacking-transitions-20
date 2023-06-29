@@ -270,7 +270,6 @@ const StudentDetail = () => {
             </tr>
           </thead>
           <tbody>
-            {console.log('Notes length: ', studentNotes.length)}
             {studentNotes.length > 0 ? (
               studentNotes.map((studentNote, index) => {
                 if (notesToDelete.includes(studentNote.id)) {
