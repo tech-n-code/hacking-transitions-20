@@ -16,6 +16,7 @@ const StudentDetail = () => {
     formatDate,
     studentModalOpen,
     setStudentModalOpen,
+    formatDateWithTime,
   } = useContext(CohortContext);
 
   const {
@@ -27,6 +28,7 @@ const StudentDetail = () => {
     setNotesToDelete,
     setNoteSelected,
     setNoteId,
+    setSelectedStudent,
   } = useContext(AppointmentContext);
 
   const [deleteConfirmation, setDeleteConfirmation] = useState(null);
@@ -57,6 +59,7 @@ const StudentDetail = () => {
   );
   
   const handleAddReminder = () => {
+    setSelectedStudent(studentID);
     setShowAddModal(true);
   }
 
@@ -240,7 +243,7 @@ const StudentDetail = () => {
                 return (
                 <tr key={index}>
                   <td className={`student-details-appt ${isStrikethrough ? 'strikethrough-text' : ''}`}>
-                    {formatDate(studentEvent.startdate)}
+                    {formatDateWithTime(studentEvent.startdate)}
                   </td>
                   <td className="student-details-appt">{studentEvent.title}</td>
                 </tr>
@@ -256,15 +259,16 @@ const StudentDetail = () => {
         <span style={{ height: "20px" }}></span>
         <table className="student-details-appt-table">
           <thead>
-            <tr>
-              <th className="student-details-appt-header" colSpan="2">
-                Notes:
-                <button style={{marginRight: '5px', marginLeft: 'auto'}} className='addButton' onClick={handleAddReminder}>Add </button>
+            <tr className="student-details-notes-header">
+              <th colSpan="2">
+                <span>Notes:</span>
+                <button style={{marginRight: '5px', marginLeft: 'auto', marginTop: '5px'}} className='addButton' onClick={handleAddReminder}>Add </button>
               </th>
             </tr>
           </thead>
           <tbody>
-            {notes.length > 0 ? (
+            {console.log('Notes length: ', studentNotes.length)}
+            {studentNotes.length > 0 ? (
               studentNotes.map((studentNote, index) => {
                 if (notesToDelete.includes(studentNote.id)) {
                   return null;
