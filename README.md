@@ -71,9 +71,9 @@ For Staff Members charged with assisting students with their transition from mil
 
 ## Improvements
 
-![Improvemnets Slide 1](assets/images/BlueOcean_improvements-1.jpeg)
+![Improvemnets Slide 1](assets/images/BlueOcean_improvements-1.png)
 
-![Improvemnets Slide 1](assets/images/BlueOcean_improvements-2.jpeg)
+![Improvemnets Slide 1](assets/images/BlueOcean_improvements-2.png)
 
 ## Screenshots & Video links
 
