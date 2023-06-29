@@ -2,7 +2,7 @@
   --fc-button-bg-color: #4E70E0;
   --fc-button-hover-bg-color: #37a9ef;
   --fc-button-active-bg-color: #EF6E47;
-  --fc-border-color: transparent;
+  --fc-border-color: lightgray;
 }
 
 .fc,
