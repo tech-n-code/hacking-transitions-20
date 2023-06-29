@@ -6,11 +6,11 @@
 ## Description
 A Full-Stack React application for transition managers to keep track of students, and their appointments. The application stores information in a database for multiple cohorts, who each have multiple students. Information attributed to the students includes Full name, Branch, Duty status, ETS date (with corresponding color indicator depending on the time to ETS), and their phone numbers. The application  provides the ability to add/edit/delete appointment notes on the fly for each individual student. The application requires users to register using email credentials, and provide a password for access to sensitive information. The user's password is hashed with additional 10 salt rounds, and is one-way encrypted so it can be stored in the database, and attributed to each individual user.
 
-## Table of Contents
+## Table of Contents <span id="contents"></span>
 * [Installation](#installation)
 * [Technologies](#technologies)
 * [Usage](#usage)
-* [Screenshot](#screenshot)
+* [Screenshots](#screenshots)
 * [Contributors](#contributors)
 * [Tests](#tests)
 * [License](#license) 
@@ -69,13 +69,13 @@ A Full-Stack React application for transition managers to keep track of students
 
 For Staff Members charged with assisting students with their transition from military service.
 
-## Improvements
+## Improvements ([Back to Top](#contents))
 
 ![Improvemnets Slide 1](assets/images/BlueOcean_improvements-1.png)
 
 ![Improvemnets Slide 1](assets/images/BlueOcean_improvements-2.png)
 
-## Screenshots & Video links
+## Screenshots & Video links (click on the images below) <span id="screenshots"></span>
 
 [![Before Demo](assets/images/hacking-transitions-before.png)](assets/videos/hacking-transitions_before.mp4)
 
@@ -85,7 +85,7 @@ For Staff Members charged with assisting students with their transition from mil
 
 - Visit AFTER deployed application @ `COMING SOON!`
 
-## Contributors
+## Contributors <span id="contributors"></span> ([Back to Top](#contents))
 
 | Role | Contact Info |
 | ---- | ---- |
@@ -100,7 +100,7 @@ For Staff Members charged with assisting students with their transition from mil
 
 Full E2E test suite with Cypress, Multiple unit tests written for various components throughout the entire application with Vitest & react-test-library, and development testing with Postman during API development to test routes.
 
-## License
+## License <span id="license"></span> ([Back to Top](#contents))
 
 The license used for this project is MIT.
 For more information visit: https://opensource.org/license/mit/
