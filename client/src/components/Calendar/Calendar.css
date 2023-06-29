@@ -16,10 +16,14 @@
 .fc {
   animation: fadeIn .5s ease-in forwards;
   background-color: #e0eaf8;
-  border: solid 1px rgb(0, 0, 0);
-  border-radius: 10px;
   box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+  border: solid 2px rgb(0, 0, 0);
+  border-radius: 10px;
 }
+
+/* .fc .fc-view-harness {
+  border: solid 1px rgb(0, 0, 0);
+} */
 
 .fc-toolbar {
   background-color: #0d0f4a;
@@ -48,8 +52,6 @@
 
 .fc-daygrid-day-frame {
   height: 50px;
-  overflow: scroll;
-  text-overflow: ellipsis;
 }
 
 .fc-daygrid-day-frame::-webkit-scrollbar {
@@ -62,9 +64,16 @@
   border: solid 1px gray !important;
 }
 
+/* .fc-day-disabled {
+  background-color: lightgray !important;
+} */
+
+.fc .fc-button {
+  font-size: small;
+}
+
 .fc-event-main {
   overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
   padding: 3px;
   box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
@@ -77,6 +86,10 @@
 .calendar-tooltip {
   opacity: 1 !important;  
   z-index: 101;
+}
+
+.tooltip-student-name {
+  color: yellow;
 }
 
 .calendar-AddEventModal {
