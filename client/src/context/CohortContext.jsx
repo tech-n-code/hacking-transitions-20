@@ -75,6 +75,31 @@ export const CohortProvider = ({children}) => {
         return formattedDate;
     }
 
+    function formatDateWithTime(timestampDate) {
+        const dateObj = new Date(timestampDate);
+        const isMidnight = timestampDate.includes("T05:00:00.000Z");
+      
+        let formattedDate = dateObj.toLocaleDateString("en-US", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        });
+      
+        //Only include time if it's not midnight
+        if (!isMidnight) {
+          const timeString = dateObj.toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          });
+      
+          //Split timeString to get time and AM/PM
+          const [time, ampm] = timeString.split(" ");
+          formattedDate += ` ${time} ${ampm}`;
+        }
+        return formattedDate;
+    }
+      
     function assignColor(dateInput) {
         const today = new Date();
         today.setHours(0, 0, 0, 0); // Set the time to midnight
@@ -118,6 +143,7 @@ export const CohortProvider = ({children}) => {
         setUpdate,
         assignColor,
         formatDate,
+        formatDateWithTime,
     }}>
         {children}
     </CohortContext.Provider>
