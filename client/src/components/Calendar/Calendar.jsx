@@ -3,7 +3,7 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import listPlugin from "@fullcalendar/list";
-import AddEventForm from "./AddEventForm";
+import AddEventForm from "./AddEventForm.jsx";
 import Modal from "react-modal";
 import "./Calendar.css";
 import AppointmentContext from "../../context/AppointmentContext.jsx";
@@ -17,6 +17,7 @@ const Calendar = () => {
   const { events } = useContext(AppointmentContext);
   const { 
     students,
+    studentsLoaded,
     cohortClickedId,
     update,
     setUpdate,
@@ -36,27 +37,19 @@ const Calendar = () => {
     console.log("Selected event: " + selectedEvent);
   };
 
-  const getEventOwner = (givenStudentId) => {
-    const eventOwner = students.find(
-      (student) => student.id === givenStudentId
-    );
-    const eventOwnerFirstName = eventOwner ? eventOwner.firstname : null;
-    const eventOwnerLastName = eventOwner ? eventOwner.lastname : null;
-    return eventOwnerFirstName + " " + eventOwnerLastName;
-  };
-
   useEffect(() => {
     setUpdate(false);
     let formattedEvents = [];
-    if (events.length > 0) {
+    if (events.length > 0 && studentsLoaded) { //checks before mapping events
       formattedEvents = events.map((event) => {
+        const eventOwner = students.find((student) => student.id === event.student_id);
+        const eventOwnerName = eventOwner ? `${eventOwner.firstname} ${eventOwner.lastname}` : "null";
         const formattedStartDate = formatDateWithTime(event.startdate);
-        const tooltipContent = `<span class="tooltip-student-name">${getEventOwner(event.student_id)}</span><br />Event: ${event.title}<br />${formattedStartDate}`;
-  
+        const tooltipContent = `<span class="tooltip-student-name">${eventOwnerName}</span><br />Event: ${event.title}<br />${formattedStartDate}`;
         return {
           start: new Date(event.startdate),
           end: new Date(event.enddate),
-          title: event.title + ": " + getEventOwner(event.student_id),
+          title: event.title + ": " + eventOwnerName,
           allDay: event.allday,
           extendedProps: {
             'data-tip': tooltipContent,
@@ -66,7 +59,7 @@ const Calendar = () => {
       });
     }
     setCalendarEvents(formattedEvents);
-  }, [update, events, cohortClickedId]);
+  }, [update, events, studentsLoaded, cohortClickedId]); //re-renders when either of these change; fix bug displaying 'null' events
 
   const headerToolbar = {
     left: `prev,next today addEventButton`,
