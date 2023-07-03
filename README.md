@@ -79,11 +79,11 @@ For Staff Members charged with assisting students with their transition from mil
 
 [![Before Demo](assets/images/hacking-transitions-before.png)](assets/videos/hacking-transitions_before.mp4)
 
-- Visit BEFORE deployed application @ https://hacking-transitions.herokuapp.com.
+- Visit the BEFORE deployed application @ https://hacking-transitions.herokuapp.com.
 
 [![After Demo](assets/images/hacking-transitions-after.png)](assets/videos/hacking-transitions_after.mp4)
 
-- Visit AFTER deployed application @ `COMING SOON!`
+- Visit the AFTER deployed application @ `COMING SOON!`
 
 ## Contributors <span id="contributors"></span> ([Back to Top](#contents))
 
@@ -95,6 +95,13 @@ For Staff Members charged with assisting students with their transition from mil
 | Software Engineer | [![GitHub](https://img.shields.io/badge/-Matt%20Drevon-181717?style=flat&logo=GitHub&logoColor=white)](https://github.com/MDrevon) [![Linkedin](https://img.shields.io/badge/-Let's%20Connect!-0A66C2?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/matthew-drevon/) |
 | Software Engineer | [![GitHub](https://img.shields.io/badge/-Dennis%20Kennedy-181717?style=flat&logo=GitHub&logoColor=white)](https://github.com/Kennedyz71) [![Linkedin](https://img.shields.io/badge/-Let's%20Connect!-0A66C2?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/dennis-kennedy-285616118/) |
 | Software Engineer | [![GitHub](https://img.shields.io/badge/-Kimberly%20Jenkins-181717?style=flat&logo=GitHub&logoColor=white)](https://github.com/Spirit1269) [![Linkedin](https://img.shields.io/badge/-Let's%20Connect!-0A66C2?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/kimberly-d-jenkins/)
+
+## Screenshot
+![Home Page](assets/images/HT_homepage.png)
+![alt text](assets/images/hacking-transitionsOLD-1.png)
+
+## Contributors
+Blake Barkman (Project Manager) ||  Josh Benton (User Interface Owner) || Will Franceschini(Architectural Owner) || Matthew Drevon (Software Engineer) || Dennis Kennedy (Software Engineer)  ||Kimberly Jenkins (Software Engineer)
 
 ## Tests
 
