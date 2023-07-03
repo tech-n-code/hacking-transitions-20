@@ -1,10 +1,14 @@
+/**
+ * Legacy component; not used after sprint 1.
+ */
+
 import React, { useState, useContext } from "react";
 import "./Appointments.css";
-import AppointmentContext from "../../context/AppointmentContext";
+import CohortContext from "../../context/CohortContext.jsx";
 
 export default function DeleteReminder() {
   const [selectedStudent, setSelectedStudent] = useState("");
-  const { students, setUpdate } = useContext(AppointmentContext);
+  const { students, setUpdate } = useContext(CohortContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -24,8 +28,6 @@ export default function DeleteReminder() {
         method: "DELETE",
     }).then(() => {
         console.log('Note has been deleted');
-        // setDeleteNote(false);
-        // setUpdate(true);
     })
   };
 
