@@ -1,13 +1,21 @@
 import React, { useContext, useState, useEffect } from "react";
 import AppointmentContext from "../../context/AppointmentContext.jsx";
+import CohortContext from "../../context/CohortContext.jsx";
 import "./StudentAppointments.css";
 import Scroll from "./Scroll";
 import ChangeReminder from "./ChangeReminder";
 
 export default function StudentAppointments() {
-  const { students, notes, setNoteSelected, setNoteId, notesToDelete, setNotesToDelete } = useContext(
-    AppointmentContext
-  );
+  const {
+    notes,
+    setNoteSelected,
+    setNoteId,
+    notesToDelete,
+    setNotesToDelete
+  } = useContext(AppointmentContext);
+
+  const { students } = useContext(CohortContext);
+
   const [expandedNoteIds, setExpandedNoteIds] = useState([]);
   const [editNote, setEditNote] = useState(false);
   const [deleteConfirmation, setDeleteConfirmation] = useState(null);
