@@ -1,5 +1,4 @@
 import React, {createContext, useEffect, useState, useContext} from "react";
-import AppointmentContext from "./AppointmentContext.jsx";
 
 const CohortContext = createContext();
 
@@ -7,6 +6,7 @@ export const CohortProvider = ({children}) => {
     const [ update, setUpdate ] = useState(false);
     const [ cohorts, setCohorts ] = useState([]);
     const [ students, setStudents ] = useState([]);
+    const [ studentsLoaded, setStudentsLoaded ] = useState(false); //new
     const [ instructors, setInstructors ] = useState([]);
     const [ cohortClicked, setCohortClicked ] = useState("");
     const [ cohortClickedId, setCohortClickedId ] = useState(1);
@@ -18,6 +18,7 @@ export const CohortProvider = ({children}) => {
     const handleCohortClicked = (cohortTitle, cohortId) => {
         if(cohortClicked === cohortTitle){
             setCohortClicked("");
+            setStudentsLoaded(false);
         } else {
             setCohortClicked(cohortTitle);
             setCohortClickedId(cohortId);
@@ -62,7 +63,10 @@ export const CohortProvider = ({children}) => {
     useEffect(() => {
         fetch(`/api/cohorts/${cohortClickedId}/students`)
             .then(response => response.json())
-            .then(data => setStudents(data))
+            .then(data => {
+                setStudents(data);
+                setStudentsLoaded(true); //fixes 'null' values on calendar
+            })
             .catch(error => console.error(error));
     }, [cohortClickedId]);
 
@@ -131,6 +135,8 @@ export const CohortProvider = ({children}) => {
         cohorts,
         students,
         setStudents,
+        studentsLoaded, //new
+        setStudentsLoaded, //new
         studentID,
         studentModalOpen,
         setStudentModalOpen,
