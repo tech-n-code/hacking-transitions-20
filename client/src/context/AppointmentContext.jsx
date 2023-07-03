@@ -5,12 +5,12 @@ const AppointmentContext = createContext();
 
 export const AppointmentProvider = ({ children }) => {
     const { 
+        students,
         cohortClickedId,
         update,
         setUpdate
     } = useContext(CohortContext);
 
-    const [ students, setStudents ] = useState([]);
     const [ notes, setNotes ] = useState([]);
     const [ events, setEvents ] =useState([]);
     const [ noteId, setNoteId ] = useState(null);
@@ -19,14 +19,6 @@ export const AppointmentProvider = ({ children }) => {
     const [ showAddModal, setShowAddModal ] = useState(false);
     const [ selectedStudent, setSelectedStudent ] = useState("");
     
-    //Gets all students in a cohort
-    useEffect(() => {
-        fetch(`/api/cohorts/${cohortClickedId}/students`)
-            .then(response => response.json())
-            .then(data => setStudents(data))
-            .catch(error => console.error(error));
-    }, [cohortClickedId]);
-
     //Gets all notes in a cohort
     useEffect(() => {
         setUpdate(false)
