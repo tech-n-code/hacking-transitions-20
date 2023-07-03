@@ -1,0 +1,49 @@
+.noteContainer {
+    border: 1px solid #ccc;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-top: 5px;
+  }
+ 
+
+.expandButton {
+    color: blue;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 13px;
+}
+
+.expandButton:hover {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.collapseButton {
+    color: blue;
+    display: flex;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 13px;
+    justify-content: right;
+    margin-right: 30px;
+}
+
+.collapseButton:hover {
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.reminder-button-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-left: 3px;
+}
+
+.editButton {
+    margin: 0px 4px 2px 0px;
+}
+
+.deleteButton {
+    margin: 2px 0px 4px 0px;
+}

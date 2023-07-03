@@ -1,138 +1,118 @@
-import React, {createContext, useEffect, useState} from "react";
+import React, {createContext, useEffect, useState, useContext} from "react";
 
 const CohortContext = createContext();
 
 export const CohortProvider = ({children}) => {
-    const [dropDownClicked, setDropDownClicked] = useState("");
-    const [cohortClicked, setCohortClicked] = useState("");
-    const [cohorts, setCohorts] = useState([]);
-    const [openDropDown, setOpenDropdown] = useState(null);
-    const [students, setStudents] = useState([]);
-    const [studentss, setStudentss] = useState([]);
-    const [cohortId, setcohortId] = useState(1);
-    const [cohortIds, setcohortIds] = useState(1);
-    const [cohortIdForInfo, setCohortIdForInfo] = useState(1);
-    const [studentID, setStudentClicked] = useState(1);
-    const [studentdata, setStudentData] = useState(null);
-    const [branchdata, setBranchData] = useState(null);
-    const [isStudentModalOpen, setIsStudentModalOpen] = useState(false)
+    const [ update, setUpdate ] = useState(false);
+    const [ cohorts, setCohorts ] = useState([]);
+    const [ students, setStudents ] = useState([]);
+    const [ studentsLoaded, setStudentsLoaded ] = useState(false); //new
+    const [ instructors, setInstructors ] = useState([]);
+    const [ cohortClicked, setCohortClicked ] = useState("");
+    const [ cohortClickedId, setCohortClickedId ] = useState(1);
+    const [ studentID, setStudentClicked ] = useState(1);
+    const [ studentdata, setStudentData ] = useState(null);
+    const [ branchdata, setBranchData ] = useState(null);
+    const [ studentModalOpen, setStudentModalOpen ] = useState(false);
 
-    const handleDropClicked = (value, id) =>{
-        if(dropDownClicked === value){
-            setDropDownClicked("")    
-        }else{
-            setDropDownClicked(value)
-            setcohortIds(id)
+    const handleCohortClicked = (cohortTitle, cohortId) => {
+        if(cohortClicked === cohortTitle){
+            setCohortClicked("");
+            setStudentsLoaded(false);
+        } else {
+            setCohortClicked(cohortTitle);
+            setCohortClickedId(cohortId);
+            setStudentModalOpen(false);
+            setUpdate(true);
         } 
-    }
+    };
 
-    const handleCohortClicked = (cohort, id, id2) => {
-        if(cohortClicked === cohort){
-            setCohortClicked("")
-        }else{
-            setCohortClicked(cohort)
-            setcohortId(id2)
-            setCohortIdForInfo(id)
-            setIsStudentModalOpen(false)
-
-        } 
-    }
-
+    //Gets all branches
     useEffect(() => {
-        if(branchdata){
-        }
-    }, [studentdata]);
-
-    useEffect(() => {
-        fetch(`http://localhost:8000/api/branches`)
+        fetch('/api/branches')
             .then(response => response.json())
             .then(data => setBranchData(data))
-            .catch(error => console.log(error));
-    }, []);
-
-    useEffect(() => {
-        fetch(`/api/branches`)
-            .then(response => response.json())
-            .then(data => setBranchData(data))
-            .catch(error => console.log(error));
+            .catch(error => console.error(error));
     }, []);
     
-    useEffect(() => {
-        if(studentdata){
-        }
-    }, [studentdata]);
-
-    useEffect(() => {
-        fetch(`http://localhost:8000/api/students/${studentID}`)
-            .then(response => response.json())
-            .then(data => setStudentData(data))
-            .catch(error => console.log(error));
-    }, [studentID]);
-
-    useEffect(() => {
-        fetch(`/api/students/${studentID}`)
-            .then(response => response.json())
-            .then(data => setStudentData(data))
-            .catch(error => console.log(error));
-    }, [studentID]);
-
-    useEffect(() => {
-        fetch('http://localhost:8000/api/cohorts')
-            .then(response => response.json())
-            .then(data => setCohorts(data))
-            .catch(error => console.log(error));
-    }, []);
-
+    //Gets all cohorts
     useEffect(() => {
         fetch('/api/cohorts')
             .then(response => response.json())
             .then(data => setCohorts(data))
-            .catch(error => console.log(error));
+            .catch(error => console.error(error));
     }, []);
 
+    //Gets all instructors
     useEffect(() => {
-        fetch(`http://localhost:8000/api/cohorts/${cohortId}/students`)
+        fetch('/api/instructors')
             .then(response => response.json())
-            .then(data => setStudents(data))
-            .catch(error => console.log(error));
-    }, [cohortId]);
+            .then(data => setInstructors(data))
+            .catch(error => console.error(error));
+    }, []);
 
+    //Gets student by studentId
     useEffect(() => {
-        fetch(`http://localhost:8000/api/cohorts/${cohortIds}/students`)
+        fetch(`/api/students/${studentID}`)
             .then(response => response.json())
-            .then(data => setStudentss(data))
-            .catch(error => console.log(error));
-    }, [cohortIds]);
-    useEffect(() => {
-        fetch(`/api/cohorts/${cohortIds}/students`)
-            .then(response => response.json())
-            .then(data => setStudentss(data))
-            .catch(error => console.log(error));
-    }, [cohortIds]);
-    useEffect(() => {
-        fetch(`/api/cohorts/${cohortId}/students`)
-            .then(response => response.json())
-            .then(data => setStudents(data))
-            .catch(error => console.log(error));
-    }, [cohortId]);
+            .then(data => setStudentData(data))
+            .catch(error => console.error(error));
+    }, [studentID]);
 
-    const toggleDropDown = (cohortId) => {
-        if (openDropDown === cohortId) {
-            setOpenDropdown(null);
-        } else {
-            setOpenDropdown(cohortId);
+    //Gets all students on a cohort by cohortId
+    useEffect(() => {
+        fetch(`/api/cohorts/${cohortClickedId}/students`)
+            .then(response => response.json())
+            .then(data => {
+                setStudents(data);
+                setStudentsLoaded(true); //fixes 'null' values on calendar
+            })
+            .catch(error => console.error(error));
+    }, [cohortClickedId]);
+
+    function formatDate(timestampDate) {
+        const formattedDate = new Date(timestampDate).toLocaleDateString("en-US", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric"
+        });
+        return formattedDate;
+    }
+
+    function formatDateWithTime(timestampDate) {
+        const dateObj = new Date(timestampDate);
+        const isMidnight = timestampDate.includes("T05:00:00.000Z");
+      
+        let formattedDate = dateObj.toLocaleDateString("en-US", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        });
+      
+        //Only include time if it's not midnight
+        if (!isMidnight) {
+          const timeString = dateObj.toLocaleTimeString("en-US", {
+            hour: "numeric",
+            minute: "numeric",
+            hour12: true,
+          });
+      
+          //Split timeString to get time and AM/PM
+          const [time, ampm] = timeString.split(" ");
+          formattedDate += ` ${time} ${ampm}`;
         }
-    };
-
+        return formattedDate;
+    }
+      
     function assignColor(dateInput) {
-        let today = new Date();
+        const today = new Date();
         today.setHours(0, 0, 0, 0); // Set the time to midnight
 
-        let inputDate = new Date(dateInput);
+        const inputDate = new Date(dateInput);
         inputDate.setHours(0, 0, 0, 0); // Set the time to midnight
 
-        let timeDifference = inputDate.getTime() - today.getTime();
-        var daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24)); // Convert milliseconds to days
+        const timeDifference = inputDate.getTime() - today.getTime();
+        const daysDifference = Math.ceil(timeDifference / (1000 * 3600 * 24)); // Convert milliseconds to days
 
         let color;
         if (daysDifference < 0) {
@@ -146,28 +126,30 @@ export const CohortProvider = ({children}) => {
     }
 
     return( <CohortContext.Provider value = {{
-        studentID,
-        isStudentModalOpen,
-        setCohortClicked,
-        setIsStudentModalOpen,
-        studentdata,
         branchdata,
-        setStudentClicked,
-        setStudentData,
-        dropDownClicked,
-        handleDropClicked,
+        setCohortClicked,
+        cohortClickedId,
+        setCohortClickedId,
         cohortClicked, 
         handleCohortClicked,
         cohorts,
-        toggleDropDown,
-        openDropDown,
         students,
-        studentss,
-        cohortId,
-        cohortIdForInfo,
         setStudents,
-        assignColor
-        
+        studentsLoaded, //new
+        setStudentsLoaded, //new
+        studentID,
+        studentModalOpen,
+        setStudentModalOpen,
+        studentdata,
+        setStudentData,
+        setStudentClicked,
+        instructors,
+        setInstructors,
+        update,
+        setUpdate,
+        assignColor,
+        formatDate,
+        formatDateWithTime,
     }}>
         {children}
     </CohortContext.Provider>

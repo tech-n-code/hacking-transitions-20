@@ -1,15 +1,19 @@
+/**
+ * Legacy component; not used after sprint 1.
+ */
+
 import React, { useState, useContext } from "react";
 import "./Appointments.css";
-import AppointmentContext from "../../context/AppointmentContext";
+import CohortContext from "../../context/CohortContext.jsx";
 
 export default function DeleteReminder() {
   const [selectedStudent, setSelectedStudent] = useState("");
-  const { students, setUpdate } = useContext(AppointmentContext);
+  const { students, setUpdate } = useContext(CohortContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    fetch(`http://localhost:8000/api/appointments/${selectedStudent}`, {
+    fetch(`http://localhost:8000/api/notes/${selectedStudent}`, {
       method: "DELETE",
     })
       .then(() => {
@@ -20,12 +24,10 @@ export default function DeleteReminder() {
         console.error("Error deleting note:", error);
       });
 
-      fetch(`/api/appointments/${selectedStudent}`, {
+      fetch(`/api/notes/${selectedStudent}`, {
         method: "DELETE",
     }).then(() => {
         console.log('Note has been deleted');
-        // setDeleteNote(false);
-        // setUpdate(true);
     })
   };
 
@@ -65,27 +67,4 @@ export default function DeleteReminder() {
       </div>
     </span>
   );
-}
-
-
-
-const handleSubmit = (e) => {
-    console.log("form submission")
-    e.preventDefault();
-
-    fetch(`http://localhost:8000/api/appointments/${selectedStudent}`, {
-        method: "DELETE",
-    }).then(() =>{
-        console.log('Note has been deleted');
-        setDeleteNote(false);
-        setUpdate(true);
-    })
-
-    fetch(`/api/appointments/${selectedStudent}`, {
-        method: "DELETE",
-    }).then(() => {
-        console.log('Note has been deleted');
-        setDeleteNote(false);
-        setUpdate(true);
-    })
 }

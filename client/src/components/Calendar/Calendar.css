@@ -1,0 +1,155 @@
+:root {
+  --fc-button-bg-color: #4E70E0;
+  --fc-button-hover-bg-color: #37a9ef;
+  --fc-button-active-bg-color: #EF6E47;
+  --fc-border-color: lightgray;
+}
+
+.fc,
+.fc-toolbar,
+.calendar-tooltip,
+.calendar-AddEventModal-elements,
+.calendar-AddEventModal-error {
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.fc {
+  animation: fadeIn .5s ease-in forwards;
+  background-color: #e0eaf8;
+  box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+  border: solid 2px rgb(0, 0, 0);
+  border-radius: 10px;
+}
+
+/* .fc .fc-view-harness {
+  border: solid 1px rgb(0, 0, 0);
+} */
+
+.fc-toolbar {
+  background-color: #0d0f4a;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  color: white;
+  padding: 8px;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+  margin-bottom: 0px;
+}
+
+.fc-button-group {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.fc-col-header {
+  background-color: #ef6e47;
+}
+
+.fc-col-header-cell {
+  width: auto;
+}
+
+.fc-daygrid-day-frame {
+  height: 50px;
+}
+
+.fc-daygrid-day-frame::-webkit-scrollbar {
+  width: 0;
+  background-color: transparent;
+}
+
+.fc-daygrid-day {
+  overflow: auto;
+  border: solid 1px gray !important;
+}
+
+/* .fc-day-disabled {
+  background-color: lightgray !important;
+} */
+
+.fc .fc-button {
+  font-size: small;
+}
+
+.fc-event-main {
+  overflow: hidden;
+  white-space: nowrap;
+  padding: 3px;
+  box-shadow: 0px 10px 20px -10px rgba(0, 0, 0, 0.75);
+}
+
+.fc-list-day-cushion {
+  background-color: #eab6a6 !important;
+}
+
+.calendar-tooltip {
+  opacity: 1 !important;  
+  z-index: 101;
+}
+
+.tooltip-student-name {
+  color: yellow;
+}
+
+.calendar-AddEventModal {
+  background-color: #0D0F4A;
+  border: 10px solid #EF6E47;
+  color: white;
+  width: 250px;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+.calendar-AddEventModal-elements {
+  margin-bottom: 10px;
+}
+
+.calendar-ModalBtnContainer-outter {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.calendar-ModalBtnContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.calendar-ModalButton {
+  background-color: #4E70E0;
+  border: 1px solid black;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  display: block;
+  padding: 8px;
+  width: 100px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+.calendar-ModalButton:hover {
+  background-color: #EF6E47;
+}
+
+.calendar-AddEventModal-error-container {
+  display: flex;
+  justify-content: center;
+}
+
+.calendar-AddEventModal-error {
+  color:#EF6E47
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
