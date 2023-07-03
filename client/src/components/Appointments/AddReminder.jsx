@@ -1,16 +1,20 @@
 import React, { useState, useContext } from "react";
 import "./Appointments.css";
-import AppointmentContext from "../../context/AppointmentContext";
+import AppointmentContext from "../../context/AppointmentContext.jsx";
+import CohortContext from "../../context/CohortContext.jsx";
 import Modal from "react-modal";
 Modal.setAppElement("#root");
 
 export default function AddReminder({showAddModal, setShowAddModal}){
     const { 
-        students,
-        setUpdate,
         selectedStudent,
         setSelectedStudent
     } = useContext(AppointmentContext);
+
+    const { 
+        students,
+        setUpdate
+    } = useContext(CohortContext);
 
     const[ note, setNote ] = useState("");
 
