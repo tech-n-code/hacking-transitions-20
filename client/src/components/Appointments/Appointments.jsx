@@ -4,13 +4,10 @@ import "./Appointments.css"
 import AddReminder from "./AddReminder";
 import ChangeReminder from "./ChangeReminder";
 
-export default function RightColumn(){
+export default function Appointments(){
     const[ showAddModal, setShowAddModal ] = useState(false)
     const[ editNote, setEditNote ] = useState(false)
     
-//a: use a div with a class of modal and a class of modal-content
-
-
     const handleAddClick = () =>{
         setShowAddModal(!showAddModal)
         console.log('Show Modal: ' + showAddModal);
@@ -21,10 +18,6 @@ export default function RightColumn(){
         console.log('Show Modal: ' + showAddModal);
     }
 
-    // const handleEditClick = () =>{
-    //     setEditNote(true)
-    // }
-
     return(
         <div className="Appointments">
             <div className="RemindersHeader">
@@ -34,12 +27,6 @@ export default function RightColumn(){
                 <span className="addButton" onClick={handleAddClick}>
                     Add
                 </span>
-                {/* <span className="editButton" onClick={handleEditClick}>
-                    Edit
-                </span> */}
-                {/* <span className="deleteButton" onClick={handleDeleteClick}>
-                    Delete
-                </span> */}
             </div>
             <div className="StudentNames">
                 <StudentAppointments/>
