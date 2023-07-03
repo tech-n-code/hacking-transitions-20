@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import "./Calendar.css";
-import AppointmentContext from "../../context/AppointmentContext";
+import CohortContext from "../../context/CohortContext.jsx";
 
 const AddEventForm = ({ handleModalClose }) => {
   const [title, setTitle] = useState("");
@@ -9,7 +9,7 @@ const AddEventForm = ({ handleModalClose }) => {
   const [allDayEvent, setAllDayEvent] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState("");
   const [addEventErrorMsg, setaddEventErrorMsg] = useState("");
-  const { students, setUpdate } = useContext(AppointmentContext);
+  const { students, setUpdate } = useContext(CohortContext);
 
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
