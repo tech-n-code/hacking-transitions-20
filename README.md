@@ -1,5 +1,15 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
+# Blue Ocean
+The Blue Ocean project is a software engineering workplace simulator. Students utilize the Agile software development process to design, develop and implement and deploy a finished product for a notional client.
+
+The project is broken in two sprints, each followed by a retrospective meeting to review the previous sprint and improve on the upcoming one.
+- Sprint 1: Develop an MVP (Minimal Viable Product) that meets the needs of the end user (User Acceptance Testing). 
+- Sprint 2: Extend the functionality on the MVP product by adding features requested by the end user. 
+
+By the end of the simulator, students meet all agreed upon client requirements, tackle technical debt, and have a well polished README.md and additional artifacts showing developer's growth.
+
+The final product is demo to the rest of the class and invited guests.
 
 # Hacking Transitions
 
