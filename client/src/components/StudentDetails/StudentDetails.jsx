@@ -240,9 +240,11 @@ const StudentDetail = () => {
           <tbody>
             {events.length > 0 ? (
               studentEvents.map((studentEvent, index) => {
-                const currentDate = new Date();
-                const appointmentDate = new Date(studentEvent.startdate);
-                const isStrikethrough = currentDate.getTime() > appointmentDate.getTime();
+                //uncomment following lines if you want to strikethrough old appointments
+                // const currentDate = new Date(); 
+                // const appointmentDate = new Date(studentEvent.startdate);
+                // const isStrikethrough = currentDate.getTime() > appointmentDate.getTime();
+                const isStrikethrough = false; //comment if previous lines is enabled
                 return (
                 <tr key={index}>
                   <td className={`student-details-appt ${isStrikethrough ? 'strikethrough-text' : ''}`}>
