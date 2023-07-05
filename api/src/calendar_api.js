@@ -3,11 +3,7 @@ import pg from "pg";
 import cors from "cors";
 import dotenv from "dotenv";
 dotenv.config();
-// const dotenv = require("dotenv");
-// const cors = require("cors");
-// const pg = require("pg");
-// const express = require("express");
-// dotenv.config();
+
 const db = new pg.Pool({ connectionString: process.env.DATABASE_URL });
 const port = 3010;
 
