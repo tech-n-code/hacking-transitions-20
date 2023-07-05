@@ -1,7 +1,9 @@
 version: "3.8"
 services:
   database:
-    image: postgres:15-alpine
+    image: postgres
+    container_name: database
+    restart: unless-stopped
     # Load all env vars from .env into the container's environment.
     env_file: .env
     ports:
@@ -11,9 +13,9 @@ services:
       - ./api/src/db/migration.sql:/docker-entrypoint-initdb.d/migration.sql
       - ./api/src/db/seed.sql:/docker-entrypoint-initdb.d/seed.sql
   api:
-    image: hacking-transitions-19/api
-    container_name: api-1
-    restart: always
+    image: hacking-transitions-20/api
+    container_name: api
+    restart: unless-stopped
     build: ./api
     environment:
       DATABASE_URL: postgres://${POSTGRES_USER}:${POSTGRES_PASSWORD}@database/${POSTGRES_DB}
@@ -28,10 +30,10 @@ services:
       # filesystem to the container's.
       - ./api/src:/code/src
     command: npm run dev
-  app:
-    image: hacking-transitions-19/web
-    container_name: app-1
-    restart: always
+  client:
+    image: hacking-transitions-20/client
+    container_name: client
+    restart: unless-stopped
     build: ./client
     environment:
       API_URL: http://api
