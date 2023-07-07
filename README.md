@@ -93,7 +93,7 @@ For Staff Members charged with assisting students with their transition from mil
 
 [![After Demo](assets/images/hacking-transitions-after.png)](assets/videos/hacking-transitions_after.mp4)
 
-- Visit the AFTER deployed application @ `COMING SOON!`
+- Visit the AFTER deployed application @ https://transitions.tech-n-code.com.
 
 ## Contributors <span id="contributors"></span> ([Back to Top](#contents))
 
