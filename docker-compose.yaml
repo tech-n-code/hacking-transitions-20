@@ -32,7 +32,7 @@ services:
     command: npm run dev
   client:
     image: hacking-transitions-20/client
-    container_name: client
+    container_name: transitions-app
     restart: unless-stopped
     build: ./client
     environment:
