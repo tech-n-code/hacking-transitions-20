@@ -1,6 +1,6 @@
 # Comment out lines 4 through 10 when running dev environment
 # Un-comment them out when building heroku deployment
-FROM node:16-alpine
+FROM node:18-alpine
 # WORKDIR /code
 # COPY package.json .
 # RUN npm install
