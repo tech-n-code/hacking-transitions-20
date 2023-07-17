@@ -87,11 +87,11 @@ For Staff Members charged with assisting students with their transition from mil
 
 ## Screenshots & Video links (click on the images below) <span id="screenshots"></span> ([Back to Top](#contents))
 
-[![Before Demo](assets/images/hacking-transitions-before.png)](assets/videos/hacking-transitions_before.mp4)
+[![Before Demo](assets/images/hacking-transitions-before.png)](https://youtu.be/R1_bUN94EIA)
 
 - Visit the BEFORE deployed application @ https://hacking-transitions.herokuapp.com.
 
-[![After Demo](assets/images/hacking-transitions-after.png)](assets/videos/hacking-transitions_after.mp4)
+[![After Demo](assets/images/hacking-transitions-after.png)](https://youtu.be/L2sGG_mr4-0)
 
 - Visit the AFTER deployed application @ https://transitions.tech-n-code.com.
 
