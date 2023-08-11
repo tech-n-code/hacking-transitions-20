@@ -1,4 +1,4 @@
 **/node_modules/
 /client/src/dist
 .env
-.DS_store
+.DS_Store
