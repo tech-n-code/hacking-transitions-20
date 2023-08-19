@@ -4,16 +4,18 @@ services:
     image: postgres
     container_name: transitions-db
     restart: unless-stopped
-    # Load all env vars from .env into the container's environment.
+    # Load all env vars from .env into the container's environment
     env_file: .env
     ports:
       - 5432:5432
+    networks:
+      - transitions_network
     volumes:
       - pg-data:/var/lib/postgresql/data
       - ./api/src/db/migration.sql:/docker-entrypoint-initdb.d/migration.sql
       - ./api/src/db/seed.sql:/docker-entrypoint-initdb.d/seed.sql
   server:
-    image: hacking-transitions-20/api
+    image: transitions-20/server
     container_name: transitions-api
     restart: unless-stopped
     build: ./api
@@ -25,13 +27,14 @@ services:
       - database
     ports:
       - ${API_PORT}:80
+    networks:
+      - transitions_network
     volumes:
-      # This allows live reload inside a docker container by mapping your
-      # filesystem to the container's.
+      # Allows live reload inside a docker container
       - ./api/src:/code/src
     command: npm run dev
   client:
-    image: hacking-transitions-20/client
+    image: transitions-20/client
     container_name: transitions-app
     restart: unless-stopped
     build: ./client
@@ -42,10 +45,13 @@ services:
       - server
     ports:
       - ${CLIENT_PORT}:${CLIENT_PORT}
+    networks:
+      - transitions_network
     volumes:
-      # This allows live reload inside a docker container by mapping your
-      # filesystem to the container's.
+      # Allows live reload inside a docker container
       - ./client/src:/code/src
     command: npm run dev
+networks:
+  transitions_network:
 volumes:
   pg-data:
