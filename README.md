@@ -30,7 +30,7 @@ A Full-Stack React application for transition managers to keep track of students
 1. This application builds the development environment inside Docker, so after forking/cloning, make sure you have Docker desktop running.
 1. In your terminal run `cp .env.example .env; cp api/.env.example api/.env` - Copy required environment variables.
 1. In your terminal run `npm install; npm install --prefix=api; npm install --prefix=client` - Install all dependencies.
-1. In your terminal run `docker compose up --build` - From the root directory (Note* the --build command ensures dependencies are installed alongside the Docker container build).
+1. In your terminal run `docker compose up -d --build` - From the root directory (Note* the --build command ensures dependencies are installed alongside the Docker container build).
 1. *Note: Since the database for the deployed application is hosted on Heroku, any changes to the data, or structure of the ERD must be pushed to heroku manually by using Heroku's CLI and adding/removing/altering the data from there. Updating the included migration and seed files will not affect the deployed version.
 
 ## Technologies <span id="technologies"></span> ([Back to Top](#contents))
