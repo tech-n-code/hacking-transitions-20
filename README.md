@@ -33,6 +33,7 @@ A Full-Stack React application for transition managers to keep track of students
 1. `cd` into the `hacking-transitions-20` directory
 1. In your terminal run `cp .env.example .env; cp api/.env.example api/.env` This copies required environment variables.
 1. In your terminal run `docker compose up -d --build`
+1. Go to `localhost:3000` on your browser
 1. To power-down the app and delete all containers and associated volumes run `docker-compose down -v`
 1. (optional) To power-down the app and also delete its images run `docker-compose down -v --rmi all`
 1. *Note: Since the database for the deployed application is hosted on Heroku, any changes to the data, or structure of the ERD must be pushed to heroku manually by using Heroku's CLI and adding/removing/altering the data from there. Updating the included migration and seed files will not affect the deployed version.
