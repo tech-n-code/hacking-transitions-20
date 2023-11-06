@@ -1,7 +1,6 @@
-# Comment out lines 4 through 10 when running dev environment
+# Comment out lines 4 through 9 when running dev environment
 # Un-comment them out when building heroku deployment
-FROM node:18-alpine
-RUN npm install -g npm@9.8.1
+FROM node:20.9.0-alpine3.18
 # WORKDIR /code
 # COPY package.json .
 # RUN npm install
