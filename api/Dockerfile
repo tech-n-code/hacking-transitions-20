@@ -1,11 +1,10 @@
-# Comment out line 8 when running local dev environment
+# Comment out line 7 when running local dev environment
 # Un-comment out when running Heroku deploy
-FROM node:18-alpine
-RUN npm install -g npm@9.8.1
+FROM node:20.9.0-alpine3.18
 WORKDIR /code
 COPY package*.json ./
 RUN npm ci
 COPY . .
 # RUN npm run heroku-postbuild
-EXPOSE 3000
+EXPOSE 8000
 CMD ["npm", "start"]
