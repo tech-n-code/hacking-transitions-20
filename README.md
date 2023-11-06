@@ -108,13 +108,6 @@ For Staff Members charged with assisting students with their transition from mil
 | Software Engineer | [![GitHub](https://img.shields.io/badge/-Dennis%20Kennedy-181717?style=flat&logo=GitHub&logoColor=white)](https://github.com/Kennedyz71) [![Linkedin](https://img.shields.io/badge/-Let's%20Connect!-0A66C2?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/dennis-kennedy-285616118/) |
 | Software Engineer | [![GitHub](https://img.shields.io/badge/-Kimberly%20Jenkins-181717?style=flat&logo=GitHub&logoColor=white)](https://github.com/Spirit1269) [![Linkedin](https://img.shields.io/badge/-Let's%20Connect!-0A66C2?style=flat&logo=Linkedin&logoColor=white)](https://www.linkedin.com/in/kimberly-d-jenkins/)
 
-## Screenshot
-![Home Page](assets/images/HT_homepage.png)
-![alt text](assets/images/hacking-transitionsOLD-1.png)
-
-## Contributors
-Blake Barkman (Project Manager) ||  Josh Benton (User Interface Owner) || Will Franceschini(Architectural Owner) || Matthew Drevon (Software Engineer) || Dennis Kennedy (Software Engineer)  ||Kimberly Jenkins (Software Engineer)
-
 ## Tests
 
 Full E2E test suite with Cypress, Multiple unit tests written for various components throughout the entire application with Vitest & react-test-library, and development testing with Postman during API development to test routes.
