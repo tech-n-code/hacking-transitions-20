@@ -1,6 +1,6 @@
 # Comment out line 7 when running local dev environment
 # Un-comment out when running Heroku deploy
-FROM node:20.9.0-alpine3.18
+FROM node:lts-alpine3.18
 WORKDIR /code
 COPY package*.json ./
 RUN npm ci
